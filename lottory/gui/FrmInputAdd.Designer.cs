@@ -168,9 +168,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(141, 21);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 17);
+            this.label6.Size = new System.Drawing.Size(98, 17);
             this.label6.TabIndex = 8;
-            this.label6.Text = "2 ตัวบน";
+            this.label6.Text = "Insert=ป้อนใหม่";
             // 
             // label5
             // 
@@ -186,9 +186,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(11, 21);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 17);
+            this.label4.Size = new System.Drawing.Size(74, 17);
             this.label4.TabIndex = 6;
-            this.label4.Text = "วิ่งบน";
+            this.label4.Text = "End=บันทึก";
             // 
             // btnSave
             // 

@@ -12,6 +12,8 @@ namespace lottory.objdb
     {
         ConnectDB conn;
         public Lotto lot;
+        String sql = "";
+        Double[] reward = new Double[2] { 0, 0 };
         public LottoDB(ConnectDB c)
         {
             conn = c;
@@ -326,9 +328,9 @@ namespace lottory.objdb
         public Double[] selectSumByRate(String yearId, String monthId, String periodId, String rateId)
         {
             //Lotto item = new Lotto();
-            Double[] reward = new Double[2] { 0, 0 };
-            String sql = "";
-            DataTable dt = new DataTable();
+            //Double[] reward = new Double[2] { 0, 0 };
+            //String sql = "";
+            //DataTable dt = new DataTable();
             //Double reward = 0;
             if (rateId.Equals("up"))
             {
@@ -378,13 +380,13 @@ namespace lottory.objdb
                 " Where " + lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
                 lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' and " + lot.r3Up + ">0 ";
             }
-            dt = conn.selectData(sql);
-            if (dt.Rows.Count > 0)
+            conn.selectDataN(sql);
+            if (conn.dt.Rows.Count > 0)
             {
-                if (dt.Rows[0]["reward"] != null)
+                if (conn.dt.Rows[0]["reward"] != null)
                 {
-                    reward[0] = lot.NumberNull(dt.Rows[0]["amt"]);
-                    reward[1] = lot.NumberNull(dt.Rows[0]["reward"]);
+                    reward[0] = lot.NumberNull(conn.dt.Rows[0]["amt"]);
+                    reward[1] = lot.NumberNull(conn.dt.Rows[0]["reward"]);
                 }                
             }
             return reward;

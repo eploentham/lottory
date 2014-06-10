@@ -12,6 +12,7 @@ namespace lottory.objdb
     {
         ConnectDB conn;
         public Rate rate;
+        public DataTable dt;
         public RateDB(ConnectDB c)
         {
             conn = c;
@@ -20,6 +21,7 @@ namespace lottory.objdb
         private void initConfig()
         {
             rate = new Rate();
+            dt = new DataTable();
             rate.Id = "rate_id";
             rate.Description = "rate_description";
             rate.rec = "rec";

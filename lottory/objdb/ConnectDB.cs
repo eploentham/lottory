@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using lottory.object1;
+using MySql.Data.MySqlClient;
 
 namespace lottory.objdb
 {
@@ -19,12 +20,14 @@ namespace lottory.objdb
         public int portnumber = 0;
         public String UName = "", User1 = "", SS = "";
         public OleDbConnection _mainConnection = new OleDbConnection();
+        public MySql.Data.MySqlClient.MySqlConnection cMysql;
+
         public int _rowsAffected = 0;
         public SqlInt32 _errorCode = 0;
         public Boolean _isDisposed = false;
         public SqlConnection connMainHIS;
         private String hostname = "";
-        private IniFile iniFile;
+        //private IniFile iniFile;
         public String databaseNameMainHIS = "";
         public String hostNameMainHIS = "";
         public String userNameMainHIS = "";
@@ -35,67 +38,46 @@ namespace lottory.objdb
         public String passwordBua = "";
         public String server = "";
         public String isBranch = "";
-        public ConnectDB()
+        private InitConfig initc;
+        public DataTable toReturn = new DataTable();
+        public DataTable dt = new DataTable();
+        //OleDbCommand cmdToExecute = new OleDbCommand();
+        public ConnectDB(InitConfig  i)
         {
-            //iniFile = new IniFile("reportbangna.ini");
-            
-            //databaseNameMainHIS = iniFile.Read("database_name");
-            //hostNameMainHIS = iniFile.Read("host_name");
-            //userNameMainHIS = iniFile.Read("user_password");
-            //passwordMainHIS = iniFile.Read("password");
-            //databaseNameBua = iniFile.Read("database_name_bua");
-            //hostNameBua = iniFile.Read("host_name_bua");
-            //userNameBua = iniFile.Read("user_password_bua");
-            //passwordBua = iniFile.Read("password_bua");
+            initc = i;
 
-            _mainConnection = new OleDbConnection();
-            //_mainConnection.ConnectionString = GetConfig("Main.ConnectionString");
-            if (Environment.Is64BitOperatingSystem)
+            if (initc.connectServer.ToLower().Equals("yes"))
             {
-                _mainConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=D:\\source\\lottory\\lottory\\DataBase\\lottory.mdb;Persist Security Info=False";
+                cMysql = new MySql.Data.MySqlClient.MySqlConnection();
+                cMysql.ConnectionString = "server="+initc.Host+";uid="+initc.User+";pwd="+initc.Password+";database=test;";
             }
             else
             {
-                _mainConnection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=D:\\source\\lottory\\lottory\\DataBase\\lottory.mdb;Persist Security Info=False";
+                if (Environment.Is64BitOperatingSystem)
+                {
+                    _mainConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=D:\\source\\lottory\\lottory\\DataBase\\lottory.mdb;Persist Security Info=False";
+                    _mainConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=" + Environment.CurrentDirectory + "\\lottory.mdb;Persist Security Info=False";
+                }
+                else
+                {
+                    _mainConnection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=D:\\source\\lottory\\lottory\\DataBase\\lottory.mdb;Persist Security Info=False";
+                    _mainConnection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" + Environment.CurrentDirectory + "\\lottory.mdb;Persist Security Info=False";
+                }
             }
+            //_mainConnection = new OleDbConnection();
+            //_mainConnection.ConnectionString = GetConfig("Main.ConnectionString");
+            
             //_mainConnection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=D:\\source\\lottory\\lottory\\DataBase\\lottory.mdb;Persist Security Info=False";
             _isDisposed = false;
         }
         public ConnectDB(String hostName)
         {
-            iniFile = new IniFile("reportbangna.ini");
-
-            //iniFile.Write("aaaa", "bbbb");
-            hostNameMainHIS = iniFile.Read("host_name");
-            userNameMainHIS = iniFile.Read("user_name");
-            passwordMainHIS = iniFile.Read("password");
-            databaseNameMainHIS = iniFile.Read("database_name");
-
-            databaseNameBua = iniFile.Read("database_name_bua");
-            hostNameBua = iniFile.Read("host_name_bua");
-            userNameBua = iniFile.Read("user_name_bua");
-            passwordBua = iniFile.Read("password_bua");
-            server = iniFile.Read("server");
-            isBranch = iniFile.Read("clientisbranch");
             if (hostName == "mainhis")
             {
                 hostname = "mainhis";
                 connMainHIS = new SqlConnection();
                 //connMainHIS.ConnectionString = GetConfig(hostName);
                 connMainHIS.ConnectionString = "Server="+hostNameMainHIS+";Database="+databaseNameMainHIS.ToString()+";Uid="+userNameMainHIS+";Pwd="+passwordMainHIS+";";
-                //if (server.Equals("bangna1"))
-                //{
-                //    connMainHIS.ConnectionString = "Server=172.1.1.1;Database=bng1_front_dbms;Uid=sa;Pwd=;";
-                //}
-                //else if (server.Equals("bangna2"))
-                //{
-                //    connMainHIS.ConnectionString = "Server=172.1.1.1;Database=bng2_front_dbms;Uid=sa;Pwd=;";
-                //}
-                //else
-                //{
-                //    //connMainHIS.ConnectionString = "Server=172.25.10.5;Database=bng5_front_dbms;Uid=sa;Pwd=;";
-                //    connMainHIS.ConnectionString = "Server=172.25.10.5;Database=BNG5_DBMS_FRONT;Uid=sa;Pwd=;";
-                //}
             }
             else if (hostName == "bangna")
             {
@@ -129,18 +111,17 @@ namespace lottory.objdb
         }
         public DataTable selectData(String sql)
         {
-            DataTable toReturn = new DataTable();
-            if ((hostname == "mainhis") || (hostname=="bangna"))
+            //DataTable toReturn = new DataTable();
+            toReturn.Clear();
+            if (initc.connectServer.Equals("yes"))
             {
-                SqlCommand comMainhis = new SqlCommand();
-                comMainhis.CommandText = sql;
-                comMainhis.CommandType = CommandType.Text;
-                comMainhis.Connection = connMainHIS;
-                SqlDataAdapter adapMainhis = new SqlDataAdapter(comMainhis);
+                MySqlCommand cmd = new MySqlCommand(sql, cMysql);
+                //SqlDataAdapter adapMainhis = new SqlDataAdapter(comMainhis);
                 try
                 {
-                    connMainHIS.Open();
-                    adapMainhis.Fill(toReturn);
+                    if (cMysql.State != ConnectionState.Open) cMysql.Open();
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    da.Fill(toReturn);
                     //return toReturn;
                 }
                 catch (Exception ex)
@@ -149,19 +130,14 @@ namespace lottory.objdb
                 }
                 finally
                 {
-                    connMainHIS.Close();
-                    comMainhis.Dispose();
-                    adapMainhis.Dispose();
+                    if (cMysql.State != ConnectionState.Open) cMysql.Close();
+                    cmd.Dispose();
                 }
             }
             else
             {
-                OleDbCommand cmdToExecute = new OleDbCommand();
-                cmdToExecute.CommandText = sql;
-                cmdToExecute.CommandType = CommandType.Text;
-                
-                OleDbDataAdapter adapter = new OleDbDataAdapter(cmdToExecute);
-                cmdToExecute.Connection = _mainConnection;
+                OleDbDataAdapter adapter = new OleDbDataAdapter(sql, _mainConnection);
+                //cmdToExecute.Connection = _mainConnection;
                 try
                 {
                     _mainConnection.Open();
@@ -175,26 +151,70 @@ namespace lottory.objdb
                 finally
                 {
                     _mainConnection.Close();
-                    cmdToExecute.Dispose();
+                    //cmdToExecute.Dispose();
                     adapter.Dispose();
                 }
             }
-            return toReturn;
-            
+            return toReturn;            
+        }
+        public void selectDataN(String sql)
+        {
+            //DataTable toReturn = new DataTable();
+            dt.Clear();
+            if (initc.connectServer.Equals("yes"))
+            {
+                MySqlCommand cmd = new MySqlCommand(sql, cMysql);
+                //SqlDataAdapter adapMainhis = new SqlDataAdapter(comMainhis);
+                try
+                {
+                    if (cMysql.State != ConnectionState.Open) cMysql.Open();
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    //return toReturn;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("", ex);
+                }
+                finally
+                {
+                    if (cMysql.State != ConnectionState.Open) cMysql.Close();
+                    cmd.Dispose();
+                }
+            }
+            else
+            {
+                OleDbDataAdapter adapter = new OleDbDataAdapter(sql, _mainConnection);
+                
+                try
+                {
+                    _mainConnection.Open();
+                    adapter.Fill(dt);
+                    //return toReturn;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("", ex);
+                }
+                finally
+                {
+                    _mainConnection.Close();
+                    //cmdToExecute.Dispose();
+                    adapter.Dispose();
+                }
+            }
+            //return toReturn;
         }
         public String ExecuteNonQuery(String sql)
         {
             String toReturn = "";
-            if ((hostname == "mainhis")|| (hostname=="bangna"))
+            if (initc.connectServer.Equals("yes"))
             {
-                SqlCommand comMainhis = new SqlCommand();
-                comMainhis.CommandText = sql;
-                comMainhis.CommandType = CommandType.Text;
-                comMainhis.Connection = connMainHIS;
+                MySqlCommand cmd = new MySqlCommand(sql, cMysql);
                 try
                 {
-                    connMainHIS.Open();
-                    _rowsAffected = comMainhis.ExecuteNonQuery();
+                    if (cMysql.State != ConnectionState.Open) cMysql.Open();
+                    _rowsAffected = cmd.ExecuteNonQuery();
                     toReturn = _rowsAffected.ToString();
                 }
                 catch (Exception ex)
@@ -205,8 +225,8 @@ namespace lottory.objdb
                 finally
                 {
                     //_mainConnection.Close();
-                    connMainHIS.Close();
-                    comMainhis.Dispose();
+                    if (cMysql.State != ConnectionState.Open) cMysql.Close();
+                    cmd.Dispose();
                 }
             }
             else
@@ -237,16 +257,13 @@ namespace lottory.objdb
         public String ExecuteNonQueryNoClose(String sql)
         {
             String toReturn = "";
-            if ((hostname == "mainhis") || (hostname == "bangna"))
+            if (initc.connectServer.Equals("yes"))
             {
-                SqlCommand comMainhis = new SqlCommand();
-                comMainhis.CommandText = sql;
-                comMainhis.CommandType = CommandType.Text;
-                comMainhis.Connection = connMainHIS;
+                MySqlCommand cmd = new MySqlCommand(sql, cMysql);
                 try
                 {
-                    //connMainHIS.Open();
-                    _rowsAffected = comMainhis.ExecuteNonQuery();
+                    if (cMysql.State != ConnectionState.Open) cMysql.Open();
+                    _rowsAffected = cmd.ExecuteNonQuery();
                     toReturn = _rowsAffected.ToString();
                 }
                 catch (Exception ex)
@@ -288,17 +305,11 @@ namespace lottory.objdb
         public String OpenConnection()
         {
             String toReturn = "";
-            if ((hostname == "mainhis") || (hostname == "bangna"))
-            {
-                SqlCommand comMainhis = new SqlCommand();
-                //comMainhis.CommandText = sql;
-                comMainhis.CommandType = CommandType.Text;
-                comMainhis.Connection = connMainHIS;
+            if (initc.connectServer.Equals("yes"))
+            {                
                 try
                 {
-                    connMainHIS.Open();
-                    //_rowsAffected = comMainhis.ExecuteNonQuery();
-                    //toReturn = _rowsAffected.ToString();
+                    if (cMysql.State != ConnectionState.Open) cMysql.Open();
                 }
                 catch (Exception ex)
                 {
@@ -313,10 +324,10 @@ namespace lottory.objdb
             }
             else
             {
-                OleDbCommand cmdToExecute = new OleDbCommand();
-                //cmdToExecute.CommandText = sql;
-                cmdToExecute.CommandType = CommandType.Text;
-                cmdToExecute.Connection = _mainConnection;
+                //OleDbCommand cmdToExecute = new OleDbCommand();
+                ////cmdToExecute.CommandText = sql;
+                //cmdToExecute.CommandType = CommandType.Text;
+                //cmdToExecute.Connection = _mainConnection;
                 try
                 {
                     _mainConnection.Open();
@@ -338,7 +349,15 @@ namespace lottory.objdb
         }
         public void CloseConnection()
         {
-            connMainHIS.Close();
+            if (initc.connectServer.Equals("yes"))
+            {
+                cMysql.Close();
+            }
+            else
+            {
+                connMainHIS.Close();
+            }
+            
         }
     }
 }

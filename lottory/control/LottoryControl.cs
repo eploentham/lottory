@@ -1,14 +1,17 @@
 ﻿using lottory.objdb;
+using lottory.object1;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace lottory.object1
+namespace lottory.control
 {
     public class LottoryControl
     {
@@ -39,28 +42,30 @@ namespace lottory.object1
         public ComboBox cboStaff, cboSale, cboThoo;
         public List<Thoo> lTho = new List<Thoo>();
         public List<Font1> thoColor = new List<Font1>();
+
+        private IniFile iniFile;
+        public InitConfig initC;
         //public List<Reward1> lRew1 = new List<Reward1>();
 
         public LottoryControl()
         {
-            conn = new ConnectDB();
-            initConfig(conn);
-            //cboStaff = sfdb.getCboStaff(cboStaff);
-            //cboSale = saledb.getCboSale(cboSale);
-            //cboThoo = thodb.getCboThoo(cboThoo);
-
+            initConfig();
         }
-        private void initConfig(ConnectDB c)
+        private void initConfig()
         {
+            iniFile = new IniFile(Environment.CurrentDirectory+"\\"+Application.ProductName+".ini");
+            initC = new InitConfig();
+            GetConfig();
             cf = new Config1();
-            ratedb = new RateDB(c);
-            saledb = new SaleDB(c);
-            sfdb = new StaffDB(c);
-            thodb = new ThooDB(c);
-            lotdb = new LottoDB(c);
-            rwdb = new RewardDB(c);
-            fldb = new FlockDB(c);
-            srdb = new SaleRateDB(c);
+            conn = new ConnectDB(initC);
+            ratedb = new RateDB(conn);
+            saledb = new SaleDB(conn);
+            sfdb = new StaffDB(conn);
+            thodb = new ThooDB(conn);
+            lotdb = new LottoDB(conn);
+            rwdb = new RewardDB(conn);
+            fldb = new FlockDB(conn);
+            srdb = new SaleRateDB(conn);
 
             rate = new Rate();
             sale = new Sale();
@@ -78,7 +83,7 @@ namespace lottory.object1
             r3Tod = new Rate();
             r3Down = new Rate();
             rUp = new Rate();
-            rDown = new Rate();
+            rDown = new Rate();            
 
             rUp = ratedb.selectByPk("up");
             rDown = ratedb.selectByPk("down");
@@ -546,6 +551,45 @@ namespace lottory.object1
                 lRew1.Add(rew1);
             }
             return lRew1;
+        }
+        public String GetConfigbyKey(String key)
+        {
+            AppSettingsReader _configReader = new AppSettingsReader();
+            // Set connection string of the sqlconnection object
+            return _configReader.GetValue(key, "".GetType()).ToString();
+        }
+        public void GetConfig()
+        {
+            initC.clearInput = iniFile.Read("clearinput");
+            initC.connectServer = iniFile.Read("connectserver");
+            initC.Host = iniFile.Read("host");
+            initC.User = iniFile.Read("username");
+            initC.Password = iniFile.Read("password");
+        }
+        public void SetClearInput(Boolean value)
+        {
+            if (value)
+            {
+                iniFile.Write("clearinput", "yes");
+            }
+            else
+            {
+                iniFile.Write("clearinput", "no");
+            }
+        }
+        public void SetConnectServer(Boolean value, String host, String username, String password)
+        {
+            if (value)
+            {
+                iniFile.Write("connectserver", "yes");
+                iniFile.Write("host", host.Trim());
+                iniFile.Write("username", username.Trim());
+                iniFile.Write("password", password.Trim());
+            }
+            else
+            {
+                iniFile.Write("connectserver", "no");
+            }
         }
     }
 }

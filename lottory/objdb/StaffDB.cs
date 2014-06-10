@@ -31,7 +31,7 @@ namespace lottory.objdb
             sf.table = "b_staff";
             sf.pkField = "staff_id";
         }
-        private Staff setData(Staff item, DataTable dt)
+        private Staff setData(Staff item,DataTable dt)
         {
             item.Id = dt.Rows[0][sf.Id].ToString();
             item.Code = dt.Rows[0][sf.Code].ToString();
@@ -68,7 +68,7 @@ namespace lottory.objdb
         {            
             Staff item = new Staff();
             String sql = "";
-            DataTable dt = new DataTable();
+            //DataTable dt = new DataTable();
             if (sfId.Equals("pop"))
             {
                 item.Code = "pop";
@@ -77,10 +77,11 @@ namespace lottory.objdb
                 return item;
             }
             sql = "Select * From " + sf.table + " Where " + sf.Code + "='" + sfId + "' and "+sf.Active+"='1' ";
-            dt = conn.selectData(sql);
-            if (dt.Rows.Count > 0)
+            //dt = conn.selectData(sql);
+            conn.selectDataN(sql);
+            if (conn.dt.Rows.Count > 0)
             {
-                item = setData(item, dt);
+                item = setData(item, conn.dt);
             }
             return item;
         }

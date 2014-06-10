@@ -1,4 +1,5 @@
-﻿using lottory.object1;
+﻿using lottory.control;
+using lottory.object1;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -1,4 +1,5 @@
-﻿using lottory.object1;
+﻿using lottory.control;
+using lottory.object1;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -61,6 +62,7 @@ namespace lottory.gui
                 tv1.Nodes["nInitConfig"].Nodes.Add("nRateView", "สร้างอัตรา");
                 tv1.Nodes["nInitConfig"].Nodes.Add("nPassword", "เปลี่ยนรหัสผ่าน");
                 tv1.Nodes["nInitConfig"].Nodes.Add("nThooDefault", "กำหนดเจ้ามือ (เจ้าของโปรแกรม)");
+                tv1.Nodes["nInitConfig"].Nodes.Add("nInitConfig1", "กำหนดค่าโปรแกรม");
             }
             
             tv1.ExpandAll();
@@ -131,6 +133,11 @@ namespace lottory.gui
             else if (e.Node.Name.ToString() == "nThooDefault")
             {
                 FrmThooDefault frm = new FrmThooDefault(sf.Code);
+                showFrame(frm);
+            }
+            else if (e.Node.Name.ToString() == "nInitConfig1")
+            {
+                FrmInitConfig frm = new FrmInitConfig(sf.Code, lc);
                 showFrame(frm);
             }
         }

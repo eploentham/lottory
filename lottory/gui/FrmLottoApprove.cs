@@ -1,4 +1,5 @@
-﻿using lottory.object1;
+﻿using lottory.control;
+using lottory.object1;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,21 +37,12 @@ namespace lottory.gui
             
             cItem = new ComboBoxItem();
             String monthId = "", periodId = "";
-            //cf = new Config1();
-            //lc = new LottoryControl();
+
             lc = l;
             cboThoo = lc.thodb.getCboThoo(cboThoo);
             sf = lc.sfdb.selectByCode(sfCode);
             //lc.sfdb.sf = sf;
             monthId = System.DateTime.Now.Month.ToString("00");
-            //if ((System.DateTime.Now.Day >= 2) && (System.DateTime.Now.Day <= 17))
-            //{
-            //    cboPeriod.SelectedValue = "02";
-            //}
-            //else
-            //{
-            //    cboPeriod.SelectedValue = "01";
-            //}
 
             cboMonth = lc.cf.setCboMonth(cboMonth);
             cboPeriod = lc.cf.setCboPeriod(cboPeriod);
@@ -59,10 +51,7 @@ namespace lottory.gui
             cboMonth.SelectedValue = monthId;
             cboYear = lc.cf.setCboYear(cboYear);
             cboPeriod = lc.setCboPeriodDefault(cboPeriod);
-            //ComboBoxItem cbo = new ComboBoxItem();
-            //cbo.Value = sf.Id;
-            //cbo.Text = sf.Name;
-            //cboStaff.Text = sf.Name;
+
             setControl();
             setGrid(dgv1);
             //setGrid(dgv3);
@@ -187,8 +176,7 @@ namespace lottory.gui
             dgvRate.Columns[colRRec].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
             dgvRate.Columns[colRDiscount].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
             dgvRate.Columns[colRAmt].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
-            dgvRate.Columns[colRLimit].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
-            
+            dgvRate.Columns[colRLimit].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;            
 
             if (dt.Rows.Count > 0)
             {

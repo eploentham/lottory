@@ -84,6 +84,7 @@ namespace lottory.gui
             pB1.Show();
             String rateId = "";
             DataTable dt = new DataTable();
+            Double[] reward = new Double[2] { 0, 0 };
             dt = lc.selectRateAll();
             dgvRate.Rows.Clear();
             Font font = new Font("Microsoft Sans Serif", 12);
@@ -135,7 +136,6 @@ namespace lottory.gui
                 {
                     pB1.Value = i;
                     rateId = dt.Rows[i][lc.ratedb.rate.Id].ToString();
-                    Double[] reward = new Double[2] { 0, 0 };
                     reward = lc.lotdb.selectSumByRate(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), rateId);
                     dgvRate[colRRow, i].Value = (i + 1);
                     dgvRate[colRpayRate, i].Value = String.Format("{0:#,###,###.00}", dt.Rows[i][lc.ratedb.rate.pay]);
