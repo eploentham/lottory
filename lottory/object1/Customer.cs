@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-//using System.Threading.Tasks;
 
 namespace lottory.object1
 {
-    public class Sale : Persistent
+    public class Customer:Persistent
     {
-        public String Id = "", Active="", Remark="", Name="", Code="", Limit1="", statusDiscount="";
+        public String Id = "", Name="", saleId="", thoId="", Active="", saleName="";
         public override string ToString()
         {
-            return Name;
+            return saleName+"."+Name;
         }
     }
 }

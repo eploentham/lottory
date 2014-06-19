@@ -207,7 +207,7 @@ namespace lottory
         {
             if (txtRewardDown2.Text.Length == 2)
             {
-                txtRDown31.Focus();
+                btnSave.Focus();
             }
         }
 
@@ -220,7 +220,7 @@ namespace lottory
         {
             if (txtReward1.Text.Length == 6)
             {
-                txtRewardDown2.Focus();
+                txtRDown31.Focus();                
             }
         }
 
@@ -252,7 +252,8 @@ namespace lottory
         {
             if (txtRDown34.Text.Length == 3)
             {
-                btnSave.Focus();
+                txtRewardDown2.Focus();
+                
             }
         }
 

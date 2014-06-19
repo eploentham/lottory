@@ -152,6 +152,7 @@ namespace lottory
             dgv1.Columns[colDown].HeaderText = "ล่าง";
             dgv1.Columns[colRowId].Visible = false;
             dgv1.Columns[colLottoId1].Visible = false;
+            dgv1.Columns[colRemark].Visible = false;
 
             dgv1.Font=font;
             //dgv1[col1Number, 0].Value = "0";
@@ -248,6 +249,7 @@ namespace lottory
             lot.down = lc.cf.LottoNull(dgv1[colDown, row].Value);
             lot.tod = lc.cf.LottoNull(dgv1[colTod, row].Value);
             lot.up = lc.cf.LottoNull(dgv1[colUp, row].Value);
+            lot.statusInput = "1";
 
             return lot;
         }
@@ -475,6 +477,10 @@ namespace lottory
 
         private void dgvLotto_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (dgvLotto[colLottoId, e.RowIndex].Value == null)
+            {
+                return;
+            }
             if (e.ColumnIndex == colLottoVoid)
             {
                 if (MessageBox.Show("ยกเลิก", "ต้องการยกเลิกทั้งใบ",  MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)

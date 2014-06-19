@@ -60,6 +60,8 @@ namespace lottory.gui
                 chkDiscount.Checked = false;
             }
             setGrdRate();
+            tab1.TabPages[0].Text = "ส่วนลด";
+            tab1.TabPages[1].Text = "ลูกค้า";
         }
         private Sale getControl()
         {

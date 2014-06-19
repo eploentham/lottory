@@ -63,6 +63,8 @@
             this.txtUp = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtInput = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLotto)).BeginInit();
@@ -202,6 +204,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.comboBox1);
+            this.groupBox2.Controls.Add(this.label17);
             this.groupBox2.Controls.Add(this.cboYear);
             this.groupBox2.Controls.Add(this.dgvLotto);
             this.groupBox2.Controls.Add(this.cboThoo);
@@ -233,10 +237,11 @@
             // 
             // cboYear
             // 
+            this.cboYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.cboYear.FormattingEnabled = true;
             this.cboYear.Location = new System.Drawing.Point(614, 522);
             this.cboYear.Name = "cboYear";
-            this.cboYear.Size = new System.Drawing.Size(99, 24);
+            this.cboYear.Size = new System.Drawing.Size(99, 28);
             this.cboYear.TabIndex = 44;
             this.cboYear.SelectedIndexChanged += new System.EventHandler(this.cboYear_SelectedIndexChanged);
             // 
@@ -254,7 +259,7 @@
             // cboThoo
             // 
             this.cboThoo.FormattingEnabled = true;
-            this.cboThoo.Location = new System.Drawing.Point(318, 570);
+            this.cboThoo.Location = new System.Drawing.Point(571, 573);
             this.cboThoo.Name = "cboThoo";
             this.cboThoo.Size = new System.Drawing.Size(142, 24);
             this.cboThoo.TabIndex = 42;
@@ -262,11 +267,11 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(226, 576);
+            this.label16.Location = new System.Drawing.Point(516, 576);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(40, 17);
+            this.label16.Size = new System.Drawing.Size(48, 17);
             this.label16.TabIndex = 41;
-            this.label16.Text = "เจ้ามือ";
+            this.label16.Text = "เจ้ามือ :";
             // 
             // btnEdit
             // 
@@ -342,11 +347,11 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label14.Location = new System.Drawing.Point(225, 526);
+            this.label14.Location = new System.Drawing.Point(217, 526);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(87, 20);
+            this.label14.Size = new System.Drawing.Size(97, 20);
             this.label14.TabIndex = 33;
-            this.label14.Text = "ประจำเดือน";
+            this.label14.Text = "ประจำเดือน :";
             // 
             // cboSale
             // 
@@ -440,6 +445,23 @@
             this.txtInput.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtInput_KeyUp);
             this.txtInput.Leave += new System.EventHandler(this.txtInput_Leave);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(318, 573);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(142, 24);
+            this.comboBox1.TabIndex = 46;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(218, 576);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(45, 17);
+            this.label17.TabIndex = 45;
+            this.label17.Text = "ลูกค้า :";
+            // 
             // FrmInputAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -499,6 +521,8 @@
         private System.Windows.Forms.DataGridView dgvLotto;
         private System.Windows.Forms.ComboBox cboYear;
         private System.Windows.Forms.Button btnInit;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label17;
     }
 }
 

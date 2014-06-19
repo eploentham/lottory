@@ -25,6 +25,8 @@ namespace lottory.control
         public RewardDB rwdb;
         public FlockDB fldb;
         public SaleRateDB srdb;
+        public CustomerDB cudb;
+        public ImageDB imgdb;
 
         public Rate rate;
         public Staff staff;
@@ -34,6 +36,10 @@ namespace lottory.control
         public Reward rw;
         public FLock fl;
         public SaleRate sr;
+        public Customer cu;
+        public Image1 img;
+
+        public RegEdit regE;
 
         public Rate r2Down, r2Tod, r2Up, r3Down, r3Up, r3Tod, rUp, rDown;
 
@@ -55,6 +61,7 @@ namespace lottory.control
         {
             iniFile = new IniFile(Environment.CurrentDirectory+"\\"+Application.ProductName+".ini");
             initC = new InitConfig();
+            //regE = new RegEdit();
             GetConfig();
             cf = new Config1();
             conn = new ConnectDB(initC);
@@ -66,6 +73,8 @@ namespace lottory.control
             rwdb = new RewardDB(conn);
             fldb = new FlockDB(conn);
             srdb = new SaleRateDB(conn);
+            cudb = new CustomerDB(conn);
+            imgdb = new ImageDB(conn);
 
             rate = new Rate();
             sale = new Sale();
@@ -75,6 +84,8 @@ namespace lottory.control
             rw = new Reward();
             fl = new FLock();
             sr = new SaleRate();
+            cu = new Customer();
+            img = new Image1();
 
             r2Down = new Rate();
             r2Tod = new Rate();
@@ -562,9 +573,20 @@ namespace lottory.control
         {
             initC.clearInput = iniFile.Read("clearinput");
             initC.connectServer = iniFile.Read("connectserver");
-            initC.Host = iniFile.Read("host");
+            initC.ServerIP = iniFile.Read("host");
             initC.User = iniFile.Read("username");
             initC.Password = iniFile.Read("password");
+
+            initC.pathImage = iniFile.Read("pathimage");
+            initC.delImage = iniFile.Read("delimage");
+            //initC.connectServer = regE.getConnectServer();
+            //initC.ServerIP = regE.getServerIP();
+            //initC.User = regE.getUsername();
+            //initC.Password = regE.getPassword();
+        }
+        public void SetPathImage(String path)
+        {
+            iniFile.Write("pathimage", path);
         }
         public void SetClearInput(Boolean value)
         {
@@ -575,6 +597,17 @@ namespace lottory.control
             else
             {
                 iniFile.Write("clearinput", "no");
+            }
+        }
+        public void SetDelImage(Boolean value)
+        {
+            if (value)
+            {
+                iniFile.Write("delimage", "yes");
+            }
+            else
+            {
+                iniFile.Write("delimage", "no");
             }
         }
         public void SetConnectServer(Boolean value, String host, String username, String password)

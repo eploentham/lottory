@@ -8,5 +8,9 @@ namespace lottory.object1
     public class TRate : Persistent
     {
         public String TRateId = "", RateId="",RateDescription="", amount="", pay="", limit1="", yearId="", monthId="", periodId="",Active="";
+        public override string ToString()
+        {
+            return RateDescription;
+        }
     }
 }

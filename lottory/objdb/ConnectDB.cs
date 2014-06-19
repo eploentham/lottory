@@ -49,19 +49,19 @@ namespace lottory.objdb
             if (initc.connectServer.ToLower().Equals("yes"))
             {
                 cMysql = new MySql.Data.MySqlClient.MySqlConnection();
-                cMysql.ConnectionString = "server="+initc.Host+";uid="+initc.User+";pwd="+initc.Password+";database=test;";
+                cMysql.ConnectionString = "server="+initc.ServerIP+";uid="+initc.User+";pwd="+initc.Password+";database=test;";
             }
             else
             {
                 if (Environment.Is64BitOperatingSystem)
                 {
                     _mainConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=D:\\source\\lottory\\lottory\\DataBase\\lottory.mdb;Persist Security Info=False";
-                    _mainConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=" + Environment.CurrentDirectory + "\\lottory.mdb;Persist Security Info=False";
+                    _mainConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=" + Environment.CurrentDirectory + "\\Database\\lottory.mdb;Persist Security Info=False";
                 }
                 else
                 {
                     _mainConnection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=D:\\source\\lottory\\lottory\\DataBase\\lottory.mdb;Persist Security Info=False";
-                    _mainConnection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" + Environment.CurrentDirectory + "\\lottory.mdb;Persist Security Info=False";
+                    _mainConnection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" + Environment.CurrentDirectory + "\\Database\\lottory.mdb;Persist Security Info=False";
                 }
             }
             //_mainConnection = new OleDbConnection();

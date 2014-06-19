@@ -81,7 +81,7 @@
             // txtRDown34
             // 
             this.txtRDown34.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.txtRDown34.Location = new System.Drawing.Point(392, 261);
+            this.txtRDown34.Location = new System.Drawing.Point(392, 157);
             this.txtRDown34.Name = "txtRDown34";
             this.txtRDown34.Size = new System.Drawing.Size(82, 38);
             this.txtRDown34.TabIndex = 62;
@@ -93,7 +93,7 @@
             // txtRDown33
             // 
             this.txtRDown33.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.txtRDown33.Location = new System.Drawing.Point(304, 261);
+            this.txtRDown33.Location = new System.Drawing.Point(304, 157);
             this.txtRDown33.Name = "txtRDown33";
             this.txtRDown33.Size = new System.Drawing.Size(82, 38);
             this.txtRDown33.TabIndex = 61;
@@ -105,7 +105,7 @@
             // txtRDown32
             // 
             this.txtRDown32.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.txtRDown32.Location = new System.Drawing.Point(216, 261);
+            this.txtRDown32.Location = new System.Drawing.Point(216, 157);
             this.txtRDown32.Name = "txtRDown32";
             this.txtRDown32.Size = new System.Drawing.Size(82, 38);
             this.txtRDown32.TabIndex = 60;
@@ -141,7 +141,7 @@
             // txtRDown31
             // 
             this.txtRDown31.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.txtRDown31.Location = new System.Drawing.Point(128, 261);
+            this.txtRDown31.Location = new System.Drawing.Point(128, 157);
             this.txtRDown31.Name = "txtRDown31";
             this.txtRDown31.Size = new System.Drawing.Size(82, 38);
             this.txtRDown31.TabIndex = 56;
@@ -154,7 +154,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label3.Location = new System.Drawing.Point(6, 270);
+            this.label3.Location = new System.Drawing.Point(6, 166);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(106, 25);
             this.label3.TabIndex = 55;
@@ -163,7 +163,7 @@
             // txtRewardDown2
             // 
             this.txtRewardDown2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.txtRewardDown2.Location = new System.Drawing.Point(128, 173);
+            this.txtRewardDown2.Location = new System.Drawing.Point(128, 233);
             this.txtRewardDown2.Name = "txtRewardDown2";
             this.txtRewardDown2.Size = new System.Drawing.Size(82, 38);
             this.txtRewardDown2.TabIndex = 54;
@@ -176,7 +176,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label2.Location = new System.Drawing.Point(6, 182);
+            this.label2.Location = new System.Drawing.Point(6, 242);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(106, 25);
             this.label2.TabIndex = 53;
@@ -211,30 +211,31 @@
             // 
             // cboYear
             // 
+            this.cboYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.cboYear.FormattingEnabled = true;
             this.cboYear.Location = new System.Drawing.Point(424, 33);
             this.cboYear.Name = "cboYear";
-            this.cboYear.Size = new System.Drawing.Size(99, 24);
+            this.cboYear.Size = new System.Drawing.Size(99, 33);
             this.cboYear.TabIndex = 49;
             this.cboYear.SelectedIndexChanged += new System.EventHandler(this.cboYear_SelectedIndexChanged);
             // 
             // cboPeriod
             // 
-            this.cboPeriod.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.cboPeriod.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.cboPeriod.FormattingEnabled = true;
             this.cboPeriod.Location = new System.Drawing.Point(276, 33);
             this.cboPeriod.Name = "cboPeriod";
-            this.cboPeriod.Size = new System.Drawing.Size(142, 28);
+            this.cboPeriod.Size = new System.Drawing.Size(142, 33);
             this.cboPeriod.TabIndex = 48;
             this.cboPeriod.SelectedIndexChanged += new System.EventHandler(this.cboPeriod_SelectedIndexChanged);
             // 
             // cboMonth
             // 
-            this.cboMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.cboMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.cboMonth.FormattingEnabled = true;
             this.cboMonth.Location = new System.Drawing.Point(128, 33);
             this.cboMonth.Name = "cboMonth";
-            this.cboMonth.Size = new System.Drawing.Size(142, 28);
+            this.cboMonth.Size = new System.Drawing.Size(142, 33);
             this.cboMonth.TabIndex = 47;
             this.cboMonth.SelectedIndexChanged += new System.EventHandler(this.cboMonth_SelectedIndexChanged);
             // 
@@ -274,7 +275,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(732, 427);
+            this.ClientSize = new System.Drawing.Size(736, 427);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmRewardAdd";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

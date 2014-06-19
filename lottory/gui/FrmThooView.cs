@@ -84,6 +84,7 @@ namespace lottory.gui
                 }
                 dgvView.Rows[dgvView.RowCount-1].Selected = true;
             }
+            dgvView.ReadOnly = true;
         }
 
         private void FrmThooView_Load(object sender, EventArgs e)

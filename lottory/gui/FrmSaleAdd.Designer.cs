@@ -43,10 +43,18 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtSaleCode = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dgvRate = new System.Windows.Forms.DataGridView();
+            this.tab1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.chkDiscount = new System.Windows.Forms.CheckBox();
+            this.dgvRate = new System.Windows.Forms.DataGridView();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
+            this.tab1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRate)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -67,7 +75,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(394, 367);
+            this.groupBox1.Size = new System.Drawing.Size(394, 433);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -224,34 +232,76 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "รหัส";
             // 
-            // dgvRate
+            // tab1
             // 
-            this.dgvRate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRate.Location = new System.Drawing.Point(412, 46);
-            this.dgvRate.Name = "dgvRate";
-            this.dgvRate.RowTemplate.Height = 24;
-            this.dgvRate.Size = new System.Drawing.Size(750, 333);
-            this.dgvRate.TabIndex = 1;
+            this.tab1.Controls.Add(this.tabPage1);
+            this.tab1.Controls.Add(this.tabPage2);
+            this.tab1.Location = new System.Drawing.Point(412, 12);
+            this.tab1.Name = "tab1";
+            this.tab1.SelectedIndex = 0;
+            this.tab1.Size = new System.Drawing.Size(771, 433);
+            this.tab1.TabIndex = 20;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.chkDiscount);
+            this.tabPage1.Controls.Add(this.dgvRate);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(763, 404);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // chkDiscount
             // 
             this.chkDiscount.AutoSize = true;
             this.chkDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.chkDiscount.Location = new System.Drawing.Point(412, 16);
+            this.chkDiscount.Location = new System.Drawing.Point(6, 6);
             this.chkDiscount.Name = "chkDiscount";
             this.chkDiscount.Size = new System.Drawing.Size(148, 24);
-            this.chkDiscount.TabIndex = 19;
+            this.chkDiscount.TabIndex = 21;
             this.chkDiscount.Text = "กำหนดส่วนลดเอง";
             this.chkDiscount.UseVisualStyleBackColor = true;
-            this.chkDiscount.Click += new System.EventHandler(this.chkDiscount_Click);
+            // 
+            // dgvRate
+            // 
+            this.dgvRate.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvRate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRate.Location = new System.Drawing.Point(6, 36);
+            this.dgvRate.Name = "dgvRate";
+            this.dgvRate.RowTemplate.Height = 24;
+            this.dgvRate.Size = new System.Drawing.Size(750, 362);
+            this.dgvRate.TabIndex = 20;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.dataGridView1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(763, 404);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(6, 4);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(750, 394);
+            this.dataGridView1.TabIndex = 21;
             // 
             // FrmSaleAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1174, 391);
-            this.Controls.Add(this.chkDiscount);
-            this.Controls.Add(this.dgvRate);
+            this.ClientSize = new System.Drawing.Size(1194, 457);
+            this.Controls.Add(this.tab1);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmSaleAdd";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -259,9 +309,13 @@
             this.Load += new System.EventHandler(this.FrmSaleAdd_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tab1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRate)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -282,7 +336,11 @@
         private System.Windows.Forms.CheckBox chkLimit;
         private System.Windows.Forms.TextBox txtLimit;
         private System.Windows.Forms.Button btnUnActive;
-        private System.Windows.Forms.DataGridView dgvRate;
+        private System.Windows.Forms.TabControl tab1;
+        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.CheckBox chkDiscount;
+        private System.Windows.Forms.DataGridView dgvRate;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

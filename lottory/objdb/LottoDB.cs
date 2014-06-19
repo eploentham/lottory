@@ -68,6 +68,7 @@ namespace lottory.objdb
             lot.r3Tod = "reward_3tod";
             lot.r3TodRate = "reward_3tod_rate";
             lot.CDbl = "cdbl";
+            lot.statusInput = "status_input";
 
             lot.table = "t_lottory";
             lot.pkField = "row_id";
@@ -99,7 +100,7 @@ namespace lottory.objdb
             item.statusOverLimit = dt.Rows[0][lot.statusOverLimit].ToString();
             item.use1 = dt.Rows[0][lot.use1].ToString();
             item.rateId = dt.Rows[0][lot.rateId].ToString();
-            
+            item.statusInput = dt.Rows[0][lot.statusInput].ToString();
             
             return item;
         }
@@ -432,7 +433,7 @@ namespace lottory.objdb
                 lot.dateCancel + "," + lot.staffCreate + "," + lot.staffModi + "," +
                 lot.staffCancel + "," + lot.yearId + "," + lot.rowNumber+","+
                 lot.statusApprove+","+lot.thooTranferId+","+lot.dateApprove+","+
-                lot.staffApproveId+","+lot.CDbl + ") " +
+                lot.staffApproveId+","+lot.CDbl +","+lot.statusInput+ ") " +
                 "Values('" + p.rowId + "','" + p.lottoId + "','" + p.staffId + "','" +
                 p.number + "','" + p.up + "','" + p.tod + "','" + 
                 p.down + "','" + p.monthId + "','" + p.periodId + "','" + 
@@ -441,7 +442,7 @@ namespace lottory.objdb
                  "'','" + p.staffCreate + "',''," +
                 "'','" + p.yearId + "','" + p.rowNumber + "','"+
                 p.statusApprove+"','"+p.thooTranferId+"','"+p.dateApprove+"','"+
-                p.staffApproveId+"','"+p.CDbl+"')";
+                p.staffApproveId+"','"+p.CDbl+"','"+p.statusInput+"')";
             try
             {
                 chk = conn.ExecuteNonQuery(sql);

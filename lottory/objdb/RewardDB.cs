@@ -171,7 +171,7 @@ namespace lottory.objdb
                 rw.periodId + "='" + p.periodId + "', " +
                 rw.staffId + "='" + p.staffId + "', " +
                 rw.staffModi + "='" + p.staffModi + "', " +
-                rw.dateModi + "='" + p.dateModi + "', " +
+                rw.dateModi + "=" + p.dateModi + ", " +
                 //rw.rewardDown31 + "='" + p.rewardDown31 + "', " +
                 rw.rewardDown32 + "='" + p.rewardDown32 + "', " +
                 rw.rewardDown33 + "='" + p.rewardDown33 + "', " +
