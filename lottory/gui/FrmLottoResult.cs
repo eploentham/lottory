@@ -37,19 +37,12 @@ namespace lottory.gui
             sf = lc.sfdb.selectByCode(sfCode);
             //lc.sfdb.sf = sf;
             monthId = System.DateTime.Now.Month.ToString("00");
-            if ((System.DateTime.Now.Day >= 2) && (System.DateTime.Now.Day <= 17))
-            {
-                cboPeriod.SelectedValue = "02";
-            }
-            else
-            {
-                cboPeriod.SelectedValue = "01";
-            }
+            //cboPeriod = lc.cf.setCboPeriod(cboPeriod);
 
             cboMonth = lc.cf.setCboMonth(cboMonth);
             cboPeriod = lc.cf.setCboPeriod(cboPeriod);
             //cboStaff = lc.sfdb.getCboStaff(cboStaff);
-
+            cboPeriod = lc.setCboPeriodDefault(cboPeriod);
             cboMonth.SelectedValue = monthId;
             cboYear = lc.cf.setCboYear(cboYear);
             //ComboBoxItem cbo = new ComboBoxItem();
@@ -70,6 +63,7 @@ namespace lottory.gui
             setDGrd();
             pageLoad = false;
             dgv1.ReadOnly = true;
+            pB1.Visible = false;
         }
         private void setControl()
         {
@@ -222,7 +216,11 @@ namespace lottory.gui
         {
             Cursor cursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
+            Font font = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
+            pB1.Minimum = 0;
+            pB1.Maximum = dgv1.Rows.Count;
             calReward();
+            pB1.Visible = true;
             String rowId = "", num = "", chk = "";
             for (int i = 0; i < dgv1.RowCount; i++)
             {
@@ -230,48 +228,122 @@ namespace lottory.gui
                 rowId = dgv1[colRowId, i].Value.ToString();
                 if (num.Length == 1)
                 {
-                    if (!dgv1[colRUp, i].Value.ToString().Equals(""))
+                    //if (!dgv1[colRUp, i].Value.ToString().Equals(""))
+                    //{
+                    //    chk = lc.lotdb.updateRewardUp(rowId, lc.rUp.pay, dgv1[colUp, i].Value.ToString());
+                    //}
+                    //if (!dgv1[colDown, i].Value.ToString().Equals(""))
+                    //{
+                    //    chk = lc.lotdb.updateRewardDown(rowId, lc.rDown.pay, dgv1[colDown, i].Value.ToString());
+                    //}
+                    if (Double.Parse(lc.cf.NumberNull(dgv1[colRUp, i].Value.ToString()))>0)
                     {
-                        chk = lc.lotdb.updateRewardUp(rowId, lc.rUp.pay, dgv1[colUp, i].Value.ToString());
+                        chk = lc.lotdb.updateRewardUp(rowId, lc.rUp.pay, dgv1[colRUp, i].Value.ToString());
+                        dgv1[colRUp, i].Style.Font = font;
+                        dgv1[colRUp, i].Style.ForeColor = Color.Red;
+                        dgv1[colNumber, i].Style.Font = font;
+                        dgv1[colNumber, i].Style.ForeColor = Color.Red;
+                        dgv1[colUp, i].Style.Font = font;
+                        dgv1[colUp, i].Style.ForeColor = Color.Red;
                     }
-                    if (!dgv1[colDown, i].Value.ToString().Equals(""))
+                    if (Double.Parse(lc.cf.NumberNull(dgv1[colRDown, i].Value.ToString())) > 0)
                     {
-                        chk = lc.lotdb.updateRewardDown(rowId, lc.rDown.pay, dgv1[colDown, i].Value.ToString());
+                        chk = lc.lotdb.updateRewardDown(rowId, lc.rDown.pay, dgv1[colRDown, i].Value.ToString());
+                        dgv1[colRDown, i].Style.Font = font;
+                        dgv1[colRDown, i].Style.ForeColor = Color.Red;
+                        dgv1[colNumber, i].Style.Font = font;
+                        dgv1[colNumber, i].Style.ForeColor = Color.Red;
+                        dgv1[colDown, i].Style.Font = font;
+                        dgv1[colDown, i].Style.ForeColor = Color.Red;
                     }
-
+                    dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#174e75");
                 }
                 else if (num.Length == 2)
                 {
-                    if (!dgv1[colR2Up, i].Value.ToString().Equals(""))
+                    //if (!dgv1[colR2Up, i].Value.ToString().Equals(""))
+                    //{
+                    //    chk = lc.lotdb.updateReward2Up(rowId, lc.r2Up.pay, dgv1[colUp, i].Value.ToString());
+                    //}
+                    //if (!dgv1[colR2Down, i].Value.ToString().Equals(""))
+                    //{
+                    //    chk = lc.lotdb.updateReward2Down(rowId, lc.r2Down.pay, dgv1[colDown, i].Value.ToString());
+                    //}
+                    if (Double.Parse(lc.cf.NumberNull(dgv1[colR2Up, i].Value.ToString())) > 0)
                     {
-                        chk = lc.lotdb.updateReward2Up(rowId, lc.r2Up.pay, dgv1[colUp, i].Value.ToString());
+                        chk = lc.lotdb.updateReward2Up(rowId, lc.r2Up.pay, dgv1[colR2Up, i].Value.ToString());
+                        dgv1[colR2Up, i].Style.Font = font;
+                        dgv1[colR2Up, i].Style.ForeColor = Color.Red;
+                        dgv1[colNumber, i].Style.Font = font;
+                        dgv1[colNumber, i].Style.ForeColor = Color.Red;
+                        dgv1[colUp, i].Style.Font = font;
+                        dgv1[colUp, i].Style.ForeColor = Color.Red;
                     }
-                    if (!dgv1[colR2Up, i].Value.ToString().Equals(""))
+                    if (Double.Parse(lc.cf.NumberNull(dgv1[colR2Down, i].Value.ToString())) > 0)
                     {
-                        chk = lc.lotdb.updateReward2Down(rowId, lc.r2Down.pay, dgv1[colDown, i].Value.ToString());
+                        chk = lc.lotdb.updateReward2Down(rowId, lc.r2Down.pay, dgv1[colR2Down, i].Value.ToString());
+                        dgv1[colR2Down, i].Style.Font = font;
+                        dgv1[colR2Down, i].Style.ForeColor = Color.Red;
+                        dgv1[colNumber, i].Style.Font = font;
+                        dgv1[colNumber, i].Style.ForeColor = Color.Red;
+                        dgv1[colDown, i].Style.Font = font;
+                        dgv1[colDown, i].Style.ForeColor = Color.Red;
                     }
+                    dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#789640");
                 }
                 else if (num.Length == 3)
                 {
-                    if (!dgv1[colR3Up, i].Value.ToString().Equals(""))
+                    //if (!dgv1[colR3Up, i].Value.ToString().Equals(""))
+                    //{
+                    //    chk = lc.lotdb.updateReward3Up(rowId, lc.r3Up.pay, dgv1[colUp, i].Value.ToString());
+                    //}
+                    //if (!dgv1[colR3Down, i].Value.ToString().Equals(""))
+                    //{
+                    //    chk = lc.lotdb.updateReward3Down(rowId, lc.r3Down.pay, dgv1[colDown, i].Value.ToString());
+                    //}
+                    //if (!dgv1[colR3Tod, i].Value.ToString().Equals(""))
+                    //{
+                    //    chk = lc.lotdb.updateReward3Tod(rowId, lc.r3Tod.pay, dgv1[colTod, i].Value.ToString());
+                    //}
+                    if (Double.Parse(lc.cf.NumberNull(dgv1[colR3Up, i].Value.ToString())) > 0)
                     {
-                        chk = lc.lotdb.updateReward3Up(rowId, lc.r3Up.pay, dgv1[colUp, i].Value.ToString());
+                        chk = lc.lotdb.updateReward3Up(rowId, lc.r3Up.pay, dgv1[colR3Up, i].Value.ToString());
+                        dgv1[colR3Up, i].Style.Font = font;
+                        dgv1[colR3Up, i].Style.ForeColor = Color.Red;
+                        dgv1[colNumber, i].Style.Font = font;
+                        dgv1[colNumber, i].Style.ForeColor = Color.Red;
+                        dgv1[colUp, i].Style.Font = font;
+                        dgv1[colUp, i].Style.ForeColor = Color.Red;
                     }
-                    if (!dgv1[colR3Down, i].Value.ToString().Equals(""))
+                    if (Double.Parse(lc.cf.NumberNull(dgv1[colR3Tod, i].Value.ToString())) > 0)
                     {
-                        chk = lc.lotdb.updateReward3Down(rowId, lc.r3Down.pay, dgv1[colDown, i].Value.ToString());
+                        chk = lc.lotdb.updateReward3Down(rowId, lc.r3Down.pay, dgv1[colR3Tod, i].Value.ToString());
+                        dgv1[colR3Tod, i].Style.Font = font;
+                        dgv1[colR3Tod, i].Style.ForeColor = Color.Red;
+                        dgv1[colNumber, i].Style.Font = font;
+                        dgv1[colNumber, i].Style.ForeColor = Color.Red;
+                        dgv1[colTod, i].Style.Font = font;
+                        dgv1[colTod, i].Style.ForeColor = Color.Red;
                     }
-                    if (!dgv1[colR3Tod, i].Value.ToString().Equals(""))
+                    if (Double.Parse(lc.cf.NumberNull(dgv1[colR3Down, i].Value.ToString())) > 0)
                     {
-                        chk = lc.lotdb.updateReward3Tod(rowId, lc.r3Tod.pay, dgv1[colTod, i].Value.ToString());
+                        chk = lc.lotdb.updateReward3Tod(rowId, lc.r3Tod.pay, dgv1[colR3Down, i].Value.ToString());
+                        dgv1[colR3Down, i].Style.Font = font;
+                        dgv1[colR3Down, i].Style.ForeColor = Color.Red;
+                        dgv1[colNumber, i].Style.Font = font;
+                        dgv1[colNumber, i].Style.ForeColor = Color.Red;
+                        dgv1[colDown, i].Style.Font = font;
+                        dgv1[colDown, i].Style.ForeColor = Color.Red;
                     }
+                    dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#788540");
                 }
-                if (chk.Equals("1"))
-                {
-                    dgv1.Rows[i].DefaultCellStyle.BackColor = Color.DarkKhaki;
-                }
+                //if (chk.Equals("1"))
+                //{
+                //    dgv1.Rows[i].DefaultCellStyle.BackColor = Color.DarkKhaki;
+                //}
+                pB1.Value = i;
             }
             lc.rwdb.updateStatusApprove(rw.rewardId, sf.Id);
+            pB1.Visible = false;
             Cursor.Current = cursor;
         }
 

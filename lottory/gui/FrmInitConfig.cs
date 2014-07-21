@@ -53,6 +53,7 @@ namespace lottory.gui
                 txtUser.Visible = false;
             }
             txtPath.Text = lc.initC.pathImage;
+            txtPath1.Text = lc.initC.pathImageBefore;
             if (lc.initC.delImage.Equals("yes"))
             {
                 chkDelImage.Checked = true;
@@ -73,6 +74,7 @@ namespace lottory.gui
 
             lc.SetConnectServer(chkConnectServer.Checked, txtHost.Text, txtUser.Text, txtPwd.Text);
             lc.SetPathImage(txtPath.Text);
+            lc.SetPathImageBefore(txtPath1.Text);
             lc.SetDelImage(chkDelImage.Checked);
 
             lc.GetConfig();
@@ -113,6 +115,13 @@ namespace lottory.gui
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             DialogResult result = fbd.ShowDialog();
             txtPath.Text = fbd.SelectedPath;
+        }
+
+        private void btnPath1_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            DialogResult result = fbd.ShowDialog();
+            txtPath1.Text = fbd.SelectedPath;
         }
     }
 }

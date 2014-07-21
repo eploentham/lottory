@@ -51,6 +51,27 @@ namespace lottory.objdb
 
             return dt;
         }
+        public List<Sale> selectSAll()
+        {
+            List<Sale> ls = new List<Sale>();
+            DataTable dt1 = selectAll();
+            if (dt1.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt1.Rows.Count; i++)
+                {
+                    Sale item = new Sale();
+                    item.Id = dt1.Rows[0][sale.Id].ToString();
+                    item.Code = dt1.Rows[0][sale.Code].ToString();
+                    item.Name = dt1.Rows[0][sale.Name].ToString();
+                    item.Remark = dt1.Rows[0][sale.Remark].ToString();
+                    item.Limit1 = dt1.Rows[0][sale.Limit1].ToString();
+                    item.Active = dt1.Rows[0][sale.Active].ToString();
+                    item.statusDiscount = dt1.Rows[0][sale.statusDiscount].ToString();
+                    ls.Add(item);
+                }
+            }
+            return ls;
+        }
         public Sale selectByPk(String saleId)
         {
             Sale item = new Sale();

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,6 +49,8 @@ namespace lottory.control
         public ComboBox cboStaff, cboSale, cboThoo;
         public List<Thoo> lTho = new List<Thoo>();
         public List<Font1> thoColor = new List<Font1>();
+        public List<SaleRate> lsr = new List<SaleRate>();
+        public List<Sale> ls = new List<Sale>();
 
         private IniFile iniFile;
         public InitConfig initC;
@@ -105,6 +108,14 @@ namespace lottory.control
             r2Up = ratedb.selectByPk("2up");
             lTho = thodb.setData();
             setThoColor();
+            lsr = srdb.selectSRAll();
+            ls = saledb.selectSAll();
+            //cboThoo = new ComboBox();
+            //cboStaff = new ComboBox();
+            //cboSale = new ComboBox();
+            //cboThoo = thodb.getCboThoo(cboThoo);
+            //cboStaff = sfdb.getCboStaff(cboStaff);
+            //cboSale = saledb.getCboSale(cboSale);
         }
         private void setThoColor()
         {
@@ -177,6 +188,19 @@ namespace lottory.control
             }
             return aa;
         }
+        public String getThooBackColorByThoId(String thoId)
+        {
+            String aa = "#FFFFFF";
+            //Font1 i = new Font1();
+            foreach (Thoo t in lTho)
+            {
+                if (t.Id.Equals(thoId))
+                {
+                    aa = getThooBackColor(t.Color);
+                }
+            }
+            return aa;
+        }
         public Thoo getThoo(String thoId)
         {
             Thoo i = new Thoo();
@@ -192,6 +216,8 @@ namespace lottory.control
         public ComboBoxItem getCboItem(ComboBox c, String valueId)
         {
             ComboBoxItem r = new ComboBoxItem();
+            r.Text = "";
+            r.Value = "";
             foreach (ComboBoxItem cc in c.Items)
             {
                 if (cc.Value.Equals(valueId))
@@ -563,6 +589,62 @@ namespace lottory.control
             }
             return lRew1;
         }
+        public List<Reward1> selectByLenNumber(String yearId, String monthId, String periodId, String rateId)
+        {
+            List<Reward1> lRew1 = new List<Reward1>();
+            DataTable dt = lotdb.selectByLenNumber(yearId, monthId, periodId, rateId);
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                Reward1 rew1 = new Reward1();
+                rew1.number = dt.Rows[i][lotdb.lot.number].ToString();
+                if (rateId.Equals("up"))
+                {
+                    rew1.Amt = Double.Parse(cf.NumberNull(dt.Rows[i][lotdb.lot.up]));
+                    rew1.PayRate = Double.Parse(cf.NumberNull(dt.Rows[i][lotdb.lot.rUpRate]));
+                    rew1.Reward = Double.Parse(cf.NumberNull(dt.Rows[i][lotdb.lot.rUp]));
+                    //rew1.AmtReward = Double.Parse(cf.NumberNull(dt.Rows[i][lotdb.lot.rUp]));
+                }
+                else if (rateId.Equals("down"))
+                {
+                    rew1.Amt = Double.Parse(cf.NumberNull(dt.Rows[i][lotdb.lot.down]));
+                    rew1.PayRate = Double.Parse(cf.NumberNull(dt.Rows[i][lotdb.lot.rDownRate]));
+                    rew1.Reward = Double.Parse(cf.NumberNull(dt.Rows[i][lotdb.lot.rDown]));
+                }
+                else if (rateId.Equals("2down"))
+                {
+                    rew1.Amt = Double.Parse(cf.NumberNull(dt.Rows[i][lotdb.lot.down]));
+                    rew1.PayRate = Double.Parse(cf.NumberNull(dt.Rows[i][lotdb.lot.r2DownRate]));
+                    rew1.Reward = Double.Parse(cf.NumberNull(dt.Rows[i][lotdb.lot.r2Down]));
+                }
+                else if (rateId.Equals("2up"))
+                {
+                    rew1.Amt = Double.Parse(cf.NumberNull(dt.Rows[i][lotdb.lot.up]));
+                    rew1.PayRate = Double.Parse(cf.NumberNull(dt.Rows[i][lotdb.lot.r2UpRate]));
+                    rew1.Reward = Double.Parse(cf.NumberNull(dt.Rows[i][lotdb.lot.r2Up]));
+                }
+                else if (rateId.Equals("3down"))
+                {
+                    rew1.Amt = Double.Parse(cf.NumberNull(dt.Rows[i][lotdb.lot.down]));
+                    rew1.PayRate = Double.Parse(cf.NumberNull(dt.Rows[i][lotdb.lot.r3DownRate]));
+                    rew1.Reward = Double.Parse(cf.NumberNull(dt.Rows[i][lotdb.lot.r3Down]));
+                }
+                else if (rateId.Equals("3tod"))
+                {
+                    rew1.Amt = Double.Parse(cf.NumberNull(dt.Rows[i][lotdb.lot.tod]));
+                    rew1.PayRate = Double.Parse(cf.NumberNull(dt.Rows[i][lotdb.lot.r3TodRate]));
+                    rew1.Reward = Double.Parse(cf.NumberNull(dt.Rows[i][lotdb.lot.r3Tod]));
+                }
+                else if (rateId.Equals("3up"))
+                {
+                    rew1.Amt = Double.Parse(cf.NumberNull(dt.Rows[i][lotdb.lot.up]));
+                    rew1.PayRate = Double.Parse(cf.NumberNull(dt.Rows[i][lotdb.lot.r3UpRate]));
+                    rew1.Reward = Double.Parse(cf.NumberNull(dt.Rows[i][lotdb.lot.r3Up]));
+                }
+                lRew1.Add(rew1);
+            }
+            return lRew1;
+        }
+        
         public String GetConfigbyKey(String key)
         {
             AppSettingsReader _configReader = new AppSettingsReader();
@@ -578,6 +660,7 @@ namespace lottory.control
             initC.Password = iniFile.Read("password");
 
             initC.pathImage = iniFile.Read("pathimage");
+            initC.pathImageBefore = iniFile.Read("pathimagebefore");
             initC.delImage = iniFile.Read("delimage");
             //initC.connectServer = regE.getConnectServer();
             //initC.ServerIP = regE.getServerIP();
@@ -587,6 +670,10 @@ namespace lottory.control
         public void SetPathImage(String path)
         {
             iniFile.Write("pathimage", path);
+        }
+        public void SetPathImageBefore(String path)
+        {
+            iniFile.Write("pathimagebefore", path);
         }
         public void SetClearInput(Boolean value)
         {
@@ -623,6 +710,103 @@ namespace lottory.control
             {
                 iniFile.Write("connectserver", "no");
             }
+        }
+        public void renameFileImage(String fileName)
+        {
+            String file1 = fileName.Replace("_0","_1");
+            System.IO.File.Move(fileName, file1);
+        }
+        public String getSalePercent(String yearId, String monthId, String periodId, String saleId)
+        {
+            String num="";
+            DataTable dt1 = lotdb.selectBySale(yearId, monthId, periodId, saleId);
+            Double up = 0, down = 0, tod = 0, amtUp=0, amtTod=0, amtDown=0, amt=0;
+            Sale s = new Sale();
+            
+            if (dt1.Rows.Count > 0)
+            {
+                s = getSalebyListS(saleId);
+                //DataTable dtRate = ratedb.selectAll();
+                
+                for (int i = 0; i < dt1.Rows.Count; i++)
+                {
+                    SaleRate sr = new SaleRate();
+                    //DataTable dtSR = srdb.selectBySale(dt.Rows[i][lotdb.lot.saleId].ToString());
+                    num = dt1.Rows[i][lotdb.lot.number].ToString();
+                    up = Double.Parse(cf.NumberNull(dt1.Rows[i][lotdb.lot.up]));
+                    down = Double.Parse(cf.NumberNull(dt1.Rows[i][lotdb.lot.down]));
+                    tod = Double.Parse(cf.NumberNull(dt1.Rows[i][lotdb.lot.tod]));
+                    amtUp = 0;
+                    amtDown = 0;
+                    amtTod = 0;
+                    if (s.statusDiscount.Equals("1"))
+                    {
+                        if (num.Length == 1)
+                        {
+                            sr = getSaleRatebyListSR(lsr, saleId, "up");
+                            amtUp = (up * Double.Parse(cf.NumberNull(sr.discount))) / 100;
+                            sr = getSaleRatebyListSR(lsr, saleId, "down");
+                            amtDown = (down * Double.Parse(cf.NumberNull(sr.discount))) / 100;
+                        }
+                        else if (num.Length == 2)
+                        {
+                            sr = getSaleRatebyListSR(lsr, saleId, "2up");
+                            amtUp = (up * Double.Parse(cf.NumberNull(sr.discount))) / 100;
+                            sr = getSaleRatebyListSR(lsr, saleId, "2down");
+                            amtDown = (down * Double.Parse(cf.NumberNull(sr.discount))) / 100;
+                            sr = getSaleRatebyListSR(lsr, saleId, "2tod");
+                            amtTod = (tod * Double.Parse(cf.NumberNull(sr.discount))) / 100;
+                        }
+                        else if (num.Length == 3)
+                        {
+                            sr = getSaleRatebyListSR(lsr, saleId, "3up");
+                            amtUp = (up * Double.Parse(cf.NumberNull(sr.discount))) / 100;
+                            sr = getSaleRatebyListSR(lsr, saleId, "3down");
+                            amtDown = (down * Double.Parse(cf.NumberNull(sr.discount))) / 100;
+                            sr = getSaleRatebyListSR(lsr, saleId, "3tod");
+                            amtTod = (tod * Double.Parse(cf.NumberNull(sr.discount))) / 100;
+                        }
+                    }
+                    else
+                    {
+
+                    }
+                    
+                    amt += amtUp + amtDown + amtTod;
+                }
+            }
+            return amt.ToString();
+        }
+        public SaleRate getSaleRatebyListSR(List<SaleRate> lsr, String saleId, String rateId)
+        {
+            SaleRate item = new SaleRate();
+            for (int i = 0; i < lsr.Count; i++)
+            {
+                item = new SaleRate();
+                item = lsr[i];
+                if (item.SaleId.Equals(saleId))
+                {
+                    if (item.RateId.Equals(rateId))
+                    {
+                        return item;
+                    }
+                }
+            }
+            return item;
+        }
+        public Sale getSalebyListS(String saleId)
+        {
+            Sale item = new Sale();
+            for (int i = 0; i < ls.Count; i++)
+            {
+                item = new Sale();
+                item = ls[i];
+                if (item.Id.Equals(saleId))
+                {
+                    return item;
+                }
+            }
+            return item;
         }
     }
 }

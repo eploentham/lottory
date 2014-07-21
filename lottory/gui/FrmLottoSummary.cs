@@ -14,12 +14,13 @@ namespace lottory.gui
     public partial class FrmLottoSummary : Form
     {
         int row = 0;
-        int colNumber = 0, colUp = 1, colTod = 2, colDown = 3, colRemark = 4, colRowId = 6, colLottoId1 = 5, colUse1 = 7, colStatusOL = 8, colOverLimit = 9, colRateId = 10, colThooTranferId = 11, colThooTranferName = 12;
+        int colNumber = 0, colUp = 1, colTod = 2, colDown = 3, colRemark = 4, colRowId = 6, colLottoId1 = 5, colUse1 = 7, colStatusOL = 8, colOverLimit = 9;
+        int colRateId = 10, colThooTranferId = 11, colThooTranferName = 12;
         int col1Cnt = 13;
         
         //int colTRow = 0, colTName = 1, colTLimit = 2, colTAmt = 3, colTId = 4;
-        int colRRow = 0, colRDescription = 1, colRAmt = 2, colRReward = 3, colRRec = 4, colRpayRate =5, colRLimit = 6, colRDiscount = 7, colRId = 8;
-        int colSaleName = 0, colSaleAmt=1, colSalePay=2, colSaleId=3, colSaleCnt=4;
+        int colRRow = 0, colRDescription = 1,colRAmt=2, colRAmtReward = 3, colRNetTotal=4, colRReward = 5, colRRec = 6, colRpayRate =7, colRLimit = 8, colRDiscount = 9, colRId = 10;
+        int colSName = 0, colSAmt=1, colSPay=2, colSId=3, colSStatusDiscount=4, colSPerDiscount=5, colSCnt=6;
         int colTName = 0, colTAmt = 1, colTPay = 2, colTId = 3, colTCnt=4;
         //int colTName = 0, colSaleAmt = 1, colSalePay = 2, colSaleId = 3, colSaleCnt = 4;
         //int col1Cnt = 14;
@@ -31,6 +32,8 @@ namespace lottory.gui
         ComboBox cboThoo, cboSale;
         ComboBoxItem cItem;
         FrmLottoSummaryRate frmSR;
+        FrmLottoSummarySale frmSS;
+        FrmLottoSummaryThoo frmST; 
         public FrmLottoSummary(String sfCode, LottoryControl l)
         {
             InitializeComponent();
@@ -85,10 +88,11 @@ namespace lottory.gui
             String rateId = "";
             DataTable dt = new DataTable();
             Double[] reward = new Double[2] { 0, 0 };
+            double amt = 0;
             dt = lc.selectRateAll();
             dgvRate.Rows.Clear();
             Font font = new Font("Microsoft Sans Serif", 12);
-
+            Font font1 = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
             dgvRate.SelectionMode = DataGridViewSelectionMode.CellSelect;
             if (dt.Rows.Count > 0)
             {
@@ -99,16 +103,18 @@ namespace lottory.gui
                 dgvRate.RowCount = 1;
             }
             //dgvRate.RowCount = dt.Rows.Count;
-            dgvRate.ColumnCount = 9;
+            dgvRate.ColumnCount = 11;
             dgvRate.Columns[colRRow].Width = 50;
             dgvRate.Columns[colRDescription].Width = 200;
-            dgvRate.Columns[colRRec].Width = 80;
+            dgvRate.Columns[colRRec].Width = 60;
             dgvRate.Columns[colRReward].Width = 100;
             dgvRate.Columns[colRpayRate].Width = 100;
             dgvRate.Columns[colRDiscount].Width = 100;
             dgvRate.Columns[colRLimit].Width = 120;
             dgvRate.Columns[colRId].Width = 80;
+            dgvRate.Columns[colRAmtReward].Width = 100;
             dgvRate.Columns[colRAmt].Width = 100;
+            dgvRate.Columns[colRNetTotal].Width = 100;
 
             dgvRate.Columns[colRRow].HeaderText = "ลำดับ";
             dgvRate.Columns[colRpayRate].HeaderText = "อัตราจ่าย";
@@ -119,6 +125,8 @@ namespace lottory.gui
             dgvRate.Columns[colRDiscount].HeaderText = "ส่วนลด";
             dgvRate.Columns[colRLimit].HeaderText = "จำนวนอั้น";
             dgvRate.Columns[colRAmt].HeaderText = "ยอดเงิน";
+            dgvRate.Columns[colRAmtReward].HeaderText = "แทงถูก";
+            dgvRate.Columns[colRNetTotal].HeaderText = "คงเหลือ";
             dgvRate.Columns[colRId].HeaderText = "id";//
 
             dgvRate.Columns[colRpayRate].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
@@ -126,8 +134,10 @@ namespace lottory.gui
             dgvRate.Columns[colRReward].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
             dgvRate.Columns[colRDiscount].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
             dgvRate.Columns[colRLimit].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
+            dgvRate.Columns[colRAmtReward].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
             dgvRate.Columns[colRAmt].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
-            dgvRate.ReadOnly = true;
+            dgvRate.Columns[colRNetTotal].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
+            //dgvRate.ReadOnly = true;
 
             if (dt.Rows.Count > 0)
             {
@@ -136,7 +146,8 @@ namespace lottory.gui
                 {
                     pB1.Value = i;
                     rateId = dt.Rows[i][lc.ratedb.rate.Id].ToString();
-                    reward = lc.lotdb.selectSumByRate(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), rateId);
+                    reward = lc.lotdb.selectSumByRateReward(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), rateId);
+                    amt = lc.lotdb.selectSumByRate(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), rateId);
                     dgvRate[colRRow, i].Value = (i + 1);
                     dgvRate[colRpayRate, i].Value = String.Format("{0:#,###,###.00}", dt.Rows[i][lc.ratedb.rate.pay]);
                     dgvRate[colRDescription, i].Value = dt.Rows[i][lc.ratedb.rate.Description].ToString();
@@ -144,20 +155,59 @@ namespace lottory.gui
                     dgvRate[colRLimit, i].Value = String.Format("{0:#,###,###.00}", dt.Rows[i][lc.ratedb.rate.limit1]);
                     //dgvRate[colRDiscount, i].Value = dt.Rows[i][lc.ratedb.rate.discount].ToString();
                     dgvRate[colRId, i].Value = rateId;
-                    dgvRate[colRAmt, i].Value = String.Format("{0:#,###,###.00}", reward[0]);
+                    dgvRate[colRAmtReward, i].Value = String.Format("{0:#,###,###.00}", reward[0]);
                     dgvRate[colRReward, i].Value = String.Format("{0:#,###,###.00}", reward[1]);
-
-                    if ((i % 2) != 0)
+                    dgvRate[colRAmt, i].Value = String.Format("{0:#,###,###.00}", amt);
+                    if (Double.Parse(lc.cf.NumberNull(dgvRate[colRReward, i].Value.ToString())) > 0)
                     {
-                        dgvRate.Rows[i].DefaultCellStyle.BackColor = Color.LightSalmon;
+                        dgvRate[colRReward, i].Style.Font = font1;
+                        dgvRate[colRReward, i].Style.ForeColor = Color.Red;
+                        dgvRate[colRAmtReward, i].Style.Font = font1;
+                        dgvRate[colRAmtReward, i].Style.ForeColor = Color.Red;
                     }
+                    if (rateId.Equals("up"))
+                    {
+                        dgvRate.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#174e75");                        
+                    }
+                    else if (rateId.Equals("down"))
+                    {
+                        dgvRate.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#174e75");
+                    }
+                    else if (rateId.Equals("2down"))
+                    {
+                        dgvRate.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#789640");
+                    }
+                    else if (rateId.Equals("2up"))
+                    {
+                        dgvRate.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#789640");
+                    }
+                    else if (rateId.Equals("2tod"))
+                    {
+                        dgvRate.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#789640");
+                    }
+                    else if (rateId.Equals("3down"))
+                    {
+                        dgvRate.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#788540");
+                    }
+                    else if (rateId.Equals("3tod"))
+                    {
+                        dgvRate.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#788540");
+                    }
+                    else if (rateId.Equals("3up"))
+                    {
+                        dgvRate.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#788540");
+                    }
+                    //if ((i % 2) != 0)
+                    //{
+                    //    dgvRate.Rows[i].DefaultCellStyle.BackColor = Color.LightSalmon;
+                    //}
                 }
             }
             dgvRate.RowHeadersVisible = false;
             dgvRate.Columns[colRId].Visible = false;
             dgvRate.Columns[colRRow].Visible = false;
             dgvRate.Columns[colRDiscount].Visible = false;
-
+            dgvRate.ReadOnly = true;
             dgvRate.Font = font;
             pB1.Hide();
             //setDataGrdThoo();
@@ -179,19 +229,19 @@ namespace lottory.gui
             {
                 dgvSale.RowCount = 1;
             }
-            dgvSale.ColumnCount = colSaleCnt;
-            dgvSale.Columns[colSaleName].Width = 200;
-            dgvSale.Columns[colSaleAmt].Width = 100;
-            dgvSale.Columns[colSalePay].Width = 80;
-            dgvSale.Columns[colSaleId].Width = 100;
+            dgvSale.ColumnCount = colSCnt;
+            dgvSale.Columns[colSName].Width = 200;
+            dgvSale.Columns[colSAmt].Width = 100;
+            dgvSale.Columns[colSPay].Width = 80;
+            dgvSale.Columns[colSId].Width = 100;
 
             //dgvRate.Columns[colRRow].HeaderText = "ลำดับ";
-            dgvSale.Columns[colSaleName].HeaderText = "sale";
-            dgvSale.Columns[colSaleAmt].HeaderText = "ยอด";
-            dgvSale.Columns[colSalePay].HeaderText = "จ่าย";
-            dgvSale.Columns[colSaleId].HeaderText = " ";
-            dgvSale.Columns[colSaleAmt].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
-            dgvSale.Columns[colSalePay].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
+            dgvSale.Columns[colSName].HeaderText = "sale";
+            dgvSale.Columns[colSAmt].HeaderText = "ยอด";
+            dgvSale.Columns[colSPay].HeaderText = "%ยอด";
+            dgvSale.Columns[colSId].HeaderText = " ";
+            dgvSale.Columns[colSAmt].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
+            dgvSale.Columns[colSPay].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
             dgvSale.ReadOnly = true;
 
             if (dt.Rows.Count > 0)
@@ -201,10 +251,10 @@ namespace lottory.gui
                 {
                     //dgvRate[colRRow, i].Value = (i + 1);
                     cItem = lc.getCboItem(cboSale, dt.Rows[i][lc.saledb.sale.Id].ToString());
-                    dgvSale[colSaleName, i].Value = cItem.Text;
-                    dgvSale[colSaleAmt, i].Value = String.Format("{0:#,###,###.00}",dt.Rows[i]["amt"]);
-                    dgvSale[colSalePay, i].Value = "";
-                    dgvSale[colSaleId, i].Value = dt.Rows[i][lc.saledb.sale.Id].ToString();
+                    dgvSale[colSName, i].Value = cItem.Text;
+                    dgvSale[colSAmt, i].Value = String.Format("{0:#,###,###.00}",dt.Rows[i]["amt"]);
+                    dgvSale[colSPay, i].Value = lc.getSalePercent(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dt.Rows[i][lc.saledb.sale.Id].ToString());
+                    dgvSale[colSId, i].Value = dt.Rows[i][lc.saledb.sale.Id].ToString();
                     //dgvRate[colRDiscount, i].Value = dt.Rows[i][lc.ratedb.rate.discount].ToString();
                     //dgvRate[colRId, i].Value = dt.Rows[i][lc.ratedb.rate.Id].ToString();
 
@@ -215,10 +265,11 @@ namespace lottory.gui
                 }
             }
             dgvSale.RowHeadersVisible = false;
-            dgvSale.Columns[colSaleId].Visible = false;
+            dgvSale.Columns[colSId].Visible = false;
             //dgvSale.Columns[colRRow].Visible = false;
 
             dgvSale.Font = font;
+            dgvSale.ReadOnly = true;
             //setDataGrdThoo();
             //setThooAmount();
         }
@@ -240,10 +291,10 @@ namespace lottory.gui
             }
             //dgvThooTranfer.RowCount = dt.Rows.Count;
             dgvThooTranfer.ColumnCount = colTCnt;
-            dgvThooTranfer.Columns[colSaleName].Width = 200;
-            dgvThooTranfer.Columns[colSaleAmt].Width = 100;
-            dgvThooTranfer.Columns[colSalePay].Width = 80;
-            dgvThooTranfer.Columns[colSaleId].Width = 100;
+            dgvThooTranfer.Columns[colSName].Width = 200;
+            dgvThooTranfer.Columns[colSAmt].Width = 100;
+            dgvThooTranfer.Columns[colSPay].Width = 80;
+            dgvThooTranfer.Columns[colSId].Width = 100;
 
             //dgvRate.Columns[colRRow].HeaderText = "ลำดับ";
             dgvThooTranfer.Columns[colTName].HeaderText = "เจ้ามือ";
@@ -267,17 +318,17 @@ namespace lottory.gui
                     dgvThooTranfer[colTId, i].Value = dt.Rows[i][lc.lotdb.lot.thooTranferId].ToString();
                     //dgvRate[colRDiscount, i].Value = dt.Rows[i][lc.ratedb.rate.discount].ToString();
                     //dgvRate[colRId, i].Value = dt.Rows[i][lc.ratedb.rate.Id].ToString();
-
-                    if ((i % 2) != 0)
-                    {
-                        dgvThooTranfer.Rows[i].DefaultCellStyle.BackColor = Color.LightSalmon;
-                    }
+                    dgvThooTranfer.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml(lc.getThooBackColorByThoId(dt.Rows[i][lc.lotdb.lot.thooTranferId].ToString()));
+                    //if ((i % 2) != 0)
+                    //{
+                    //    dgvThooTranfer.Rows[i].DefaultCellStyle.BackColor = Color.LightSalmon;
+                    //}
                 }
             }
             dgvThooTranfer.RowHeadersVisible = false;
-            dgvThooTranfer.Columns[colSaleId].Visible = false;
+            dgvThooTranfer.Columns[colSId].Visible = false;
             //dgvSale.Columns[colRRow].Visible = false;
-
+            dgvThooTranfer.ReadOnly = true;
             dgvThooTranfer.Font = font;
             //setDataGrdThoo();
             //setThooAmount();
@@ -292,6 +343,13 @@ namespace lottory.gui
             txtRDown34.Text = rw.rewardDown34;
             txtReward1.Text = rw.reward1;
             txtRewardId.Text = rw.rewardId;
+            txtRewardDown2.ReadOnly = true;
+            txtRDown31.ReadOnly = true;
+            txtRDown32.ReadOnly = true;
+            txtRDown33.ReadOnly = true;
+            txtRDown34.ReadOnly = true;
+            txtReward1.ReadOnly = true;
+            
             //rw.dateReward;
         }
         //private void setGrid(DataGridView dgv)
@@ -497,34 +555,34 @@ namespace lottory.gui
         //    }
         //    //lc.fldb.unLockLotto();
         //}
-        private void setThooAmount()
-        {
-            double amt = 0;
-            String thooId = "", thoo1Id = "";
-            for (int i = 0; i < dgvThooTranfer.RowCount; i++)
-            {
-                if (dgvThooTranfer[colTId, i].Value == null)
-                {
-                    continue;
-                }
-                thooId = dgvThooTranfer[colTId, i].Value.ToString();
-                for (int j = 0; j < dgv1.RowCount; j++)
-                {
-                    if (dgv1[colThooTranferId, j].Value == null)
-                    {
-                        continue;
-                    }
-                    thoo1Id = dgv1[colThooTranferId, j].Value.ToString();
-                    if (thooId.Equals(thoo1Id))
-                    {
-                        amt += Double.Parse(lc.cf.NumberNull(dgv1[colUp, j].Value));
-                        amt += Double.Parse(lc.cf.NumberNull(dgv1[colTod, j].Value));
-                        amt += Double.Parse(lc.cf.NumberNull(dgv1[colDown, j].Value));
-                    }
-                }
-                dgvThooTranfer[colTAmt, i].Value = String.Format("{0:#,###,###.##}", amt);
-            }
-        }
+        //private void setThooAmount()
+        //{
+        //    double amt = 0;
+        //    String thooId = "", thoo1Id = "";
+        //    for (int i = 0; i < dgvThooTranfer.RowCount; i++)
+        //    {
+        //        if (dgvThooTranfer[colTId, i].Value == null)
+        //        {
+        //            continue;
+        //        }
+        //        thooId = dgvThooTranfer[colTId, i].Value.ToString();
+        //        for (int j = 0; j < dgv1.RowCount; j++)
+        //        {
+        //            if (dgv1[colThooTranferId, j].Value == null)
+        //            {
+        //                continue;
+        //            }
+        //            thoo1Id = dgv1[colThooTranferId, j].Value.ToString();
+        //            if (thooId.Equals(thoo1Id))
+        //            {
+        //                amt += Double.Parse(lc.cf.NumberNull(dgv1[colUp, j].Value));
+        //                amt += Double.Parse(lc.cf.NumberNull(dgv1[colTod, j].Value));
+        //                amt += Double.Parse(lc.cf.NumberNull(dgv1[colDown, j].Value));
+        //            }
+        //        }
+        //        dgvThooTranfer[colTAmt, i].Value = String.Format("{0:#,###,###.##}", amt);
+        //    }
+        //}
         //private void setRateAmount()
         //{
         //    String rateId = "", rate1Id = "", num = "";
@@ -624,9 +682,11 @@ namespace lottory.gui
 
         private void dgvRate_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            Cursor cursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
             if (frmSR == null)
             {
-                frmSR = new FrmLottoSummaryRate(sf.Id, cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvRate[colRId, e.RowIndex].Value.ToString());
+                frmSR = new FrmLottoSummaryRate(sf.Id, cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvRate[colRId, e.RowIndex].Value.ToString(),lc);
             }
             frmSR.setControl(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvRate[colRId, e.RowIndex].Value.ToString());
             if (!frmSR.Visible)
@@ -638,19 +698,53 @@ namespace lottory.gui
                 frmSR.Show();
                 frmSR.Activate();
             }
-            
+            Cursor.Current = cursor;
         }
 
         private void dgvSale_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            FrmLottoSummarySale frm = new FrmLottoSummarySale();
-            frm.ShowDialog(this);
+            Cursor cursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
+            if (frmSS == null)
+            {
+                frmSS = new FrmLottoSummarySale(sf.Id, cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvRate[colRId, e.RowIndex].Value.ToString(), lc);
+            }
+            frmSS.setControl(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvSale[colSId, e.RowIndex].Value.ToString());
+            //FrmLottoSummarySale frm = new FrmLottoSummarySale(sf.Id, cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvRate[colRId, e.RowIndex].Value.ToString(), lc);
+            //frm.ShowDialog(this);
+            if (!frmSS.Visible)
+            {
+                frmSS.Show(this);
+            }
+            else
+            {
+                frmSS.Show();
+                frmSS.Activate();
+            }
+            Cursor.Current = cursor;
         }
 
         private void dgvThooTranfer_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            FrmLottoSummaryThoo frm = new FrmLottoSummaryThoo();
-            frm.ShowDialog(this);
+            Cursor cursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
+            if (frmSS == null)
+            {
+                frmST = new FrmLottoSummaryThoo(sf.Id, cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvRate[colRId, e.RowIndex].Value.ToString(), lc);
+            }
+            frmST.setControl(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvThooTranfer[colTId, e.RowIndex].Value.ToString());
+            //FrmLottoSummarySale frm = new FrmLottoSummarySale(sf.Id, cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvRate[colRId, e.RowIndex].Value.ToString(), lc);
+            //frm.ShowDialog(this);
+            if (!frmST.Visible)
+            {
+                frmST.Show(this);
+            }
+            else
+            {
+                frmST.Show();
+                frmST.Activate();
+            }
+            Cursor.Current = cursor;
         }
         protected override bool ProcessCmdKey(ref Message message, Keys keys)
         {

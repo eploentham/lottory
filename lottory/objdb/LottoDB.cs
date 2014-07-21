@@ -63,12 +63,13 @@ namespace lottory.objdb
             lot.r2UpRate = "reward_2tod_rate";
             lot.r3Up = "reward_3up";
             lot.r3UpRate = "reward_3up_rate";
-            lot.r3Down = "reward_2down";
+            lot.r3Down = "reward_3down";
             lot.r3DownRate = "reward_3down_rate";
             lot.r3Tod = "reward_3tod";
             lot.r3TodRate = "reward_3tod_rate";
             lot.CDbl = "cdbl";
             lot.statusInput = "status_input";
+            lot.imgId = "img_id";
 
             lot.table = "t_lottory";
             lot.pkField = "row_id";
@@ -101,6 +102,7 @@ namespace lottory.objdb
             item.use1 = dt.Rows[0][lot.use1].ToString();
             item.rateId = dt.Rows[0][lot.rateId].ToString();
             item.statusInput = dt.Rows[0][lot.statusInput].ToString();
+            item.imgId = dt.Rows[0][lot.imgId].ToString();
             
             return item;
         }
@@ -165,6 +167,19 @@ namespace lottory.objdb
             //}
             return dt;
         }
+        public DataTable selectByImg(String imgId)
+        {
+            Lotto item = new Lotto();
+            String sql = "";
+            DataTable dt = new DataTable();
+            sql = "Select * From " + lot.table + " Where " + lot.imgId + "='" + imgId + "' and " + lot.Active + "='1' ";
+            dt = conn.selectData(sql);
+            //if (dt.Rows.Count > 0)
+            //{
+            //    item = setData(item, dt);
+            //}
+            return dt;
+        }
         public Lotto selectByLRowId(String lotId)
         {
             Lotto item = new Lotto();
@@ -219,8 +234,33 @@ namespace lottory.objdb
             DataTable dt = new DataTable();
             sql = "Select * From " + lot.table + " Where  " +
                 lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
+                lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' " +
+                "Order By " + lot.CDbl + "," + lot.rowNumber;
+            
+            dt = conn.selectData(sql);
+
+            return dt;            
+        }
+        public DataTable selectBySale(String yearId, String monthId, String periodId, String saleId)
+        {
+            String sql = "";
+            DataTable dt3 = new DataTable();
+            sql = "Select * From " + lot.table + " Where " + lot.saleId + "='" + saleId + "' and " +
+                lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
                 lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' "+
-                "Order By "+lot.CDbl+","+lot.rowNumber;
+                "Order By " + lot.CDbl + "," + lot.rowNumber;
+            dt3 = conn.selectData(sql);
+
+            return dt3;
+        }
+        public DataTable selectApprovedByPeriod(String yearId, String monthId, String periodId)
+        {
+            String sql = "";
+            DataTable dt = new DataTable();
+            sql = "Select * From " + lot.table + " Where  " +
+                lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
+                lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' and " + lot.statusApprove + "='1' " +
+                "Order By " + lot.CDbl + "," + lot.rowNumber;
             dt = conn.selectData(sql);
 
             return dt;
@@ -297,6 +337,78 @@ namespace lottory.objdb
 
             return dt;
         }
+        public DataTable selectByLenNumber(String yearId, String monthId, String periodId, String rateId)
+        {
+            String sql = "";
+            DataTable dt = new DataTable();
+            if (rateId.Equals("up"))
+            {
+                sql = "Select * From " + lot.table + " Where  " +
+                lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
+                lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' and len(" + lot.number + ") = 1 and " + lot.up + " >0 " +
+                "Order By " + lot.CDbl + "," + lot.rowNumber;
+            }
+            else if (rateId.Equals("down"))
+            {
+                sql = "Select * From " + lot.table + " Where  " +
+                lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
+                lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' and len(" + lot.number + ") = 1 and " + lot.down + " >0 " +
+                "Order By " + lot.CDbl + "," + lot.rowNumber;
+            }
+            else if (rateId.Equals("2down"))
+            {
+                sql = "Select * From " + lot.table + " Where  " +
+                lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
+                lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' and len(" + lot.number + ") = 2 and " + lot.down + " >0 " +
+                "Order By " + lot.CDbl + "," + lot.rowNumber;
+            }
+            else if (rateId.Equals("2tod"))
+            {
+                sql = "Select * From " + lot.table + " Where  " +
+                lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
+                lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' and len(" + lot.number + ") = 2 and " + lot.tod + " >0 " +
+                "Order By " + lot.CDbl + "," + lot.rowNumber;
+            }
+            else if (rateId.Equals("2up"))
+            {
+                sql = "Select * From " + lot.table + " Where  " +
+                lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
+                lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' and len(" + lot.number + ") = 2 and " + lot.up + " >0 " +
+                "Order By " + lot.CDbl + "," + lot.rowNumber;
+            }
+            else if (rateId.Equals("3down"))
+            {
+                sql = "Select * From " + lot.table + " Where  " +
+                lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
+                lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' and len(" + lot.number + ") = 3 and " + lot.down + " >0 " +
+                "Order By " + lot.CDbl + "," + lot.rowNumber;
+            }
+            else if (rateId.Equals("3tod"))
+            {
+                sql = "Select * From " + lot.table + " Where  " +
+                lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
+                lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' and len(" + lot.number + ") = 3 and " + lot.tod + " >0 " +
+                "Order By " + lot.CDbl + "," + lot.rowNumber;
+            }
+            else if (rateId.Equals("3up"))
+            {
+                sql = "Select * From " + lot.table + " Where  " +
+                lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
+                lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' and len(" + lot.number + ") = 3 and " + lot.up + " >0 " +
+                "Order By " + lot.CDbl + "," + lot.rowNumber;
+            }
+            else
+            {
+                sql = "Select * From " + lot.table + " Where  " +
+                lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
+                lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "'  " +
+                "Order By " + lot.CDbl + "," + lot.rowNumber;
+            }
+
+            dt = conn.selectData(sql);
+
+            return dt;
+        }
 
         public DataTable selectSumByStaff(String yearId, String monthId, String periodId, String staffId)
         {
@@ -326,7 +438,7 @@ namespace lottory.objdb
 
             return dt;
         }
-        public Double[] selectSumByRate(String yearId, String monthId, String periodId, String rateId)
+        public Double[] selectSumByRateReward(String yearId, String monthId, String periodId, String rateId)
         {
             //Lotto item = new Lotto();
             //Double[] reward = new Double[2] { 0, 0 };
@@ -392,6 +504,72 @@ namespace lottory.objdb
             }
             return reward;
         }
+        public Double selectSumByRate(String yearId, String monthId, String periodId, String rateId)
+        {
+            //Lotto item = new Lotto();
+            //Double[] reward = new Double[2] { 0, 0 };
+            //String sql = "";
+            //DataTable dt = new DataTable();
+            Double amt = 0;
+            if (rateId.Equals("up"))
+            {
+                sql = "Select sum(" + lot.up + ") as amt From " + lot.table +
+                " Where " + lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
+                lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' and len(" + lot.number + ") = 1 and " + lot.up + " >0";
+            }
+            else if (rateId.Equals("down"))
+            {
+                sql = "Select sum(" + lot.down + ") as amt From " + lot.table +
+                " Where " + lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
+                lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' and len(" + lot.number + ") = 1 and " + lot.down + " >0 ";
+            }
+            else if (rateId.Equals("2down"))
+            {
+                sql = "Select sum(" + lot.down + ") as amt From " + lot.table +
+                " Where " + lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
+                lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' and len(" + lot.number + ") = 2 and " + lot.down + " >0 ";
+            }
+            else if (rateId.Equals("2up"))
+            {
+                sql = "Select sum(" + lot.up + ") as amt From " + lot.table +
+                " Where " + lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
+                lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' and len(" + lot.number + ") = 2 and " + lot.up + " >0 ";
+            }
+            else if (rateId.Equals("2tod"))
+            {
+                sql = "Select sum(" + lot.tod + ") as amt From " + lot.table +
+                " Where " + lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
+                lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' and len(" + lot.number + ") = 2 and " + lot.tod + " >0 ";
+            }
+            else if (rateId.Equals("3down"))
+            {
+                sql = "Select sum(" + lot.down + ") as amt From " + lot.table +
+                " Where " + lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
+                lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' and len(" + lot.number + ") = 3 and " + lot.down + " >0";
+            }
+            else if (rateId.Equals("3tod"))
+            {
+                sql = "Select sum(" + lot.tod + ") as amt From " + lot.table +
+                " Where " + lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
+                lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' and len(" + lot.number + ") = 3 and " + lot.tod + " >0";
+            }
+            else if (rateId.Equals("3up"))
+            {
+                sql = "Select sum(" + lot.up + ") as amt From " + lot.table +
+                " Where " + lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
+                lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' and len("+lot.number+") = 3 and "+lot.up+" >0";
+            }
+            conn.selectDataN(sql);
+            if (conn.dt.Rows.Count > 0)
+            {
+                if (conn.dt.Rows[0]["reward"] != null)
+                {
+                    amt = lot.NumberNull(conn.dt.Rows[0]["amt"]);
+                    //reward[1] = lot.NumberNull(conn.dt.Rows[0]["reward"]);
+                }
+            }
+            return amt;
+        }
         public DataTable selectSumByThooTranfer(String yearId, String monthId, String periodId)
         {
             //Lotto item = new Lotto();
@@ -425,24 +603,42 @@ namespace lottory.objdb
             p.dateCreate = p.dateGenDB;
             p.staffCreate = p.staffId;
             p.Remark = p.Remark.Replace("''", "'");
+            //sql = "Insert Into " + lot.table + " (" + lot.pkField + "," + lot.lottoId + "," + lot.staffId + "," +
+            //    lot.number + "," + lot.up + "," + lot.tod + "," + 
+            //    lot.down + "," + lot.monthId + "," + lot.periodId + "," + 
+            //    lot.saleId + "," + lot.thooId + "," + lot.Remark + "," + 
+            //    lot.Active + "," + lot.dateCreate + "," + lot.dateModi + "," + 
+            //    lot.dateCancel + "," + lot.staffCreate + "," + lot.staffModi + "," +
+            //    lot.staffCancel + "," + lot.yearId + "," + lot.rowNumber+","+
+            //    lot.statusApprove+","+lot.thooTranferId+","+lot.dateApprove+","+
+            //    lot.staffApproveId + "," + lot.CDbl + "," + lot.statusInput + "," + lot.imgId + ") " +
+            //    "Values('" + p.rowId + "','" + p.lottoId + "','" + p.staffId + "','" +
+            //    p.number + "','" + p.up + "','" + p.tod + "','" + 
+            //    p.down + "','" + p.monthId + "','" + p.periodId + "','" + 
+            //    p.saleId + "','" + p.thooId + "','" + p.Remark + "','" + 
+            //    p.Active + "'," + p.dateCreate + ",''," + 
+            //     "'','" + p.staffCreate + "',''," +
+            //    "'','" + p.yearId + "','" + p.rowNumber + "','"+
+            //    p.statusApprove+"','"+p.thooTranferId+"','"+p.dateApprove+"','"+
+            //    p.staffApproveId + "','" + p.CDbl + "','" + p.statusInput + "','" + p.imgId + "')";
             sql = "Insert Into " + lot.table + " (" + lot.pkField + "," + lot.lottoId + "," + lot.staffId + "," +
-                lot.number + "," + lot.up + "," + lot.tod + "," + 
-                lot.down + "," + lot.monthId + "," + lot.periodId + "," + 
-                lot.saleId + "," + lot.thooId + "," + lot.Remark + "," + 
-                lot.Active + "," + lot.dateCreate + "," + lot.dateModi + "," + 
+                lot.number + "," + lot.up + "," + lot.tod + "," +
+                lot.down + "," + lot.monthId + "," + lot.periodId + "," +
+                lot.saleId + "," + lot.thooId + "," + lot.Remark + "," +
+                lot.Active + "," + lot.dateCreate + "," + lot.dateModi + "," +
                 lot.dateCancel + "," + lot.staffCreate + "," + lot.staffModi + "," +
-                lot.staffCancel + "," + lot.yearId + "," + lot.rowNumber+","+
-                lot.statusApprove+","+lot.thooTranferId+","+lot.dateApprove+","+
-                lot.staffApproveId+","+lot.CDbl +","+lot.statusInput+ ") " +
+                lot.staffCancel + "," + lot.yearId + "," + lot.rowNumber + "," +
+                lot.statusApprove + "," + lot.thooTranferId + "," + lot.dateApprove + "," +
+                lot.staffApproveId + "," + lot.CDbl + "," + lot.statusInput + "," + lot.imgId + ") " +
                 "Values('" + p.rowId + "','" + p.lottoId + "','" + p.staffId + "','" +
-                p.number + "','" + p.up + "','" + p.tod + "','" + 
-                p.down + "','" + p.monthId + "','" + p.periodId + "','" + 
-                p.saleId + "','" + p.thooId + "','" + p.Remark + "','" + 
-                p.Active + "'," + p.dateCreate + ",''," + 
+                p.number + "'," + p.up + "," + p.tod + "," +
+                p.down + "," + p.monthId + "','" + p.periodId + "','" +
+                p.saleId + "','" + p.thooId + "','" + p.Remark + "','" +
+                p.Active + "'," + p.dateCreate + ",''," +
                  "'','" + p.staffCreate + "',''," +
-                "'','" + p.yearId + "','" + p.rowNumber + "','"+
-                p.statusApprove+"','"+p.thooTranferId+"','"+p.dateApprove+"','"+
-                p.staffApproveId+"','"+p.CDbl+"','"+p.statusInput+"')";
+                "'','" + p.yearId + "','" + p.rowNumber + "','" +
+                p.statusApprove + "','" + p.thooTranferId + "','" + p.dateApprove + "','" +
+                p.staffApproveId + "','" + p.CDbl + "','" + p.statusInput + "','" + p.imgId + "')";
             try
             {
                 chk = conn.ExecuteNonQuery(sql);
@@ -466,9 +662,9 @@ namespace lottory.objdb
             p.dateModi = p.dateGenDB;
             p.staffModi = p.staffId;
             sql = "Update " + lot.table + " Set " + lot.number + "='" + p.number + "', " +
-                lot.up + "='" + p.up + "', " +
-                lot.tod + "='" + p.tod + "', " +
-                lot.down + "='" + p.down + "', " +
+                lot.up + "=" + p.up + ", " +
+                lot.tod + "=" + p.tod + ", " +
+                lot.down + "=" + p.down + ", " +
                 lot.yearId + "='" + p.yearId + "', " +
                 lot.monthId + "='" + p.monthId + "', " +
                 lot.periodId + "='" + p.periodId + "', " +
@@ -533,7 +729,7 @@ namespace lottory.objdb
         {
             String sql = "", chk = "";
 
-            sql = "Update " + lot.table + " Set " + lot.thooId + "=" + thooId + " " +
+            sql = "Update " + lot.table + " Set " + lot.thooId + "='" + thooId + "' " +
                 "Where " + lot.pkField + "='" + rowId + "'";
             chk = conn.ExecuteNonQuery(sql);
             return chk;
@@ -542,7 +738,7 @@ namespace lottory.objdb
         {
             String sql = "", chk = "";
 
-            sql = "Update " + lot.table + " Set " + lot.thooTranferId + "=" + thooId + " " +
+            sql = "Update " + lot.table + " Set " + lot.thooTranferId + "='" + thooId + "' " +
                 "Where " + lot.pkField + "='" + rowId + "'";
             chk = conn.ExecuteNonQuery(sql);
             return chk;

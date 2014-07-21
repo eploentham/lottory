@@ -7,6 +7,6 @@ namespace lottory.object1
 {
     public class InitConfig
     {
-        public String clearInput = "", connectServer = "", ServerIP="", User="", Password="", Database="", pathImage="", delImage="";
+        public String clearInput = "", connectServer = "", ServerIP="", User="", Password="", Database="", pathImage="", delImage="", pathImageBefore="";
     }
 }

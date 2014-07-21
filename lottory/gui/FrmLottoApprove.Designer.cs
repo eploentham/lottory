@@ -44,6 +44,9 @@
             this.dgvRate = new System.Windows.Forms.DataGridView();
             this.dgvThooTranfer = new System.Windows.Forms.DataGridView();
             this.dgv1 = new System.Windows.Forms.DataGridView();
+            this.txtTho = new System.Windows.Forms.TextBox();
+            this.txtNetTotal = new System.Windows.Forms.TextBox();
+            this.btnVoid = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRate)).BeginInit();
@@ -53,6 +56,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnVoid);
             this.groupBox1.Controls.Add(this.btnInit);
             this.groupBox1.Controls.Add(this.btnSave);
             this.groupBox1.Controls.Add(this.btnSearch);
@@ -134,6 +138,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtNetTotal);
+            this.groupBox2.Controls.Add(this.txtTho);
             this.groupBox2.Controls.Add(this.txtAmt);
             this.groupBox2.Controls.Add(this.txtDown);
             this.groupBox2.Controls.Add(this.txtTod);
@@ -216,6 +222,33 @@
             this.dgv1.TabIndex = 0;
             this.dgv1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv1_CellDoubleClick);
             // 
+            // txtTho
+            // 
+            this.txtTho.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtTho.Location = new System.Drawing.Point(629, 700);
+            this.txtTho.Name = "txtTho";
+            this.txtTho.Size = new System.Drawing.Size(122, 30);
+            this.txtTho.TabIndex = 7;
+            this.txtTho.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtNetTotal
+            // 
+            this.txtNetTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtNetTotal.Location = new System.Drawing.Point(757, 700);
+            this.txtNetTotal.Name = "txtNetTotal";
+            this.txtNetTotal.Size = new System.Drawing.Size(122, 30);
+            this.txtNetTotal.TabIndex = 8;
+            this.txtNetTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // btnVoid
+            // 
+            this.btnVoid.Location = new System.Drawing.Point(901, 18);
+            this.btnVoid.Name = "btnVoid";
+            this.btnVoid.Size = new System.Drawing.Size(102, 41);
+            this.btnVoid.TabIndex = 63;
+            this.btnVoid.Text = "ยกเลิก";
+            this.btnVoid.UseVisualStyleBackColor = true;
+            // 
             // FrmLottoApprove
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -258,5 +291,8 @@
         private System.Windows.Forms.TextBox txtUp;
         private System.Windows.Forms.TextBox txtAmt;
         private System.Windows.Forms.Button btnInit;
+        private System.Windows.Forms.TextBox txtNetTotal;
+        private System.Windows.Forms.TextBox txtTho;
+        private System.Windows.Forms.Button btnVoid;
     }
 }

@@ -18,10 +18,10 @@ namespace lottory.gui
         Thoo tho;
         LottoryControl lc;
         Boolean pageLoad = false, clearGrd1 = false;
-        ImageList iL = new ImageList();
-        FolderBrowserDialog fbd = new FolderBrowserDialog();
-        List<String> name = new List<String>();
-        List<String> name1 = new List<String>();
+        ImageList iL;
+        FolderBrowserDialog fbd;
+        List<String> name;
+        List<String> name1;
         public FrmLottoImage(String sfCode, LottoryControl l)
         {
             InitializeComponent();
@@ -34,6 +34,13 @@ namespace lottory.gui
             String monthId = "", periodId = "";
             lc = l;
             sf = lc.sfdb.selectByCode(sfCode);
+
+            fbd = new FolderBrowserDialog();
+            fbd.SelectedPath = lc.initC.pathImageBefore;
+            iL = new ImageList();
+            name = new List<String>();
+            name1 = new List<String>();
+            
             monthId = System.DateTime.Now.Month.ToString("00");
 
             cboMonth = lc.cf.setCboMonth(cboMonth);
@@ -44,7 +51,7 @@ namespace lottory.gui
             cboYear = lc.cf.setCboYear(cboYear);
             cboPeriod = lc.setCboPeriodDefault(cboPeriod);
             getImage();
-            pageLoad = false;
+            //pageLoad = false;
         }
         private void getImageNew()
         {
@@ -149,6 +156,13 @@ namespace lottory.gui
             DirectoryInfo dir = new DirectoryInfo(pahtFile);
             iL.Images.Clear();
             int cnt = 0;
+            if (!dir.Exists)
+            {
+                pageLoad = false;
+                pB1.Visible = false;
+                Cursor.Current = cursor;
+                return;
+            }
             foreach (FileInfo file in dir.GetFiles())
             {
                 cnt++;
@@ -235,6 +249,7 @@ namespace lottory.gui
                     img.monthId = cboMonth.SelectedValue.ToString();
                     img.periodId = cboPeriod.SelectedValue.ToString();
                     img.statusInput = "0";
+                    img.FLock = "0";
                     String id = lc.imgdb.insertImage(img);
 
                     Image image = Image.FromFile(file.FullName);
@@ -286,10 +301,11 @@ namespace lottory.gui
             //{
                 //if (e.Item.Checked)
                 //{
-            String pahtFile = lc.initC.pathImage + "\\" + cboYear.Text + "\\" + cboMonth.SelectedValue.ToString() + "\\" + cboPeriod.SelectedValue.ToString();
-            if (System.IO.File.Exists(pahtFile + "\\" + filename))
+            String file = filename.Replace(".thumb",".lotto");
+
+            if (System.IO.File.Exists(file))
             {
-                pic1.Image = Image.FromFile(pahtFile + "\\" + filename);
+                pic1.Image = Image.FromFile(file);
                 pic1.SizeMode = PictureBoxSizeMode.StretchImage;
                 picRotate.Visible = true;
                 //picZoomM.Visible = true;
@@ -316,46 +332,50 @@ namespace lottory.gui
             getImage();
         }
 
-        private void lVNew_ItemChecked(object sender, ItemCheckedEventArgs e)
+        private void lV1_MouseClick(object sender, MouseEventArgs e)
         {
-            if (!pageLoad)
-            {
-                //viewImage(name[e.Item.ImageIndex]);
-            }            
+            //ListViewItem aa = lV1.SelectedItems[0].Index;
+            viewImage(name1[lV1.SelectedItems[0].Index]);
         }
 
-        private void lVNew_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void lVNew_MouseClick(object sender, MouseEventArgs e)
         {
-            if (!pageLoad)
-            {
-                //viewImage(name[e.Index]);
-            }            
+            viewImage(name[lVNew.SelectedItems[0].Index]);
         }
 
-        private void lV1_ItemChecked(object sender, ItemCheckedEventArgs e)
+        private void btnBrowe_Click(object sender, EventArgs e)
         {
-            if (!pageLoad)
-            {
-                //viewImage(name1[e.Item.ImageIndex]);
-            }            
-        }
-
-        private void lV1_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            if (!pageLoad)
-            {
-                //viewImage(name1[e.Index]);
-            }            
+            fbd.ShowDialog();
+            getImageNew();
         }
 
         private void FrmLottoImage_Load(object sender, EventArgs e)
         {
-            //pageLoad = true;
+
         }
 
-        private void lV1_SelectedIndexChanged(object sender, EventArgs e)
+        private void cboPeriod_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            if (!pageLoad)
+            {
+                getImage();
+            }
+        }
+
+        private void cboMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!pageLoad)
+            {
+                getImage();
+            }
+        }
+
+        private void cboYear_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!pageLoad)
+            {
+                getImage();
+            }
         }
     }
 }

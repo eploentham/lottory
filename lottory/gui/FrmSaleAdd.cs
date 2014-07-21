@@ -62,6 +62,7 @@ namespace lottory.gui
             setGrdRate();
             tab1.TabPages[0].Text = "ส่วนลด";
             tab1.TabPages[1].Text = "ลูกค้า";
+            tab1.TabPages[1].Hide();
         }
         private Sale getControl()
         {
@@ -206,20 +207,23 @@ namespace lottory.gui
             s = getControl();
             if (lc.saveSale(s).Length >= 1)
             {
-                for (int i = 0; i < dgvRate.RowCount; i++)
+                if (chkDiscount.Checked)
                 {
-                    SaleRate sr = new SaleRate();
-                    sr.SaleId = txtSaleId.Text;
-                    sr.Description = dgvRate[colRDescription, i].Value.ToString();
-                    sr.rec = dgvRate[colRRec, i].Value.ToString();
-                    sr.limit1 = dgvRate[colRLimit, i].Value.ToString();
-                    sr.discount = dgvRate[colRDiscount, i].Value.ToString();
-                    sr.RateId=dgvRate[colRId, i].Value.ToString();
-                    sr.Id=dgvRate[colSRId, i].Value.ToString();
-                    sr.Active = "1";
+                    for (int i = 0; i < dgvRate.RowCount; i++)
+                    {
+                        SaleRate sr = new SaleRate();
+                        sr.SaleId = txtSaleId.Text;
+                        sr.Description = dgvRate[colRDescription, i].Value.ToString();
+                        sr.rec = dgvRate[colRRec, i].Value.ToString();
+                        sr.limit1 = dgvRate[colRLimit, i].Value.ToString();
+                        sr.discount = dgvRate[colRDiscount, i].Value.ToString();
+                        sr.RateId = dgvRate[colRId, i].Value.ToString();
+                        sr.Id = dgvRate[colSRId, i].Value.ToString();
+                        sr.Active = "1";
 
-                    lc.srdb.insertSaleRate(sr);
-                }
+                        lc.srdb.insertSaleRate(sr);
+                    }
+                }                
                 MessageBox.Show("บันทึกข้อมูล เรียบร้อย", "บันทึกข้อมูล");
                 this.Dispose();
                 //this.Hide();
@@ -301,17 +305,17 @@ namespace lottory.gui
 
         private void chkDiscount_Click(object sender, EventArgs e)
         {
-            if (chkDiscount.Checked)
-            {
-                dgvRate.Visible = true;
-                s.statusDiscount = "1";
-                setGrdRate();
-            }
-            else
-            {
-                dgvRate.Visible = false;
-                s.statusDiscount = "0";
-            }
+            //if (chkDiscount.Checked)
+            //{
+            //    dgvRate.Visible = true;
+            //    s.statusDiscount = "1";
+            //    setGrdRate();
+            //}
+            //else
+            //{
+            //    dgvRate.Visible = false;
+            //    s.statusDiscount = "0";
+            //}
         }
 
         private void ChkUnActive_Click(object sender, EventArgs e)
@@ -344,6 +348,21 @@ namespace lottory.gui
                 btnCancel.Enabled = true;
                 chkDiscount.Enabled = true;
                 dgvRate.Enabled = true;
+            }
+        }
+
+        private void chkDiscount_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkDiscount.Checked)
+            {
+                dgvRate.Visible = true;
+                s.statusDiscount = "1";
+                setGrdRate();
+            }
+            else
+            {
+                dgvRate.Visible = false;
+                s.statusDiscount = "0";
             }
         }
     }

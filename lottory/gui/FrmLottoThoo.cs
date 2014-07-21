@@ -19,24 +19,24 @@ namespace lottory.gui
         Reward rw;
         Lotto lot;
         public String thooId = "";
-        
-        public FrmLottoThoo(String sfCode, String rowId, String thooid)
+
+        public FrmLottoThoo(String sfCode, String rowId, String thooid, LottoryControl l)
         {
             InitializeComponent();
             thooId = thooid;
             
-            initConfig(sfCode, rowId);
-            
-            
+            initConfig(sfCode, rowId,l);
         }
-        private void initConfig(String sfCode, String rowId)
+        private void initConfig(String sfCode, String rowId, LottoryControl l)
         {
             lot = new Lotto();
-            lc = new LottoryControl();
+            lc = l;
             cboThoo = lc.thodb.getCboThoo(cboThoo);
             cboStaff = lc.sfdb.getCboStaff(cboStaff);
             cboSale = lc.saledb.getCboSale(cboSale);
-            
+            //cboThoo = lc.cboThoo;
+            //cboStaff = lc.cboStaff;
+            //cboSale = lc.cboSale;
 
             cboMonth = lc.cf.setCboMonth(cboMonth);
             cboPeriod = lc.cf.setCboPeriod(cboPeriod);

@@ -42,6 +42,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.cboYear = new System.Windows.Forms.ComboBox();
             this.dgvLotto = new System.Windows.Forms.DataGridView();
             this.cboThoo = new System.Windows.Forms.ComboBox();
@@ -63,8 +65,7 @@
             this.txtUp = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtInput = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label17 = new System.Windows.Forms.Label();
+            this.lbAmt = new System.Windows.Forms.Label();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLotto)).BeginInit();
@@ -73,6 +74,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.lbAmt);
             this.groupBox4.Controls.Add(this.btnInit);
             this.groupBox4.Controls.Add(this.button1);
             this.groupBox4.Controls.Add(this.btnMain);
@@ -234,6 +236,23 @@
             this.groupBox2.Size = new System.Drawing.Size(1330, 748);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(318, 573);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(142, 24);
+            this.comboBox1.TabIndex = 46;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(218, 576);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(45, 17);
+            this.label17.TabIndex = 45;
+            this.label17.Text = "ลูกค้า :";
             // 
             // cboYear
             // 
@@ -445,22 +464,14 @@
             this.txtInput.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtInput_KeyUp);
             this.txtInput.Leave += new System.EventHandler(this.txtInput_Leave);
             // 
-            // comboBox1
+            // lbAmt
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(318, 573);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(142, 24);
-            this.comboBox1.TabIndex = 46;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(218, 576);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(45, 17);
-            this.label17.TabIndex = 45;
-            this.label17.Text = "ลูกค้า :";
+            this.lbAmt.AutoSize = true;
+            this.lbAmt.Location = new System.Drawing.Point(598, 18);
+            this.lbAmt.Name = "lbAmt";
+            this.lbAmt.Size = new System.Drawing.Size(30, 17);
+            this.lbAmt.TabIndex = 71;
+            this.lbAmt.Text = "รวม";
             // 
             // FrmInputAdd
             // 
@@ -473,7 +484,6 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmInput_FormClosed);
             this.Load += new System.EventHandler(this.FrmInput_Load);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FrmInputAdd_KeyUp);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -523,6 +533,7 @@
         private System.Windows.Forms.Button btnInit;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label lbAmt;
     }
 }
 

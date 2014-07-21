@@ -30,6 +30,11 @@ namespace lottory.objdb
             img.monthId = "month_id";
             img.periodId = "period1";
             img.statusInput = "status_input";
+            img.FLock = "f_lock";
+            img.dateCreate = "date_create";
+            img.dateInput = "date_input";
+            img.staffInputId = "staff_input_id";
+            img.staffInputName = "staff_input_name";
 
             img.pkField = "img_id";
             img.table = "t_image";
@@ -47,6 +52,12 @@ namespace lottory.objdb
             item.monthId = dt.Rows[0][img.monthId].ToString();
             item.periodId = dt.Rows[0][img.periodId].ToString();
             item.statusInput = dt.Rows[0][img.statusInput].ToString();
+            item.FLock = dt.Rows[0][img.FLock].ToString();
+
+            item.dateCreate = dt.Rows[0][img.dateCreate].ToString();
+            item.dateInput = dt.Rows[0][img.dateInput].ToString();
+            item.staffInputId = dt.Rows[0][img.staffInputId].ToString();
+            item.staffInputName = dt.Rows[0][img.staffInputName].ToString();
 
             return item;
         }
@@ -80,14 +91,16 @@ namespace lottory.objdb
                 p.Id = p.getGenID();
             }
 
-            //p.Name = p.Name.Replace("''", "'");
+            p.dateCreate = p.dateGenDB;
             //p.Remark = p.Remark.Replace("''", "'");
             sql = "Insert Into " + img.table + " (" + img.pkField + "," + img.custId + "," + img.pathFilename + "," +
                 img.saleId + "," + img.staffId + "," + img.Active + ","+
-                img.yearId + "," + img.monthId + "," + img.periodId + "," + img.statusInput + ") " +
+                img.yearId + "," + img.monthId + "," + img.periodId + "," +
+                img.statusInput + "," + img.FLock + "," + img.dateCreate + "," + img.dateInput + "," + img.staffInputId + "," + img.staffInputName + ") " +
                 "Values('" + p.Id + "','" + p.custId + "','" + p.pathFilename + "','" +
                 p.saleId + "','" + p.staffId + "','" + p.Active + "','" +
-                p.yearId + "','" + p.monthId + "','" + p.periodId + "','" + p.statusInput + "')";
+                p.yearId + "','" + p.monthId + "','" + p.periodId + "','" +
+                "0','0'," + p.dateCreate+",'','','')";
             try
             {
                 chk = conn.ExecuteNonQuery(sql);
@@ -149,6 +162,31 @@ namespace lottory.objdb
         {
             String sql = "", chk = "";
             sql = "Delete From " + img.table;
+            chk = conn.ExecuteNonQuery(sql);
+            return chk;
+        }
+        public String UpdateStatusInput(String imgId, String sfId, String sfName)
+        {
+            String sql = "", chk = "";
+            sql = "Update " + img.table+" Set "+img.statusInput+"='1', "+
+                img.dateInput + "=" + img.dateGenDB + "," +
+                img.staffInputId+"='"+sfId+"',"+
+                img.staffInputName+"='"+sfName+"' "+
+                "Where "+img.pkField+"='"+imgId+"'" ;
+            chk = conn.ExecuteNonQuery(sql);
+            return chk;
+        }
+        public String UpdateLock(String imgId)
+        {
+            String sql = "", chk = "";
+            sql = "Update " + img.table + " Set " + img.FLock + "='1' Where " + img.pkField + "='" + imgId + "'";
+            chk = conn.ExecuteNonQuery(sql);
+            return chk;
+        }
+        public String UpdateUnLock(String imgId)
+        {
+            String sql = "", chk = "";
+            sql = "Update " + img.table + " Set " + img.FLock + "='0' Where " + img.pkField + "='" + imgId + "'";
             chk = conn.ExecuteNonQuery(sql);
             return chk;
         }

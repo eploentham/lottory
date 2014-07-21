@@ -44,15 +44,7 @@ namespace lottory
             initConfig(sfCode,l);
             pageLoad = false;
         }
-        //internal void setLC(LottoryControl l)
-        //{
-        //    lc = l;
-        //}
-        //public void setStaff(String sfCode)
-        //{
-        //    sf = lc.sfdb.selectByCode(sfCode);
-        //    //lc.sfdb.sf = sf;
-        //}
+
         private void initConfig(String sfCode, LottoryControl l)
         {
             String monthId = "", periodId = "";
@@ -63,8 +55,6 @@ namespace lottory
             tho = lc.thodb.selectByDefault();
             //lc.sfdb.sf = sf;
             monthId = System.DateTime.Now.Month.ToString("00");
-            
-            
 
             setGrid1();
             setGridLotto(1);
@@ -250,6 +240,7 @@ namespace lottory
             lot.tod = lc.cf.LottoNull(dgv1[colTod, row].Value);
             lot.up = lc.cf.LottoNull(dgv1[colUp, row].Value);
             lot.statusInput = "1";
+            lot.imgId = "";
 
             return lot;
         }
@@ -283,13 +274,20 @@ namespace lottory
         }
         private void setGrdColor()
         {
+            String numUp = "", numTod = "", numDown = "";
+            Double amt = 0;
             for (int i = 0; i < dgv1.RowCount-1; i++)
             {
+                numUp = dgv1[colUp, i].Value.ToString();
+                numTod = dgv1[colTod, i].Value.ToString();
+                numDown = dgv1[colDown, i].Value.ToString();
+                amt += (Double.Parse(numUp) + Double.Parse(numTod) + Double.Parse(numDown));
                 if ((i % 2) != 0)
                 {
                     dgv1.Rows[i].DefaultCellStyle.BackColor = Color.DarkKhaki;
                 }
             }
+            lbAmt.Text = "รวม : " + amt.ToString();
         }
         private void saveLotto()
         {
@@ -565,13 +563,6 @@ namespace lottory
             txtDown.BackColor = Color.White;
         }
 
-        private void FrmInputAdd_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyData == (Keys.Control | Keys.S))
-            {
-                saveLotto();
-            }
-        }
         protected override bool ProcessCmdKey(ref Message message, Keys keys)
         {
             switch (keys)

@@ -29,11 +29,15 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtIndex = new System.Windows.Forms.Label();
+            this.txtImgId = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.btnInit = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.pB1 = new System.Windows.Forms.ProgressBar();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.btnInit = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -62,6 +66,7 @@
             this.pic1 = new System.Windows.Forms.PictureBox();
             this.picHand = new System.Windows.Forms.PictureBox();
             this.dgv1 = new System.Windows.Forms.DataGridView();
+            this.lbAmt = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picZoomM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picZoomP)).BeginInit();
@@ -73,11 +78,16 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lbAmt);
+            this.groupBox1.Controls.Add(this.txtIndex);
+            this.groupBox1.Controls.Add(this.txtImgId);
+            this.groupBox1.Controls.Add(this.label18);
+            this.groupBox1.Controls.Add(this.label19);
+            this.groupBox1.Controls.Add(this.btnInit);
             this.groupBox1.Controls.Add(this.btnEdit);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.pB1);
             this.groupBox1.Controls.Add(this.btnSearch);
-            this.groupBox1.Controls.Add(this.btnInit);
             this.groupBox1.Controls.Add(this.btnSave);
             this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.label17);
@@ -99,11 +109,58 @@
             this.groupBox1.Controls.Add(this.txtUp);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtInput);
-            this.groupBox1.Location = new System.Drawing.Point(12, 720);
+            this.groupBox1.Location = new System.Drawing.Point(8, 720);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1078, 200);
+            this.groupBox1.Size = new System.Drawing.Size(1805, 200);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // txtIndex
+            // 
+            this.txtIndex.AutoSize = true;
+            this.txtIndex.Location = new System.Drawing.Point(741, 151);
+            this.txtIndex.Name = "txtIndex";
+            this.txtIndex.Size = new System.Drawing.Size(12, 17);
+            this.txtIndex.TabIndex = 69;
+            this.txtIndex.Text = ".";
+            this.txtIndex.Visible = false;
+            // 
+            // txtImgId
+            // 
+            this.txtImgId.AutoSize = true;
+            this.txtImgId.Location = new System.Drawing.Point(709, 151);
+            this.txtImgId.Name = "txtImgId";
+            this.txtImgId.Size = new System.Drawing.Size(12, 17);
+            this.txtImgId.TabIndex = 68;
+            this.txtImgId.Text = ".";
+            this.txtImgId.Visible = false;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(880, 110);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(98, 17);
+            this.label18.TabIndex = 67;
+            this.label18.Text = "Insert=ป้อนใหม่";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(750, 110);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(74, 17);
+            this.label19.TabIndex = 66;
+            this.label19.Text = "End=บันทึก";
+            // 
+            // btnInit
+            // 
+            this.btnInit.Location = new System.Drawing.Point(813, 130);
+            this.btnInit.Name = "btnInit";
+            this.btnInit.Size = new System.Drawing.Size(100, 32);
+            this.btnInit.TabIndex = 26;
+            this.btnInit.Text = "กำหนดค่า";
+            this.btnInit.UseVisualStyleBackColor = true;
             // 
             // btnEdit
             // 
@@ -123,7 +180,6 @@
             this.button1.TabIndex = 63;
             this.button1.Text = "ดึงรูปใหม่จากระบบ";
             this.button1.UseVisualStyleBackColor = true;
-            
             // 
             // pB1
             // 
@@ -141,16 +197,6 @@
             this.btnSearch.Text = "ดึงรูป";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // btnInit
-            // 
-            this.btnInit.Location = new System.Drawing.Point(753, 130);
-            this.btnInit.Name = "btnInit";
-            this.btnInit.Size = new System.Drawing.Size(100, 32);
-            this.btnInit.TabIndex = 60;
-            this.btnInit.Text = "กำหนดค่า";
-            this.btnInit.UseVisualStyleBackColor = true;
-            this.btnInit.Click += new System.EventHandler(this.btnInit_Click);
             // 
             // btnSave
             // 
@@ -187,6 +233,7 @@
             this.cboYear.Name = "cboYear";
             this.cboYear.Size = new System.Drawing.Size(99, 28);
             this.cboYear.TabIndex = 56;
+            this.cboYear.SelectedIndexChanged += new System.EventHandler(this.cboYear_SelectedIndexChanged);
             // 
             // cboThoo
             // 
@@ -221,6 +268,7 @@
             this.cboPeriod.Name = "cboPeriod";
             this.cboPeriod.Size = new System.Drawing.Size(142, 28);
             this.cboPeriod.TabIndex = 52;
+            this.cboPeriod.SelectedIndexChanged += new System.EventHandler(this.cboPeriod_SelectedIndexChanged);
             // 
             // cboMonth
             // 
@@ -230,6 +278,7 @@
             this.cboMonth.Name = "cboMonth";
             this.cboMonth.Size = new System.Drawing.Size(142, 28);
             this.cboMonth.TabIndex = 51;
+            this.cboMonth.SelectedIndexChanged += new System.EventHandler(this.cboMonth_SelectedIndexChanged);
             // 
             // label14
             // 
@@ -337,7 +386,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label1.Location = new System.Drawing.Point(2, 26);
+            this.label1.Location = new System.Drawing.Point(0, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 20);
             this.label1.TabIndex = 40;
@@ -363,11 +412,12 @@
             this.lV1.TabIndex = 2;
             this.lV1.UseCompatibleStateImageBehavior = false;
             this.lV1.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lV1_ItemChecked);
+            this.lV1.SelectedIndexChanged += new System.EventHandler(this.lV1_SelectedIndexChanged);
             // 
             // picZoomM
             // 
             this.picZoomM.Image = global::lottory.Properties.Resources.zoom_minus;
-            this.picZoomM.Location = new System.Drawing.Point(1144, 134);
+            this.picZoomM.Location = new System.Drawing.Point(1755, 134);
             this.picZoomM.Name = "picZoomM";
             this.picZoomM.Size = new System.Drawing.Size(55, 55);
             this.picZoomM.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -378,7 +428,7 @@
             // picZoomP
             // 
             this.picZoomP.Image = global::lottory.Properties.Resources.zoom_plus;
-            this.picZoomP.Location = new System.Drawing.Point(1144, 73);
+            this.picZoomP.Location = new System.Drawing.Point(1755, 73);
             this.picZoomP.Name = "picZoomP";
             this.picZoomP.Size = new System.Drawing.Size(55, 55);
             this.picZoomP.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -389,7 +439,7 @@
             // picRotate
             // 
             this.picRotate.Image = global::lottory.Properties.Resources.rotate2;
-            this.picRotate.Location = new System.Drawing.Point(1144, 12);
+            this.picRotate.Location = new System.Drawing.Point(1755, 12);
             this.picRotate.Name = "picRotate";
             this.picRotate.Size = new System.Drawing.Size(55, 55);
             this.picRotate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -408,7 +458,7 @@
             // picHand
             // 
             this.picHand.Image = global::lottory.Properties.Resources.zoom_minus;
-            this.picHand.Location = new System.Drawing.Point(1144, 195);
+            this.picHand.Location = new System.Drawing.Point(1755, 195);
             this.picHand.Name = "picHand";
             this.picHand.Size = new System.Drawing.Size(55, 55);
             this.picHand.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -419,17 +469,26 @@
             // 
             this.dgv1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgv1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv1.Location = new System.Drawing.Point(1205, 12);
+            this.dgv1.Location = new System.Drawing.Point(1144, 12);
             this.dgv1.Name = "dgv1";
             this.dgv1.RowTemplate.Height = 24;
-            this.dgv1.Size = new System.Drawing.Size(605, 694);
+            this.dgv1.Size = new System.Drawing.Size(605, 702);
             this.dgv1.TabIndex = 40;
+            // 
+            // lbAmt
+            // 
+            this.lbAmt.AutoSize = true;
+            this.lbAmt.Location = new System.Drawing.Point(1090, 21);
+            this.lbAmt.Name = "lbAmt";
+            this.lbAmt.Size = new System.Drawing.Size(42, 17);
+            this.lbAmt.TabIndex = 70;
+            this.lbAmt.Text = "รวม : ";
             // 
             // FrmInputImage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1837, 932);
+            this.ClientSize = new System.Drawing.Size(1825, 932);
             this.Controls.Add(this.dgv1);
             this.Controls.Add(this.picHand);
             this.Controls.Add(this.picZoomM);
@@ -480,7 +539,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button btnInit;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.ProgressBar pB1;
         private System.Windows.Forms.PictureBox picRotate;
@@ -490,5 +548,11 @@
         private System.Windows.Forms.DataGridView dgv1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnInit;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label txtImgId;
+        private System.Windows.Forms.Label txtIndex;
+        private System.Windows.Forms.Label lbAmt;
     }
 }

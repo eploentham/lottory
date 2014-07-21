@@ -51,6 +51,7 @@
             this.dgv3 = new System.Windows.Forms.DataGridView();
             this.dgv2 = new System.Windows.Forms.DataGridView();
             this.dgv1 = new System.Windows.Forms.DataGridView();
+            this.pB1 = new System.Windows.Forms.ProgressBar();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv3)).BeginInit();
@@ -60,6 +61,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.pB1);
             this.groupBox1.Controls.Add(this.ChkNumGroup);
             this.groupBox1.Controls.Add(this.chkNum);
             this.groupBox1.Controls.Add(this.txtRDown34);
@@ -295,6 +297,13 @@
             this.dgv1.Size = new System.Drawing.Size(1365, 673);
             this.dgv1.TabIndex = 0;
             // 
+            // pB1
+            // 
+            this.pB1.Location = new System.Drawing.Point(756, 93);
+            this.pB1.Name = "pB1";
+            this.pB1.Size = new System.Drawing.Size(606, 23);
+            this.pB1.TabIndex = 68;
+            // 
             // FrmLottoResult
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -341,5 +350,6 @@
         private System.Windows.Forms.TextBox txtRDown32;
         private System.Windows.Forms.RadioButton ChkNumGroup;
         private System.Windows.Forms.RadioButton chkNum;
+        private System.Windows.Forms.ProgressBar pB1;
     }
 }

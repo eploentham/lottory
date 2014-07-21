@@ -7,6 +7,6 @@ namespace lottory.object1
 {
     public class Font1
     {
-        public String foreColor = "", BackColor = "", id="";
+        public String foreColor = "", BackColor = "", id="", thoId="";
     }
 }

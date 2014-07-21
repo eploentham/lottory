@@ -39,7 +39,7 @@ namespace lottory.objdb
         public String server = "";
         public String isBranch = "";
         private InitConfig initc;
-        public DataTable toReturn = new DataTable();
+        //public DataTable toReturn = new DataTable();
         public DataTable dt = new DataTable();
         //OleDbCommand cmdToExecute = new OleDbCommand();
         public ConnectDB(InitConfig  i)
@@ -111,8 +111,8 @@ namespace lottory.objdb
         }
         public DataTable selectData(String sql)
         {
-            //DataTable toReturn = new DataTable();
-            toReturn.Clear();
+            DataTable toReturn = new DataTable();
+            //toReturn.Clear();
             if (initc.connectServer.Equals("yes"))
             {
                 MySqlCommand cmd = new MySqlCommand(sql, cMysql);

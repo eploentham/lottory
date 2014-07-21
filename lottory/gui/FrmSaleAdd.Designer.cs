@@ -264,6 +264,8 @@
             this.chkDiscount.TabIndex = 21;
             this.chkDiscount.Text = "กำหนดส่วนลดเอง";
             this.chkDiscount.UseVisualStyleBackColor = true;
+            this.chkDiscount.CheckedChanged += new System.EventHandler(this.chkDiscount_CheckedChanged);
+            this.chkDiscount.Click += new System.EventHandler(this.chkDiscount_Click);
             // 
             // dgvRate
             // 

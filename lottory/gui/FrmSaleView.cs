@@ -84,7 +84,7 @@ namespace lottory.gui
         private void btnSaleAdd_Click(object sender, EventArgs e)
         {
             FrmSaleAdd frm = new FrmSaleAdd("");
-            frm.setControl("");
+            //frm.setControl("");
             frm.ShowDialog(this);
             setControl();
         }

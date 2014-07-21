@@ -30,12 +30,15 @@ namespace lottory.gui
         Color btnEditColor;
         public FrmInputImage(String sfCode, LottoryControl l)
         {
+            pageLoad = true;
             InitializeComponent();
             initConfig(sfCode, l);
+            pageLoad = false;
         }
         private void initConfig(String sfCode, LottoryControl l)
         {
             pB1.Visible = false;
+            
             String monthId = "", periodId = "";
             lc = l;
             sf = lc.sfdb.selectByCode(sfCode);
@@ -61,7 +64,9 @@ namespace lottory.gui
             picHand.Visible = false;
             lotNew = true;
             clearGrd1 = false;
-            
+
+            setGrid1();
+            viewImage();
             btnEdit.Enabled = false;
         }
         private void setGrid1()
@@ -91,6 +96,26 @@ namespace lottory.gui
 
             lotNew = true;
         }
+        private void setGrid1(String lotoId)
+        {
+            DataTable dt = lc.lotdb.selectByImg(lotoId);
+            setGrid1();
+            if (dt.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    setDataGrid1(dt.Rows[i][lc.lotdb.lot.number].ToString(), dt.Rows[i][lc.lotdb.lot.up].ToString(),
+                        dt.Rows[i][lc.lotdb.lot.tod].ToString(), dt.Rows[i][lc.lotdb.lot.down].ToString(),
+                        dt.Rows[i][lc.lotdb.lot.rowId].ToString(), dt.Rows[i][lc.lotdb.lot.lottoId].ToString());
+                    if ((i % 2) != 0)
+                    {
+                        dgv1.Rows[i].DefaultCellStyle.BackColor = Color.LightSalmon;
+                    }
+                }
+                lotId1 = lotoId;
+            }
+            dgv1.Enabled = false;
+        }
 
         private void FrmInputImage_Load(object sender, EventArgs e)
         {
@@ -98,6 +123,15 @@ namespace lottory.gui
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
+        {
+            viewImage();
+        }
+        private void nextImage(int index)
+        {
+            //viewImage(index);
+            lV1.Items[index].Checked = true;
+        }
+        private void viewImage()
         {
             Cursor cursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
@@ -108,12 +142,20 @@ namespace lottory.gui
             lV1.Clear();
             DirectoryInfo dir = new DirectoryInfo(pahtFile);
             iL.Images.Clear();
+            name.Clear();
             int cnt = 0;
+            if (!dir.Exists)
+            {
+                pageLoad = false;                
+                pB1.Visible = false;
+                Cursor.Current = cursor;
+                return;
+            }
             foreach (FileInfo file in dir.GetFiles())
             {
                 cnt++;
             }
-            
+
             pB1.Minimum = 0;
             pB1.Maximum = cnt;
             cnt = 0;
@@ -127,7 +169,6 @@ namespace lottory.gui
                         iL.Images.Add(Image.FromFile(file.FullName));
                         name.Add(file.Name.Replace(file.Extension, "") + ".lotto");
                     }
-                    
                     pB1.Value = cnt;
                 }
                 catch
@@ -148,10 +189,50 @@ namespace lottory.gui
                 ListViewItem item = new ListViewItem();
                 item.ImageIndex = j;
                 lV1.Items.Add(item);
+                if (name[j].IndexOf("_1.") > 0)
+                {
+                    lV1.Items[j].Checked = true;
+                    lV1.Items[j].BackColor = Color.DarkCyan;
+                }
             }
             pB1.Visible = false;
             pageLoad = false;
             Cursor.Current = cursor;
+        }
+        private void viewImage(int index)
+        {
+            Image1 img = new Image1();
+            //txtImgId.Text = name[index];
+            txtIndex.Text = index.ToString();
+            img = lc.imgdb.selectByPk(txtImgId.Text);
+            if (img.FLock.Equals("1"))
+            {
+                MessageBox.Show("viewImage img.FLock", "1111");
+                return;
+            }
+            lc.imgdb.UpdateLock(txtImgId.Text);
+
+            String pahtFile = lc.initC.pathImage + "\\" + cboYear.Text + "\\" + cboMonth.SelectedValue.ToString() + "\\" + cboPeriod.SelectedValue.ToString();
+            //File.
+            if (File.Exists(pahtFile + "\\" + name[index]))
+            {
+                //pic1.Image = Image.FromFile(pahtFile + "\\" + name[index]);
+                Image im = GetCopyImage(pahtFile + "\\" + name[index]);
+                pic1.Image = im;
+                pic1.SizeMode = PictureBoxSizeMode.StretchImage;
+                picRotate.Visible = true;
+                picZoomM.Visible = true;
+                picZoomP.Visible = true;
+                picHand.Visible = true;
+            }
+        }
+        private Image GetCopyImage(string path)
+        {
+            using (Image im = Image.FromFile(path))
+            {
+                Bitmap bm = new Bitmap(im);
+                return bm;
+            }
         }
 
         private void lV1_ItemChecked(object sender, ItemCheckedEventArgs e)
@@ -160,23 +241,13 @@ namespace lottory.gui
             {
                 if (e.Item.Checked)
                 {
-                    String pahtFile = lc.initC.pathImage + "\\" + cboYear.Text + "\\" + cboMonth.SelectedValue.ToString() + "\\" + cboPeriod.SelectedValue.ToString();
-                    if (System.IO.File.Exists(pahtFile + "\\" + name[e.Item.ImageIndex]))
-                    {
-                        pic1.Image = Image.FromFile(pahtFile + "\\" + name[e.Item.ImageIndex]);
-                        pic1.SizeMode = PictureBoxSizeMode.StretchImage;
-                        picRotate.Visible = true;
-                        picZoomM.Visible = true;
-                        picZoomP.Visible = true;
-                        picHand.Visible = true;
-                    }
+                    //viewImage(e.Item.ImageIndex);
                 }
                 else
                 {
                     //pic1.Image = new Image(new Size(1,1));
                 }
-                
-            }            
+            }
         }
 
         private void picRotate_Click(object sender, EventArgs e)
@@ -285,6 +356,7 @@ namespace lottory.gui
             lot.tod = lc.cf.LottoNull(dgv1[colTod, row].Value);
             lot.up = lc.cf.LottoNull(dgv1[colUp, row].Value);
             lot.statusInput= "2";
+            lot.imgId = txtImgId.Text;
 
             return lot;
         }
@@ -315,21 +387,53 @@ namespace lottory.gui
                     {
                         lot.lottoId = lotId1;
                     }
-
                 }
                 lc.saveLotto(lot);
                 dgv1.Rows[i].DefaultCellStyle.BackColor = Color.DarkKhaki;
+                //lV1.Items[txtIndex.Text].Checked = true;               
+            }
+            pic1.CancelAsync();
+            pic1.Image.Dispose();
+            lc.renameFileImage(lc.initC.pathImage + "\\" + cboYear.Text + "\\" + cboMonth.SelectedValue.ToString() + "\\" + cboPeriod.SelectedValue.ToString() + "\\" + txtImgId.Text);
+            lc.renameFileImage(lc.initC.pathImage + "\\" + cboYear.Text + "\\" + cboMonth.SelectedValue.ToString() + "\\" + cboPeriod.SelectedValue.ToString() + "\\" + txtImgId.Text.Replace(".lotto", ".thumb"));
+            lc.imgdb.UpdateStatusInput(txtImgId.Text.Replace(txtImgId.Text.Substring(txtImgId.Text.IndexOf("_0")),""), sf.Id, sf.Name);
+            lc.imgdb.UpdateUnLock(txtImgId.Text);
+            if (lV1.Items.Count < int.Parse(txtIndex.Text))
+            {
+                txtIndex.Text = String.Concat(int.Parse(txtIndex.Text) + 1);
+                lV1.Items[int.Parse(txtIndex.Text)].Checked = true;
             }
             refresh();
         }
         private void setDataGrid1(String number, String numUp, String numTod, String numDown, String rowId, String lottoId)
         {
-
             dgv1.Rows.Insert(dgv1.RowCount - 1, 1);
 
             dgv1[colNumber, row].Value = number;
-            dgv1[colUp, row].Value = numUp;
-            dgv1[colTod, row].Value = numTod;
+            if (numUp.Equals(""))
+            {
+                dgv1[colUp, row].Value = "0";
+            }
+            else
+            {
+                dgv1[colUp, row].Value = numUp;
+            }
+            if (numTod.Equals(""))
+            {
+                dgv1[colTod, row].Value = "0";
+            }
+            else
+            {
+                dgv1[colTod, row].Value = numTod;
+            }
+            if (numDown.Equals(""))
+            {
+                dgv1[colDown, row].Value = "0";
+            }
+            else
+            {
+                dgv1[colDown, row].Value = numDown;
+            }
             dgv1[colDown, row].Value = numDown;
             dgv1[colRowId, row].Value = rowId;
             dgv1[colLottoId1, row].Value = lottoId;
@@ -338,20 +442,30 @@ namespace lottory.gui
         }
         private void setGrdColor()
         {
+            String numUp = "", numTod = "", numDown="";
+            Double amt = 0;
             for (int i = 0; i < dgv1.RowCount-1; i++)
             {
+                numUp = lc.cf.NumberNull(dgv1[colUp, i].Value.ToString());
+                numTod = lc.cf.NumberNull(dgv1[colTod, i].Value.ToString());
+                numDown = lc.cf.NumberNull(dgv1[colDown, i].Value.ToString());
+                amt += (Double.Parse(numUp) + Double.Parse(numTod) + Double.Parse(numDown));
                 if ((i % 2) != 0)
                 {
                     dgv1.Rows[i].DefaultCellStyle.BackColor = Color.DarkKhaki;
                 }
             }
+            lbAmt.Text = "รวม : " + amt.ToString();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            Cursor cursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
             btnSave.Enabled = false;
             saveLotto();
             btnSave.Enabled = true;
+            Cursor.Current = cursor;
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -368,13 +482,6 @@ namespace lottory.gui
             dgv1.Enabled = true;
             lotNew = false;
             clearGrd1 = false;
-        }
-
-        private void btnInit_Click(object sender, EventArgs e)
-        {
-            FrmMain frm = new FrmMain(this,sf.Code, lc);
-            frm.Show();
-            this.Hide();
         }
 
         private void txtInput_Enter(object sender, EventArgs e)
@@ -494,6 +601,76 @@ namespace lottory.gui
         private void txtDown_Leave(object sender, EventArgs e)
         {
             txtDown.BackColor = Color.White;
+        }
+
+        private void btnInit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lV1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!pageLoad)
+            {
+                Cursor cursor = Cursor.Current;
+                Cursor.Current = Cursors.WaitCursor;
+                try
+                {
+                    ListViewItem i = lV1.SelectedItems[0];
+                    txtImgId.Text = name[i.ImageIndex];
+                    viewImage(i.ImageIndex);
+                    if (txtImgId.Text.Length >= 10)
+                    {
+                        setGrid1(txtImgId.Text.Replace(txtImgId.Text.Substring(txtImgId.Text.IndexOf("_1")), ""));
+                    }                    
+                    txtInputFocus();
+                }
+                catch (Exception ex)
+                {
+
+                }
+                Cursor.Current = cursor;
+            }
+        }
+
+        protected override bool ProcessCmdKey(ref Message message, Keys keys)
+        {
+            switch (keys)
+            {
+                case Keys.End:
+                    // ... Process Shift+Ctrl+Alt+B ...
+                    saveLotto();
+                    return true; // signal that we've processed this key
+                case Keys.Insert:
+                    txtInputFocus();
+                    return true;
+            }
+            // run base implementation
+            return base.ProcessCmdKey(ref message, keys);
+        }
+
+        private void cboPeriod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!pageLoad)
+            {
+                viewImage();
+            }
+        }
+
+        private void cboMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!pageLoad)
+            {
+                viewImage();
+            }
+        }
+
+        private void cboYear_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!pageLoad)
+            {
+                viewImage();
+            }
         }
     }
 }

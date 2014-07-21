@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkDelImage = new System.Windows.Forms.CheckBox();
             this.btnPath = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.txtPath = new System.Windows.Forms.TextBox();
@@ -47,7 +48,9 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.chkClearInput = new System.Windows.Forms.CheckBox();
-            this.chkDelImage = new System.Windows.Forms.CheckBox();
+            this.btnPath1 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtPath1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -55,6 +58,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnPath1);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.txtPath1);
             this.groupBox1.Controls.Add(this.chkDelImage);
             this.groupBox1.Controls.Add(this.btnPath);
             this.groupBox1.Controls.Add(this.label5);
@@ -67,6 +73,16 @@
             this.groupBox1.Size = new System.Drawing.Size(906, 610);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // chkDelImage
+            // 
+            this.chkDelImage.AutoSize = true;
+            this.chkDelImage.Location = new System.Drawing.Point(410, 133);
+            this.chkDelImage.Name = "chkDelImage";
+            this.chkDelImage.Size = new System.Drawing.Size(175, 21);
+            this.chkDelImage.TabIndex = 16;
+            this.chkDelImage.Text = "เมื่อนำรูปเข้าระบบ ให้ลบรูป";
+            this.chkDelImage.UseVisualStyleBackColor = true;
             // 
             // btnPath
             // 
@@ -83,9 +99,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(407, 32);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(86, 17);
+            this.label5.Size = new System.Drawing.Size(83, 17);
             this.label5.TabIndex = 14;
-            this.label5.Text = "path image :";
+            this.label5.Text = "path เก็บรูป :";
             // 
             // txtPath
             // 
@@ -236,15 +252,31 @@
             this.chkClearInput.Text = "ให้ล้างข้อมูลหลังบันทึก";
             this.chkClearInput.UseVisualStyleBackColor = true;
             // 
-            // chkDelImage
+            // btnPath1
             // 
-            this.chkDelImage.AutoSize = true;
-            this.chkDelImage.Location = new System.Drawing.Point(422, 71);
-            this.chkDelImage.Name = "chkDelImage";
-            this.chkDelImage.Size = new System.Drawing.Size(175, 21);
-            this.chkDelImage.TabIndex = 16;
-            this.chkDelImage.Text = "เมื่อนำรูปเข้าระบบ ให้ลบรูป";
-            this.chkDelImage.UseVisualStyleBackColor = true;
+            this.btnPath1.Location = new System.Drawing.Point(871, 86);
+            this.btnPath1.Name = "btnPath1";
+            this.btnPath1.Size = new System.Drawing.Size(29, 32);
+            this.btnPath1.TabIndex = 19;
+            this.btnPath1.Text = "...";
+            this.btnPath1.UseVisualStyleBackColor = true;
+            this.btnPath1.Click += new System.EventHandler(this.btnPath1_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(407, 71);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(146, 17);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "path เก็บรูปก่อนเข้าระบบ";
+            // 
+            // txtPath1
+            // 
+            this.txtPath1.Location = new System.Drawing.Point(499, 91);
+            this.txtPath1.Name = "txtPath1";
+            this.txtPath1.Size = new System.Drawing.Size(366, 22);
+            this.txtPath1.TabIndex = 17;
             // 
             // FrmInitConfig
             // 
@@ -288,5 +320,8 @@
         private System.Windows.Forms.TextBox txtPath;
         private System.Windows.Forms.Button btnPath;
         private System.Windows.Forms.CheckBox chkDelImage;
+        private System.Windows.Forms.Button btnPath1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtPath1;
     }
 }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnBrowe = new System.Windows.Forms.Button();
             this.pB1 = new System.Windows.Forms.ProgressBar();
             this.btnInit = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -48,6 +49,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnBrowe);
             this.groupBox1.Controls.Add(this.pB1);
             this.groupBox1.Controls.Add(this.btnInit);
             this.groupBox1.Controls.Add(this.btnSave);
@@ -61,6 +63,16 @@
             this.groupBox1.Size = new System.Drawing.Size(1377, 94);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
+            // 
+            // btnBrowe
+            // 
+            this.btnBrowe.Location = new System.Drawing.Point(699, 18);
+            this.btnBrowe.Name = "btnBrowe";
+            this.btnBrowe.Size = new System.Drawing.Size(37, 41);
+            this.btnBrowe.TabIndex = 64;
+            this.btnBrowe.Text = "...";
+            this.btnBrowe.UseVisualStyleBackColor = true;
+            this.btnBrowe.Click += new System.EventHandler(this.btnBrowe_Click);
             // 
             // pB1
             // 
@@ -106,6 +118,7 @@
             this.cboYear.Name = "cboYear";
             this.cboYear.Size = new System.Drawing.Size(99, 28);
             this.cboYear.TabIndex = 53;
+            this.cboYear.SelectedIndexChanged += new System.EventHandler(this.cboYear_SelectedIndexChanged);
             // 
             // cboPeriod
             // 
@@ -115,6 +128,7 @@
             this.cboPeriod.Name = "cboPeriod";
             this.cboPeriod.Size = new System.Drawing.Size(142, 28);
             this.cboPeriod.TabIndex = 52;
+            this.cboPeriod.SelectedIndexChanged += new System.EventHandler(this.cboPeriod_SelectedIndexChanged);
             // 
             // cboMonth
             // 
@@ -124,6 +138,7 @@
             this.cboMonth.Name = "cboMonth";
             this.cboMonth.Size = new System.Drawing.Size(142, 28);
             this.cboMonth.TabIndex = 51;
+            this.cboMonth.SelectedIndexChanged += new System.EventHandler(this.cboMonth_SelectedIndexChanged);
             // 
             // label14
             // 
@@ -150,9 +165,7 @@
             this.lV1.Size = new System.Drawing.Size(553, 702);
             this.lV1.TabIndex = 4;
             this.lV1.UseCompatibleStateImageBehavior = false;
-            this.lV1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lV1_ItemCheck);
-            this.lV1.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lV1_ItemChecked);
-            this.lV1.SelectedIndexChanged += new System.EventHandler(this.lV1_SelectedIndexChanged);
+            this.lV1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lV1_MouseClick);
             // 
             // lVNew
             // 
@@ -161,8 +174,7 @@
             this.lVNew.Size = new System.Drawing.Size(553, 702);
             this.lVNew.TabIndex = 6;
             this.lVNew.UseCompatibleStateImageBehavior = false;
-            this.lVNew.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lVNew_ItemCheck);
-            this.lVNew.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lVNew_ItemChecked);
+            this.lVNew.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lVNew_MouseClick);
             // 
             // picRotate
             // 
@@ -211,5 +223,6 @@
         private System.Windows.Forms.ListView lVNew;
         private System.Windows.Forms.PictureBox picRotate;
         private System.Windows.Forms.ProgressBar pB1;
+        private System.Windows.Forms.Button btnBrowe;
     }
 }

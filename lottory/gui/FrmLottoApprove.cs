@@ -58,6 +58,25 @@ namespace lottory.gui
             setGrdThoo();
             setGrdRate();
             dgv1.ReadOnly = true;
+            dgvThooTranfer.ReadOnly = true;
+            dgvRate.ReadOnly = true;
+            txtAmt.ReadOnly = true;
+            txtDown.ReadOnly = true;
+            txtUp.ReadOnly = true;
+            txtTod.ReadOnly = true;
+            txtTho.ReadOnly = true;
+            txtNetTotal.ReadOnly = true;
+            setGrd2();
+            if (dgv1.Rows.Count > 1)
+            {
+                btnSearch.Enabled = false;
+                btnSave.Enabled = false;
+                btnVoid.Visible = true;
+            }
+            else
+            {
+                btnVoid.Visible = false;
+            }
             //dgvRate.Hide();
         }
         private void setControl()
@@ -292,8 +311,10 @@ namespace lottory.gui
         {
             double amt = 0;
             String thooId = "", thoo1Id="";
+            Font font = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
             for (int i = 0; i < dgvThooTranfer.RowCount; i++)
             {
+                amt = 0;
                 if (dgvThooTranfer[colTId, i].Value == null)
                 {
                     continue;
@@ -313,7 +334,14 @@ namespace lottory.gui
                         amt += Double.Parse(lc.cf.NumberNull(dgv1[colDown, j].Value));
                     }
                 }
+                if (amt >= Double.Parse(lc.cf.NumberNull(dgvThooTranfer[colTLimit, i].Value)))
+                {
+                    dgvThooTranfer[colTAmt, i].Style.Font = font;
+                    dgvThooTranfer[colTAmt, i].Style.ForeColor = Color.Red;
+                }
+                
                 dgvThooTranfer[colTAmt, i].Value = String.Format("{0:#,###,###.00}",amt);
+
             }
         }
         private void setDataGrid1(DataGridView dgv, int row, String number, Double numUp, Double numTod, Double numDown, String rowId, 
@@ -345,7 +373,73 @@ namespace lottory.gui
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            double up = 0, tod = 0, down = 0, amt=0;
+            setGrd1();
+        }
+        private void setGrd2()
+        {
+            Font font = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
+            Font fontStrike = new Font("Microsoft Sans Serif", 12, FontStyle.Strikeout);
+            double up = 0, tod = 0, down = 0, amt = 0;
+            DataTable dt = new DataTable();
+            Thoo t = new Thoo();
+            dt = lc.lotdb.selectApprovedByPeriod(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString());
+            if (dt.Rows.Count > 0)
+            {
+                dgv1.RowCount = dt.Rows.Count;
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    try
+                    {
+                        setDataGrid1(dgv1, i, dt.Rows[i][lc.lotdb.lot.number].ToString(), Double.Parse(dt.Rows[i][lc.lotdb.lot.up].ToString()),
+                        Double.Parse(dt.Rows[i][lc.lotdb.lot.tod].ToString()), Double.Parse(dt.Rows[i][lc.lotdb.lot.down].ToString()),
+                        dt.Rows[i][lc.lotdb.lot.rowId].ToString(), dt.Rows[i][lc.lotdb.lot.lottoId].ToString(), dt.Rows[i][lc.lotdb.lot.use1].ToString(), 
+                        dt.Rows[i][lc.lotdb.lot.statusOverLimit].ToString(), dt.Rows[i][lc.lotdb.lot.overLimit].ToString(),
+                        dt.Rows[i][lc.lotdb.lot.thooTranferId].ToString());
+                        up += Double.Parse(lc.cf.NumberNull(dt.Rows[i][lc.lotdb.lot.up]));
+                        tod += Double.Parse(lc.cf.NumberNull(dt.Rows[i][lc.lotdb.lot.tod]));
+                        down += Double.Parse(lc.cf.NumberNull(dt.Rows[i][lc.lotdb.lot.down]));
+                        //amt += up + tod + down;
+                        t = lc.getThoo(dt.Rows[i][lc.lotdb.lot.thooTranferId].ToString());
+                        if (dgv1[colThooTranferId, i].Value.ToString().Length > 0)
+                        {
+                            dgv1.Rows[i].DefaultCellStyle.Font = fontStrike;
+                        }
+                        if (dgv1[colStatusOL, i].Value.ToString().Equals("1"))
+                        {
+                            dgv1[colOverLimit, i].Style.Font = font;
+                            dgv1[colOverLimit, i].Style.ForeColor = Color.Red;
+                        }
+                        if (dgv1[colNumber, i].Value.ToString().Length == 1)
+                        {
+                            dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#174e75");
+                        }
+                        else if (dgv1[colNumber, i].Value.ToString().Length == 2)
+                        {
+                            dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#789640");
+                        }
+                        else if (dgv1[colNumber, i].Value.ToString().Length == 3)
+                        {
+                            dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#788540");
+                        }
+                        //c = ColorTranslator.FromHtml(t.Color);
+                        //dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml(lc.getThooBackColor(t.Color));
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                }
+            }
+            txtUp.Text = String.Format("{0:#,###,###.00}", up);
+            txtTod.Text = String.Format("{0:#,###,###.00}", tod);
+            txtDown.Text = String.Format("{0:#,###,###.00}", down);
+            txtAmt.Text = String.Format("{0:#,###,###.00}", (up + tod + down));
+            setThooAmount();
+            setRateAmount();
+        }
+        private void setGrd1()
+        {
+            double up = 0, tod = 0, down = 0, amt = 0;
             DataTable dt = new DataTable();
             dgv1.Rows.Clear();
             //Color c = new Color();
@@ -365,7 +459,7 @@ namespace lottory.gui
                         up += Double.Parse(lc.cf.NumberNull(dt.Rows[i][lc.lotdb.lot.up]));
                         tod += Double.Parse(lc.cf.NumberNull(dt.Rows[i][lc.lotdb.lot.tod]));
                         down += Double.Parse(lc.cf.NumberNull(dt.Rows[i][lc.lotdb.lot.down]));
-                        amt += up + tod + down;
+                        //amt += up + tod + down;
                         t = lc.getThoo(dt.Rows[i][lc.lotdb.lot.thooTranferId].ToString());
                         //c = ColorTranslator.FromHtml(t.Color);
                         dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml(lc.getThooBackColor(t.Color));
@@ -374,13 +468,12 @@ namespace lottory.gui
                     {
 
                     }
-                    
                 }
             }
-            txtUp.Text = String.Format("{0:#,###,###.00}",up);
-            txtTod.Text = String.Format("{0:#,###,###.00}",tod);
-            txtDown.Text = String.Format("{0:#,###,###.00}",down);
-            txtAmt.Text = String.Format("{0:#,###,###.00}",amt);
+            txtUp.Text = String.Format("{0:#,###,###.00}", up);
+            txtTod.Text = String.Format("{0:#,###,###.00}", tod);
+            txtDown.Text = String.Format("{0:#,###,###.00}", down);
+            txtAmt.Text = String.Format("{0:#,###,###.00}", (up + tod + down));
 
             setApprove();
             setThooAmount();
@@ -390,6 +483,8 @@ namespace lottory.gui
         {
             Cursor cursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
+            Font font = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
+            Font fontStrike = new Font("Microsoft Sans Serif", 12, FontStyle.Strikeout);
             Rate r2Up = new Rate();
             Rate r3Up = new Rate();
             Rate r3Tod = new Rate();
@@ -400,12 +495,12 @@ namespace lottory.gui
             Decimal up1 = 0, limitUp1 = 0, useUp1 = 0, overLimit1 = 0;
             Decimal up2 = 0, limitUp2 = 0, useUp2 = 0, overLimit2 = 0;
             Decimal down2 = 0, limitDown2 = 0, useDown2 = 0, overLimitD2 = 0;
-            Decimal up3 = 0, limitUp3 = 0, useUp3 = 0, overLimit3 = 0;
-            Decimal down3 = 0, limitDown3 = 0, useDown3 = 0, overLimitD3 = 0;
+            Decimal up3 = 0, limitUp3 = 0, useUp3 = 0, overLimit3 = 0,tod3=0;
+            Decimal down3 = 0, limitDown3 = 0, useDown3 = 0, overLimitD3 = 0, useTod3=0;
 
             if (!lc.fldb.setLock(sf.Id))
             {
-                MessageBox.Show("aaaa", "aaaa");
+                MessageBox.Show("setApprove", "aaaa");
                 return;
             }
             r2Up = lc.ratedb.selectByPk("2up");
@@ -437,58 +532,95 @@ namespace lottory.gui
                 num = dgv1[colNumber, i].Value.ToString();
                 up = dgv1[colUp, i].Value.ToString();
                 down = dgv1[colDown, i].Value.ToString();
+                tod = dgv1[colTod, i].Value.ToString();
+                if (dgv1[colThooTranferId, i].Value.ToString().Length <= 0)
+                {
+                    //continue;
+                }
                 if (num.Length == 1)
                 {
-                    up1 = Decimal.Parse(up);
-                    useUp1 += up1;
-                    if ((useUp1) <= limitUp1)
+                    if (dgv1[colThooTranferId, i].Value.ToString().Length <= 0)
                     {
-                        dgv1[colStatusOL, i].Value = "0";
+                        up1 = Decimal.Parse(up);
+                        useUp1 += up1;
+                        if ((useUp1) <= limitUp1)
+                        {
+                            dgv1[colStatusOL, i].Value = "0";
+                        }
+                        else
+                        {
+                            dgv1[colStatusOL, i].Value = "1";
+                            overLimit1 += up1;
+                            dgv1[colOverLimit, i].Value = overLimit1;
+                            dgv1[colOverLimit, i].Style.Font = font;
+                            dgv1[colOverLimit, i].Style.ForeColor = Color.Red;
+                        }
+                        dgv1[colUse1, i].Value = useUp1;
                     }
                     else
                     {
-                        dgv1[colStatusOL, i].Value = "1";
-                        overLimit1 += up1;
-                        dgv1[colOverLimit, i].Value = overLimit1;
+                        dgv1.Rows[i].DefaultCellStyle.Font = fontStrike;
                     }
-                    dgv1[colUse1, i].Value = useUp1;
+                    
+                    dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#174e75");
                 }
                 else if (num.Length == 2)
                 {
-                    up2 = Decimal.Parse(up);
-                    useUp2 += (up2);
-                    down2 = Decimal.Parse(down);
-                    useDown2 += down2;
-                    if ((useUp2 + useDown2) <= limitUp2)
+                    if (dgv1[colThooTranferId, i].Value.ToString().Length <= 0)
                     {
-                        dgv1[colStatusOL, i].Value = "0";
+                        up2 = Decimal.Parse(up);
+                        useUp2 += (up2);
+                        down2 = Decimal.Parse(down);
+                        useDown2 += down2;
+                        if ((useUp2 + useDown2) <= limitUp2)
+                        {
+                            dgv1[colStatusOL, i].Value = "0";
+                        }
+                        else
+                        {
+                            dgv1[colStatusOL, i].Value = "1";
+                            overLimit2 += (up2 + down2);
+                            dgv1[colOverLimit, i].Value = overLimit2;
+                            dgv1[colOverLimit, i].Style.Font = font;
+                            dgv1[colOverLimit, i].Style.ForeColor = Color.Red;
+                        }
+                        dgv1[colUse1, i].Value = (useUp2 + useDown2);
                     }
                     else
                     {
-                        dgv1[colStatusOL, i].Value = "1";
-                        overLimit2 += (up2 + down2);
-                        dgv1[colOverLimit, i].Value = overLimit2;
+                        dgv1.Rows[i].DefaultCellStyle.Font = fontStrike;
                     }
-
-                    dgv1[colUse1, i].Value = (useUp2 + useDown2);
+                    dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#789640");
                 }
                 else if (num.Length == 3)
                 {
-                    up3 = Decimal.Parse(up);
-                    useUp3 += up3;
-                    down3 = Decimal.Parse(down);
-                    useDown3 += down3;
-                    if ((useUp3 + useDown3) <= limitUp3)
+                    if (dgv1[colThooTranferId, i].Value.ToString().Length <= 0)
                     {
-                        dgv1[colStatusOL, i].Value = "0";
+                        up3 = Decimal.Parse(up);
+                        useUp3 += up3;
+                        down3 = Decimal.Parse(down);
+                        useDown3 += down3;
+                        tod3 = Decimal.Parse(tod);
+                        useTod3 += tod3;
+                        if ((useUp3 + useDown3) <= limitUp3)
+                        {
+                            dgv1[colStatusOL, i].Value = "0";
+                        }
+                        else
+                        {
+                            dgv1[colStatusOL, i].Value = "1";
+                            overLimit3 += (up3 + down3);
+                            dgv1[colOverLimit, i].Value = overLimit3;
+                            dgv1[colOverLimit, i].Style.Font = font;
+                            dgv1[colOverLimit, i].Style.ForeColor = Color.Red;
+                        }
+                        dgv1[colUse1, i].Value = (useUp3 + useDown3 + useTod3);
                     }
                     else
                     {
-                        dgv1[colStatusOL, i].Value = "1";
-                        overLimit3 += (up3 + down3);
-                        dgv1[colOverLimit, i].Value = overLimit3;
+                        dgv1.Rows[i].DefaultCellStyle.Font = fontStrike;
                     }
-                    dgv1[colUse1, i].Value = (useUp3 + useDown3);
+                    dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#788540");
                 }
             }
             lc.fldb.unLockLotto();
@@ -533,14 +665,14 @@ namespace lottory.gui
         private void dgv1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             String thooId = "";
-            FrmLottoThoo frm = new FrmLottoThoo(sf.Id, dgv1[colRowId, e.RowIndex].Value.ToString(), thooId);
+            FrmLottoThoo frm = new FrmLottoThoo(sf.Id, dgv1[colRowId, e.RowIndex].Value.ToString(), thooId, lc);
             
             frm.ShowDialog(this);
             thooId = frm.thooId;
-            cItem = lc.getCboItem(cboThoo, thooId);
-            dgv1[colThooTranferId, e.RowIndex].Value = cItem.Value;
-            dgv1[colThooTranferName, e.RowIndex].Value = cItem.Text;
-            setThooAmount();
+            //cItem = lc.getCboItem(cboThoo, thooId);
+            //dgv1[colThooTranferId, e.RowIndex].Value = cItem.Value;
+            //dgv1[colThooTranferName, e.RowIndex].Value = cItem.Text;
+            setGrd1();
         }
 
         private void dgvThooTranfer_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

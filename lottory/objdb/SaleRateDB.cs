@@ -49,14 +49,53 @@ namespace lottory.objdb
             item.RateId = dt.Rows[0][sr.RateId].ToString();
             return item;
         }
+        private SaleRate setData(SaleRate item, DataTable dt, int row)
+        {
+            item.Id = dt.Rows[row][sr.Id].ToString();
+            item.Description = dt.Rows[row][sr.Description].ToString();
+            item.rec = dt.Rows[row][sr.rec].ToString();
+            item.pay = dt.Rows[row][sr.pay].ToString();
+            item.limit1 = dt.Rows[row][sr.limit1].ToString();
+            item.discount = dt.Rows[row][sr.discount].ToString();
+            item.Active = dt.Rows[row][sr.Active].ToString();
+            item.thooId = dt.Rows[row][sr.thooId].ToString();
+            item.SaleId = dt.Rows[row][sr.SaleId].ToString();
+            item.RateId = dt.Rows[row][sr.RateId].ToString();
+            return item;
+        }
+        
         public DataTable selectAll()
         {
             String sql = "";
-            DataTable dt = new DataTable();
+            DataTable dt2 = new DataTable();
             sql = "Select * From " + sr.table + " Where " + sr.Active + "='1'";
-            dt = conn.selectData(sql);
+            dt2 = conn.selectData(sql);
 
-            return dt;
+            return dt2;
+        }
+        public List<SaleRate> selectSRAll()
+        {
+            List<SaleRate> lsr = new List<SaleRate>();
+            DataTable dt1 = selectAll();
+            if (dt1.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt1.Rows.Count; i++)
+                {
+                    SaleRate item = new SaleRate();
+                    item.Id = dt1.Rows[i][sr.Id].ToString();
+                    item.Description = dt1.Rows[i][sr.Description].ToString();
+                    item.rec = dt1.Rows[i][sr.rec].ToString();
+                    item.pay = dt1.Rows[i][sr.pay].ToString();
+                    item.limit1 = dt1.Rows[i][sr.limit1].ToString();
+                    item.discount = dt1.Rows[i][sr.discount].ToString();
+                    item.Active = dt1.Rows[i][sr.Active].ToString();
+                    item.thooId = dt1.Rows[i][sr.thooId].ToString();
+                    item.SaleId = dt1.Rows[i][sr.SaleId].ToString();
+                    item.RateId = dt1.Rows[i][sr.RateId].ToString();
+                    lsr.Add(item);
+                }
+            }
+            return lsr;
         }
         public SaleRate selectByPk(String saleId)
         {
