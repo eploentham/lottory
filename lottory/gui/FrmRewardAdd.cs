@@ -17,12 +17,12 @@ namespace lottory
         Staff sf;
         Reward rw;
         Boolean pageLoad = false;
-        public FrmRewardAdd(String sfCode)
+        public FrmRewardAdd(String sfCode, String rId)
         {
             InitializeComponent();
-            initConfig(sfCode);
+            initConfig(sfCode,rId);
         }
-        private void initConfig(String sfCode)
+        private void initConfig(String sfCode, String rId)
         {
             pageLoad = true;
             rw = new Reward();
@@ -51,19 +51,27 @@ namespace lottory
             cbo.Value = sf.Id;
             cbo.Text = sf.Name;
             cboStaff.Text = sf.Name;
-            setControl();
+            setControl(rId);
             pageLoad = false;
         }
-        private void setControl()
+        private void setControl(String rId)
         {
-            rw = lc.selectRewardByPeriod(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString());
+            if (rId.Equals(""))
+            {
+                rw = lc.selectRewardByPeriod(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString());
+            }
+            else
+            {
+                rw = lc.rwdb.selectByPk(rId);
+            }
+            
             txtRewardDown2.Text = rw.rewardDown2;
             txtRDown31.Text = rw.rewardDown31;
             txtRDown32.Text = rw.rewardDown32;
             txtRDown33.Text = rw.rewardDown33;
             txtRDown34.Text = rw.rewardDown34;
             txtReward1.Text = rw.reward1;
-            txtRewardId.Text = rw.rewardId;
+            txtRewardId.Text = rw.Id;
             //rw.dateReward;
         }
         private Reward getControl()
@@ -74,7 +82,7 @@ namespace lottory
             rw.rewardDown33 = txtRDown33.Text;
             rw.rewardDown34 = txtRDown34.Text;
             rw.reward1 = txtReward1.Text;
-            rw.rewardId = txtRewardId.Text;
+            rw.Id = txtRewardId.Text;
             rw.dateReward = lc.cf.datetoDB();
             rw.yearId = cboYear.Text;
             rw.monthId = cboMonth.SelectedValue.ToString();
@@ -228,7 +236,7 @@ namespace lottory
         {
             if (!pageLoad)
             {
-                setControl();
+                setControl(rw.Id);
             }
         }
 
@@ -236,7 +244,7 @@ namespace lottory
         {
             if (!pageLoad)
             {
-                setControl();
+                setControl(rw.Id);
             }
         }
 
@@ -244,7 +252,7 @@ namespace lottory
         {
             if (!pageLoad)
             {
-                setControl();
+                setControl(rw.Id);
             }
         }
 

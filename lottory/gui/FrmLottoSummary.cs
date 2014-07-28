@@ -73,7 +73,7 @@ namespace lottory.gui
             cboPeriod = lc.setCboPeriodDefault(cboPeriod);
             //setGrid(dgv1);
             //setControl1();
-            setControl1();
+            //setControl1();
             pageLoad = false;
             pB1.Visible = false;
         }
@@ -342,7 +342,7 @@ namespace lottory.gui
             txtRDown33.Text = rw.rewardDown33;
             txtRDown34.Text = rw.rewardDown34;
             txtReward1.Text = rw.reward1;
-            txtRewardId.Text = rw.rewardId;
+            txtRewardId.Text = rw.Id;
             txtRewardDown2.ReadOnly = true;
             txtRDown31.ReadOnly = true;
             txtRDown32.ReadOnly = true;
@@ -705,21 +705,17 @@ namespace lottory.gui
         {
             Cursor cursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
-            if (frmSS == null)
+            if (frmST == null)
             {
-                frmSS = new FrmLottoSummarySale(sf.Id, cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvRate[colRId, e.RowIndex].Value.ToString(), lc);
-            }
-            frmSS.setControl(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvSale[colSId, e.RowIndex].Value.ToString());
-            //FrmLottoSummarySale frm = new FrmLottoSummarySale(sf.Id, cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvRate[colRId, e.RowIndex].Value.ToString(), lc);
-            //frm.ShowDialog(this);
-            if (!frmSS.Visible)
-            {
-                frmSS.Show(this);
+                frmST = new FrmLottoSummaryThoo(sf.Id, cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvRate[colRId, e.RowIndex].Value.ToString(), lc);
+                frmST.setControl(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvSale[colSId, e.RowIndex].Value.ToString(), "sale");
+                frmST.Show(this);
             }
             else
             {
-                frmSS.Show();
-                frmSS.Activate();
+                frmST.setControl(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvSale[colSId, e.RowIndex].Value.ToString(), "sale");
+                frmST.Show();
+                frmST.Activate();
             }
             Cursor.Current = cursor;
         }
@@ -728,19 +724,15 @@ namespace lottory.gui
         {
             Cursor cursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
-            if (frmSS == null)
+            if (frmST == null)
             {
                 frmST = new FrmLottoSummaryThoo(sf.Id, cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvRate[colRId, e.RowIndex].Value.ToString(), lc);
-            }
-            frmST.setControl(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvThooTranfer[colTId, e.RowIndex].Value.ToString());
-            //FrmLottoSummarySale frm = new FrmLottoSummarySale(sf.Id, cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvRate[colRId, e.RowIndex].Value.ToString(), lc);
-            //frm.ShowDialog(this);
-            if (!frmST.Visible)
-            {
+                frmST.setControl(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvThooTranfer[colTId, e.RowIndex].Value.ToString(),"tho");
                 frmST.Show(this);
             }
             else
             {
+                frmST.setControl(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvThooTranfer[colTId, e.RowIndex].Value.ToString(), "tho");
                 frmST.Show();
                 frmST.Activate();
             }
@@ -756,6 +748,11 @@ namespace lottory.gui
                     return true; // signal that we've processed this key
             }
             return base.ProcessCmdKey(ref message, keys);
+        }
+
+        private void btnProcess_Click(object sender, EventArgs e)
+        {
+            setControl1();
         }
     }
 }

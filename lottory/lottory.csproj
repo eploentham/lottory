@@ -100,6 +100,18 @@
     <Compile Include="gui\FrmLottoImage.Designer.cs">
       <DependentUpon>FrmLottoImage.cs</DependentUpon>
     </Compile>
+    <Compile Include="gui\FrmNumberLimitAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\FrmNumberLimitAdd.Designer.cs">
+      <DependentUpon>FrmNumberLimitAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\FrmNumberLimitView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\FrmNumberLimitView.Designer.cs">
+      <DependentUpon>FrmNumberLimitView.cs</DependentUpon>
+    </Compile>
     <Compile Include="gui\FrmRewardAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +214,12 @@
     <Compile Include="gui\FrmReport.Designer.cs">
       <DependentUpon>FrmReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="gui\FrmRewardView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\FrmRewardView.Designer.cs">
+      <DependentUpon>FrmRewardView.cs</DependentUpon>
+    </Compile>
     <Compile Include="gui\FrmSaleAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -248,7 +266,11 @@
     <Compile Include="objdb\CustomerDB.cs" />
     <Compile Include="objdb\FlockDB.cs" />
     <Compile Include="objdb\ImageDB.cs" />
+    <Compile Include="objdb\LottoRateDB.cs" />
+    <Compile Include="objdb\LottoSaleDB.cs" />
     <Compile Include="objdb\LottoDB.cs" />
+    <Compile Include="objdb\LottoThoDB.cs" />
+    <Compile Include="objdb\NumberLimitDB.cs" />
     <Compile Include="objdb\RateDB.cs" />
     <Compile Include="objdb\RewardDB.cs" />
     <Compile Include="objdb\SaleDB.cs" />
@@ -266,6 +288,10 @@
     <Compile Include="control\LottoryControl.cs" />
     <Compile Include="object1\InitConfig.cs" />
     <Compile Include="object1\Lotto.cs" />
+    <Compile Include="object1\LottoRate.cs" />
+    <Compile Include="object1\LottoSale.cs" />
+    <Compile Include="object1\LottoTho.cs" />
+    <Compile Include="object1\NumberLimit.cs" />
     <Compile Include="object1\Persistent.cs" />
     <Compile Include="object1\Rate.cs" />
     <Compile Include="object1\RegEdit.cs" />
@@ -291,6 +317,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="gui\FrmLottoImage.resx">
       <DependentUpon>FrmLottoImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\FrmNumberLimitAdd.resx">
+      <DependentUpon>FrmNumberLimitAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\FrmNumberLimitView.resx">
+      <DependentUpon>FrmNumberLimitView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="gui\FrmRewardAdd.resx">
       <DependentUpon>FrmRewardAdd.cs</DependentUpon>
@@ -342,6 +374,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="gui\FrmReport.resx">
       <DependentUpon>FrmReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\FrmRewardView.resx">
+      <DependentUpon>FrmRewardView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="gui\FrmSaleAdd.resx">
       <DependentUpon>FrmSaleAdd.cs</DependentUpon>

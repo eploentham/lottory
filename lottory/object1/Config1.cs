@@ -97,6 +97,21 @@ namespace lottory.object1
         //    c.ValueMember = "Value";
         //    return c;
         //}
+        public String getPeriod(String periodId)
+        {
+            if (periodId == "01")
+            {
+                return "งวด วันที่1";
+            }
+            else if (periodId == "02")
+            {
+                return "งวด วันที่16";
+            }
+            else
+            {
+                return "";
+            }
+        }
         public String getMonth(String monthId)
         {
             if (monthId == "01")

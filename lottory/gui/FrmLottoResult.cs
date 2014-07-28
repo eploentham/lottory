@@ -74,7 +74,7 @@ namespace lottory.gui
             txtRDown33.Text = rw.rewardDown33;
             txtRDown34.Text = rw.rewardDown34;
             txtReward1.Text = rw.reward1;
-            txtRewardId.Text = rw.rewardId;
+            txtRewardId.Text = rw.Id;
             //rw.dateReward;
         }
         private void setGrid(DataGridView dgv)
@@ -342,7 +342,7 @@ namespace lottory.gui
                 //}
                 pB1.Value = i;
             }
-            lc.rwdb.updateStatusApprove(rw.rewardId, sf.Id);
+            lc.rwdb.updateStatusApprove(rw.Id, sf.Id);
             pB1.Visible = false;
             Cursor.Current = cursor;
         }

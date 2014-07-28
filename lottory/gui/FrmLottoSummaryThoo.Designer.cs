@@ -76,7 +76,7 @@
             this.groupBox1.Controls.Add(this.txtUp);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtInput);
-            this.groupBox1.Location = new System.Drawing.Point(687, 12);
+            this.groupBox1.Location = new System.Drawing.Point(909, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(346, 696);
             this.groupBox1.TabIndex = 9;
@@ -267,14 +267,14 @@
             this.dgv1.Location = new System.Drawing.Point(12, 12);
             this.dgv1.Name = "dgv1";
             this.dgv1.RowTemplate.Height = 24;
-            this.dgv1.Size = new System.Drawing.Size(669, 696);
+            this.dgv1.Size = new System.Drawing.Size(891, 696);
             this.dgv1.TabIndex = 8;
             // 
             // FrmLottoSummaryThoo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1045, 723);
+            this.ClientSize = new System.Drawing.Size(1267, 723);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgv1);
             this.Name = "FrmLottoSummaryThoo";

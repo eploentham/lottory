@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dgv1 = new System.Windows.Forms.DataGridView();
+            this.btnProcess = new System.Windows.Forms.Button();
+            this.pB1 = new System.Windows.Forms.ProgressBar();
             this.txtRDown34 = new System.Windows.Forms.TextBox();
             this.txtRDown33 = new System.Windows.Forms.TextBox();
             this.txtRDown32 = new System.Windows.Forms.TextBox();
@@ -47,9 +48,9 @@
             this.dgvRate = new System.Windows.Forms.DataGridView();
             this.dgvSale = new System.Windows.Forms.DataGridView();
             this.dgvThooTranfer = new System.Windows.Forms.DataGridView();
-            this.pB1 = new System.Windows.Forms.ProgressBar();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnVoid = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThooTranfer)).BeginInit();
@@ -57,8 +58,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnVoid);
+            this.groupBox1.Controls.Add(this.btnSave);
+            this.groupBox1.Controls.Add(this.btnProcess);
             this.groupBox1.Controls.Add(this.pB1);
-            this.groupBox1.Controls.Add(this.dgv1);
             this.groupBox1.Controls.Add(this.txtRDown34);
             this.groupBox1.Controls.Add(this.txtRDown33);
             this.groupBox1.Controls.Add(this.txtRDown32);
@@ -79,15 +82,22 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
-            // dgv1
+            // btnProcess
             // 
-            this.dgv1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv1.Location = new System.Drawing.Point(1003, 13);
-            this.dgv1.Name = "dgv1";
-            this.dgv1.RowTemplate.Height = 24;
-            this.dgv1.Size = new System.Drawing.Size(176, 107);
-            this.dgv1.TabIndex = 4;
-            this.dgv1.Visible = false;
+            this.btnProcess.Location = new System.Drawing.Point(1092, 15);
+            this.btnProcess.Name = "btnProcess";
+            this.btnProcess.Size = new System.Drawing.Size(102, 38);
+            this.btnProcess.TabIndex = 67;
+            this.btnProcess.Text = "ประมวลผล";
+            this.btnProcess.UseVisualStyleBackColor = true;
+            this.btnProcess.Click += new System.EventHandler(this.btnProcess_Click);
+            // 
+            // pB1
+            // 
+            this.pB1.Location = new System.Drawing.Point(757, 97);
+            this.pB1.Name = "pB1";
+            this.pB1.Size = new System.Drawing.Size(437, 23);
+            this.pB1.TabIndex = 66;
             // 
             // txtRDown34
             // 
@@ -247,12 +257,23 @@
             this.dgvThooTranfer.TabIndex = 4;
             this.dgvThooTranfer.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvThooTranfer_CellDoubleClick);
             // 
-            // pB1
+            // btnSave
             // 
-            this.pB1.Location = new System.Drawing.Point(757, 97);
-            this.pB1.Name = "pB1";
-            this.pB1.Size = new System.Drawing.Size(437, 23);
-            this.pB1.TabIndex = 66;
+            this.btnSave.Location = new System.Drawing.Point(953, 56);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(102, 41);
+            this.btnSave.TabIndex = 68;
+            this.btnSave.Text = "บันทึก";
+            this.btnSave.UseVisualStyleBackColor = true;
+            // 
+            // btnVoid
+            // 
+            this.btnVoid.Location = new System.Drawing.Point(1092, 56);
+            this.btnVoid.Name = "btnVoid";
+            this.btnVoid.Size = new System.Drawing.Size(102, 41);
+            this.btnVoid.TabIndex = 69;
+            this.btnVoid.Text = "ยกเลิก";
+            this.btnVoid.UseVisualStyleBackColor = true;
             // 
             // FrmLottoSummary
             // 
@@ -269,7 +290,6 @@
             this.Load += new System.EventHandler(this.FrmLottoSummary_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSale)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThooTranfer)).EndInit();
@@ -296,8 +316,10 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.DataGridView dgvRate;
         private System.Windows.Forms.DataGridView dgvSale;
-        private System.Windows.Forms.DataGridView dgv1;
         private System.Windows.Forms.DataGridView dgvThooTranfer;
         private System.Windows.Forms.ProgressBar pB1;
+        private System.Windows.Forms.Button btnProcess;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnVoid;
     }
 }

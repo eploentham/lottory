@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbAmt = new System.Windows.Forms.Label();
             this.txtIndex = new System.Windows.Forms.Label();
             this.txtImgId = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -66,7 +67,7 @@
             this.pic1 = new System.Windows.Forms.PictureBox();
             this.picHand = new System.Windows.Forms.PictureBox();
             this.dgv1 = new System.Windows.Forms.DataGridView();
-            this.lbAmt = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picZoomM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picZoomP)).BeginInit();
@@ -78,6 +79,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.lbAmt);
             this.groupBox1.Controls.Add(this.txtIndex);
             this.groupBox1.Controls.Add(this.txtImgId);
@@ -114,6 +116,15 @@
             this.groupBox1.Size = new System.Drawing.Size(1805, 200);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // lbAmt
+            // 
+            this.lbAmt.AutoSize = true;
+            this.lbAmt.Location = new System.Drawing.Point(1090, 21);
+            this.lbAmt.Name = "lbAmt";
+            this.lbAmt.Size = new System.Drawing.Size(42, 17);
+            this.lbAmt.TabIndex = 70;
+            this.lbAmt.Text = "รวม : ";
             // 
             // txtIndex
             // 
@@ -475,14 +486,15 @@
             this.dgv1.Size = new System.Drawing.Size(605, 702);
             this.dgv1.TabIndex = 40;
             // 
-            // lbAmt
+            // label4
             // 
-            this.lbAmt.AutoSize = true;
-            this.lbAmt.Location = new System.Drawing.Point(1090, 21);
-            this.lbAmt.Name = "lbAmt";
-            this.lbAmt.Size = new System.Drawing.Size(42, 17);
-            this.lbAmt.TabIndex = 70;
-            this.lbAmt.Text = "รวม : ";
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.label4.Location = new System.Drawing.Point(668, 26);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 20);
+            this.label4.TabIndex = 71;
+            this.label4.Text = "label4";
             // 
             // FrmInputImage
             // 
@@ -554,5 +566,6 @@
         private System.Windows.Forms.Label txtImgId;
         private System.Windows.Forms.Label txtIndex;
         private System.Windows.Forms.Label lbAmt;
+        private System.Windows.Forms.Label label4;
     }
 }

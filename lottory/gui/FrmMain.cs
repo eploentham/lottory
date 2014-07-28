@@ -45,11 +45,12 @@ namespace lottory.gui
                 tv1.Nodes.Add("nInputAdd", "ป้อนข้อมูล");
                 tv1.Nodes.Add("nInputImage", "ป้อนข้อมูลจากรูป");
                 tv1.Nodes.Add("nInputView", "ดูข้อมูลเก่า");
-                tv1.Nodes.Add("nRewardAdd", "ป้อนรางวัล");
+                tv1.Nodes.Add("nRewardView", "ป้อนรางวัล");
             }
             if (sf.Priority.Equals("2") || sf.Priority.Equals("3"))
             {
                 tv1.Nodes.Add("nLottoImage", "นำรูปเข้าระบบ");
+                tv1.Nodes.Add("nNumberLimit", "ป้อนเลขอั้น");
                 tv1.Nodes.Add("nLottoApprove", "ยืนยันตัวเลข");
                 tv1.Nodes.Add("nLottoResult", "ตรวจรางวัลประจำงวด");
                 tv1.Nodes.Add("nLottoSummary", "สรุปข้อมูลประจำงวด");
@@ -112,9 +113,9 @@ namespace lottory.gui
                 FrmInputAdd frm = new FrmInputAdd(sf.Code, lc);
                 showFrame(frm);
             }
-            else if (e.Node.Name.ToString() == "nRewardAdd")
+            else if (e.Node.Name.ToString() == "nRewardView")
             {
-                FrmRewardAdd frm = new FrmRewardAdd(sf.Code);
+                FrmRewardView frm = new FrmRewardView(sf.Code);
                 showFrame(frm);
             }
             else if (e.Node.Name.ToString() == "nLottoResult")
@@ -150,6 +151,11 @@ namespace lottory.gui
             else if (e.Node.Name.ToString() == "nLottoImage")
             {
                 FrmLottoImage frm = new FrmLottoImage(sf.Code, lc);
+                showFrame(frm);
+            }
+            else if (e.Node.Name.ToString() == "nNumberLimit")
+            {
+                FrmNumberLimitView frm = new FrmNumberLimitView(sf.Code, lc);
                 showFrame(frm);
             }
         }

@@ -13,7 +13,7 @@ namespace lottory.gui
 {
     public partial class FrmLottoSummarySale : Form
     {
-        int colNumber = 0, colUp=1, colTod=2, colDown=3, colRAmt = 4, colRAmtReward = 5, colRpayRate = 6, colRReward = 7;
+        int colNumber = 0, colUp = 1, colTod = 2, colDown = 3, colRUp = 4, colRTod = 5, colRDown = 6, colRReward = 7;
         //int colR3Up = 13, colR3TodRate = 14, colR3Tod = 15, colR3DownRate = 16, colR3Down = 17;
         int col1Cnt = 8;
         LottoryControl lc;
@@ -76,17 +76,17 @@ namespace lottory.gui
             dgv1.Columns[colUp].Width = 80;
             dgv1.Columns[colTod].Width = 80;
             dgv1.Columns[colDown].Width = 80;
-            dgv1.Columns[colRpayRate].Width = 100;
+            dgv1.Columns[colRDown].Width = 100;
             dgv1.Columns[colNumber].HeaderText = "ตัวเลข";
-            dgv1.Columns[colRAmt].HeaderText = "ยอดเงิน";
-            dgv1.Columns[colRAmtReward].HeaderText = "แทงถูก";
             dgv1.Columns[colUp].HeaderText = "บน";
             dgv1.Columns[colTod].HeaderText = "โต๊ด";
             dgv1.Columns[colDown].HeaderText = "ล่าง";
 
-            dgv1.Columns[colRpayRate].HeaderText = "อัตราจ่าย";
+            dgv1.Columns[colRUp].HeaderText = "ถูกบน";
+            dgv1.Columns[colRTod].HeaderText = "ถูกtod";
+            dgv1.Columns[colRDown].HeaderText = "ถูกล่าง";
             dgv1.Columns[colRReward].HeaderText = "จ่าย";
-            dgv1.Columns[colRAmt].Visible = false;
+            //dgv1.Columns[colRReward].Visible = false;
 
             dgv1.Font = font;
             //lotNew = true;
@@ -95,56 +95,56 @@ namespace lottory.gui
                 dgv1.RowCount = dt.Rows.Count;
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-
                     dgv1[colNumber, i].Value = lc.cf.stringNull1(dt.Rows[i][lc.lotdb.lot.number].ToString());
                     dgv1[colUp, i].Value = lc.cf.stringNull1(dt.Rows[i][lc.lotdb.lot.up].ToString());
                     dgv1[colTod, i].Value = lc.cf.stringNull1(dt.Rows[i][lc.lotdb.lot.tod].ToString());
                     dgv1[colDown, i].Value = lc.cf.stringNull1(dt.Rows[i][lc.lotdb.lot.down].ToString());
+                    if (dt.Rows[i][lc.lotdb.lot.number].ToString().Length == 1)
+                    {
+                        dgv1[colRUp, i].Value = lc.cf.stringNull1(dt.Rows[i][lc.lotdb.lot.rUp].ToString());
+                        dgv1[colRDown, i].Value = lc.cf.stringNull1(dt.Rows[i][lc.lotdb.lot.rDown].ToString());
+                        dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#174e75");
+                    }
+                    else if (dt.Rows[i][lc.lotdb.lot.number].ToString().Length == 2)
+                    {
+                        dgv1[colRUp, i].Value = lc.cf.stringNull1(dt.Rows[i][lc.lotdb.lot.r2Up].ToString());
+                        dgv1[colRDown, i].Value = lc.cf.stringNull1(dt.Rows[i][lc.lotdb.lot.r2Down].ToString());
+                        dgv1[colRTod, i].Value = lc.cf.stringNull1(dt.Rows[i][lc.lotdb.lot.r2Tod].ToString());
+                        dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#789640");
+                    }
+                    else if (dt.Rows[i][lc.lotdb.lot.number].ToString().Length == 3)
+                    {
+                        dgv1[colRUp, i].Value = lc.cf.stringNull1(dt.Rows[i][lc.lotdb.lot.r3Up].ToString());
+                        dgv1[colRDown, i].Value = lc.cf.stringNull1(dt.Rows[i][lc.lotdb.lot.r3Down].ToString());
+                        dgv1[colRTod, i].Value = lc.cf.stringNull1(dt.Rows[i][lc.lotdb.lot.r3Tod].ToString());
+                        dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#788540");
+                    }
+                    dgv1[colRReward, i].Value = Double.Parse(lc.cf.NumberNull(dgv1[colRUp, i].Value)) + Double.Parse(lc.cf.NumberNull(dgv1[colRDown, i].Value)) + Double.Parse(lc.cf.NumberNull(dgv1[colRTod, i].Value));
 
-                    //dgv1[colRpayRate, i].Value = rew1.PayRate;
-                    //dgv1[colRReward, i].Value = rew1.Reward;
-                    //dgv1[colRAmtReward, i].Value = rew1.Amt;
-                    //if (Double.Parse(lc.cf.NumberNull(dgv1[colRReward, i].Value.ToString())) > 0)
-                    //{
-                    //    dgv1[colNumber, i].Style.Font = font1;
-                    //    dgv1[colNumber, i].Style.ForeColor = Color.Red;
-                    //    dgv1[colRReward, i].Style.Font = font1;
-                    //    dgv1[colRReward, i].Style.ForeColor = Color.Red;
-                    //    dgv1[colRAmtReward, i].Style.Font = font1;
-                    //    dgv1[colRAmtReward, i].Style.ForeColor = Color.Red;
-                    //}
-                    //if (saleId.Equals("up"))
-                    //{
-                    //    dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#174e75");
-                    //}
-                    //else if (saleId.Equals("down"))
-                    //{
-                    //    dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#174e75");
-                    //}
-                    //else if (saleId.Equals("2down"))
-                    //{
-                    //    dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#789640");
-                    //}
-                    //else if (saleId.Equals("2up"))
-                    //{
-                    //    dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#789640");
-                    //}
-                    //else if (saleId.Equals("2tod"))
-                    //{
-                    //    dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#789640");
-                    //}
-                    //else if (saleId.Equals("3down"))
-                    //{
-                    //    dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#788540");
-                    //}
-                    //else if (saleId.Equals("3tod"))
-                    //{
-                    //    dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#788540");
-                    //}
-                    //else if (saleId.Equals("3up"))
-                    //{
-                    //    dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#788540");
-                    //}
+                    if (Double.Parse(lc.cf.NumberNull(dgv1[colRReward, i].Value.ToString())) > 0)
+                    {
+                        dgv1[colNumber, i].Style.Font = font1;
+                        dgv1[colNumber, i].Style.ForeColor = Color.Red;
+                        dgv1[colRReward, i].Style.Font = font1;
+                        dgv1[colRReward, i].Style.ForeColor = Color.Red;
+                        if (Double.Parse(lc.cf.NumberNull(dgv1[colRUp, i].Value.ToString())) > 0)
+                        {
+                            dgv1[colRUp, i].Style.Font = font1;
+                            dgv1[colRUp, i].Style.ForeColor = Color.Red;
+                        }
+                        if (Double.Parse(lc.cf.NumberNull(dgv1[colRDown, i].Value.ToString())) > 0)
+                        {
+                            dgv1[colRDown, i].Style.Font = font1;
+                            dgv1[colRDown, i].Style.ForeColor = Color.Red;
+                        }
+                        if (Double.Parse(lc.cf.NumberNull(dgv1[colRTod, i].Value.ToString())) > 0)
+                        {
+                            dgv1[colRTod, i].Style.Font = font1;
+                            dgv1[colRTod, i].Style.ForeColor = Color.Red;
+                        }
+                        //dgv1[colRTod, i].Style.Font = font1;
+                        //dgv1[colRTod, i].Style.ForeColor = Color.Red;
+                    }
                 }
             }
             dgv1.ReadOnly = true;

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.lbAmt = new System.Windows.Forms.Label();
             this.btnInit = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btnMain = new System.Windows.Forms.Button();
@@ -65,7 +66,7 @@
             this.txtUp = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtInput = new System.Windows.Forms.TextBox();
-            this.lbAmt = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLotto)).BeginInit();
@@ -92,6 +93,15 @@
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "ป้อนข้อมูล";
+            // 
+            // lbAmt
+            // 
+            this.lbAmt.AutoSize = true;
+            this.lbAmt.Location = new System.Drawing.Point(598, 18);
+            this.lbAmt.Name = "lbAmt";
+            this.lbAmt.Size = new System.Drawing.Size(30, 17);
+            this.lbAmt.TabIndex = 71;
+            this.lbAmt.Text = "รวม";
             // 
             // btnInit
             // 
@@ -206,6 +216,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label18);
             this.groupBox2.Controls.Add(this.comboBox1);
             this.groupBox2.Controls.Add(this.label17);
             this.groupBox2.Controls.Add(this.cboYear);
@@ -464,14 +475,15 @@
             this.txtInput.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtInput_KeyUp);
             this.txtInput.Leave += new System.EventHandler(this.txtInput_Leave);
             // 
-            // lbAmt
+            // label18
             // 
-            this.lbAmt.AutoSize = true;
-            this.lbAmt.Location = new System.Drawing.Point(598, 18);
-            this.lbAmt.Name = "lbAmt";
-            this.lbAmt.Size = new System.Drawing.Size(30, 17);
-            this.lbAmt.TabIndex = 71;
-            this.lbAmt.Text = "รวม";
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.label18.Location = new System.Drawing.Point(618, 205);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(62, 20);
+            this.label18.TabIndex = 47;
+            this.label18.Text = "label18";
             // 
             // FrmInputAdd
             // 
@@ -534,6 +546,7 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label lbAmt;
+        private System.Windows.Forms.Label label18;
     }
 }
 

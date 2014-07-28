@@ -61,6 +61,8 @@ namespace lottory.objdb
             lot.r2DownRate = "reward_2down_rate";
             lot.r2Up = "reward_2tod";
             lot.r2UpRate = "reward_2tod_rate";
+            lot.r2Tod = "reward_2tod";
+            lot.r2TodRate = "reward_2tod_rate";
             lot.r3Up = "reward_3up";
             lot.r3UpRate = "reward_3up_rate";
             lot.r3Down = "reward_3down";

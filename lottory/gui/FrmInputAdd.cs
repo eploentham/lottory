@@ -33,8 +33,7 @@ namespace lottory
         Color btnEditColor;
         ComboBox cboSale1;
         //Test1 t;
-
-
+        
         public FrmInputAdd(String sfCode, LottoryControl l)
         {
             //lc = l;
@@ -81,6 +80,7 @@ namespace lottory
             btnEditColor = btnEdit.BackColor;
             cboPeriod = lc.setCboPeriodDefault(cboPeriod);
             setGridLot();
+            label18.Text = "";
         }
         private void ExitApplication()
         {
@@ -96,7 +96,7 @@ namespace lottory
             dgvLotto.RowCount = row;
             row = 0;
             dgvLotto.Columns[colLottoNumber].Width = 150;
-            dgvLotto.Columns[colLottoTod].Width = 80;
+            dgvLotto.Columns[colLottoTod].Width = 100;
             dgvLotto.Columns[colLottoUp].Width = 80;
             dgvLotto.Columns[colLottoDown].Width = 80;
             dgvLotto.Columns[colSale].Width = 80;
@@ -119,7 +119,7 @@ namespace lottory
 
             dgvLotto.ReadOnly = true;
 
-            dgv1.Font = font;
+            dgvLotto.Font = font;
         }
         private void setGrid1()
         {
@@ -278,9 +278,9 @@ namespace lottory
             Double amt = 0;
             for (int i = 0; i < dgv1.RowCount-1; i++)
             {
-                numUp = dgv1[colUp, i].Value.ToString();
-                numTod = dgv1[colTod, i].Value.ToString();
-                numDown = dgv1[colDown, i].Value.ToString();
+                numUp = lc.cf.NumberNull(dgv1[colUp, i].Value);
+                numTod = lc.cf.NumberNull(dgv1[colTod, i].Value);
+                numDown = lc.cf.NumberNull(dgv1[colDown, i].Value);
                 amt += (Double.Parse(numUp) + Double.Parse(numTod) + Double.Parse(numDown));
                 if ((i % 2) != 0)
                 {
@@ -377,7 +377,16 @@ namespace lottory
         {
             if (e.KeyCode == Keys.Enter)
             {
-                txtUpFocus();
+                if (lc.chkNumberLimit(txtInput.Text))
+                {
+                    label18.Text = "เลขอั้น";
+                    return;
+                }
+                else
+                {
+                    label18.Text = "";
+                    txtUpFocus();
+                }
             }
         }
 
@@ -397,6 +406,15 @@ namespace lottory
                 {
                     setGrid1();
                     clearGrd1 = false;
+                }
+                if (lc.chkNumberLimit(txtInput.Text))
+                {
+                    label18.Text = "เลขอั้น";
+                    return;
+                }
+                else
+                {
+                    label18.Text = "";
                 }
                 //if (txtInput.Text.Length == 1)
                 //{

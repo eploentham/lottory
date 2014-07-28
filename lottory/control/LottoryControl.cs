@@ -28,6 +28,7 @@ namespace lottory.control
         public SaleRateDB srdb;
         public CustomerDB cudb;
         public ImageDB imgdb;
+        public NumberLimitDB nldb;
 
         public Rate rate;
         public Staff staff;
@@ -39,6 +40,7 @@ namespace lottory.control
         public SaleRate sr;
         public Customer cu;
         public Image1 img;
+        public NumberLimit nl;
 
         public RegEdit regE;
 
@@ -51,6 +53,7 @@ namespace lottory.control
         public List<Font1> thoColor = new List<Font1>();
         public List<SaleRate> lsr = new List<SaleRate>();
         public List<Sale> ls = new List<Sale>();
+        public List<NumberLimit> lnl = new List<NumberLimit>();
 
         private IniFile iniFile;
         public InitConfig initC;
@@ -78,6 +81,7 @@ namespace lottory.control
             srdb = new SaleRateDB(conn);
             cudb = new CustomerDB(conn);
             imgdb = new ImageDB(conn);
+            nldb = new NumberLimitDB(conn);
 
             rate = new Rate();
             sale = new Sale();
@@ -89,6 +93,7 @@ namespace lottory.control
             sr = new SaleRate();
             cu = new Customer();
             img = new Image1();
+            nl = new NumberLimit();
 
             r2Down = new Rate();
             r2Tod = new Rate();
@@ -110,6 +115,7 @@ namespace lottory.control
             setThoColor();
             lsr = srdb.selectSRAll();
             ls = saledb.selectSAll();
+            lnl = selectByNumberLimit();
             //cboThoo = new ComboBox();
             //cboStaff = new ComboBox();
             //cboSale = new ComboBox();
@@ -643,6 +649,40 @@ namespace lottory.control
                 lRew1.Add(rew1);
             }
             return lRew1;
+        }
+        public List<NumberLimit> selectByNumberLimit()
+        {
+            List<NumberLimit> lnl = new List<NumberLimit>();
+            DataTable dt = nldb.selectAll();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                NumberLimit nl = new NumberLimit();
+                nl.number = dt.Rows[i][nldb.nl.number].ToString();
+                nl.StatusStart = dt.Rows[i][nldb.nl.StatusStart].ToString();
+                nl.yearLimitId = dt.Rows[i][nldb.nl.yearLimitId].ToString();
+                nl.monthLimitId = dt.Rows[i][nldb.nl.monthLimitId].ToString();
+                nl.periodLimitId = dt.Rows[i][nldb.nl.periodLimitId].ToString();
+                //nl. = dt.Rows[i][nldb.nl.periodLimitId].ToString();
+                lnl.Add(nl);
+            }
+            return lnl;
+        }
+        public Boolean chkNumberLimit(String num)
+        {
+            Boolean chk = false;
+
+            if (lnl.Count > 0)
+            {
+                foreach (NumberLimit nl in lnl)
+                {
+                    if (nl.number.Equals(num))
+                    {
+                        chk = true;
+                        return chk;
+                    }
+                }
+            }
+            return chk;
         }
         
         public String GetConfigbyKey(String key)

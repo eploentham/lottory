@@ -10,7 +10,7 @@ namespace lottory.objdb
     public class RewardDB
     {
         ConnectDB conn;
-        Reward rw;
+        public Reward rw;
         public RewardDB(ConnectDB c)
         {
             conn = c;
@@ -33,7 +33,7 @@ namespace lottory.objdb
             rw.rewardDown34 = "reward_down34";
             rw.periodId = "period1";
             rw.Remark = "remark";
-            rw.rewardId = "reward_id";
+            rw.Id = "reward_id";
             
             rw.staffCancel = "staff_cancel";
             rw.staffCreate = "staff_create";
@@ -62,7 +62,7 @@ namespace lottory.objdb
             item.rewardDown34 = dt.Rows[0][rw.rewardDown34].ToString();
             item.periodId = dt.Rows[0][rw.periodId].ToString();
             item.Remark = dt.Rows[0][rw.Remark].ToString();
-            item.rewardId = dt.Rows[0][rw.rewardId].ToString();
+            item.Id = dt.Rows[0][rw.Id].ToString();
 
             item.staffCancel = dt.Rows[0][rw.staffCancel].ToString();
             item.staffCreate = dt.Rows[0][rw.staffCreate].ToString();
@@ -121,9 +121,9 @@ namespace lottory.objdb
         private String insert(Reward p)
         {
             String sql = "", chk = "";
-            if (p.rewardId.Equals(""))
+            if (p.Id.Equals(""))
             {
-                p.rewardId = p.getGenID();
+                p.Id = p.getGenID();
             }
             //p.Name = p.Name.Replace("''", "'");
             p.dateCreate = p.dateTimetoDB();
@@ -135,7 +135,7 @@ namespace lottory.objdb
                 rw.dateCreate + "," + rw.dateModi + "," +
                 rw.dateCancel + "," + rw.staffCreate + "," + rw.staffModi + "," +
                 rw.staffCancel + "," + rw.yearId + "," + rw.rewardDown32 + "," + rw.rewardDown33 + "," + rw.rewardDown34 + ") " +
-                "Values('" + p.rewardId + "','" + p.dateReward + "','" + p.staffId + "','" +
+                "Values('" + p.Id + "','" + p.dateReward + "','" + p.staffId + "','" +
                 p.reward1 + "','" + p.monthId + "','" + p.periodId + "','" +
                 p.rewardDown2 + "','" + p.rewardDown31 + "','" + p.Remark + "','" +
                 p.dateCreate + "',''," +
@@ -144,7 +144,7 @@ namespace lottory.objdb
             try
             {
                 chk = conn.ExecuteNonQuery(sql);
-                chk = p.rewardId;
+                chk = p.Id;
             }
             catch (Exception ex)
             {
@@ -176,7 +176,7 @@ namespace lottory.objdb
                 rw.rewardDown32 + "='" + p.rewardDown32 + "', " +
                 rw.rewardDown33 + "='" + p.rewardDown33 + "', " +
                 rw.rewardDown34 + "='" + p.rewardDown34 + "' " +
-                "Where " + rw.pkField + "='" + p.rewardId + "'";
+                "Where " + rw.pkField + "='" + p.Id + "'";
             try
             {
                 chk = conn.ExecuteNonQuery(sql);
@@ -194,8 +194,8 @@ namespace lottory.objdb
         {
             Reward item = new Reward();
             String chk = "";
-            item = selectByPk(p.rewardId);
-            if (item.rewardId == "")
+            item = selectByPk(p.Id);
+            if (item.Id == "")
             {
                 chk = insert(p);
             }

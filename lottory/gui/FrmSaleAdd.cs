@@ -47,7 +47,6 @@ namespace lottory.gui
             {
                 chkActive.Checked = false;
                 ChkUnActive.Checked = true;
-
             }
             if (s.statusDiscount.Equals("1"))
             {

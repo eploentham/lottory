@@ -624,7 +624,7 @@ namespace lottory.gui
                 }
             }
             lc.fldb.unLockLotto();
-            lc.rwdb.updateStatusApprove(rw.rewardId, sf.Id);
+            lc.rwdb.updateStatusApprove(rw.Id, sf.Id);
             Cursor.Current = cursor;
         }
         private void ExitApplication()
