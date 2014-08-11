@@ -80,7 +80,6 @@ namespace lottory.gui
         public void setLC(Test1 l)
         {
             t = l;
-            
         }
         private void setGrdRate()
         {
@@ -691,7 +690,7 @@ namespace lottory.gui
             frmSR.setControl(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvRate[colRId, e.RowIndex].Value.ToString());
             if (!frmSR.Visible)
             {
-                frmSR.Show(this);
+                frmSR.Show();
             }
             else
             {
@@ -709,7 +708,7 @@ namespace lottory.gui
             {
                 frmST = new FrmLottoSummaryThoo(sf.Id, cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvRate[colRId, e.RowIndex].Value.ToString(), lc);
                 frmST.setControl(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvSale[colSId, e.RowIndex].Value.ToString(), "sale");
-                frmST.Show(this);
+                frmST.Show();
             }
             else
             {
@@ -728,7 +727,7 @@ namespace lottory.gui
             {
                 frmST = new FrmLottoSummaryThoo(sf.Id, cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvRate[colRId, e.RowIndex].Value.ToString(), lc);
                 frmST.setControl(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dgvThooTranfer[colTId, e.RowIndex].Value.ToString(),"tho");
-                frmST.Show(this);
+                frmST.Show();
             }
             else
             {

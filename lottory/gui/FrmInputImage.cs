@@ -25,7 +25,7 @@ namespace lottory.gui
         List<String> name = new List<String>();
         ImageList iL = new ImageList();
         Boolean pageLoad = false, clearGrd1=false;
-        Boolean lotNew = false;
+        Boolean lotNew = false, txtDownBackFirst=false, txtTodBackFirst=false;
         String lotId1 = "";
         Color btnEditColor;
         public FrmInputImage(String sfCode, LottoryControl l)
@@ -113,8 +113,12 @@ namespace lottory.gui
                     }
                 }
                 lotId1 = lotoId;
+                dgv1.ReadOnly = true;
             }
-            dgv1.Enabled = false;
+            else
+            {
+                dgv1.ReadOnly = false;
+            }
         }
 
         private void FrmInputImage_Load(object sender, EventArgs e)
@@ -356,7 +360,8 @@ namespace lottory.gui
             lot.tod = lc.cf.LottoNull(dgv1[colTod, row].Value);
             lot.up = lc.cf.LottoNull(dgv1[colUp, row].Value);
             lot.statusInput= "2";
-            lot.imgId = txtImgId.Text;
+            //lot.imgId = txtImgId.Text;
+            lot.imgId = txtImgId.Text.Replace(txtImgId.Text.Substring(txtImgId.Text.IndexOf("_0")), "");            
 
             return lot;
         }
@@ -369,6 +374,9 @@ namespace lottory.gui
             lotId = lot.getGenID();
             Cbdl = lc.lotdb.selectCDbl();
             //}
+            pB1.Visible = true;
+            pB1.Minimum = 0;
+            pB1.Maximum = dgv1.Rows.Count;
             for (int i = 0; i < dgv1.RowCount; i++)
             {
                 if (dgv1[colNumber, i].Value == null)
@@ -390,25 +398,33 @@ namespace lottory.gui
                 }
                 lc.saveLotto(lot);
                 dgv1.Rows[i].DefaultCellStyle.BackColor = Color.DarkKhaki;
+                pB1.Value = i;
                 //lV1.Items[txtIndex.Text].Checked = true;               
             }
-            pic1.CancelAsync();
-            pic1.Image.Dispose();
-            lc.renameFileImage(lc.initC.pathImage + "\\" + cboYear.Text + "\\" + cboMonth.SelectedValue.ToString() + "\\" + cboPeriod.SelectedValue.ToString() + "\\" + txtImgId.Text);
-            lc.renameFileImage(lc.initC.pathImage + "\\" + cboYear.Text + "\\" + cboMonth.SelectedValue.ToString() + "\\" + cboPeriod.SelectedValue.ToString() + "\\" + txtImgId.Text.Replace(".lotto", ".thumb"));
-            lc.imgdb.UpdateStatusInput(txtImgId.Text.Replace(txtImgId.Text.Substring(txtImgId.Text.IndexOf("_0")),""), sf.Id, sf.Name);
-            lc.imgdb.UpdateUnLock(txtImgId.Text);
-            if (lV1.Items.Count < int.Parse(txtIndex.Text))
+            if (pic1.Image != null)
             {
-                txtIndex.Text = String.Concat(int.Parse(txtIndex.Text) + 1);
-                lV1.Items[int.Parse(txtIndex.Text)].Checked = true;
+                pic1.CancelAsync();
+                pic1.Image.Dispose();
+                lc.renameFileImage(lc.initC.pathImage + "\\" + cboYear.Text + "\\" + cboMonth.SelectedValue.ToString() + "\\" + cboPeriod.SelectedValue.ToString() + "\\" + txtImgId.Text);
+                lc.renameFileImage(lc.initC.pathImage + "\\" + cboYear.Text + "\\" + cboMonth.SelectedValue.ToString() + "\\" + cboPeriod.SelectedValue.ToString() + "\\" + txtImgId.Text.Replace(".lotto", ".thumb"));
+                lc.imgdb.UpdateStatusInput(txtImgId.Text.Replace(txtImgId.Text.Substring(txtImgId.Text.IndexOf("_0")), ""), sf.Id, sf.Name);
             }
+            
+            lc.imgdb.UpdateUnLock(txtImgId.Text);
+            if (txtIndex.Text.Equals("."))
+            {
+                if (lV1.Items.Count < int.Parse(txtIndex.Text))
+                {
+                    txtIndex.Text = String.Concat(int.Parse(txtIndex.Text) + 1);
+                    lV1.Items[int.Parse(txtIndex.Text)].Checked = true;
+                }
+            }
+            pB1.Visible = false;
             refresh();
         }
         private void setDataGrid1(String number, String numUp, String numTod, String numDown, String rowId, String lottoId)
         {
             dgv1.Rows.Insert(dgv1.RowCount - 1, 1);
-
             dgv1[colNumber, row].Value = number;
             if (numUp.Equals(""))
             {
@@ -437,25 +453,32 @@ namespace lottory.gui
             dgv1[colDown, row].Value = numDown;
             dgv1[colRowId, row].Value = rowId;
             dgv1[colLottoId1, row].Value = lottoId;
+            dgv1.FirstDisplayedScrollingRowIndex = row;
             
             row++;
         }
         private void setGrdColor()
         {
             String numUp = "", numTod = "", numDown="";
-            Double amt = 0;
+            Double amt = 0, up=0, tod=0, down=0;
             for (int i = 0; i < dgv1.RowCount-1; i++)
             {
-                numUp = lc.cf.NumberNull(dgv1[colUp, i].Value);
-                numTod = lc.cf.NumberNull(dgv1[colTod, i].Value);
-                numDown = lc.cf.NumberNull(dgv1[colDown, i].Value);
+                numUp = (dgv1[colUp, i].Value.ToString());
+                numTod = (dgv1[colTod, i].Value.ToString());
+                numDown = (dgv1[colDown, i].Value.ToString());
                 amt += (Double.Parse(numUp) + Double.Parse(numTod) + Double.Parse(numDown));
+                up+=(Double.Parse(numUp));
+                tod += (Double.Parse(numTod));
+                down += (Double.Parse(numDown));
                 if ((i % 2) != 0)
                 {
                     dgv1.Rows[i].DefaultCellStyle.BackColor = Color.DarkKhaki;
                 }
             }
-            lbAmt.Text = "รวม : " + amt.ToString();
+            lbAmt.Text = "รวม : " + amt.ToString("#,###.00");
+            lbUp.Text = "รวมบน : " + up.ToString("#,###.00");
+            lbTod.Text = "รวมโต๊ด : " + tod.ToString("#,###.00");
+            lbDown.Text = "รวมล่าง : " + down.ToString("#,###.00");
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -464,6 +487,7 @@ namespace lottory.gui
             Cursor.Current = Cursors.WaitCursor;
             btnSave.Enabled = false;
             saveLotto();
+            row = 0;
             btnSave.Enabled = true;
             Cursor.Current = cursor;
         }
@@ -503,16 +527,26 @@ namespace lottory.gui
         {
             if (e.KeyCode == Keys.Enter)
             {
+                if (txtInput.Text.Length>3)
+                {
+                    return;
+                }
+                label4.Text = "";
                 if (lc.chkNumberLimit(txtInput.Text))
                 {
-                    label18.Text = "เลขอั้น";
+                    label4.Text = "เลขอั้น";
+                    //label14.Font
                     return;
                 }
                 else
                 {
-                    label18.Text = "";
+                    if (txtInput.Text.Equals(""))
+                    {
+                        return;
+                    }
+                    label4.Text = "OK";
                     txtUpFocus();
-                }               
+                }
             }
         }
 
@@ -535,6 +569,7 @@ namespace lottory.gui
         {
             if (e.KeyCode == Keys.Enter)
             {
+                txtTodBackFirst = true;
                 txtTodFocus();
             }
         }
@@ -553,7 +588,16 @@ namespace lottory.gui
         {
             if (e.KeyCode == Keys.Enter)
             {
+                txtDownBackFirst = true;
                 txtDownFocus();
+            }
+            else if ((e.KeyCode == Keys.Back) && (txtTod.Text.Equals("")))
+            {
+                if (!txtTodBackFirst)
+                {
+                    txtTodFocus();
+                }
+                txtTodBackFirst = false;
             }
         }
 
@@ -591,7 +635,7 @@ namespace lottory.gui
                 }
                 else
                 {
-                    label18.Text = "";
+                    label18.Text = "OK";
                 }
                 if (txtInput.Text.Length <= 0)
                 {
@@ -613,6 +657,14 @@ namespace lottory.gui
                 setGrdColor();
                 txtInputFocus();
                 clearInput();
+            }
+            else if ((e.KeyCode == Keys.Back) && (txtDown.Text.Equals("")) )
+            {
+                if (!txtDownBackFirst)
+                {
+                    txtTodFocus();
+                }
+                txtDownBackFirst = false;
             }
         }
 
@@ -636,11 +688,17 @@ namespace lottory.gui
                 {
                     ListViewItem i = lV1.SelectedItems[0];
                     txtImgId.Text = name[i.ImageIndex];
+                    dgv1.Rows.Clear();
                     viewImage(i.ImageIndex);
                     if (txtImgId.Text.Length >= 10)
                     {
+                        if (txtImgId.Text.IndexOf("_1") <= 0)
+                        {
+                            return;
+                        }
                         setGrid1(txtImgId.Text.Replace(txtImgId.Text.Substring(txtImgId.Text.IndexOf("_1")), ""));
-                    }                    
+                        setGrdColor();
+                    }
                     txtInputFocus();
                 }
                 catch (Exception ex)
@@ -657,7 +715,13 @@ namespace lottory.gui
             {
                 case Keys.End:
                     // ... Process Shift+Ctrl+Alt+B ...
+                    Cursor cursor = Cursor.Current;
+                    Cursor.Current = Cursors.WaitCursor;
+                    btnSave.Enabled = false;
                     saveLotto();
+                    row = 0;
+                    btnSave.Enabled = true;
+                    Cursor.Current = cursor;
                     return true; // signal that we've processed this key
                 case Keys.Insert:
                     txtInputFocus();

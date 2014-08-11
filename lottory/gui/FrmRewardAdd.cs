@@ -17,18 +17,19 @@ namespace lottory
         Staff sf;
         Reward rw;
         Boolean pageLoad = false;
-        public FrmRewardAdd(String sfCode, String rId)
+        public FrmRewardAdd(String sfCode, LottoryControl l, String rId)
         {
             InitializeComponent();
-            initConfig(sfCode,rId);
+            initConfig(sfCode,l,rId);
         }
-        private void initConfig(String sfCode, String rId)
+        private void initConfig(String sfCode, LottoryControl l, String rId)
         {
             pageLoad = true;
             rw = new Reward();
             String monthId = "", periodId = "";
             //cf = new Config1();
-            lc = new LottoryControl();
+            //lc = new LottoryControl();
+            lc = l;
             sf = lc.sfdb.selectByCode(sfCode);
             //lc.sfdb.sf = sf;
             monthId = System.DateTime.Now.Month.ToString("00");
@@ -64,7 +65,6 @@ namespace lottory
             {
                 rw = lc.rwdb.selectByPk(rId);
             }
-            
             txtRewardDown2.Text = rw.rewardDown2;
             txtRDown31.Text = rw.rewardDown31;
             txtRDown32.Text = rw.rewardDown32;
@@ -101,7 +101,6 @@ namespace lottory
                 this.Dispose();
             }
         }
-
         private void txtReward1_Enter(object sender, EventArgs e)
         {
             txtReward1.BackColor = Color.LightYellow;

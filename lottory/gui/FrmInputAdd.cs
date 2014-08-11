@@ -24,7 +24,7 @@ namespace lottory
         
         int col3Number = 0, col3Up = 1, col3Down = 2, col3Remark=3;
         int col3Cnt = 4;
-        Boolean lotNew = false, clearGrd1=false, pageLoad=false;
+        Boolean lotNew = false, clearGrd1 = false, pageLoad = false, txtDownBackFirst = false, txtTodBackFirst = false;
         Staff sf;
         Thoo tho;
         //Config1 cf;
@@ -197,7 +197,8 @@ namespace lottory
             dgv1[colDown, row].Value = numDown;
             dgv1[colRowId, row].Value = rowId;
             dgv1[colLottoId1, row].Value = lottoId;
-            
+            dgv1.FirstDisplayedScrollingRowIndex = row;
+
             row++;
             
             //dgv1.RowCount = dgv1.RowCount + 1;
@@ -377,14 +378,22 @@ namespace lottory
         {
             if (e.KeyCode == Keys.Enter)
             {
+                if (txtInput.Text.Length > 3)
+                {
+                    return;
+                }
                 if (lc.chkNumberLimit(txtInput.Text))
                 {
                     label18.Text = "เลขอั้น";
                     return;
                 }
                 else
+                    if (txtInput.Text.Equals(""))
+                    {
+                        return;
+                    }
                 {
-                    label18.Text = "";
+                    label18.Text = "OK";
                     txtUpFocus();
                 }
             }
@@ -394,6 +403,7 @@ namespace lottory
         {
             if (e.KeyCode == Keys.Enter)
             {
+                txtTodBackFirst = true;
                 txtTodFocus();
             }
         }
@@ -440,6 +450,14 @@ namespace lottory
                 txtInputFocus();
                 clearInput();
             }
+            else if ((e.KeyCode == Keys.Back) && (txtDown.Text.Equals("")))
+            {
+                if (!txtDownBackFirst)
+                {
+                    txtTodFocus();
+                }
+                txtDownBackFirst = false;
+            }
         }
 
         private void btnMain_Click(object sender, EventArgs e)
@@ -453,15 +471,28 @@ namespace lottory
         {
             if (e.KeyCode == Keys.Enter)
             {
+                txtDownBackFirst = true;
                 txtDownFocus();
+            }
+            else if ((e.KeyCode == Keys.Back) && (txtTod.Text.Equals("")))
+            {
+                if (!txtTodBackFirst)
+                {
+                    txtTodFocus();
+                }
+                txtTodBackFirst = false;
             }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            Cursor cursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
             btnSave.Enabled = false;
             saveLotto();
+            row = 0;
             btnSave.Enabled = true;
+            Cursor.Current = cursor;
         }
 
         private void txtInput_KeyPress(object sender, KeyPressEventArgs e)
@@ -587,7 +618,13 @@ namespace lottory
             {
                 case Keys.End:
                     // ... Process Shift+Ctrl+Alt+B ...
+                    Cursor cursor = Cursor.Current;
+                    Cursor.Current = Cursors.WaitCursor;
+                    btnSave.Enabled = false;
                     saveLotto();
+                    row = 0;
+                    btnSave.Enabled = true;
+                    Cursor.Current = cursor;
                     return true; // signal that we've processed this key
                 case Keys.Insert:
                     txtInputFocus();

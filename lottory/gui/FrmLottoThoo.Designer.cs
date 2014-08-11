@@ -94,6 +94,7 @@
             this.txtLotId.Name = "txtLotId";
             this.txtLotId.Size = new System.Drawing.Size(142, 28);
             this.txtLotId.TabIndex = 77;
+            this.txtLotId.Visible = false;
             // 
             // txtRowId
             // 
@@ -102,6 +103,7 @@
             this.txtRowId.Name = "txtRowId";
             this.txtRowId.Size = new System.Drawing.Size(142, 28);
             this.txtRowId.TabIndex = 76;
+            this.txtRowId.Visible = false;
             // 
             // cboThoo
             // 

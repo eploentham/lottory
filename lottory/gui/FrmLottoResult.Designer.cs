@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pB1 = new System.Windows.Forms.ProgressBar();
             this.ChkNumGroup = new System.Windows.Forms.RadioButton();
             this.chkNum = new System.Windows.Forms.RadioButton();
             this.txtRDown34 = new System.Windows.Forms.TextBox();
@@ -48,10 +49,20 @@
             this.cboMonth = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtR3Down = new System.Windows.Forms.TextBox();
+            this.txtR3Tod = new System.Windows.Forms.TextBox();
+            this.txtR3Up = new System.Windows.Forms.TextBox();
+            this.txtR2Down = new System.Windows.Forms.TextBox();
+            this.txtR2Up = new System.Windows.Forms.TextBox();
+            this.txtRDown = new System.Windows.Forms.TextBox();
+            this.txtRUp = new System.Windows.Forms.TextBox();
+            this.txtAmt = new System.Windows.Forms.TextBox();
+            this.txtDown = new System.Windows.Forms.TextBox();
+            this.txtTod = new System.Windows.Forms.TextBox();
+            this.txtUp = new System.Windows.Forms.TextBox();
             this.dgv3 = new System.Windows.Forms.DataGridView();
             this.dgv2 = new System.Windows.Forms.DataGridView();
             this.dgv1 = new System.Windows.Forms.DataGridView();
-            this.pB1 = new System.Windows.Forms.ProgressBar();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv3)).BeginInit();
@@ -82,9 +93,16 @@
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1368, 126);
+            this.groupBox1.Size = new System.Drawing.Size(1408, 126);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // pB1
+            // 
+            this.pB1.Location = new System.Drawing.Point(756, 93);
+            this.pB1.Name = "pB1";
+            this.pB1.Size = new System.Drawing.Size(606, 23);
+            this.pB1.TabIndex = 68;
             // 
             // ChkNumGroup
             // 
@@ -258,14 +276,135 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtR3Down);
+            this.groupBox2.Controls.Add(this.txtR3Tod);
+            this.groupBox2.Controls.Add(this.txtR3Up);
+            this.groupBox2.Controls.Add(this.txtR2Down);
+            this.groupBox2.Controls.Add(this.txtR2Up);
+            this.groupBox2.Controls.Add(this.txtRDown);
+            this.groupBox2.Controls.Add(this.txtRUp);
+            this.groupBox2.Controls.Add(this.txtAmt);
+            this.groupBox2.Controls.Add(this.txtDown);
+            this.groupBox2.Controls.Add(this.txtTod);
+            this.groupBox2.Controls.Add(this.txtUp);
             this.groupBox2.Controls.Add(this.dgv3);
             this.groupBox2.Controls.Add(this.dgv2);
             this.groupBox2.Controls.Add(this.dgv1);
             this.groupBox2.Location = new System.Drawing.Point(3, 144);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1377, 700);
+            this.groupBox2.Size = new System.Drawing.Size(1417, 747);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
+            // 
+            // txtR3Down
+            // 
+            this.txtR3Down.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtR3Down.Location = new System.Drawing.Point(1280, 700);
+            this.txtR3Down.Name = "txtR3Down";
+            this.txtR3Down.ReadOnly = true;
+            this.txtR3Down.Size = new System.Drawing.Size(127, 30);
+            this.txtR3Down.TabIndex = 17;
+            this.txtR3Down.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtR3Tod
+            // 
+            this.txtR3Tod.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtR3Tod.Location = new System.Drawing.Point(1149, 700);
+            this.txtR3Tod.Name = "txtR3Tod";
+            this.txtR3Tod.ReadOnly = true;
+            this.txtR3Tod.Size = new System.Drawing.Size(127, 30);
+            this.txtR3Tod.TabIndex = 16;
+            this.txtR3Tod.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtR3Up
+            // 
+            this.txtR3Up.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtR3Up.Location = new System.Drawing.Point(1018, 700);
+            this.txtR3Up.Name = "txtR3Up";
+            this.txtR3Up.ReadOnly = true;
+            this.txtR3Up.Size = new System.Drawing.Size(127, 30);
+            this.txtR3Up.TabIndex = 15;
+            this.txtR3Up.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtR2Down
+            // 
+            this.txtR2Down.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtR2Down.Location = new System.Drawing.Point(888, 700);
+            this.txtR2Down.Name = "txtR2Down";
+            this.txtR2Down.ReadOnly = true;
+            this.txtR2Down.Size = new System.Drawing.Size(127, 30);
+            this.txtR2Down.TabIndex = 14;
+            this.txtR2Down.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtR2Up
+            // 
+            this.txtR2Up.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtR2Up.Location = new System.Drawing.Point(757, 700);
+            this.txtR2Up.Name = "txtR2Up";
+            this.txtR2Up.ReadOnly = true;
+            this.txtR2Up.Size = new System.Drawing.Size(127, 30);
+            this.txtR2Up.TabIndex = 13;
+            this.txtR2Up.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtRDown
+            // 
+            this.txtRDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtRDown.Location = new System.Drawing.Point(626, 700);
+            this.txtRDown.Name = "txtRDown";
+            this.txtRDown.ReadOnly = true;
+            this.txtRDown.Size = new System.Drawing.Size(127, 30);
+            this.txtRDown.TabIndex = 12;
+            this.txtRDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtRUp
+            // 
+            this.txtRUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtRUp.Location = new System.Drawing.Point(496, 700);
+            this.txtRUp.Name = "txtRUp";
+            this.txtRUp.ReadOnly = true;
+            this.txtRUp.Size = new System.Drawing.Size(127, 30);
+            this.txtRUp.TabIndex = 11;
+            this.txtRUp.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtAmt
+            // 
+            this.txtAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtAmt.Location = new System.Drawing.Point(29, 700);
+            this.txtAmt.Name = "txtAmt";
+            this.txtAmt.ReadOnly = true;
+            this.txtAmt.Size = new System.Drawing.Size(122, 30);
+            this.txtAmt.TabIndex = 10;
+            this.txtAmt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDown
+            // 
+            this.txtDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtDown.Location = new System.Drawing.Point(383, 700);
+            this.txtDown.Name = "txtDown";
+            this.txtDown.ReadOnly = true;
+            this.txtDown.Size = new System.Drawing.Size(105, 30);
+            this.txtDown.TabIndex = 9;
+            this.txtDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtTod
+            // 
+            this.txtTod.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtTod.Location = new System.Drawing.Point(270, 700);
+            this.txtTod.Name = "txtTod";
+            this.txtTod.ReadOnly = true;
+            this.txtTod.Size = new System.Drawing.Size(105, 30);
+            this.txtTod.TabIndex = 8;
+            this.txtTod.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtUp
+            // 
+            this.txtUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtUp.Location = new System.Drawing.Point(157, 700);
+            this.txtUp.Name = "txtUp";
+            this.txtUp.ReadOnly = true;
+            this.txtUp.Size = new System.Drawing.Size(105, 30);
+            this.txtUp.TabIndex = 7;
+            this.txtUp.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // dgv3
             // 
@@ -294,21 +433,14 @@
             this.dgv1.Location = new System.Drawing.Point(6, 21);
             this.dgv1.Name = "dgv1";
             this.dgv1.RowTemplate.Height = 24;
-            this.dgv1.Size = new System.Drawing.Size(1365, 673);
+            this.dgv1.Size = new System.Drawing.Size(1401, 673);
             this.dgv1.TabIndex = 0;
-            // 
-            // pB1
-            // 
-            this.pB1.Location = new System.Drawing.Point(756, 93);
-            this.pB1.Name = "pB1";
-            this.pB1.Size = new System.Drawing.Size(606, 23);
-            this.pB1.TabIndex = 68;
             // 
             // FrmLottoResult
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1393, 864);
+            this.ClientSize = new System.Drawing.Size(1432, 903);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmLottoResult";
@@ -318,6 +450,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv1)).EndInit();
@@ -351,5 +484,16 @@
         private System.Windows.Forms.RadioButton ChkNumGroup;
         private System.Windows.Forms.RadioButton chkNum;
         private System.Windows.Forms.ProgressBar pB1;
+        private System.Windows.Forms.TextBox txtAmt;
+        private System.Windows.Forms.TextBox txtDown;
+        private System.Windows.Forms.TextBox txtTod;
+        private System.Windows.Forms.TextBox txtUp;
+        private System.Windows.Forms.TextBox txtR2Up;
+        private System.Windows.Forms.TextBox txtRDown;
+        private System.Windows.Forms.TextBox txtRUp;
+        private System.Windows.Forms.TextBox txtR3Tod;
+        private System.Windows.Forms.TextBox txtR3Up;
+        private System.Windows.Forms.TextBox txtR2Down;
+        private System.Windows.Forms.TextBox txtR3Down;
     }
 }

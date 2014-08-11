@@ -258,7 +258,6 @@ namespace lottory.gui
 
                     if (!System.IO.File.Exists(fileName))
                     {
-
                         image.Save(fileName);
                     }
                     else
@@ -340,7 +339,7 @@ namespace lottory.gui
 
         private void lVNew_MouseClick(object sender, MouseEventArgs e)
         {
-            viewImage(name[lVNew.SelectedItems[0].Index]);
+            //viewImage(name[lVNew.SelectedItems[0].Index]);
         }
 
         private void btnBrowe_Click(object sender, EventArgs e)

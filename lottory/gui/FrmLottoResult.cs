@@ -58,7 +58,7 @@ namespace lottory.gui
             {
                 dgv2.Visible = false;
                 dgv3.Visible = false;
-                dgv1.Width = 1000;       
+                dgv1.Width = 1050;       
             }
             setDGrd();
             pageLoad = false;
@@ -148,13 +148,13 @@ namespace lottory.gui
             dgv[colDown, row].Value = String.Format("{0:#,###,###.00}",numDown);
             dgv[colRowId, row].Value = rowId;
             dgv[colLottoId1, row].Value = lottoId;
-            dgv[colRUp, row].Value = "";
-            dgv[colRDown, row].Value = "";
-            dgv[colR2Up, row].Value = "";
-            dgv[colR2Down, row].Value = "";
-            dgv[colR3Up, row].Value = "";
-            dgv[colR3Down, row].Value = "";
-            dgv[colR3Tod, row].Value = "";
+            dgv[colRUp, row].Value = "0";
+            dgv[colRDown, row].Value = "0";
+            dgv[colR2Up, row].Value = "0";
+            dgv[colR2Down, row].Value = "0";
+            dgv[colR3Up, row].Value = "0";
+            dgv[colR3Down, row].Value = "0";
+            dgv[colR3Tod, row].Value = "0";
 
             //row++;
 
@@ -211,11 +211,49 @@ namespace lottory.gui
         {
 
         }
+        //private void setGrdColor()
+        //{
+        //    //String numUp = "", numTod = "", numDown = "";
+        //    //Double amt = 0, up = 0, tod = 0, down = 0, rUp=0,rDown=0, r2Up=0,r2Down=0,r3Up=0,r3Down=0,r3Tod=0;
+        //    //for (int i = 0; i < dgv1.RowCount - 1; i++)
+        //    //{
+        //    //    numUp = (dgv1[colUp, i].Value.ToString());
+        //    //    numTod = lc.cf.NumberNull(dgv1[colTod, i].Value);
+        //    //    numDown = lc.cf.NumberNull(dgv1[colDown, i].Value);
+        //    //    //amt += (Double.Parse(numUp) + Double.Parse(numTod) + Double.Parse(numDown));
+        //    //    up += (Double.Parse(numUp));
+        //    //    tod += (Double.Parse(numTod));
+        //    //    down += (Double.Parse(numDown));
+        //    //    rUp += (Double.Parse(dgv1[colRUp, i].Value.ToString()));
+        //    //    rDown += (Double.Parse(lc.cf.NumberNull(dgv1[colRDown, i].Value)));
+        //    //    r2Up += (Double.Parse(lc.cf.NumberNull(dgv1[colR2Up, i].Value)));
+        //    //    r2Down += (Double.Parse(lc.cf.NumberNull(dgv1[colR2Up, i].Value)));
+        //    //    r3Up += (Double.Parse(lc.cf.NumberNull(dgv1[colR3Up, i].Value)));
+        //    //    r3Down += (Double.Parse(lc.cf.NumberNull(dgv1[colR3Down, i].Value)));
+        //    //    //if ((i % 2) != 0)
+        //    //    //{
+        //    //    //    dgv1.Rows[i].DefaultCellStyle.BackColor = Color.DarkKhaki;
+        //    //    //}
+        //    //}
+        //    //txtAmt.Text = amt.ToString("#,###.00");
+        //    //txtUp.Text = up.ToString("#,###.00");
+        //    //txtTod.Text = tod.ToString("#,###.00");
+        //    //txtDown.Text = down.ToString("#,###.00");
+        //    //txtRUp.Text = rUp.ToString("#,###.00");
+        //    //txtRDown.Text = rDown.ToString("#,###.00");
+        //    //txtR2Up.Text = r2Up.ToString("#,###.00");
+        //    //txtR2Down.Text = r2Down.ToString("#,###.00");
+        //    //txtR3Up.Text = r3Up.ToString("#,###.00");
+        //    //txtR3Down.Text = r3Down.ToString("#,###.00");
+        //    //txtR3Tod.Text = up.ToString("#,###.00");
+        //}
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
             Cursor cursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
+            String numUp = "", numTod = "", numDown = "";
+            Double amt = 0, up = 0, tod = 0, down = 0, rUp = 0, rDown = 0, r2Up = 0, r2Down = 0, r3Up = 0, r3Down = 0, r3Tod = 0;
             Font font = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
             pB1.Minimum = 0;
             pB1.Maximum = dgv1.Rows.Count;
@@ -226,6 +264,15 @@ namespace lottory.gui
             {
                 num = dgv1[colNumber, i].Value.ToString();
                 rowId = dgv1[colRowId, i].Value.ToString();
+                numUp = dgv1[colUp, i].Value.ToString();
+                numTod = dgv1[colTod, i].Value.ToString();
+                numDown = dgv1[colDown, i].Value.ToString();
+                rDown += (Double.Parse(dgv1[colRDown, i].Value.ToString()));
+                r2Up += (Double.Parse(dgv1[colR2Up, i].Value.ToString()));
+                r2Down += (Double.Parse(dgv1[colR2Down, i].Value.ToString()));
+                r3Up += (Double.Parse(dgv1[colR3Up, i].Value.ToString()));
+                r3Down += (Double.Parse(dgv1[colR3Down, i].Value.ToString()));
+                r3Tod += (Double.Parse(dgv1[colR3Tod, i].Value.ToString()));
                 if (num.Length == 1)
                 {
                     //if (!dgv1[colRUp, i].Value.ToString().Equals(""))
@@ -339,9 +386,25 @@ namespace lottory.gui
                 //if (chk.Equals("1"))
                 //{
                 //    dgv1.Rows[i].DefaultCellStyle.BackColor = Color.DarkKhaki;
-                //}
+                //}                
+                up += (Double.Parse(numUp));
+                tod += (Double.Parse(numTod));
+                down += (Double.Parse(numDown));
+                amt += (Double.Parse(numUp) + Double.Parse(numTod) + Double.Parse(numDown));
                 pB1.Value = i;
             }
+            //setGrdColor();
+            txtAmt.Text = amt.ToString("#,###.00");
+            txtUp.Text = up.ToString("#,###.00");
+            txtTod.Text = tod.ToString("#,###.00");
+            txtDown.Text = down.ToString("#,###.00");
+            txtRUp.Text = rUp.ToString("#,###.00");
+            txtRDown.Text = rDown.ToString("#,###.00");
+            txtR2Up.Text = r2Up.ToString("#,###.00");
+            txtR2Down.Text = r2Down.ToString("#,###.00");
+            txtR3Up.Text = r3Up.ToString("#,###.00");
+            txtR3Down.Text = r3Down.ToString("#,###.00");
+            txtR3Tod.Text = r3Tod.ToString("#,###.00");
             lc.rwdb.updateStatusApprove(rw.Id, sf.Id);
             pB1.Visible = false;
             Cursor.Current = cursor;

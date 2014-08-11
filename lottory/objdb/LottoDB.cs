@@ -634,7 +634,7 @@ namespace lottory.objdb
                 lot.staffApproveId + "," + lot.CDbl + "," + lot.statusInput + "," + lot.imgId + ") " +
                 "Values('" + p.rowId + "','" + p.lottoId + "','" + p.staffId + "','" +
                 p.number + "'," + p.up + "," + p.tod + "," +
-                p.down + "," + p.monthId + "','" + p.periodId + "','" +
+                p.down + ",'" + p.monthId + "','" + p.periodId + "','" +
                 p.saleId + "','" + p.thooId + "','" + p.Remark + "','" +
                 p.Active + "'," + p.dateCreate + ",''," +
                  "'','" + p.staffCreate + "',''," +

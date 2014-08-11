@@ -46,7 +46,7 @@ namespace lottory.gui
             dgvView.RowCount = dt.Rows.Count + 1;
             dgvView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvView.Columns[colRow].Width = 50;
-            dgvView.Columns[colPeriod].Width = 200;
+            dgvView.Columns[colPeriod].Width = 220;
             dgvView.Columns[colYear].Width = 80;
             dgvView.Columns[colR1].Width = 120;
             dgvView.Columns[colR3].Width = 180;
@@ -92,7 +92,7 @@ namespace lottory.gui
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            FrmRewardAdd frm = new FrmRewardAdd(sf.Id,"");
+            FrmRewardAdd frm = new FrmRewardAdd(sf.Id,lc,"");
             //frm.setControl("");
             frm.ShowDialog(this);
             setGrd();
@@ -109,7 +109,7 @@ namespace lottory.gui
                 return;
             }
 
-            FrmRewardAdd frm = new FrmRewardAdd(sf.Code, dgvView[colId, e.RowIndex].Value.ToString());
+            FrmRewardAdd frm = new FrmRewardAdd(sf.Code,lc, dgvView[colId, e.RowIndex].Value.ToString());
             //frm.setControl(dgvView[colId, e.RowIndex].Value.ToString());
             frm.ShowDialog(this);
             setGrd();

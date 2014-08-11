@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.lbAmt = new System.Windows.Forms.Label();
             this.txtIndex = new System.Windows.Forms.Label();
             this.txtImgId = new System.Windows.Forms.Label();
@@ -67,7 +68,9 @@
             this.pic1 = new System.Windows.Forms.PictureBox();
             this.picHand = new System.Windows.Forms.PictureBox();
             this.dgv1 = new System.Windows.Forms.DataGridView();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lbUp = new System.Windows.Forms.Label();
+            this.lbTod = new System.Windows.Forms.Label();
+            this.lbDown = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picZoomM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picZoomP)).BeginInit();
@@ -79,6 +82,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lbDown);
+            this.groupBox1.Controls.Add(this.lbTod);
+            this.groupBox1.Controls.Add(this.lbUp);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.lbAmt);
             this.groupBox1.Controls.Add(this.txtIndex);
@@ -116,6 +122,16 @@
             this.groupBox1.Size = new System.Drawing.Size(1805, 200);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.label4.Location = new System.Drawing.Point(668, 26);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 20);
+            this.label4.TabIndex = 71;
+            this.label4.Text = "label4";
             // 
             // lbAmt
             // 
@@ -339,10 +355,10 @@
             // 
             // txtTod
             // 
-            this.txtTod.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtTod.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.txtTod.Location = new System.Drawing.Point(386, 21);
             this.txtTod.Name = "txtTod";
-            this.txtTod.Size = new System.Drawing.Size(100, 38);
+            this.txtTod.Size = new System.Drawing.Size(100, 41);
             this.txtTod.TabIndex = 45;
             this.txtTod.Enter += new System.EventHandler(this.txtTod_Enter);
             this.txtTod.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTod_KeyPress);
@@ -361,10 +377,10 @@
             // 
             // txtDown
             // 
-            this.txtDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.txtDown.Location = new System.Drawing.Point(550, 21);
             this.txtDown.Name = "txtDown";
-            this.txtDown.Size = new System.Drawing.Size(100, 38);
+            this.txtDown.Size = new System.Drawing.Size(100, 41);
             this.txtDown.TabIndex = 43;
             this.txtDown.Enter += new System.EventHandler(this.txtDown_Enter);
             this.txtDown.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDown_KeyPress);
@@ -383,10 +399,10 @@
             // 
             // txtUp
             // 
-            this.txtUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.txtUp.Location = new System.Drawing.Point(213, 21);
             this.txtUp.Name = "txtUp";
-            this.txtUp.Size = new System.Drawing.Size(100, 38);
+            this.txtUp.Size = new System.Drawing.Size(100, 41);
             this.txtUp.TabIndex = 41;
             this.txtUp.Enter += new System.EventHandler(this.txtUp_Enter);
             this.txtUp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUp_KeyPress);
@@ -405,10 +421,10 @@
             // 
             // txtInput
             // 
-            this.txtInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.txtInput.Location = new System.Drawing.Point(67, 21);
             this.txtInput.Name = "txtInput";
-            this.txtInput.Size = new System.Drawing.Size(100, 38);
+            this.txtInput.Size = new System.Drawing.Size(100, 41);
             this.txtInput.TabIndex = 39;
             this.txtInput.Enter += new System.EventHandler(this.txtInput_Enter);
             this.txtInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtInput_KeyPress);
@@ -486,15 +502,32 @@
             this.dgv1.Size = new System.Drawing.Size(605, 702);
             this.dgv1.TabIndex = 40;
             // 
-            // label4
+            // lbUp
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label4.Location = new System.Drawing.Point(668, 26);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 20);
-            this.label4.TabIndex = 71;
-            this.label4.Text = "label4";
+            this.lbUp.AutoSize = true;
+            this.lbUp.Location = new System.Drawing.Point(1247, 21);
+            this.lbUp.Name = "lbUp";
+            this.lbUp.Size = new System.Drawing.Size(42, 17);
+            this.lbUp.TabIndex = 72;
+            this.lbUp.Text = "รวม : ";
+            // 
+            // lbTod
+            // 
+            this.lbTod.AutoSize = true;
+            this.lbTod.Location = new System.Drawing.Point(1407, 21);
+            this.lbTod.Name = "lbTod";
+            this.lbTod.Size = new System.Drawing.Size(42, 17);
+            this.lbTod.TabIndex = 73;
+            this.lbTod.Text = "รวม : ";
+            // 
+            // lbDown
+            // 
+            this.lbDown.AutoSize = true;
+            this.lbDown.Location = new System.Drawing.Point(1553, 21);
+            this.lbDown.Name = "lbDown";
+            this.lbDown.Size = new System.Drawing.Size(42, 17);
+            this.lbDown.TabIndex = 74;
+            this.lbDown.Text = "รวม : ";
             // 
             // FrmInputImage
             // 
@@ -567,5 +600,8 @@
         private System.Windows.Forms.Label txtIndex;
         private System.Windows.Forms.Label lbAmt;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbUp;
+        private System.Windows.Forms.Label lbDown;
+        private System.Windows.Forms.Label lbTod;
     }
 }

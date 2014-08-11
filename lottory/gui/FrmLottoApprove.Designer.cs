@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnVoid = new System.Windows.Forms.Button();
             this.btnInit = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -37,6 +38,8 @@
             this.cboMonth = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtNetTotal = new System.Windows.Forms.TextBox();
+            this.txtTho = new System.Windows.Forms.TextBox();
             this.txtAmt = new System.Windows.Forms.TextBox();
             this.txtDown = new System.Windows.Forms.TextBox();
             this.txtTod = new System.Windows.Forms.TextBox();
@@ -44,9 +47,6 @@
             this.dgvRate = new System.Windows.Forms.DataGridView();
             this.dgvThooTranfer = new System.Windows.Forms.DataGridView();
             this.dgv1 = new System.Windows.Forms.DataGridView();
-            this.txtTho = new System.Windows.Forms.TextBox();
-            this.txtNetTotal = new System.Windows.Forms.TextBox();
-            this.btnVoid = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRate)).BeginInit();
@@ -70,9 +70,18 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
+            // btnVoid
+            // 
+            this.btnVoid.Location = new System.Drawing.Point(901, 13);
+            this.btnVoid.Name = "btnVoid";
+            this.btnVoid.Size = new System.Drawing.Size(102, 41);
+            this.btnVoid.TabIndex = 63;
+            this.btnVoid.Text = "ยกเลิก";
+            this.btnVoid.UseVisualStyleBackColor = true;
+            // 
             // btnInit
             // 
-            this.btnInit.Location = new System.Drawing.Point(1013, 18);
+            this.btnInit.Location = new System.Drawing.Point(1013, 13);
             this.btnInit.Name = "btnInit";
             this.btnInit.Size = new System.Drawing.Size(102, 41);
             this.btnInit.TabIndex = 62;
@@ -82,7 +91,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(793, 18);
+            this.btnSave.Location = new System.Drawing.Point(793, 13);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(102, 41);
             this.btnSave.TabIndex = 61;
@@ -92,7 +101,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(591, 18);
+            this.btnSearch.Location = new System.Drawing.Point(591, 13);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(102, 41);
             this.btnSearch.TabIndex = 54;
@@ -103,7 +112,7 @@
             // cboYear
             // 
             this.cboYear.FormattingEnabled = true;
-            this.cboYear.Location = new System.Drawing.Point(451, 27);
+            this.cboYear.Location = new System.Drawing.Point(451, 22);
             this.cboYear.Name = "cboYear";
             this.cboYear.Size = new System.Drawing.Size(99, 24);
             this.cboYear.TabIndex = 53;
@@ -112,7 +121,7 @@
             // 
             this.cboPeriod.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.cboPeriod.FormattingEnabled = true;
-            this.cboPeriod.Location = new System.Drawing.Point(292, 24);
+            this.cboPeriod.Location = new System.Drawing.Point(292, 19);
             this.cboPeriod.Name = "cboPeriod";
             this.cboPeriod.Size = new System.Drawing.Size(142, 28);
             this.cboPeriod.TabIndex = 52;
@@ -121,7 +130,7 @@
             // 
             this.cboMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.cboMonth.FormattingEnabled = true;
-            this.cboMonth.Location = new System.Drawing.Point(125, 24);
+            this.cboMonth.Location = new System.Drawing.Point(125, 19);
             this.cboMonth.Name = "cboMonth";
             this.cboMonth.Size = new System.Drawing.Size(142, 28);
             this.cboMonth.TabIndex = 51;
@@ -130,7 +139,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label14.Location = new System.Drawing.Point(18, 27);
+            this.label14.Location = new System.Drawing.Point(18, 22);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(87, 20);
             this.label14.TabIndex = 50;
@@ -152,6 +161,24 @@
             this.groupBox2.Size = new System.Drawing.Size(1377, 742);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
+            // 
+            // txtNetTotal
+            // 
+            this.txtNetTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtNetTotal.Location = new System.Drawing.Point(757, 700);
+            this.txtNetTotal.Name = "txtNetTotal";
+            this.txtNetTotal.Size = new System.Drawing.Size(122, 30);
+            this.txtNetTotal.TabIndex = 8;
+            this.txtNetTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtTho
+            // 
+            this.txtTho.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtTho.Location = new System.Drawing.Point(629, 700);
+            this.txtTho.Name = "txtTho";
+            this.txtTho.Size = new System.Drawing.Size(122, 30);
+            this.txtTho.TabIndex = 7;
+            this.txtTho.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtAmt
             // 
@@ -221,33 +248,6 @@
             this.dgv1.Size = new System.Drawing.Size(921, 673);
             this.dgv1.TabIndex = 0;
             this.dgv1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv1_CellDoubleClick);
-            // 
-            // txtTho
-            // 
-            this.txtTho.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.txtTho.Location = new System.Drawing.Point(629, 700);
-            this.txtTho.Name = "txtTho";
-            this.txtTho.Size = new System.Drawing.Size(122, 30);
-            this.txtTho.TabIndex = 7;
-            this.txtTho.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtNetTotal
-            // 
-            this.txtNetTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.txtNetTotal.Location = new System.Drawing.Point(757, 700);
-            this.txtNetTotal.Name = "txtNetTotal";
-            this.txtNetTotal.Size = new System.Drawing.Size(122, 30);
-            this.txtNetTotal.TabIndex = 8;
-            this.txtNetTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // btnVoid
-            // 
-            this.btnVoid.Location = new System.Drawing.Point(901, 18);
-            this.btnVoid.Name = "btnVoid";
-            this.btnVoid.Size = new System.Drawing.Size(102, 41);
-            this.btnVoid.TabIndex = 63;
-            this.btnVoid.Text = "ยกเลิก";
-            this.btnVoid.UseVisualStyleBackColor = true;
             // 
             // FrmLottoApprove
             // 

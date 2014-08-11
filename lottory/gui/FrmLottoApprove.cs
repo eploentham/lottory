@@ -443,6 +443,7 @@ namespace lottory.gui
             DataTable dt = new DataTable();
             dgv1.Rows.Clear();
             //Color c = new Color();
+            dgv1.Visible = false;
             Thoo t = new Thoo();
             dt = lc.lotdb.selectByPeriod(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString());
             if (dt.Rows.Count > 0)
@@ -474,7 +475,7 @@ namespace lottory.gui
             txtTod.Text = String.Format("{0:#,###,###.00}", tod);
             txtDown.Text = String.Format("{0:#,###,###.00}", down);
             txtAmt.Text = String.Format("{0:#,###,###.00}", (up + tod + down));
-
+            dgv1.Visible = true;
             setApprove();
             setThooAmount();
             setRateAmount();

@@ -181,6 +181,7 @@
             this.chkActive.TabStop = true;
             this.chkActive.Text = "ใช้งาน";
             this.chkActive.UseVisualStyleBackColor = true;
+            
             this.chkActive.Click += new System.EventHandler(this.chkActive_Click);
             // 
             // btnCancel
