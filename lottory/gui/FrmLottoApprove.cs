@@ -444,6 +444,7 @@ namespace lottory.gui
             dgv1.Rows.Clear();
             //Color c = new Color();
             dgv1.Visible = false;
+            
             Thoo t = new Thoo();
             dt = lc.lotdb.selectByPeriod(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString());
             if (dt.Rows.Count > 0)
