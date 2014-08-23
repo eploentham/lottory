@@ -44,14 +44,14 @@ namespace lottory.gui
             {
                 tv1.Nodes.Add("nInputAdd", "ป้อนข้อมูล");
                 tv1.Nodes.Add("nInputImage", "ป้อนข้อมูลจากรูป");
-                tv1.Nodes.Add("nInputView", "ดูข้อมูลเก่า");
+                tv1.Nodes.Add("nInputView", "ยืนยันตัวเลข");
                 tv1.Nodes.Add("nRewardView", "ป้อนรางวัล");
             }
             if (sf.Priority.Equals("2") || sf.Priority.Equals("3"))
             {
                 tv1.Nodes.Add("nLottoImage", "นำรูปเข้าระบบ");
                 tv1.Nodes.Add("nNumberLimit", "ป้อนเลขอั้น");
-                tv1.Nodes.Add("nLottoApprove", "ยืนยันตัวเลข");
+                tv1.Nodes.Add("nLottoApprove", "โอนยอดให้เจ้ามือคนอื่น");
                 tv1.Nodes.Add("nLottoResult", "ตรวจรางวัลประจำงวด");
                 tv1.Nodes.Add("nLottoSummary", "สรุปข้อมูลประจำงวด");
             }
@@ -105,7 +105,7 @@ namespace lottory.gui
             }
             else if (e.Node.Name.ToString() == "nInputView")
             {
-                FrmInputView frm = new FrmInputView(sf.Code);
+                FrmInputApprove frm = new FrmInputApprove(sf.Code,lc);
                 showFrame(frm);
             }
             else if (e.Node.Name.ToString() == "nInputAdd")

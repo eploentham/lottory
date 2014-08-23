@@ -532,7 +532,7 @@ namespace lottory
             {
                 if (MessageBox.Show("ยกเลิก", "ต้องการยกเลิกทั้งใบ",  MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
                 {
-                    lc.lotdb.VoidLotto(dgvLotto[colLottoId, e.RowIndex].Value.ToString());
+                    lc.lotdb.VoidLotto(dgvLotto[colLottoId, e.RowIndex].Value.ToString(), sf.Id);
                     refresh();
                 }
             }
@@ -542,7 +542,7 @@ namespace lottory
                 setGrdColor();
                 clearGrd1 = true;
                 btnEdit.Enabled = true;
-            }            
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -630,7 +630,6 @@ namespace lottory
                     txtInputFocus();
                     return true;
             }
-
             // run base implementation
             return base.ProcessCmdKey(ref message, keys);
         }

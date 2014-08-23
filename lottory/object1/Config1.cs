@@ -317,6 +317,34 @@ namespace lottory.object1
             //    return o.ToString();
             //}
         }
+        public String NumberNull1(String o)
+        {
+            float a = new float();
+            try
+            {
+                return float.Parse(o).ToString();
+            }
+            catch (Exception ex)
+            {
+                return "0";
+            }
+            //return a.ToString();
+
+        }
+        public String NumberNull2(String o)
+        {
+            if (o.Equals(""))
+            {
+                return "0";
+            }
+            else
+            {
+                return o;
+            }
+                
+            //return a.ToString();
+
+        }
         //public String shortPaidName(String name)
         //{
         //    if (name == "ประกันสังคม (บ.1)")

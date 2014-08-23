@@ -8,6 +8,10 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Management;
+using System.Net;
+using System.Net.Sockets;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -49,6 +53,7 @@ namespace lottory.control
         public String thooId = "";
 
         public ComboBox cboStaff, cboSale, cboThoo;
+        public ComboBox cbosf;
         public List<Thoo> lTho = new List<Thoo>();
         public List<Font1> thoColor = new List<Font1>();
         public List<SaleRate> lsr = new List<SaleRate>();
@@ -65,7 +70,7 @@ namespace lottory.control
         }
         private void initConfig()
         {
-            iniFile = new IniFile(Environment.CurrentDirectory+"\\"+Application.ProductName+".ini");
+            iniFile = new IniFile(Environment.CurrentDirectory + "\\" + Application.ProductName + ".ini");
             initC = new InitConfig();
             //regE = new RegEdit();
             GetConfig();
@@ -102,7 +107,7 @@ namespace lottory.control
             r3Tod = new Rate();
             r3Down = new Rate();
             rUp = new Rate();
-            rDown = new Rate();            
+            rDown = new Rate();
 
             rUp = ratedb.selectByPk("up");
             rDown = ratedb.selectByPk("down");
@@ -117,11 +122,25 @@ namespace lottory.control
             ls = saledb.selectSAll();
             lnl = selectByNumberLimit();
             //cboThoo = new ComboBox();
-            //cboStaff = new ComboBox();
+            cbosf = new ComboBox();
             //cboSale = new ComboBox();
             //cboThoo = thodb.getCboThoo(cboThoo);
-            //cboStaff = sfdb.getCboStaff(cboStaff);
+            cbosf = sfdb.getCboStaff(cbosf);
             //cboSale = saledb.getCboSale(cboSale);
+        }
+        public String getTextCboItem(ComboBox c, String valueId)
+        {
+            ComboBoxItem r = new ComboBoxItem();
+            r.Text = "";
+            r.Value = "";
+            foreach (ComboBoxItem cc in c.Items)
+            {
+                if (cc.Value.Equals(valueId))
+                {
+                    r = cc;
+                }
+            }
+            return r.Text;
         }
         private void setThoColor()
         {
@@ -684,7 +703,7 @@ namespace lottory.control
             }
             return chk;
         }
-        
+
         public String GetConfigbyKey(String key)
         {
             AppSettingsReader _configReader = new AppSettingsReader();
@@ -702,9 +721,9 @@ namespace lottory.control
             initC.pathImage = iniFile.Read("pathimage");
             initC.pathImageBefore = iniFile.Read("pathimagebefore");
             initC.delImage = iniFile.Read("delimage");
-            //initC.connectServer = regE.getConnectServer();
-            //initC.ServerIP = regE.getServerIP();
-            //initC.User = regE.getUsername();
+            initC.StatusServer = iniFile.Read("statusserver");
+            initC.pathShareData = iniFile.Read("pathsharedata");
+            initC.pathShareImage = iniFile.Read("pathshareimage");
             //initC.Password = regE.getPassword();
         }
         public void SetPathImage(String path)
@@ -714,6 +733,25 @@ namespace lottory.control
         public void SetPathImageBefore(String path)
         {
             iniFile.Write("pathimagebefore", path);
+        }
+        public void SetPathShareImage(String path)
+        {
+            iniFile.Write("pathshareimage", path);
+        }
+        public void SetPathShareData(String path)
+        {
+            iniFile.Write("pathsharedata", path);
+        }
+        public void SetSetatusServer(Boolean value)
+        {
+            if (value)
+            {
+                iniFile.Write("statusserver", "yes");
+            }
+            else
+            {
+                iniFile.Write("statusserver", "no");
+            }
         }
         public void SetClearInput(Boolean value)
         {
@@ -753,21 +791,26 @@ namespace lottory.control
         }
         public void renameFileImage(String fileName)
         {
-            String file1 = fileName.Replace("_0","_1");
+            String file1 = fileName.Replace("_0", "_1");
             System.IO.File.Move(fileName, file1);
+        }
+        public void DeleteFileImage(String fileName)
+        {
+            //String file1 = fileName.Replace("_0", "_1");
+            System.IO.File.Delete(fileName);
+
         }
         public String getSalePercent(String yearId, String monthId, String periodId, String saleId)
         {
-            String num="";
+            String num = "";
             DataTable dt1 = lotdb.selectBySale(yearId, monthId, periodId, saleId);
-            Double up = 0, down = 0, tod = 0, amtUp=0, amtTod=0, amtDown=0, amt=0;
+            Double up = 0, down = 0, tod = 0, amtUp = 0, amtTod = 0, amtDown = 0, amt = 0;
             Sale s = new Sale();
-            
+
             if (dt1.Rows.Count > 0)
             {
                 s = getSalebyListS(saleId);
                 //DataTable dtRate = ratedb.selectAll();
-                
                 for (int i = 0; i < dt1.Rows.Count; i++)
                 {
                     SaleRate sr = new SaleRate();
@@ -811,7 +854,7 @@ namespace lottory.control
                     {
 
                     }
-                    
+
                     amt += amtUp + amtDown + amtTod;
                 }
             }
@@ -847,6 +890,130 @@ namespace lottory.control
                 }
             }
             return item;
+        }
+        public String getStatusInput(String statusInput)
+        {
+            if (statusInput.Equals("1"))
+            {
+                return "ป้อนตรง";
+            }
+            else if (statusInput.Equals("2"))
+            {
+                return "ป้อนจากรูป";
+            }
+            else
+            {
+                return "";
+            }
+        }
+        public void CreateSharedFolder(string FolderPath, string ShareName, string Description)
+        {
+            try
+            {
+                // Create a ManagementClass object
+                ManagementClass mc = new ManagementClass("Win32_Share");
+
+                // Create ManagementBaseObjects for in and out parameters
+                ManagementBaseObject inParams = mc.GetMethodParameters("Create");
+
+                ManagementBaseObject outParams;
+
+                // Set the input parameters
+                inParams["Description"] = Description;
+                inParams["Name"] = ShareName;
+                inParams["Path"] = FolderPath;
+                inParams["Type"] = 0x0; // Disk Drive
+
+                //Another Type:
+                // DISK_DRIVE = 0x0
+                // PRINT_QUEUE = 0x1
+                // DEVICE = 0x2
+                // IPC = 0x3
+                // DISK_DRIVE_ADMIN = 0x80000000
+                // PRINT_QUEUE_ADMIN = 0x80000001
+                // DEVICE_ADMIN = 0x80000002
+                // IPC_ADMIN = 0x8000003
+
+                //inParams["MaximumAllowed"] = 2;
+                inParams["Password"] = null;
+
+                NTAccount everyoneAccount = new NTAccount(null, "EVERYONE");
+                SecurityIdentifier sid = (SecurityIdentifier)everyoneAccount.Translate(typeof(SecurityIdentifier));
+                byte[] sidArray = new byte[sid.BinaryLength];
+                sid.GetBinaryForm(sidArray, 0);
+
+                ManagementObject everyone = new ManagementClass("Win32_Trustee");
+                everyone["Domain"] = null;
+                everyone["Name"] = "EVERYONE";
+                everyone["SID"] = sidArray;
+
+                ManagementObject dacl = new ManagementClass("Win32_Ace");
+                dacl["AccessMask"] = 2032127;
+                dacl["AceFlags"] = 3;
+                dacl["AceType"] = 0;
+                dacl["Trustee"] = everyone;
+
+                ManagementObject securityDescriptor = new ManagementClass("Win32_SecurityDescriptor");
+                securityDescriptor["ControlFlags"] = 4; //SE_DACL_PRESENT 
+                securityDescriptor["DACL"] = new object[] { dacl };
+
+                inParams["Access"] = securityDescriptor;
+
+                // Invoke the "create" method on the ManagementClass object
+                outParams = mc.InvokeMethod("Create", inParams, null);
+
+                // Check to see if the method invocation was successful
+                var result = (uint)(outParams.Properties["ReturnValue"].Value);
+                switch (result)
+                {
+                    case 0:
+                        Console.WriteLine("Folder successfuly shared.");
+                        break;
+                    case 2:
+                        Console.WriteLine("Access Denied");
+                        break;
+                    case 8:
+                        Console.WriteLine("Unknown Failure");
+                        break;
+                    case 9:
+                        Console.WriteLine("Invalid Name");
+                        break;
+                    case 10:
+                        Console.WriteLine("Invalid Level");
+                        break;
+                    case 21:
+                        Console.WriteLine("Invalid Parameter");
+                        break;
+                    case 22:
+                        Console.WriteLine("Duplicate Share");
+                        break;
+                    case 23:
+                        Console.WriteLine("Redirected Path");
+                        break;
+                    case 24:
+                        Console.WriteLine("Unknown Device or Directory");
+                        break;
+                    case 25:
+                        Console.WriteLine("Net Name Not Found");
+                        break;
+                    default:
+                        Console.WriteLine("Folder cannot be shared.");
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error:" + ex.Message);
+            }
+        }
+        public string LocalIPAddress()
+        {
+            IPHostEntry host;
+            string localIP = "";
+            host = Dns.GetHostEntry(Dns.GetHostName());
+            IPAddress[] addr = host.AddressList;
+            return addr[addr.Length - 1].ToString();
+            //return localIP;
         }
     }
 }

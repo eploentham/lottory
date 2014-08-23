@@ -35,6 +35,7 @@ namespace lottory.objdb
             img.dateInput = "date_input";
             img.staffInputId = "staff_input_id";
             img.staffInputName = "staff_input_name";
+            img.rowNumber = "row_number";
 
             img.pkField = "img_id";
             img.table = "t_image";
@@ -58,6 +59,7 @@ namespace lottory.objdb
             item.dateInput = dt.Rows[0][img.dateInput].ToString();
             item.staffInputId = dt.Rows[0][img.staffInputId].ToString();
             item.staffInputName = dt.Rows[0][img.staffInputName].ToString();
+            item.rowNumber = dt.Rows[0][img.rowNumber].ToString();
 
             return item;
         }
@@ -96,11 +98,13 @@ namespace lottory.objdb
             sql = "Insert Into " + img.table + " (" + img.pkField + "," + img.custId + "," + img.pathFilename + "," +
                 img.saleId + "," + img.staffId + "," + img.Active + ","+
                 img.yearId + "," + img.monthId + "," + img.periodId + "," +
-                img.statusInput + "," + img.FLock + "," + img.dateCreate + "," + img.dateInput + "," + img.staffInputId + "," + img.staffInputName + ") " +
+                img.statusInput + "," + img.FLock + "," + img.dateCreate + "," +
+                img.dateInput + "," + img.staffInputId + "," + img.staffInputName + "," + img.rowNumber + ") " +
                 "Values('" + p.Id + "','" + p.custId + "','" + p.pathFilename + "','" +
                 p.saleId + "','" + p.staffId + "','" + p.Active + "','" +
                 p.yearId + "','" + p.monthId + "','" + p.periodId + "','" +
-                "0','0'," + p.dateCreate+",'','','')";
+                "0','0'," + p.dateCreate+","+
+                "'','','','"+ p.rowNumber+"')";
             try
             {
                 chk = conn.ExecuteNonQuery(sql);
@@ -150,6 +154,9 @@ namespace lottory.objdb
             item = selectByPk(p.Id);
             if (item.Id == "")
             {
+                String max = "";
+                max = selectMaxRowNumberByPeriod(p.yearId, p.monthId, p.periodId);
+                p.rowNumber = max;
                 chk = insert(p);
             }
             else
@@ -189,6 +196,40 @@ namespace lottory.objdb
             sql = "Update " + img.table + " Set " + img.FLock + "='0' Where " + img.pkField + "='" + imgId + "'";
             chk = conn.ExecuteNonQuery(sql);
             return chk;
+        }
+        public String selectMaxRowNumberByPeriod(String yearId, String monthId, String periodId)
+        {
+            Image1 item = new Image1();
+            String sql = "";
+            int cnt = 0;
+            DataTable dt = new DataTable();
+            sql = "Select max(" + img.rowNumber + ") as " + img.rowNumber + " From " + img.table + " Where " + img.yearId + "='" + yearId + "' and " +
+                img.monthId + "='" + monthId + "' and " + img.periodId + "='" + periodId+"'";
+            dt = conn.selectData(sql);
+            if (dt.Rows.Count > 0)
+            {
+                if (dt.Rows[0][img.rowNumber] != null)
+                {
+                    if (dt.Rows[0][img.rowNumber].ToString().Equals(""))
+                    {
+                        cnt = 1000;
+                    }
+                    else
+                    {
+                        cnt = int.Parse(dt.Rows[0][img.rowNumber].ToString())+1;
+                    }
+
+                }
+                else
+                {
+                    cnt = 1000;
+                }
+            }
+            else
+            {
+                cnt = 1000;
+            }
+            return cnt.ToString();
         }
     }
 }

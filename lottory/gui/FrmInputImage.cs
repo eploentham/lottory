@@ -15,7 +15,7 @@ namespace lottory.gui
 {
     public partial class FrmInputImage : Form
     {
-        int row = 0;
+        int row = 0, rowImage=0;
         int colNumber = 0, colUp = 1, colTod = 2, colDown = 3, colRemark = 4, colRowId = 6, colLottoId1 = 5;
         int col1Cnt = 7;
         Staff sf;
@@ -28,6 +28,7 @@ namespace lottory.gui
         Boolean lotNew = false, txtDownBackFirst=false, txtTodBackFirst=false;
         String lotId1 = "";
         Color btnEditColor;
+        Double amt = 0, up = 0, tod = 0, down = 0;
         public FrmInputImage(String sfCode, LottoryControl l)
         {
             pageLoad = true;
@@ -113,6 +114,7 @@ namespace lottory.gui
                     }
                 }
                 lotId1 = lotoId;
+                lotNew = false;
                 dgv1.ReadOnly = true;
             }
             else
@@ -263,12 +265,10 @@ namespace lottory.gui
             pic1.SizeMode = PictureBoxSizeMode.StretchImage;
             //pic1.Image = p.Image;
         }
-
         private void picZoomP_Click(object sender, EventArgs e)
         {
             pic1.Image = (PictureBoxZoom(pic1.Image, new Size(2,2)));
         }
-
         private void picZoomM_Click(object sender, EventArgs e)
         {
 
@@ -360,8 +360,15 @@ namespace lottory.gui
             lot.tod = lc.cf.LottoNull(dgv1[colTod, row].Value);
             lot.up = lc.cf.LottoNull(dgv1[colUp, row].Value);
             lot.statusInput= "2";
-            //lot.imgId = txtImgId.Text;
-            lot.imgId = txtImgId.Text.Replace(txtImgId.Text.Substring(txtImgId.Text.IndexOf("_0")), "");            
+            lot.imgId = txtImgId.Text.Replace(txtImgId.Text.Substring(txtImgId.Text.IndexOf("_")), "");
+            //if (txtImgId.Text.IndexOf("_0") > 0)
+            //{
+            //    lot.imgId = txtImgId.Text.Replace(txtImgId.Text.Substring(txtImgId.Text.IndexOf("_0")), "");
+            //}
+            //else
+            //{
+            //    lc.imgdb.UpdateStatusInput(txtImgId.Text, sf.Id, sf.Name);
+            //}
 
             return lot;
         }
@@ -407,7 +414,18 @@ namespace lottory.gui
                 pic1.Image.Dispose();
                 lc.renameFileImage(lc.initC.pathImage + "\\" + cboYear.Text + "\\" + cboMonth.SelectedValue.ToString() + "\\" + cboPeriod.SelectedValue.ToString() + "\\" + txtImgId.Text);
                 lc.renameFileImage(lc.initC.pathImage + "\\" + cboYear.Text + "\\" + cboMonth.SelectedValue.ToString() + "\\" + cboPeriod.SelectedValue.ToString() + "\\" + txtImgId.Text.Replace(".lotto", ".thumb"));
-                lc.imgdb.UpdateStatusInput(txtImgId.Text.Replace(txtImgId.Text.Substring(txtImgId.Text.IndexOf("_0")), ""), sf.Id, sf.Name);
+                //ListViewItem i = lV1.SelectedItems[0];
+                //txtImgId.Text = name[i.ImageIndex];
+                
+                if (txtImgId.Text.IndexOf("_0") > 0)
+                {
+                    lc.imgdb.UpdateStatusInput(txtImgId.Text.Replace(txtImgId.Text.Substring(txtImgId.Text.IndexOf("_0")), ""), sf.Id, sf.Name);
+                }
+                else
+                {
+                    lc.imgdb.UpdateStatusInput(txtImgId.Text, sf.Id, sf.Name);
+                }
+                name[rowImage] = name[rowImage].Replace("_0", "_1");
             }
             
             lc.imgdb.UpdateUnLock(txtImgId.Text);
@@ -424,7 +442,8 @@ namespace lottory.gui
         }
         private void setDataGrid1(String number, String numUp, String numTod, String numDown, String rowId, String lottoId)
         {
-            dgv1.Rows.Insert(dgv1.RowCount - 1, 1);
+            //dgv1.Rows.Insert(dgv1.RowCount - 1, 1);
+            dgv1.Rows.Add();
             dgv1[colNumber, row].Value = number;
             if (numUp.Equals(""))
             {
@@ -459,17 +478,20 @@ namespace lottory.gui
         }
         private void setGrdColor()
         {
-            String numUp = "", numTod = "", numDown="";
-            Double amt = 0, up=0, tod=0, down=0;
+            //String numUp = "", numTod = "", numDown="";
+            amt = 0;
+            up = 0;
+            tod = 0;
+            down = 0;
             for (int i = 0; i < dgv1.RowCount-1; i++)
             {
-                numUp = (dgv1[colUp, i].Value.ToString());
-                numTod = (dgv1[colTod, i].Value.ToString());
-                numDown = (dgv1[colDown, i].Value.ToString());
-                amt += (Double.Parse(numUp) + Double.Parse(numTod) + Double.Parse(numDown));
-                up+=(Double.Parse(numUp));
-                tod += (Double.Parse(numTod));
-                down += (Double.Parse(numDown));
+                //numUp = (dgv1[colUp, i].Value.ToString());
+                //numTod = (dgv1[colTod, i].Value.ToString());
+                //numDown = (dgv1[colDown, i].Value.ToString());
+                amt += (Double.Parse(dgv1[colUp, i].Value.ToString()) + Double.Parse(lc.cf.NumberNull2(dgv1[colTod, i].Value.ToString())) + Double.Parse(lc.cf.NumberNull2(dgv1[colDown, i].Value.ToString())));
+                up += (Double.Parse(dgv1[colUp, i].Value.ToString()));
+                tod += (Double.Parse(lc.cf.NumberNull2(dgv1[colTod, i].Value.ToString())));
+                down += (Double.Parse(lc.cf.NumberNull2(dgv1[colDown, i].Value.ToString())));
                 if ((i % 2) != 0)
                 {
                     dgv1.Rows[i].DefaultCellStyle.BackColor = Color.DarkKhaki;
@@ -479,6 +501,7 @@ namespace lottory.gui
             lbUp.Text = "รวมบน : " + up.ToString("#,###.00");
             lbTod.Text = "รวมโต๊ด : " + tod.ToString("#,###.00");
             lbDown.Text = "รวมล่าง : " + down.ToString("#,###.00");
+            lbNum.Text = "รวม " + (dgv1.RowCount - 1 )+ " รายการ";
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -573,7 +596,6 @@ namespace lottory.gui
                 txtTodFocus();
             }
         }
-
         private void txtTod_Enter(object sender, EventArgs e)
         {
             txtTod.BackColor = Color.LightYellow;
@@ -583,7 +605,6 @@ namespace lottory.gui
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
-
         private void txtTod_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -687,8 +708,11 @@ namespace lottory.gui
                 try
                 {
                     ListViewItem i = lV1.SelectedItems[0];
-                    txtImgId.Text = name[i.ImageIndex];
+                    rowImage = i.ImageIndex;//ใช้ตอนsave เพื่อให้แก้ไข name[]ได้ถูกต้อง
+                    txtImgId.Text = name[rowImage];
+                    
                     dgv1.Rows.Clear();
+                    row = 0;
                     viewImage(i.ImageIndex);
                     if (txtImgId.Text.Length >= 10)
                     {

@@ -47,6 +47,7 @@
             this.dgvRate = new System.Windows.Forms.DataGridView();
             this.dgvThooTranfer = new System.Windows.Forms.DataGridView();
             this.dgv1 = new System.Windows.Forms.DataGridView();
+            this.pB1 = new System.Windows.Forms.ProgressBar();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRate)).BeginInit();
@@ -56,6 +57,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.pB1);
             this.groupBox1.Controls.Add(this.btnVoid);
             this.groupBox1.Controls.Add(this.btnInit);
             this.groupBox1.Controls.Add(this.btnSave);
@@ -249,6 +251,13 @@
             this.dgv1.TabIndex = 0;
             this.dgv1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv1_CellDoubleClick);
             // 
+            // pB1
+            // 
+            this.pB1.Location = new System.Drawing.Point(22, 55);
+            this.pB1.Name = "pB1";
+            this.pB1.Size = new System.Drawing.Size(873, 23);
+            this.pB1.TabIndex = 69;
+            // 
             // FrmLottoApprove
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -294,5 +303,6 @@
         private System.Windows.Forms.TextBox txtNetTotal;
         private System.Windows.Forms.TextBox txtTho;
         private System.Windows.Forms.Button btnVoid;
+        private System.Windows.Forms.ProgressBar pB1;
     }
 }

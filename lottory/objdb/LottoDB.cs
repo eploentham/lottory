@@ -43,7 +43,7 @@ namespace lottory.objdb
             lot.tod = "tod";
             lot.up="up1";
             lot.rowNumber = "row_number";
-            lot.overLimit = "over_limit";
+            lot.OLUp = "over_limit_up";
             lot.use1 = "use1";
             lot.statusOverLimit = "status_over_limit";
             lot.rateId = "rate_id";
@@ -72,6 +72,10 @@ namespace lottory.objdb
             lot.CDbl = "cdbl";
             lot.statusInput = "status_input";
             lot.imgId = "img_id";
+            lot.log = "log";
+            lot.OLTod = "over_limit_tod";
+            lot.OLDown = "over_limit_down";
+            lot.StatusVoid = "status_void";
 
             lot.table = "t_lottory";
             lot.pkField = "row_id";
@@ -99,12 +103,16 @@ namespace lottory.objdb
             item.tod = dt.Rows[0][lot.tod].ToString();
             item.up = dt.Rows[0][lot.up].ToString();
             item.rowNumber = dt.Rows[0][lot.rowNumber].ToString();
-            item.overLimit = dt.Rows[0][lot.overLimit].ToString();
+            item.OLUp = dt.Rows[0][lot.OLUp].ToString();
             item.statusOverLimit = dt.Rows[0][lot.statusOverLimit].ToString();
             item.use1 = dt.Rows[0][lot.use1].ToString();
             item.rateId = dt.Rows[0][lot.rateId].ToString();
             item.statusInput = dt.Rows[0][lot.statusInput].ToString();
             item.imgId = dt.Rows[0][lot.imgId].ToString();
+
+            item.OLDown = dt.Rows[0][lot.OLDown].ToString();
+            item.OLTod = dt.Rows[0][lot.OLTod].ToString();
+            item.StatusVoid = dt.Rows[0][lot.StatusVoid].ToString();
             
             return item;
         }
@@ -226,6 +234,18 @@ namespace lottory.objdb
             sql = "Select * From " + lot.table + " Where " + lot.staffId + "='" + staffId + "' and " +
                 lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
                 lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "'";
+            dt = conn.selectData(sql);
+
+            return dt;
+        }
+        public DataTable selectByStaffGroupLot(String yearId, String monthId, String periodId, String staffId)
+        {
+            String sql = "";
+            DataTable dt = new DataTable();
+            sql = "Select distinct "+lot.lottoId+","+lot.staffId+","+lot.CDbl+","+lot.statusInput+","+lot.imgId+" From " + lot.table + " Where " + lot.staffId + "='" + staffId + "' and " +
+                lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
+                lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' "+
+                " Order By " + lot.CDbl;
             dt = conn.selectData(sql);
 
             return dt;
@@ -631,7 +651,8 @@ namespace lottory.objdb
                 lot.dateCancel + "," + lot.staffCreate + "," + lot.staffModi + "," +
                 lot.staffCancel + "," + lot.yearId + "," + lot.rowNumber + "," +
                 lot.statusApprove + "," + lot.thooTranferId + "," + lot.dateApprove + "," +
-                lot.staffApproveId + "," + lot.CDbl + "," + lot.statusInput + "," + lot.imgId + ") " +
+                lot.staffApproveId + "," + lot.CDbl + "," + lot.statusInput + "," +
+                lot.imgId + "," + lot.log + ") " +
                 "Values('" + p.rowId + "','" + p.lottoId + "','" + p.staffId + "','" +
                 p.number + "'," + p.up + "," + p.tod + "," +
                 p.down + ",'" + p.monthId + "','" + p.periodId + "','" +
@@ -640,7 +661,8 @@ namespace lottory.objdb
                  "'','" + p.staffCreate + "',''," +
                 "'','" + p.yearId + "','" + p.rowNumber + "','" +
                 p.statusApprove + "','" + p.thooTranferId + "','" + p.dateApprove + "','" +
-                p.staffApproveId + "','" + p.CDbl + "','" + p.statusInput + "','" + p.imgId + "')";
+                p.staffApproveId + "','" + p.CDbl + "','" + p.statusInput + "','" + 
+                p.imgId + "','')";
             try
             {
                 chk = conn.ExecuteNonQuery(sql);
@@ -712,16 +734,18 @@ namespace lottory.objdb
             chk = conn.ExecuteNonQuery(sql);
             return chk;
         }
-        public String updateApprove(String rowId, String overLimit, String use1, String statusOL, String thooTranferId, String staffApproveId)
+        public String updateApprove(String rowId, String OLUp, String OLTod, String OLDown, String use1, String statusOL, String thooTranferId, String staffApproveId)
         {
             String sql = "", chk = "";
 
-            sql = "Update "+lot.table+" Set "+lot.overLimit+"="+overLimit+", "+
+            sql = "Update "+lot.table+" Set "+lot.OLUp+"="+OLUp+", "+
                 lot.use1 + "=" + use1 + ", " +
                 lot.statusOverLimit+"='"+statusOL+"', "+
                 lot.dateApprove+"="+lot.dateGenDB+","+
                 lot.thooTranferId+"='"+thooTranferId+"', "+
                 lot.staffApproveId + "='" + staffApproveId + "', " +
+                lot.OLDown + "=" + OLDown + ", " +
+                lot.OLTod + "=" + OLTod + ", " +
                 lot.statusApprove+"='1' "+
                 "Where "+lot.pkField+"='"+rowId+"'";
             chk = conn.ExecuteNonQuery(sql);
@@ -801,22 +825,57 @@ namespace lottory.objdb
 
             return chk;
         }
-        public String VoidLotto(String lotId)
+        public String VoidLotto(String lotId, String sfId)
         {
             String sql = "", chk = "";
 
-            sql = "Update " + lot.table + " Set " + lot.Active + "='3' " +
+            sql = "Update " + lot.table + " Set " + lot.Active + "='3', " +
+                lot.dateCancel + "=" + lot.dateGenDB + ", " +
+                lot.StatusVoid + "='2', " +
+                lot.staffCancel + "=" + sfId + " " +
                 "Where " + lot.lottoId + "='" + lotId + "'";
             chk = conn.ExecuteNonQuery(sql);
             return chk;
         }
-        public String VoidRowId(String rowId)
+        public String VoidRowId(String rowId, String sfId)
+        {
+            String sql = "", chk = "";
+            //p = p.dateGenDB;
+            sql = "Update " + lot.table + " Set " + lot.Active + "='3', " +
+                lot.dateCancel+"="+lot.dateGenDB+", "+
+                lot.StatusVoid + "='1', " +
+                lot.staffCancel + "=" + sfId + " " +
+                "Where " + lot.pkField + "='" + rowId + "'";
+            chk = conn.ExecuteNonQuery(sql);
+            return chk;
+        }
+        public String updateInputApprove(String rowId, String sfId, String number, String up, String tod, String down)
         {
             String sql = "", chk = "";
 
-            sql = "Update " + lot.table + " Set " + lot.Active + "='3' " +
+            //p.Remark = p.Remark.Replace("''", "'");
+            ////p.dateModi = System.DateTime.Now.ToString();
+            //p.dateModi = p.dateGenDB;
+            //p.staffModi = p.staffId;
+            sql = "Update " + lot.table + " Set " + lot.number + "='" + number + "', " +
+                lot.up + "=" + up + ", " +
+                lot.tod + "=" + tod + ", " +
+                lot.down + "=" + down + ", " +
+                lot.dateModi + "=" + lot.dateGenDB + ", " +
+                lot.staffModi + "=" + sfId + " " +
+
                 "Where " + lot.pkField + "='" + rowId + "'";
-            chk = conn.ExecuteNonQuery(sql);
+            try
+            {
+                chk = conn.ExecuteNonQuery(sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error " + ex.ToString(), "update Sale");
+            }
+            finally
+            {
+            }
             return chk;
         }
     }

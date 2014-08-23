@@ -14,8 +14,9 @@ namespace lottory.gui
     public partial class FrmLottoApprove : Form
     {
         //int row = 0;
-        int colNumber = 0, colUp = 1, colTod = 2, colDown = 3, colRemark = 4, colRowId = 6, colLottoId1 = 5, colUse1 = 7, colStatusOL = 8, colOverLimit = 9, colRateId = 10, colThooTranferId = 11, colThooTranferName= 12;
-        int col1Cnt = 13;
+        int colNumber = 0, colUp = 1, colTod = 2, colDown = 3, colRemark = 4, colRowId = 6, colLottoId1 = 5, colUse1 = 7, colStatusOL = 8, colOLUp = 9, colOLTod=10, colOLDown=11;
+        int colRateId = 12, colThooTranferId = 13, colThooTranferName= 14;
+        int col1Cnt = 15;
         int colTRow=0, colTName = 1, colTLimit = 2, colTAmt = 3, colTId=4;
         int colRRow = 0, colRDescription = 1, colRRec = 3, colRId = 7, colRpay = 4, colRLimit = 5, colRDiscount = 6, colRAmt=2;
         LottoryControl lc;
@@ -77,6 +78,7 @@ namespace lottory.gui
             {
                 btnVoid.Visible = false;
             }
+            pB1.Visible = false;
             //dgvRate.Hide();
         }
         private void setControl()
@@ -105,7 +107,7 @@ namespace lottory.gui
             dgv.Columns[colDown].Width = 80;
             dgv.Columns[colUse1].Width = 90;
             dgv.Columns[colStatusOL].Width = 80;
-            dgv.Columns[colOverLimit].Width = 110;
+            dgv.Columns[colOLUp].Width = 110;
             dgv.Columns[colRemark].Width = 80;
             dgv.Columns[colRateId].Width = 60;
             dgv.Columns[colThooTranferName].Width = 100;
@@ -116,14 +118,18 @@ namespace lottory.gui
             dgv.Columns[colDown].HeaderText = "ล่าง";
             dgv.Columns[colUse1].HeaderText = "ยอดเงิน";
             dgv.Columns[colStatusOL].HeaderText = "สถานะ";
-            dgv.Columns[colOverLimit].HeaderText = "วงเงิน(เกิน)";
+            dgv.Columns[colOLUp].HeaderText = "เกิน.(บน)";
+            dgv.Columns[colOLTod].HeaderText = "เกิน.(โต๊ด)";
+            dgv.Columns[colOLDown].HeaderText = "เกิน.(ล่าง)";
             dgv.Columns[colThooTranferName].HeaderText = "ส่งต่อให้";
 
             dgv.Columns[colUp].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
             dgv.Columns[colTod].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
             dgv.Columns[colDown].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
             dgv.Columns[colUse1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
-            dgv.Columns[colOverLimit].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
+            dgv.Columns[colOLUp].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
+            dgv.Columns[colOLTod].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
+            dgv.Columns[colOLDown].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
 
             dgv.Columns[colRowId].Visible = false;
             dgv.Columns[colThooTranferId].Visible = false;
@@ -344,8 +350,8 @@ namespace lottory.gui
 
             }
         }
-        private void setDataGrid1(DataGridView dgv, int row, String number, Double numUp, Double numTod, Double numDown, String rowId, 
-            String lottoId, String use1, String statusOL, String overLimit, String thooTranferId)
+        private void setDataGrid1(DataGridView dgv, int row, String number, Double numUp, Double numTod, Double numDown, String rowId,
+            String lottoId, String use1, String statusOL, String OLUp, String OLTod, String OLDown, String thooTranferId)
         {
             if (dgv.Enabled == false)
             {
@@ -364,7 +370,31 @@ namespace lottory.gui
             dgv[colLottoId1, row].Value = lottoId;
             dgv[colUse1, row].Value = use1;
             dgv[colStatusOL, row].Value = statusOL;
-            dgv[colOverLimit, row].Value = overLimit;
+            if (OLUp.Equals("0.00"))
+            {
+                dgv[colOLUp, row].Value = "";
+            }
+            else
+            {
+                dgv[colOLUp, row].Value = OLUp;
+            }
+            if (OLTod.Equals("0.00"))
+            {
+                dgv[colOLTod, row].Value = "";
+            }
+            else
+            {
+                dgv[colOLTod, row].Value = OLTod;
+            }
+            if (OLDown.Equals("0.00"))
+            {
+                dgv[colOLDown, row].Value = "";
+            }
+            else
+            {
+                dgv[colOLDown, row].Value = OLDown;
+            }
+            
             dgv[colThooTranferId, row].Value = thooTranferId;
             cItem = lc.getCboItem(cboThoo, thooTranferId);
             dgv[colThooTranferName, row].Value = cItem.Text;
@@ -392,8 +422,8 @@ namespace lottory.gui
                     {
                         setDataGrid1(dgv1, i, dt.Rows[i][lc.lotdb.lot.number].ToString(), Double.Parse(dt.Rows[i][lc.lotdb.lot.up].ToString()),
                         Double.Parse(dt.Rows[i][lc.lotdb.lot.tod].ToString()), Double.Parse(dt.Rows[i][lc.lotdb.lot.down].ToString()),
-                        dt.Rows[i][lc.lotdb.lot.rowId].ToString(), dt.Rows[i][lc.lotdb.lot.lottoId].ToString(), dt.Rows[i][lc.lotdb.lot.use1].ToString(), 
-                        dt.Rows[i][lc.lotdb.lot.statusOverLimit].ToString(), dt.Rows[i][lc.lotdb.lot.overLimit].ToString(),
+                        dt.Rows[i][lc.lotdb.lot.rowId].ToString(), dt.Rows[i][lc.lotdb.lot.lottoId].ToString(), dt.Rows[i][lc.lotdb.lot.use1].ToString(),
+                        dt.Rows[i][lc.lotdb.lot.statusOverLimit].ToString(), dt.Rows[i][lc.lotdb.lot.OLUp].ToString(), dt.Rows[i][lc.lotdb.lot.OLTod].ToString(), dt.Rows[i][lc.lotdb.lot.OLDown].ToString(),
                         dt.Rows[i][lc.lotdb.lot.thooTranferId].ToString());
                         up += Double.Parse(lc.cf.NumberNull(dt.Rows[i][lc.lotdb.lot.up]));
                         tod += Double.Parse(lc.cf.NumberNull(dt.Rows[i][lc.lotdb.lot.tod]));
@@ -406,8 +436,12 @@ namespace lottory.gui
                         }
                         if (dgv1[colStatusOL, i].Value.ToString().Equals("1"))
                         {
-                            dgv1[colOverLimit, i].Style.Font = font;
-                            dgv1[colOverLimit, i].Style.ForeColor = Color.Red;
+                            dgv1[colOLUp, i].Style.Font = font;
+                            dgv1[colOLUp, i].Style.ForeColor = Color.Red;
+                            dgv1[colOLTod, i].Style.Font = font;
+                            dgv1[colOLTod, i].Style.ForeColor = Color.Red;
+                            dgv1[colOLDown, i].Style.Font = font;
+                            dgv1[colOLDown, i].Style.ForeColor = Color.Red;
                         }
                         if (dgv1[colNumber, i].Value.ToString().Length == 1)
                         {
@@ -456,7 +490,7 @@ namespace lottory.gui
                     {
                         setDataGrid1(dgv1, i, dt.Rows[i][lc.lotdb.lot.number].ToString(), Double.Parse(dt.Rows[i][lc.lotdb.lot.up].ToString()),
                         Double.Parse(dt.Rows[i][lc.lotdb.lot.tod].ToString()), Double.Parse(dt.Rows[i][lc.lotdb.lot.down].ToString()),
-                        dt.Rows[i][lc.lotdb.lot.rowId].ToString(), dt.Rows[i][lc.lotdb.lot.lottoId].ToString(), "", "", "",
+                        dt.Rows[i][lc.lotdb.lot.rowId].ToString(), dt.Rows[i][lc.lotdb.lot.lottoId].ToString(), "", "", "", "", "",
                         dt.Rows[i][lc.lotdb.lot.thooTranferId].ToString());
                         up += Double.Parse(lc.cf.NumberNull(dt.Rows[i][lc.lotdb.lot.up]));
                         tod += Double.Parse(lc.cf.NumberNull(dt.Rows[i][lc.lotdb.lot.tod]));
@@ -497,7 +531,7 @@ namespace lottory.gui
             Decimal up1 = 0, limitUp1 = 0, useUp1 = 0, overLimit1 = 0;
             Decimal up2 = 0, limitUp2 = 0, useUp2 = 0, overLimit2 = 0;
             Decimal down2 = 0, limitDown2 = 0, useDown2 = 0, overLimitD2 = 0;
-            Decimal up3 = 0, limitUp3 = 0, useUp3 = 0, overLimit3 = 0,tod3=0;
+            Decimal up3 = 0, limitUp3 = 0, useUp3 = 0, overLimit3 = 0,tod3=0, limitTod3=0;
             Decimal down3 = 0, limitDown3 = 0, useDown3 = 0, overLimitD3 = 0, useTod3=0;
 
             if (!lc.fldb.setLock(sf.Id))
@@ -524,6 +558,7 @@ namespace lottory.gui
             limitUp3 = Decimal.Parse(lc.cf.NumberNull(r3Up.limit1));
             useDown3 = Decimal.Parse(lc.cf.NumberNull(r3Down.use1));
             limitDown3 = Decimal.Parse(lc.cf.NumberNull(r3Down.limit1));
+            limitTod3 = Decimal.Parse(lc.cf.NumberNull(r3Tod.limit1));
 
             for (int i = 0; i < dgv1.Rows.Count; i++)
             {
@@ -553,11 +588,13 @@ namespace lottory.gui
                         {
                             dgv1[colStatusOL, i].Value = "1";
                             overLimit1 += up1;
-                            dgv1[colOverLimit, i].Value = overLimit1;
-                            dgv1[colOverLimit, i].Style.Font = font;
-                            dgv1[colOverLimit, i].Style.ForeColor = Color.Red;
+                            dgv1[colOLUp, i].Value = String.Format("{0:#,###,###.00}",overLimit1);
+                            //dgv1[colOLTod, i].Value = "0";
+                            //dgv1[colOLDown, i].Value = "0";
+                            dgv1[colOLUp, i].Style.Font = font;
+                            dgv1[colOLUp, i].Style.ForeColor = Color.Red;
                         }
-                        dgv1[colUse1, i].Value = useUp1;
+                        dgv1[colUse1, i].Value = String.Format("{0:#,###,###.00}",useUp1);
                     }
                     else
                     {
@@ -574,7 +611,7 @@ namespace lottory.gui
                         useUp2 += (up2);
                         down2 = Decimal.Parse(down);
                         useDown2 += down2;
-                        if ((useUp2 + useDown2) <= limitUp2)
+                        if ((useUp2) <= limitUp2)
                         {
                             dgv1[colStatusOL, i].Value = "0";
                         }
@@ -582,11 +619,23 @@ namespace lottory.gui
                         {
                             dgv1[colStatusOL, i].Value = "1";
                             overLimit2 += (up2 + down2);
-                            dgv1[colOverLimit, i].Value = overLimit2;
-                            dgv1[colOverLimit, i].Style.Font = font;
-                            dgv1[colOverLimit, i].Style.ForeColor = Color.Red;
+                            dgv1[colOLUp, i].Value = String.Format("{0:#,###,###.00}",(useUp2 - limitUp2));
+                            dgv1[colOLUp, i].Style.Font = font;
+                            dgv1[colOLUp, i].Style.ForeColor = Color.Red;
                         }
-                        dgv1[colUse1, i].Value = (useUp2 + useDown2);
+                        if ((useDown2) <= limitDown2)
+                        {
+                            dgv1[colStatusOL, i].Value = "0";
+                        }
+                        else
+                        {
+                            dgv1[colStatusOL, i].Value = "1";
+                            overLimit2 += (up2 + down2);
+                            dgv1[colOLDown, i].Value = String.Format("{0:#,###,###.00}",(useDown2 - limitDown2));
+                            dgv1[colOLDown, i].Style.Font = font;
+                            dgv1[colOLDown, i].Style.ForeColor = Color.Red;
+                        }
+                        dgv1[colUse1, i].Value = String.Format("{0:#,###,###.00}",(useUp2 + useDown2));
                     }
                     else
                     {
@@ -604,19 +653,44 @@ namespace lottory.gui
                         useDown3 += down3;
                         tod3 = Decimal.Parse(tod);
                         useTod3 += tod3;
-                        if ((useUp3 + useDown3) <= limitUp3)
+                        if ((useUp3) <= limitUp3)
                         {
                             dgv1[colStatusOL, i].Value = "0";
                         }
                         else
                         {
                             dgv1[colStatusOL, i].Value = "1";
-                            overLimit3 += (up3 + down3);
-                            dgv1[colOverLimit, i].Value = overLimit3;
-                            dgv1[colOverLimit, i].Style.Font = font;
-                            dgv1[colOverLimit, i].Style.ForeColor = Color.Red;
+                            //overLimit3 += (up3 + down3);
+                            dgv1[colOLUp, i].Value = String.Format("{0:#,###,###.00}",(useUp3 - limitUp3));
+                            dgv1[colOLUp, i].Style.Font = font;
+                            dgv1[colOLUp, i].Style.ForeColor = Color.Red;
                         }
-                        dgv1[colUse1, i].Value = (useUp3 + useDown3 + useTod3);
+                        if ((useTod3) <= limitTod3)
+                        {
+                            dgv1[colStatusOL, i].Value = "0";
+                        }
+                        else
+                        {
+                            dgv1[colStatusOL, i].Value = "1";
+                            //overLimit3 += (up3 + down3);
+                            dgv1[colOLTod, i].Value = String.Format("{0:#,###,###.00}",(useTod3 - limitTod3));
+                            dgv1[colOLTod, i].Style.Font = font;
+                            dgv1[colOLTod, i].Style.ForeColor = Color.Red;
+                        }
+                        if ((useDown3) <= limitDown3)
+                        {
+                            dgv1[colStatusOL, i].Value = "0";
+                        }
+                        else
+                        {
+                            dgv1[colStatusOL, i].Value = "1";
+                            //overLimit3 += (up3 + down3);
+                            dgv1[colOLDown, i].Value = String.Format("{0:#,###,###.00}",(useDown3 - limitDown3));
+                            dgv1[colOLDown, i].Style.Font = font;
+                            dgv1[colOLDown, i].Style.ForeColor = Color.Red;
+                        }
+
+                        dgv1[colUse1, i].Value = String.Format("{0:#,###,###.00}",(useUp3 + useDown3 + useTod3));
                     }
                     else
                     {
@@ -636,9 +710,14 @@ namespace lottory.gui
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            String statusOL = "", overLimit = "", down = "", tod = "";
+            Cursor cursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
+            String statusOL = "", OLUp = "", OLDown = "", OLTod = "", down = "", tod = "";
             String lottoId = "", rowId = "", chk="";
+            pB1.Visible = true;
             //Lotto lot = new Lotto();
+            pB1.Minimum = 0;
+            pB1.Maximum = dgv1.Rows.Count;
             for (int i = 0; i < dgv1.Rows.Count; i++)
             {
                 if (dgv1[colNumber, i].Value == null)
@@ -650,18 +729,45 @@ namespace lottory.gui
                 //lot.rowId = rowId;
 
                 statusOL = lc.cf.stringNull1(dgv1[colStatusOL, i].Value);
-                overLimit = lc.cf.NumberNull(dgv1[colOverLimit, i].Value);
+                if (dgv1[colOLUp, i].Value != null)
+                {
+                    OLUp = lc.cf.NumberNull1(dgv1[colOLUp, i].Value.ToString());
+                }
+                else
+                {
+                    OLUp = "0";
+                }
+                if (dgv1[colOLDown, i].Value != null)
+                {
+                    OLDown = lc.cf.NumberNull1(dgv1[colOLDown, i].Value.ToString());
+                }
+                else
+                {
+                    OLDown = "0";
+                }
+                if (dgv1[colOLTod, i].Value != null)
+                {
+                    OLTod = lc.cf.NumberNull1(dgv1[colOLTod, i].Value.ToString());
+                }
+                else
+                {
+                    OLTod = "0";
+                }
+                
                 //down = dgv1[colDown, i].Value.ToString();
                 //lot.statusOverLimit = statusOL;
                 //lot.overLimit = overLimit;
                 //lot.staffApproveId = sf.Id;
                 //lot.thooTranferId = lc.cf.stringNull1(dgv1[colThooTranfer, i].Value);
-                chk = lc.lotdb.updateApprove(rowId, overLimit, lc.cf.NumberNull(dgv1[colUse1, i].Value), statusOL, lc.cf.stringNull1(dgv1[colThooTranferId, i].Value), sf.Id);
+                chk = lc.lotdb.updateApprove(rowId, OLUp, OLDown, OLTod, lc.cf.NumberNull(dgv1[colUse1, i].Value), statusOL, lc.cf.stringNull1(dgv1[colThooTranferId, i].Value), sf.Id);
                 if (chk.Equals("1"))
                 {
                     dgv1.Rows[i].DefaultCellStyle.BackColor = Color.DarkKhaki;
                 }
+                pB1.Value = i;
             }
+            pB1.Visible = false;
+            Cursor.Current = cursor;
         }
 
         private void dgv1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

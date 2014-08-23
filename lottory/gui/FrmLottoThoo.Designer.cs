@@ -85,7 +85,6 @@
             this.groupBox1.Size = new System.Drawing.Size(718, 425);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
             // 
             // txtLotId
             // 
@@ -252,10 +251,11 @@
             // 
             // cboYear
             // 
+            this.cboYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.cboYear.FormattingEnabled = true;
-            this.cboYear.Location = new System.Drawing.Point(451, 27);
+            this.cboYear.Location = new System.Drawing.Point(451, 24);
             this.cboYear.Name = "cboYear";
-            this.cboYear.Size = new System.Drawing.Size(99, 24);
+            this.cboYear.Size = new System.Drawing.Size(99, 28);
             this.cboYear.TabIndex = 53;
             // 
             // cboPeriod

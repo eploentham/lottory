@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbDown = new System.Windows.Forms.Label();
+            this.lbTod = new System.Windows.Forms.Label();
+            this.lbUp = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lbAmt = new System.Windows.Forms.Label();
             this.txtIndex = new System.Windows.Forms.Label();
@@ -68,9 +71,7 @@
             this.pic1 = new System.Windows.Forms.PictureBox();
             this.picHand = new System.Windows.Forms.PictureBox();
             this.dgv1 = new System.Windows.Forms.DataGridView();
-            this.lbUp = new System.Windows.Forms.Label();
-            this.lbTod = new System.Windows.Forms.Label();
-            this.lbDown = new System.Windows.Forms.Label();
+            this.lbNum = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picZoomM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picZoomP)).BeginInit();
@@ -82,6 +83,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lbNum);
             this.groupBox1.Controls.Add(this.lbDown);
             this.groupBox1.Controls.Add(this.lbTod);
             this.groupBox1.Controls.Add(this.lbUp);
@@ -122,6 +124,33 @@
             this.groupBox1.Size = new System.Drawing.Size(1805, 200);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // lbDown
+            // 
+            this.lbDown.AutoSize = true;
+            this.lbDown.Location = new System.Drawing.Point(1553, 21);
+            this.lbDown.Name = "lbDown";
+            this.lbDown.Size = new System.Drawing.Size(42, 17);
+            this.lbDown.TabIndex = 74;
+            this.lbDown.Text = "รวม : ";
+            // 
+            // lbTod
+            // 
+            this.lbTod.AutoSize = true;
+            this.lbTod.Location = new System.Drawing.Point(1407, 21);
+            this.lbTod.Name = "lbTod";
+            this.lbTod.Size = new System.Drawing.Size(42, 17);
+            this.lbTod.TabIndex = 73;
+            this.lbTod.Text = "รวม : ";
+            // 
+            // lbUp
+            // 
+            this.lbUp.AutoSize = true;
+            this.lbUp.Location = new System.Drawing.Point(1247, 21);
+            this.lbUp.Name = "lbUp";
+            this.lbUp.Size = new System.Drawing.Size(42, 17);
+            this.lbUp.TabIndex = 72;
+            this.lbUp.Text = "รวม : ";
             // 
             // label4
             // 
@@ -502,32 +531,14 @@
             this.dgv1.Size = new System.Drawing.Size(605, 702);
             this.dgv1.TabIndex = 40;
             // 
-            // lbUp
+            // lbNum
             // 
-            this.lbUp.AutoSize = true;
-            this.lbUp.Location = new System.Drawing.Point(1247, 21);
-            this.lbUp.Name = "lbUp";
-            this.lbUp.Size = new System.Drawing.Size(42, 17);
-            this.lbUp.TabIndex = 72;
-            this.lbUp.Text = "รวม : ";
-            // 
-            // lbTod
-            // 
-            this.lbTod.AutoSize = true;
-            this.lbTod.Location = new System.Drawing.Point(1407, 21);
-            this.lbTod.Name = "lbTod";
-            this.lbTod.Size = new System.Drawing.Size(42, 17);
-            this.lbTod.TabIndex = 73;
-            this.lbTod.Text = "รวม : ";
-            // 
-            // lbDown
-            // 
-            this.lbDown.AutoSize = true;
-            this.lbDown.Location = new System.Drawing.Point(1553, 21);
-            this.lbDown.Name = "lbDown";
-            this.lbDown.Size = new System.Drawing.Size(42, 17);
-            this.lbDown.TabIndex = 74;
-            this.lbDown.Text = "รวม : ";
+            this.lbNum.AutoSize = true;
+            this.lbNum.Location = new System.Drawing.Point(1090, 84);
+            this.lbNum.Name = "lbNum";
+            this.lbNum.Size = new System.Drawing.Size(42, 17);
+            this.lbNum.TabIndex = 75;
+            this.lbNum.Text = "รวม : ";
             // 
             // FrmInputImage
             // 
@@ -603,5 +614,6 @@
         private System.Windows.Forms.Label lbUp;
         private System.Windows.Forms.Label lbDown;
         private System.Windows.Forms.Label lbTod;
+        private System.Windows.Forms.Label lbNum;
     }
 }

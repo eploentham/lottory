@@ -65,6 +65,7 @@
     <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -136,11 +137,11 @@
     <Compile Include="gui\FrmInputAdd.Designer.cs">
       <DependentUpon>FrmInputAdd.cs</DependentUpon>
     </Compile>
-    <Compile Include="gui\FrmInputView.cs">
+    <Compile Include="gui\FrmInputApprove.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="gui\FrmInputView.Designer.cs">
-      <DependentUpon>FrmInputView.cs</DependentUpon>
+    <Compile Include="gui\FrmInputApprove.Designer.cs">
+      <DependentUpon>FrmInputApprove.cs</DependentUpon>
     </Compile>
     <Compile Include="gui\FrmLogin.cs">
       <SubType>Form</SubType>
@@ -339,8 +340,8 @@
     <EmbeddedResource Include="gui\FrmInputAdd.resx">
       <DependentUpon>FrmInputAdd.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="gui\FrmInputView.resx">
-      <DependentUpon>FrmInputView.cs</DependentUpon>
+    <EmbeddedResource Include="gui\FrmInputApprove.resx">
+      <DependentUpon>FrmInputApprove.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="gui\FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
