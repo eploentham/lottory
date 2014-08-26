@@ -197,6 +197,16 @@ namespace lottory.objdb
             chk = conn.ExecuteNonQuery(sql);
             return chk;
         }
+        public String VoidImage(String imgId, String sfId)
+        {
+            String sql = "", chk = "";
+
+            sql = "Update " + img.table + " Set " + img.Active + "='3' " +
+                
+                "Where " + img.Id + "='" + imgId + "'";
+            chk = conn.ExecuteNonQuery(sql);
+            return chk;
+        }
         public String selectMaxRowNumberByPeriod(String yearId, String monthId, String periodId)
         {
             Image1 item = new Image1();

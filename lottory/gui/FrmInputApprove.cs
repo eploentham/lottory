@@ -60,6 +60,7 @@ namespace lottory.gui
             setGrid1();
             setDataGrdLotto();
             pageLoad = false;
+            btnLotUnActive.Visible = false;
         }
         private void setGrdLotto()
         {
@@ -114,14 +115,14 @@ namespace lottory.gui
 
             //lotNew = true;
         }
-        private void setDataGrid1(String number, String numUp, String numTod, String numDown, String rowId, String lottoId)
+        private void setDataGrd1(String number, String numUp, String numTod, String numDown, String rowId, String lottoId)
         {
-            dgv1[colLLotId, row].Value = number;
-            dgv1[colLsfId, row].Value = numUp;
-            dgv1[colLDateTime, row].Value = numTod;
-            dgv1[colLStatusInput, row].Value = numDown;
-            dgv1[colLStatusInputId, row].Value = rowId;
-            dgv1[colLImgId, row].Value = lottoId;
+            dgv1[colNumber, row].Value = number;
+            dgv1[colUp, row].Value = numUp;
+            dgv1[colTod, row].Value = numTod;
+            dgv1[colDown, row].Value = numDown;
+            dgv1[colRowId, row].Value = rowId;
+            dgv1[colLottoId1, row].Value = lottoId;
 
             row++;
         }
@@ -269,9 +270,12 @@ namespace lottory.gui
                 dgv1.RowCount = dt.Rows.Count;
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    setDataGrid1(dt.Rows[i][lc.lotdb.lot.number].ToString(), dt.Rows[i][lc.lotdb.lot.up].ToString(),
-                        dt.Rows[i][lc.lotdb.lot.tod].ToString(), dt.Rows[i][lc.lotdb.lot.down].ToString(),
-                        dt.Rows[i][lc.lotdb.lot.rowId].ToString(), dt.Rows[i][lc.lotdb.lot.lottoId].ToString());
+                    dgv1[colNumber, row].Value = dt.Rows[i][lc.lotdb.lot.number].ToString();
+                    dgv1[colUp, row].Value = dt.Rows[i][lc.lotdb.lot.up].ToString();
+                    dgv1[colTod, row].Value = dt.Rows[i][lc.lotdb.lot.tod].ToString();
+                    dgv1[colDown, row].Value = dt.Rows[i][lc.lotdb.lot.down].ToString();
+                    dgv1[colRowId, row].Value = dt.Rows[i][lc.lotdb.lot.rowId].ToString();
+                    dgv1[colLottoId1, row].Value = dt.Rows[i][lc.lotdb.lot.lottoId].ToString();
                 }
                 //lotId1 = lotoId;
             }
@@ -311,9 +315,10 @@ namespace lottory.gui
             }
             else
             {
-                viewLotto("");
+                viewLotto(dgvLotto[colLLotId, e.RowIndex].Value.ToString());
+                gBLot.Visible = true;
+                chkLotActive.Checked = true;
             }
-            
         }
 
         private void dgv1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -415,27 +420,46 @@ namespace lottory.gui
 
         private void btnLotUnActive_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("ต้องการยกเลิกทั้งใบ", "ยกเลิก", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+            if (chkLotUnActive.Checked)
             {
-                lc.lotdb.VoidLotto(txtLotId.Text, sf.Id);
-                txtDown.Text = "";
-                txtInput.Text = "";
-                txtTod.Text = "";
-                txtUp.Text = "";
-                setGrid1(txtImgId.Text);
+                if (MessageBox.Show("ต้องการยกเลิกทั้งใบ", "ยกเลิก", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+                {
+                    lc.lotdb.VoidLotto(txtLotId.Text, sf.Id);
+                    lc.imgdb.VoidImage(txtImgId.Text, sf.Id);
+                    txtDown.Text = "";
+                    txtInput.Text = "";
+                    txtTod.Text = "";
+                    txtUp.Text = "";
+                    setGrid1(txtImgId.Text);
+                }
             }
+            else if (chkLotDel.Checked)                
+            {
+                if (MessageBox.Show("ต้องการยกเลิกทั้งใบ และลบภาพด้วย", "ยกเลิก", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+                {
+                    //btnLotUnActive.Visible = true;
+                    lc.lotdb.VoidLotto(txtLotId.Text, sf.Id);
+
+                    txtDown.Text = "";
+                    txtInput.Text = "";
+                    txtTod.Text = "";
+                    txtUp.Text = "";
+                    setGrid1(txtImgId.Text);
+                }
+            }            
         }
 
         private void chkLotDel_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("ต้องการยกเลิกทั้งใบ และลบภาพด้วย", "ยกเลิก", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
             {
-                lc.lotdb.VoidLotto(txtLotId.Text, sf.Id);
-                txtDown.Text = "";
-                txtInput.Text = "";
-                txtTod.Text = "";
-                txtUp.Text = "";
-                setGrid1(txtImgId.Text);
+                btnLotUnActive.Visible = true;
+                //lc.lotdb.VoidLotto(txtLotId.Text, sf.Id);
+                //txtDown.Text = "";
+                //txtInput.Text = "";
+                //txtTod.Text = "";
+                //txtUp.Text = "";
+                //setGrid1(txtImgId.Text);
             }
         }
     }
