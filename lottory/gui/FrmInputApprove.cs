@@ -260,6 +260,23 @@ namespace lottory.gui
             txtUp.Text = lot.up;
             txtRowId.Text = lot.rowId;
         }
+        private void viewLotto(String lotoId)
+        {
+            DataTable dt = lc.lotdb.selectByLot(lotoId);
+            setGrid1();
+            if (dt.Rows.Count > 0)
+            {
+                dgv1.RowCount = dt.Rows.Count;
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    setDataGrid1(dt.Rows[i][lc.lotdb.lot.number].ToString(), dt.Rows[i][lc.lotdb.lot.up].ToString(),
+                        dt.Rows[i][lc.lotdb.lot.tod].ToString(), dt.Rows[i][lc.lotdb.lot.down].ToString(),
+                        dt.Rows[i][lc.lotdb.lot.rowId].ToString(), dt.Rows[i][lc.lotdb.lot.lottoId].ToString());
+                }
+                //lotId1 = lotoId;
+            }
+            dgv1.Enabled = false;
+        }
         private void FrmInputView_Load(object sender, EventArgs e)
         {
 
@@ -294,7 +311,7 @@ namespace lottory.gui
             }
             else
             {
-
+                viewLotto("");
             }
             
         }

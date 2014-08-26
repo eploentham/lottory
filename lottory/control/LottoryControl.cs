@@ -713,7 +713,7 @@ namespace lottory.control
         public void GetConfig()
         {
             initC.clearInput = iniFile.Read("clearinput");
-            initC.connectServer = iniFile.Read("connectserver");
+            initC.connectDatabaseServer = iniFile.Read("connectserver");
             initC.ServerIP = iniFile.Read("host");
             initC.User = iniFile.Read("username");
             initC.Password = iniFile.Read("password");

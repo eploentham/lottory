@@ -102,7 +102,6 @@ namespace lottory.gui
                 lc.SetPathShareImage(txtConnectShareData.Text);
                 lc.SetPathShareData(txtConnectShareImage.Text);
             }
-            
 
             lc.GetConfig();
         }
