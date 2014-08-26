@@ -85,7 +85,7 @@ namespace lottory.objdb
         {
             String sql = "";
             DataTable dt = new DataTable();
-            sql = "Select * From " + rw.table + " ";
+            sql = "Select * From " + rw.table + " Order By "+rw.yearId+","+rw.monthId+","+rw.periodId;
             dt = conn.selectData(sql);
 
             return dt;

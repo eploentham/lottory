@@ -72,6 +72,10 @@ namespace lottory
             txtRDown34.Text = rw.rewardDown34;
             txtReward1.Text = rw.reward1;
             txtRewardId.Text = rw.Id;
+            cboYear.Text = rw.yearId;
+            cboMonth.SelectedValue = rw.monthId;
+            cboPeriod.SelectedValue = rw.periodId;
+
             //rw.dateReward;
         }
         private Reward getControl()

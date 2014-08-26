@@ -68,6 +68,15 @@ namespace lottory.gui
         private void setControl()
         {
             rw = lc.selectRewardByPeriod(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString());
+            if (rw.Id.Equals(""))
+            {
+                btnSearch.Enabled = false;
+            }
+            else
+            {
+                btnSearch.Enabled = true;
+            }
+            
             txtRewardDown2.Text = rw.rewardDown2;
             txtRDown31.Text = rw.rewardDown31;
             txtRDown32.Text = rw.rewardDown32;
@@ -257,9 +266,14 @@ namespace lottory.gui
             Font font = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
             pB1.Minimum = 0;
             pB1.Maximum = dgv1.Rows.Count;
+            if(rw.Id.Equals(""))
+            {
+                return;
+            }
             calReward();
             pB1.Visible = true;
             String rowId = "", num = "", chk = "";
+            
             for (int i = 0; i < dgv1.RowCount; i++)
             {
                 num = dgv1[colNumber, i].Value.ToString();
