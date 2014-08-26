@@ -61,6 +61,7 @@ namespace lottory.gui
             setDataGrdLotto();
             pageLoad = false;
             btnLotUnActive.Visible = false;
+            btnSaveApprove.Visible = false;
         }
         private void setGrdLotto()
         {
@@ -164,6 +165,7 @@ namespace lottory.gui
         }
         private void viewImage(String imgId)
         {
+            
             Image1 img = new Image1();
             //txtImgId.Text = name[index];
             //txtIndex.Text = index.ToString();
@@ -188,6 +190,7 @@ namespace lottory.gui
                 //picZoomP.Visible = true;
                 //picHand.Visible = true;
             }
+            
         }
         private Image GetCopyImage(string path)
         {
@@ -279,7 +282,7 @@ namespace lottory.gui
                 }
                 //lotId1 = lotoId;
             }
-            dgv1.Enabled = false;
+            dgv1.ReadOnly = true;
         }
         private void FrmInputView_Load(object sender, EventArgs e)
         {
@@ -293,6 +296,8 @@ namespace lottory.gui
 
         private void dgvLotto_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            Cursor cursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
             if (e.RowIndex == -1)
             {
                 return;
@@ -306,6 +311,7 @@ namespace lottory.gui
                 return;
             }
             txtImgId.Text = dgvLotto[colLImgId, e.RowIndex].Value.ToString();
+            pic1.Image = null;
             if (dgvLotto[colLStatusInputId, e.RowIndex].Value.ToString().Equals("2"))
             {
                 viewImage(txtImgId.Text);
@@ -319,6 +325,9 @@ namespace lottory.gui
                 gBLot.Visible = true;
                 chkLotActive.Checked = true;
             }
+            gBLotto.Visible = false;
+            btnSaveApprove.Visible = true;
+            Cursor.Current = cursor;
         }
 
         private void dgv1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -333,6 +342,7 @@ namespace lottory.gui
             }
             //txtLotId.Text = dgv1[colRowId, e.RowIndex].Value.ToString();
             setLotto(dgv1[colRowId, e.RowIndex].Value.ToString());
+            gBLotto.Visible = true;
         }
 
         private void chkActive_Click(object sender, EventArgs e)
@@ -404,7 +414,7 @@ namespace lottory.gui
 
         private void chkLotActive_Click(object sender, EventArgs e)
         {
-            if (chkActive.Checked)
+            if (chkLotActive.Checked)
             {
                 btnLotUnActive.Visible = false;
             }
@@ -412,9 +422,9 @@ namespace lottory.gui
 
         private void chkLotUnActive_Click(object sender, EventArgs e)
         {
-            if (chkActive.Checked)
+            if (chkLotUnActive.Checked)
             {
-                btnUnActive.Visible = true;
+                btnLotUnActive.Visible = true;
             }
         }
 
@@ -433,25 +443,35 @@ namespace lottory.gui
                     setGrid1(txtImgId.Text);
                 }
             }
-            else if (chkLotDel.Checked)                
+            else if (chkLotDel.Checked) 
             {
                 if (MessageBox.Show("ต้องการยกเลิกทั้งใบ และลบภาพด้วย", "ยกเลิก", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
                 {
                     //btnLotUnActive.Visible = true;
+                    String pahtFile = lc.initC.pathImage + "\\" + cboYear.Text + "\\" + cboMonth.SelectedValue.ToString() + "\\" +
+                        cboPeriod.SelectedValue.ToString();
                     lc.lotdb.VoidLotto(txtLotId.Text, sf.Id);
-
+                    lc.imgdb.VoidImage(txtImgId.Text, sf.Id);
+                    if (File.Exists(pahtFile + "\\" + txtImgId.Text + "_1.lotto"))
+                    {
+                        File.Delete(pahtFile + "\\" + txtImgId.Text + "_1.lotto");
+                    }
+                    if (File.Exists(pahtFile + "\\" + txtImgId.Text + "_1.thumb"))
+                    {
+                        File.Delete(pahtFile + "\\" + txtImgId.Text + "_1.thumb");
+                    }
                     txtDown.Text = "";
                     txtInput.Text = "";
                     txtTod.Text = "";
                     txtUp.Text = "";
                     setGrid1(txtImgId.Text);
                 }
-            }            
+            }
         }
 
         private void chkLotDel_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("ต้องการยกเลิกทั้งใบ และลบภาพด้วย", "ยกเลิก", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+            if (chkLotDel.Checked)
             {
                 btnLotUnActive.Visible = true;
                 //lc.lotdb.VoidLotto(txtLotId.Text, sf.Id);
@@ -461,6 +481,11 @@ namespace lottory.gui
                 //txtUp.Text = "";
                 //setGrid1(txtImgId.Text);
             }
+        }
+
+        private void btnSaveApprove_Click(object sender, EventArgs e)
+        {
+            //lc.lotdb.updateApprove(
         }
     }
 }

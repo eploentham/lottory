@@ -341,7 +341,7 @@
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{364EC733-215D-4E0D-B59A-4726A32BB384}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td>{AEFB168A-A162-44FE-A9E7-02E70689EBFB}</td><td>DATABASEDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>lottory.exe</td><td>{6CAD83A3-3357-4D9C-ACA4-316212CE3389}</td><td>INSTALLDIR</td><td>2</td><td/><td>lottory.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>lottory.exe</td><td>{78136BB0-AF93-410C-8E41-4E1964F23619}</td><td>INSTALLDIR</td><td>2</td><td/><td>lottory.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -1173,7 +1173,9 @@
 		<row><td>WindowsFolder</td><td>TARGETDIR</td><td>.:Windows</td><td/><td>0</td><td/></row>
 		<row><td>WindowsVolume</td><td>TARGETDIR</td><td>.:WinRoot</td><td/><td>0</td><td/></row>
 		<row><td>YOUR_COMPANY_NAME</td><td>ProgramFilesFolder</td><td>YOURCO~1|Your Company Name</td><td/><td>0</td><td/></row>
+		<row><td>lottory</td><td>wynnso_1_wynn_soft</td><td>Lottory</td><td/><td>1</td><td/></row>
 		<row><td>setup__1_setup_lottory</td><td>yourco_1_your_company_name</td><td>SETUP_~1|Setup_Lottory</td><td/><td>1</td><td/></row>
+		<row><td>wynnso_1_wynn_soft</td><td>ProgramMenuFolder</td><td>WYNNSO~1|Wynn Soft</td><td/><td>1</td><td/></row>
 		<row><td>yourco_1_your_company_name</td><td>ProgramMenuFolder</td><td>YOURCO~1|Your Company Name</td><td/><td>1</td><td/></row>
 	</table>
 
@@ -1883,9 +1885,9 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
-		<row><td>lottory.exe</td><td>lottory.exe</td><td>lottory.exe</td><td>0</td><td/><td/><td/><td>1</td><td>D:\source\lottory\lottory\bin\Debug\lottory.exe</td><td>1</td><td/></row>
-		<row><td>lottory.ini</td><td>ISX_DEFAULTCOMPONENT</td><td>lottory.ini</td><td>0</td><td/><td/><td/><td>1</td><td>D:\source\lottory\lottory\bin\Debug\lottory.ini</td><td>1</td><td/></row>
-		<row><td>lottory.mdb</td><td>ISX_DEFAULTCOMPONENT1</td><td>lottory.mdb</td><td>0</td><td/><td/><td/><td>1</td><td>D:\source\lottory\lottory\bin\Debug\Database\lottory.mdb</td><td>1</td><td/></row>
+		<row><td>lottory.exe</td><td>lottory.exe</td><td>lottory.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\source\lottory\lottory\bin\Debug\lottory.exe</td><td>1</td><td/></row>
+		<row><td>lottory.ini</td><td>ISX_DEFAULTCOMPONENT</td><td>lottory.ini</td><td>0</td><td/><td/><td/><td>1</td><td>C:\source\lottory\lottory\bin\Debug\lottory.ini</td><td>1</td><td/></row>
+		<row><td>lottory.mdb</td><td>ISX_DEFAULTCOMPONENT1</td><td>lottory.mdb</td><td>0</td><td/><td/><td/><td>1</td><td>C:\source\lottory\lottory\bin\Debug\Database\lottory.mdb</td><td>1</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2032,7 +2034,7 @@
 		<col def="S0">Miscellaneous</col>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_DC5D8F2F_EEF6_4B39_B11E_EE9DF5AC8C23_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td/><td/><td>_DAA9F7E6_BD94_46BD_94A8_BDF56B653640_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>lottory.exe</td><td/><td/><td>_B8E78BA0_DE6E_448D_BCE3_7E5A3BF97F18_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>lottory.exe</td><td/><td/><td>_1313A142_357E_4630_8C24_BD70D718EAB1_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISCustomActionReference">
@@ -2650,7 +2652,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>Wynn Soft</td><td>0</td><td/><td>1663173905</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>Wynn Soft</td><td>0</td><td/><td>-735948362</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>1260535563</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>1260535563</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION40CLIENT</td><td>1033</td><td>Microsoft .NET Framework 4.0 Client Package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>1260535627</td></row>
@@ -3465,6 +3467,7 @@
 		<row><td>IDS_SETUPEXE_EXPIRE_MSG</td><td>1033</td><td>This setup works until %s. The setup will now exit.</td><td>0</td><td/><td>1260535563</td></row>
 		<row><td>IDS_SETUPEXE_LAUNCH_COND_E</td><td>1033</td><td>This setup was built with an evaluation version of InstallShield and can only be launched from setup.exe.</td><td>0</td><td/><td>1260535563</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>1033</td><td>LAUNCH~1.EXE|Launch lottory.exe</td><td>0</td><td/><td>1260548558</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME2</td><td>1033</td><td>LAUNCH~1.EXE|Launch lottory.exe</td><td>0</td><td/><td>-735966698</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO</td><td>1033</td><td>From the list of servers below, select the database server you would like to target.</td><td>0</td><td/><td>1260535563</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_DB</td><td>1033</td><td>From the list of catalog names below, select the database catalog you would like to target.</td><td>0</td><td/><td>1260535563</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_TEMPLATE</td><td>1033</td><td>[IS_SQLBROWSE_INTRO]</td><td>0</td><td/><td>1260535563</td></row>
@@ -3754,9 +3757,9 @@
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>1260535563</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>1260535563</td></row>
 		<row><td>ID_STRING1</td><td>1033</td><td/><td>0</td><td/><td>1260537611</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>http://www.Wynn-Soft.com</td><td>0</td><td/><td>-2094908048</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>http://www.WynnSoft.com</td><td>0</td><td/><td>-735948362</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>LAUNCH~1.EXE|Launch lottory.exe</td><td>0</td><td/><td>1260577230</td></row>
-		<row><td>ID_STRING4</td><td>1033</td><td>Wynn Soft</td><td>0</td><td/><td>1663173905</td></row>
+		<row><td>ID_STRING4</td><td>1033</td><td>Wynn Soft</td><td>0</td><td/><td>-735948362</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>1260535563</td></row>
 	</table>
 
@@ -3866,6 +3869,7 @@
 		<col def="I2">ISIconIndex</col>
 		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;VSSolutionFolder&gt;\resource\App.ico</td><td>0</td></row>
 		<row><td>lottory.exe1_B677832AD2234C4286A7BAAD591489F3.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
+		<row><td>lottory.exe_489418BB250A4BA2BCE57589823DB350.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>lottory.exe_AA3B73D4102740679E0F81EBA8136E8E.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 	</table>
 
@@ -4453,9 +4457,9 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="L255">FileName</col>
 		<col def="s72">DirProperty</col>
 		<col def="i2">InstallMode</col>
-		<row><td>FileKey1</td><td>lottory.exe</td><td/><td>yourco_1_your_company_name</td><td>2</td></row>
-		<row><td>FileKey2</td><td>lottory.exe</td><td/><td>setup__1_setup_lottory</td><td>2</td></row>
-		<row><td>lottory.exe</td><td>lottory.exe</td><td/><td>setup__1_setup_lottory</td><td>2</td></row>
+		<row><td>FileKey1</td><td>lottory.exe</td><td/><td>wynnso_1_wynn_soft</td><td>2</td></row>
+		<row><td>FileKey2</td><td>lottory.exe</td><td/><td>lottory</td><td>2</td></row>
+		<row><td>lottory.exe</td><td>lottory.exe</td><td/><td>lottory</td><td>2</td></row>
 	</table>
 
 	<table name="RemoveIniFile">
@@ -4541,8 +4545,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>lottory.exe</td><td>setup__1_setup_lottory</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>lottory.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>lottory.exe_AA3B73D4102740679E0F81EBA8136E8E.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>lottory.exe1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>lottory.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>lottory.exe1_B677832AD2234C4286A7BAAD591489F3.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>lottory.exe</td><td>lottory</td><td>##IDS_SHORTCUT_DISPLAY_NAME2##</td><td>lottory.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>lottory.exe_489418BB250A4BA2BCE57589823DB350.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">

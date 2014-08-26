@@ -76,6 +76,7 @@ namespace lottory.objdb
             lot.OLTod = "over_limit_tod";
             lot.OLDown = "over_limit_down";
             lot.StatusVoid = "status_void";
+            lot.statusInputApprove = "status_input_approve";
 
             lot.table = "t_lottory";
             lot.pkField = "row_id";
@@ -113,6 +114,7 @@ namespace lottory.objdb
             item.OLDown = dt.Rows[0][lot.OLDown].ToString();
             item.OLTod = dt.Rows[0][lot.OLTod].ToString();
             item.StatusVoid = dt.Rows[0][lot.StatusVoid].ToString();
+            item.statusInputApprove = dt.Rows[0][lot.statusInputApprove].ToString();
             
             return item;
         }
@@ -625,6 +627,7 @@ namespace lottory.objdb
             p.dateCreate = p.dateGenDB;
             p.staffCreate = p.staffId;
             p.Remark = p.Remark.Replace("''", "'");
+            p.statusInputApprove = "";
             //sql = "Insert Into " + lot.table + " (" + lot.pkField + "," + lot.lottoId + "," + lot.staffId + "," +
             //    lot.number + "," + lot.up + "," + lot.tod + "," + 
             //    lot.down + "," + lot.monthId + "," + lot.periodId + "," + 
@@ -652,7 +655,7 @@ namespace lottory.objdb
                 lot.staffCancel + "," + lot.yearId + "," + lot.rowNumber + "," +
                 lot.statusApprove + "," + lot.thooTranferId + "," + lot.dateApprove + "," +
                 lot.staffApproveId + "," + lot.CDbl + "," + lot.statusInput + "," +
-                lot.imgId + "," + lot.log + ") " +
+                lot.imgId + "," + lot.log + "," + lot.statusInputApprove + ") " +
                 "Values('" + p.rowId + "','" + p.lottoId + "','" + p.staffId + "','" +
                 p.number + "'," + p.up + "," + p.tod + "," +
                 p.down + ",'" + p.monthId + "','" + p.periodId + "','" +
@@ -662,7 +665,7 @@ namespace lottory.objdb
                 "'','" + p.yearId + "','" + p.rowNumber + "','" +
                 p.statusApprove + "','" + p.thooTranferId + "','" + p.dateApprove + "','" +
                 p.staffApproveId + "','" + p.CDbl + "','" + p.statusInput + "','" + 
-                p.imgId + "','')";
+                p.imgId + "','','" + p.statusInputApprove+"')";
             try
             {
                 chk = conn.ExecuteNonQuery(sql);
@@ -876,6 +879,15 @@ namespace lottory.objdb
             finally
             {
             }
+            return chk;
+        }
+        public String updateStatusApprove(String lotId)
+        {
+            String sql = "", chk = "";
+
+            sql = "Update " + lot.table + " Set " + lot.statusInputApprove + "='1' " +
+                "Where " + lot.lottoId + "='" + lotId + "'";
+            chk = conn.ExecuteNonQuery(sql);
             return chk;
         }
     }
