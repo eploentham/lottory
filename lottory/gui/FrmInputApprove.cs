@@ -202,6 +202,7 @@ namespace lottory.gui
         }
         private void setGrid1(String imgId)
         {
+            dgv1.Rows.Clear();
             DataTable dt = lc.lotdb.selectByImg(imgId);
             //setGrdLotto();
             if (dt.Rows.Count > 0)
@@ -221,9 +222,16 @@ namespace lottory.gui
                     dgv1[colRowId, i].Value = dt.Rows[i][lc.lotdb.lot.rowId].ToString();
                     //dgv1[colLImgId, row].Value = lottoId;
 
-                    if ((i % 2) != 0)
+                    if (dt.Rows[i][lc.lotdb.lot.statusInputApprove].ToString().Equals("1"))
                     {
-                        dgv1.Rows[i].DefaultCellStyle.BackColor = Color.LightSalmon;
+                        dgv1.Rows[i].DefaultCellStyle.BackColor = Color.CadetBlue;
+                    }
+                    else
+                    {
+                        if ((i % 2) != 0)
+                        {
+                            dgv1.Rows[i].DefaultCellStyle.BackColor = Color.LightSalmon;
+                        }
                     }
                 }
                 //lotId1 = lotoId;
@@ -311,6 +319,7 @@ namespace lottory.gui
                 return;
             }
             txtImgId.Text = dgvLotto[colLImgId, e.RowIndex].Value.ToString();
+            txtLotId.Text = dgvLotto[colLLotId, e.RowIndex].Value.ToString();
             pic1.Image = null;
             if (dgvLotto[colLStatusInputId, e.RowIndex].Value.ToString().Equals("2"))
             {
@@ -485,7 +494,12 @@ namespace lottory.gui
 
         private void btnSaveApprove_Click(object sender, EventArgs e)
         {
-            //lc.lotdb.updateApprove(
+            lc.lotdb.updateStatusInputApprove(txtLotId.Text);
+        }
+
+        private void btnInputApproveSome_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

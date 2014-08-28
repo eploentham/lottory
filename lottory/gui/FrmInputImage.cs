@@ -97,9 +97,9 @@ namespace lottory.gui
 
             lotNew = true;
         }
-        private void setGrid1(String lotoId)
+        private void setGrid1(String imgId)
         {
-            DataTable dt = lc.lotdb.selectByImg(lotoId);
+            DataTable dt = lc.lotdb.selectByImg(imgId);
             setGrid1();
             if (dt.Rows.Count > 0)
             {
@@ -112,8 +112,8 @@ namespace lottory.gui
                     {
                         dgv1.Rows[i].DefaultCellStyle.BackColor = Color.LightSalmon;
                     }
+                    lotId1 = dt.Rows[i][lc.lotdb.lot.lottoId].ToString();
                 }
-                lotId1 = lotoId;
                 lotNew = false;
                 dgv1.ReadOnly = true;
             }

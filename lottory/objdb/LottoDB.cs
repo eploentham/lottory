@@ -881,7 +881,7 @@ namespace lottory.objdb
             }
             return chk;
         }
-        public String updateStatusApprove(String lotId)
+        public String updateStatusInputApprove(String lotId)
         {
             String sql = "", chk = "";
 
