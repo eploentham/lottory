@@ -147,6 +147,14 @@ namespace lottory.gui
             pB1.Visible = true;
             lV1.Clear();
             DirectoryInfo dir = new DirectoryInfo(pahtFile);
+            DataTable dt = new DataTable();
+            if (cboSale.SelectedItem != null)
+            {
+                //ComboBoxItem aa = new ComboBoxItem();
+                //aa = lc.getCboItem(cboSale, cboSale.SelectedText);
+                dt = lc.imgdb.selectBySaleId(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), lc.cf.getValueCboItem(cboSale));
+            }
+            
             iL.Images.Clear();
             name.Clear();
             int cnt = 0;
@@ -172,8 +180,27 @@ namespace lottory.gui
                     cnt++;
                     if (file.Extension.Equals(".thumb"))
                     {
-                        iL.Images.Add(Image.FromFile(file.FullName));
-                        name.Add(file.Name.Replace(file.Extension, "") + ".lotto");
+                        if (cboSale.SelectedItem != null)
+                        {
+                            for (int i = 0; i < dt.Rows.Count; i++)
+                            {
+                                fileName = file.FullName.Replace(pahtFile, "");
+                                fileName = fileName.Replace("\\", "");
+                                fileName = fileName.Replace(".thumb", "");
+                                fileName = fileName.Replace("_0", "");
+                                fileName = fileName.Replace("_1", "");
+                                if (fileName.Equals(dt.Rows[i][lc.imgdb.img.Id].ToString()))
+                                {
+                                    iL.Images.Add(Image.FromFile(file.FullName));
+                                    name.Add(file.Name.Replace(file.Extension, "") + ".lotto");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            iL.Images.Add(Image.FromFile(file.FullName));
+                            name.Add(file.Name.Replace(file.Extension, "") + ".lotto");
+                        }
                     }
                     pB1.Value = cnt;
                 }
@@ -183,7 +210,8 @@ namespace lottory.gui
                 }
             }
             lV1.View = View.LargeIcon;
-            iL.ImageSize = new Size(64, 64);
+            //iL.ImageSize = new Size(64, 64);
+            iL.ImageSize = new Size(128, 128);
             lV1.LargeImageList = iL;
             lV1.CheckBoxes = true;
             //or
@@ -217,6 +245,7 @@ namespace lottory.gui
                 return;
             }
             lc.imgdb.UpdateLock(txtImgId.Text);
+            cboSale.Text = lc.getTextCboItem(cboSale, img.saleId);
 
             String pahtFile = lc.initC.pathImage + "\\" + cboYear.Text + "\\" + cboMonth.SelectedValue.ToString() + "\\" + cboPeriod.SelectedValue.ToString();
             //File.
@@ -361,6 +390,7 @@ namespace lottory.gui
             lot.up = lc.cf.LottoNull(dgv1[colUp, row].Value);
             lot.statusInput= "2";
             lot.imgId = txtImgId.Text.Replace(txtImgId.Text.Substring(txtImgId.Text.IndexOf("_")), "");
+            lot.number = lot.number.Trim();
             //if (txtImgId.Text.IndexOf("_0") > 0)
             //{
             //    lot.imgId = txtImgId.Text.Replace(txtImgId.Text.Substring(txtImgId.Text.IndexOf("_0")), "");
@@ -488,10 +518,18 @@ namespace lottory.gui
                 //numUp = (dgv1[colUp, i].Value.ToString());
                 //numTod = (dgv1[colTod, i].Value.ToString());
                 //numDown = (dgv1[colDown, i].Value.ToString());
-                amt += (Double.Parse(dgv1[colUp, i].Value.ToString()) + Double.Parse(lc.cf.NumberNull2(dgv1[colTod, i].Value.ToString())) + Double.Parse(lc.cf.NumberNull2(dgv1[colDown, i].Value.ToString())));
-                up += (Double.Parse(dgv1[colUp, i].Value.ToString()));
-                tod += (Double.Parse(lc.cf.NumberNull2(dgv1[colTod, i].Value.ToString())));
-                down += (Double.Parse(lc.cf.NumberNull2(dgv1[colDown, i].Value.ToString())));
+                if (dgv1[colDown, i].Value != null)
+                {
+                    if (dgv1[colUp, i].Value != null)
+                    {
+                        amt += (Double.Parse(dgv1[colUp, i].Value.ToString()) + Double.Parse(lc.cf.NumberNull2(dgv1[colTod, i].Value.ToString())) + Double.Parse(lc.cf.NumberNull2(dgv1[colDown, i].Value.ToString())));
+                        up += (Double.Parse(dgv1[colUp, i].Value.ToString()));
+                        tod += (Double.Parse(lc.cf.NumberNull2(dgv1[colTod, i].Value.ToString())));
+                        down += (Double.Parse(lc.cf.NumberNull2(dgv1[colDown, i].Value.ToString())));
+                    }
+                    
+                }
+                
                 if ((i % 2) != 0)
                 {
                     dgv1.Rows[i].DefaultCellStyle.BackColor = Color.DarkKhaki;
@@ -550,6 +588,11 @@ namespace lottory.gui
         {
             if (e.KeyCode == Keys.Enter)
             {
+                if (cboSale.Text.Equals(""))
+                {
+                    MessageBox.Show("ไม่ได้เลือก Sale", "ไม่ได้เลือก Sale");
+                    return;
+                }
                 if (txtInput.Text.Length>3)
                 {
                     return;
@@ -772,6 +815,37 @@ namespace lottory.gui
         }
 
         private void cboYear_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!pageLoad)
+            {
+                viewImage();
+            }
+        }
+
+        private void FrmInputImage_Resize(object sender, EventArgs e)
+        {
+            setResize();
+        }
+        private void setResize()
+        {
+            //dgvAdd.Width = this.Width - 80;
+            ////groupBox3.Left = dgvAdd.Width - groupBox3.Width - 50;
+            //btnSave.Left = dgvAdd.Width - 80;
+            //btnDoc.Left = btnSave.Left;
+            //btnPrint.Left = btnSave.Left;
+            //btnPrintT.Left = btnSave.Left;
+            //btnCalEx.Left = btnSave.Left;
+            //groupBox2.Left = this.Width - groupBox2.Width - btnSave.Width - 150;
+            //groupBox3.Left = groupBox2.Left;
+            //groupBox1.Height = this.Height = 150;
+        }
+
+        private void cboSale_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboSale_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!pageLoad)
             {

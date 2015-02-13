@@ -90,14 +90,14 @@ namespace lottory.objdb
             {
                 p.Id = p.getGenID();
             }
-            p.thoName = p.thoName.Replace("''", "'");
-            //p.Remark = p.Remark.Replace("''", "'");
-            sql = "Insert Into " + lRate.table + " (" + lRate.pkField + "," + lRate.Active + "," + lRate.Amount + "," +
-                lRate.AmountPer + "," + lRate.monthId + "," + lRate.periodId + "," +
-                lRate.rowNumber + "," + lRate.thoId + "," + lRate.thoName + "," + lRate.yearId + ") " +
-                "Values('" + p.Id + "','" + p.Active + "','" + p.Amount + "','" +
-                p.AmountPer + "','" + p.monthId + "','" + p.periodId + "','" +
-                p.rowNumber + "','" + p.thoId + "','" + p.thoName + "','" + p.yearId + "')";
+            //p.thoName = p.thoName.Replace("''", "'");
+            ////p.Remark = p.Remark.Replace("''", "'");
+            //sql = "Insert Into " + lRate.table + " (" + lRate.pkField + "," + lRate.Active + "," + lRate.Amount + "," +
+            //    lRate.AmountPer + "," + lRate.monthId + "," + lRate.periodId + "," +
+            //    lRate.rowNumber + "," + lRate.thoId + "," + lRate.thoName + "," + lRate.yearId + ") " +
+            //    "Values('" + p.Id + "','" + p.Active + "','" + p.Amount + "','" +
+            //    p.AmountPer + "','" + p.monthId + "','" + p.periodId + "','" +
+            //    p.rowNumber + "','" + p.thoId + "','" + p.thoName + "','" + p.yearId + "')";
             try
             {
                 chk = conn.ExecuteNonQuery(sql);
@@ -116,17 +116,17 @@ namespace lottory.objdb
         {
             String sql = "", chk = "";
 
-            p.thoName = p.thoName.Replace("''", "'");
+            //p.thoName = p.thoName.Replace("''", "'");
 
-            sql = "Update " + lRate.table + " Set " + lTho.Amount + "='" + p.Amount + "', " +
-                lRate.AmountPer + "='" + p.AmountPer + "', " +
-                lRate.monthId + "='" + p.monthId + "', " +
-                lRate.periodId + "='" + p.periodId + "', " +
-                lRate.rowNumber + "='" + p.rowNumber + "', " +
-                lRate.thoId + "='" + p.thoId + "', " +
-                lRate.thoName + "='" + p.thoName + "', " +
-                lRate.yearId + "='" + p.yearId + "' " +
-                "Where " + lTho.pkField + "='" + p.Id + "'";
+            //sql = "Update " + lRate.table + " Set " + lTho.Amount + "='" + p.Amount + "', " +
+            //    lRate.AmountPer + "='" + p.AmountPer + "', " +
+            //    lRate.monthId + "='" + p.monthId + "', " +
+            //    lRate.periodId + "='" + p.periodId + "', " +
+            //    lRate.rowNumber + "='" + p.rowNumber + "', " +
+            //    lRate.thoId + "='" + p.thoId + "', " +
+            //    lRate.thoName + "='" + p.thoName + "', " +
+            //    lRate.yearId + "='" + p.yearId + "' " +
+            //    "Where " + lTho.pkField + "='" + p.Id + "'";
             try
             {
                 chk = conn.ExecuteNonQuery(sql);

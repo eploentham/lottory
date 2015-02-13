@@ -57,6 +57,14 @@ namespace lottory
         }
         private void setControl(String rId)
         {
+            if (cboPeriod.SelectedValue == null)
+            {
+                return;
+            }
+            if (cboMonth.SelectedValue == null)
+            {
+                return;
+            }
             if (rId.Equals(""))
             {
                 rw = lc.selectRewardByPeriod(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString());
@@ -239,7 +247,7 @@ namespace lottory
         {
             if (!pageLoad)
             {
-                setControl(rw.Id);
+                //setControl(rw.Id);
             }
         }
 
@@ -247,7 +255,7 @@ namespace lottory
         {
             if (!pageLoad)
             {
-                setControl(rw.Id);
+                //setControl(rw.Id);
             }
         }
 

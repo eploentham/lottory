@@ -77,6 +77,7 @@ namespace lottory.objdb
             lot.OLDown = "over_limit_down";
             lot.StatusVoid = "status_void";
             lot.statusInputApprove = "status_input_approve";
+            lot.number2 = "number2";
 
             lot.table = "t_lottory";
             lot.pkField = "row_id";
@@ -115,6 +116,7 @@ namespace lottory.objdb
             item.OLTod = dt.Rows[0][lot.OLTod].ToString();
             item.StatusVoid = dt.Rows[0][lot.StatusVoid].ToString();
             item.statusInputApprove = dt.Rows[0][lot.statusInputApprove].ToString();
+            item.number2 = dt.Rows[0][lot.number2].ToString();
             
             return item;
         }
@@ -256,14 +258,63 @@ namespace lottory.objdb
         {
             String sql = "";
             DataTable dt = new DataTable();
-            sql = "Select * From " + lot.table + " Where  " +
-                lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
-                lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' " +
-                "Order By " + lot.CDbl + "," + lot.rowNumber;
+            sql = "Select lot.*, sa.sale_name "+
+                "From " + lot.table + " as lot "+
+                "Inner Join b_sale sa on sa.sale_id = lot.sale_id "+
+                "Where  lot." +
+                lot.Active + "='1' and lot." + lot.yearId + "='" + yearId + "' and lot." +
+                lot.monthId + "='" + monthId + "' and lot." + lot.periodId + "='" + periodId + "' " +
+                "Order By lot." + lot.CDbl + ",lot." + lot.rowNumber;
             
             dt = conn.selectData(sql);
 
             return dt;            
+        }
+        public DataTable selectByPeriod2(String yearId, String monthId, String periodId)
+        {
+            String sql = "";
+            DataTable dt = new DataTable();
+            sql = "Select lot."+lot.number +", sum("+lot.up+") as up, sum("+lot.down+") as down " +
+                "From " + lot.table + " as lot " +                
+                "Where  lot." +
+                lot.Active + "='1' and lot." + lot.yearId + "='" + yearId + "' and lot." +
+                lot.monthId + "='" + monthId + "' and lot." + lot.periodId + "='" + periodId + "' and len("+lot.number+") =2 " +
+                "Group By lot." + lot.number+" Order By lot." + lot.number;
+
+            dt = conn.selectData(sql);
+
+            return dt;
+        }
+        public DataTable selectByPeriod3(String yearId, String monthId, String periodId)
+        {
+            String sql = "";
+            DataTable dt = new DataTable();
+            sql = "Select lot." + lot.number + ", sum( lot." + lot.up + ") as up, sum( lot." + lot.down + ") as down, sum( lot." + lot.tod + ") as tod " +
+                "From " + lot.table + " as lot " +
+                "Where  lot." +
+                lot.Active + "='1' and lot." + lot.yearId + "='" + yearId + "' and lot." +
+                lot.monthId + "='" + monthId + "' and lot." + lot.periodId + "='" + periodId + "' and len(" + lot.number + ") =3 " +
+                "Group By lot." + lot.number + " Order By lot." + lot.number;
+
+            dt = conn.selectData(sql);
+
+            return dt;
+        }
+        public DataTable selectByPeriod(String yearId, String monthId, String periodId, String number)
+        {
+            String sql = "";
+            DataTable dt = new DataTable();
+            sql = "Select lot.*, sa.sale_name " +
+                "From " + lot.table + " as lot " +
+                "Inner Join b_sale sa on sa.sale_id = lot.sale_id " +
+                "Where  lot." +
+                lot.Active + "='1' and lot." + lot.yearId + "='" + yearId + "' and lot." +
+                lot.monthId + "='" + monthId + "' and lot." + lot.periodId + "='" + periodId + "' and "+lot.number+"='"+number+"' " +
+                "Order By lot." + lot.CDbl + ",lot." + lot.rowNumber;
+
+            dt = conn.selectData(sql);
+
+            return dt;
         }
         public DataTable selectBySale(String yearId, String monthId, String periodId, String saleId)
         {

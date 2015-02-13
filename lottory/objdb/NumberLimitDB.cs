@@ -71,8 +71,16 @@ namespace lottory.objdb
         {
             String sql = "";
             DataTable dt = new DataTable();
-            sql = "Select * From " + nl.table + " Where " + nl.Active + "='1'";
-            dt = conn.selectData(sql);
+            try
+            {
+                sql = "Select * From " + nl.table + " Where " + nl.Active + "='1'";
+                dt = conn.selectData(sql);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            
 
             return dt;
         }

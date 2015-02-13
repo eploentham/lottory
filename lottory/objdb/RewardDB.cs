@@ -69,13 +69,18 @@ namespace lottory.objdb
             item.staffId = dt.Rows[0][rw.staffId].ToString();
             item.staffModi = dt.Rows[0][rw.staffModi].ToString();
 
-            item.tod31 = item.reward1.Substring(item.reward1.Length - 3,1) + item.reward1.Substring(item.reward1.Length - 2,1) + item.reward1.Substring(item.reward1.Length);
-            item.tod32 = item.reward1.Substring(item.reward1.Length - 2) + item.reward1.Substring(item.reward1.Length - 3, 1) + item.reward1.Substring(item.reward1.Length);
-            item.tod33 = item.reward1.Substring(item.reward1.Length) + item.reward1.Substring(item.reward1.Length - 2, 1) + item.reward1.Substring(item.reward1.Length-3,1);
+            item.tod31 = item.reward1.Substring(item.reward1.Length - 3,1) + item.reward1.Substring(item.reward1.Length - 2,1) + item.reward1.Substring(item.reward1.Length-1);
+            item.tod32 = item.reward1.Substring(item.reward1.Length - 2,1) + item.reward1.Substring(item.reward1.Length - 3, 1) + item.reward1.Substring(item.reward1.Length-1);
+            item.tod33 = item.reward1.Substring(item.reward1.Length-1) + item.reward1.Substring(item.reward1.Length - 2, 1) + item.reward1.Substring(item.reward1.Length-3,1);
 
-            item.tod34 = item.reward1.Substring(item.reward1.Length) + item.reward1.Substring(item.reward1.Length - 3, 1) + item.reward1.Substring(item.reward1.Length-2,1);
-            item.tod35 = item.reward1.Substring(item.reward1.Length - 2, 1) + item.reward1.Substring(item.reward1.Length) + item.reward1.Substring(item.reward1.Length-3,1);
-            item.tod36 = item.reward1.Substring(item.reward1.Length - 3, 1) + item.reward1.Substring(item.reward1.Length) + item.reward1.Substring(item.reward1.Length-2,1);
+            item.tod34 = item.reward1.Substring(item.reward1.Length-1) + item.reward1.Substring(item.reward1.Length - 3, 1) + item.reward1.Substring(item.reward1.Length-2,1);
+            item.tod35 = item.reward1.Substring(item.reward1.Length - 2, 1) + item.reward1.Substring(item.reward1.Length-1) + item.reward1.Substring(item.reward1.Length-3,1);
+            item.tod36 = item.reward1.Substring(item.reward1.Length - 3, 1) + item.reward1.Substring(item.reward1.Length-1) + item.reward1.Substring(item.reward1.Length-2,1);
+
+            item.up3 = item.reward1.Substring(item.reward1.Length - 3);
+            item.up2 = item.reward1.Substring(item.reward1.Length - 2);
+
+            //item.down2 = dt.Rows[0][rw.down2].ToString();
 
             item.statusApprove = dt.Rows[0][rw.statusApprove].ToString();
 

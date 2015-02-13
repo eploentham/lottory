@@ -193,5 +193,26 @@ namespace lottory.gui
             gBClient.Visible = true;
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            String sql = "", imgId="";
+            sql = "Select img_id From t_image Where sale_id = ''";
+            DataTable dt = lc.conn.selectData(sql);
+            if (dt.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++) 
+                {
+                    imgId = dt.Rows[i]["img_id"].ToString();
+                    sql = "Select sale_id From t_lottory Where year_id = '2558' and month_id = '02' and period1 = '01' and img_id = '"+imgId+"'";
+                    DataTable dt1 = lc.conn.selectData(sql);
+                    if (dt1.Rows.Count > 0)
+                    {
+                        sql = "Update t_image Set sale_id = '"+dt1.Rows[0]["sale_id"].ToString()+"' Where  img_id = '"+imgId+"'";
+                        lc.conn.ExecuteNonQuery(sql);
+                    }
+                    
+                }
+            }
+        }
     }
 }

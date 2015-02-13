@@ -212,15 +212,18 @@ namespace lottory.gui
                     {
                         SaleRate sr = new SaleRate();
                         sr.SaleId = txtSaleId.Text;
-                        sr.Description = dgvRate[colRDescription, i].Value.ToString();
-                        sr.rec = dgvRate[colRRec, i].Value.ToString();
-                        sr.limit1 = dgvRate[colRLimit, i].Value.ToString();
-                        sr.discount = dgvRate[colRDiscount, i].Value.ToString();
-                        sr.RateId = dgvRate[colRId, i].Value.ToString();
-                        sr.Id = dgvRate[colSRId, i].Value.ToString();
-                        sr.Active = "1";
+                        if (dgvRate[colRDescription, i].Value != null)
+                        {
+                            sr.Description = dgvRate[colRDescription, i].Value.ToString();
+                            sr.rec = dgvRate[colRRec, i].Value.ToString();
+                            sr.limit1 = dgvRate[colRLimit, i].Value.ToString();
+                            sr.discount = dgvRate[colRDiscount, i].Value.ToString();
+                            sr.RateId = dgvRate[colRId, i].Value.ToString();
+                            sr.Id = dgvRate[colSRId, i].Value.ToString();
+                            sr.Active = "1";
 
-                        lc.srdb.insertSaleRate(sr);
+                            lc.srdb.insertSaleRate(sr);
+                        }
                     }
                 }                
                 MessageBox.Show("บันทึกข้อมูล เรียบร้อย", "บันทึกข้อมูล");

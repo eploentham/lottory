@@ -279,9 +279,9 @@ namespace lottory
             Double amt = 0;
             for (int i = 0; i < dgv1.RowCount-1; i++)
             {
-                numUp = lc.cf.NumberNull(dgv1[colUp, i].Value);
-                numTod = lc.cf.NumberNull(dgv1[colTod, i].Value);
-                numDown = lc.cf.NumberNull(dgv1[colDown, i].Value);
+                numUp = lc.cf.NumberNull2(dgv1[colUp, i].Value.ToString());
+                numTod = lc.cf.NumberNull2(dgv1[colTod, i].Value.ToString());
+                numDown = lc.cf.NumberNull2(dgv1[colDown, i].Value.ToString());
                 amt += (Double.Parse(numUp) + Double.Parse(numTod) + Double.Parse(numDown));
                 if ((i % 2) != 0)
                 {

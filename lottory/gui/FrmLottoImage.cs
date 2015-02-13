@@ -50,6 +50,7 @@ namespace lottory.gui
             cboMonth.SelectedValue = monthId;
             cboYear = lc.cf.setCboYear(cboYear);
             cboPeriod = lc.setCboPeriodDefault(cboPeriod);
+            cboSale = lc.saledb.getCboSale(cboSale);
             getImage();
             //pageLoad = false;
         }
@@ -64,7 +65,8 @@ namespace lottory.gui
             pB1.Visible = true;
             lVNew.Clear();
             DirectoryInfo dir = new DirectoryInfo(fbd.SelectedPath);
-            iL.Images.Clear();
+            ImageList iL1 = new ImageList();
+            iL1.Images.Clear();
             int cnt = 0;
             foreach (FileInfo file in dir.GetFiles())
             {
@@ -79,7 +81,7 @@ namespace lottory.gui
                 try
                 {
                     cnt++;
-                    iL.Images.Add(Image.FromFile(file.FullName));
+                    iL1.Images.Add(Image.FromFile(file.FullName));
                     name.Add(file.FullName);
 
                     //Image image = Image.FromFile(file.FullName);
@@ -93,14 +95,14 @@ namespace lottory.gui
                 }
             }
             lVNew.View = View.LargeIcon;
-            iL.ImageSize = new Size(64, 64);
-            lVNew.LargeImageList = iL;
+            iL1.ImageSize = new Size(128, 128);
+            lVNew.LargeImageList = iL1;
             lVNew.CheckBoxes = true;
             //or
             //this.listView1.View = View.SmallIcon;
             //this.listView1.SmallImageList = this.imageList1;
 
-            for (int j = 0; j < iL.Images.Count; j++)
+            for (int j = 0; j < iL1.Images.Count; j++)
             {
                 ListViewItem item = new ListViewItem();
                 item.ImageIndex = j;
@@ -191,7 +193,7 @@ namespace lottory.gui
                 }
             }
             lV1.View = View.LargeIcon;
-            iL.ImageSize = new Size(64, 64);
+            iL.ImageSize = new Size(128, 128);
             lV1.LargeImageList = iL;
             lV1.CheckBoxes = true;
             //or
@@ -250,6 +252,7 @@ namespace lottory.gui
                     img.periodId = cboPeriod.SelectedValue.ToString();
                     img.statusInput = "0";
                     img.FLock = "0";
+                    img.saleId = lc.cf.getValueCboItem(cboSale);
                     String id = lc.imgdb.insertImage(img);
 
                     Image image = Image.FromFile(file.FullName);

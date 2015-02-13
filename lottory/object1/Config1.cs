@@ -275,6 +275,19 @@ namespace lottory.object1
                 return iSale.Value;
             }
         }
+        public String getTextCboItem(ComboBox c)
+        {
+            ComboBoxItem iSale;
+            iSale = (ComboBoxItem)c.SelectedItem;
+            if (iSale == null)
+            {
+                return "";
+            }
+            else
+            {
+                return iSale.Text;
+            }
+        }
         public String LottoNull(object o)
         {
             String chk = "";

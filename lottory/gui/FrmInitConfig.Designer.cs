@@ -31,6 +31,10 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.gBClient = new System.Windows.Forms.GroupBox();
+            this.txtConnectShareImage = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtConnectShareData = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.chkConnectServer = new System.Windows.Forms.CheckBox();
             this.txtHost = new System.Windows.Forms.TextBox();
             this.txtUser = new System.Windows.Forms.TextBox();
@@ -62,10 +66,7 @@
             this.ChkServer = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.chkClearInput = new System.Windows.Forms.CheckBox();
-            this.txtConnectShareData = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtConnectShareImage = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.gBClient.SuspendLayout();
@@ -77,22 +78,27 @@
             // 
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(9, 10);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(906, 610);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Size = new System.Drawing.Size(841, 496);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.gBClient);
             this.groupBox3.Controls.Add(this.btnSave);
             this.groupBox3.Controls.Add(this.gBServer);
             this.groupBox3.Controls.Add(this.ChkClient);
             this.groupBox3.Controls.Add(this.ChkServer);
-            this.groupBox3.Location = new System.Drawing.Point(6, 124);
+            this.groupBox3.Location = new System.Drawing.Point(4, 101);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(894, 480);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox3.Size = new System.Drawing.Size(833, 390);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "ใช้งานหลายเครื่อง";
@@ -114,19 +120,58 @@
             this.gBClient.Controls.Add(this.lV1);
             this.gBClient.Controls.Add(this.label3);
             this.gBClient.Controls.Add(this.btnTest);
-            this.gBClient.Location = new System.Drawing.Point(160, 251);
+            this.gBClient.Location = new System.Drawing.Point(169, 204);
+            this.gBClient.Margin = new System.Windows.Forms.Padding(2);
             this.gBClient.Name = "gBClient";
-            this.gBClient.Size = new System.Drawing.Size(560, 223);
+            this.gBClient.Padding = new System.Windows.Forms.Padding(2);
+            this.gBClient.Size = new System.Drawing.Size(420, 181);
             this.gBClient.TabIndex = 29;
             this.gBClient.TabStop = false;
             this.gBClient.Text = "Client";
             // 
+            // txtConnectShareImage
+            // 
+            this.txtConnectShareImage.Location = new System.Drawing.Point(120, 84);
+            this.txtConnectShareImage.Margin = new System.Windows.Forms.Padding(2);
+            this.txtConnectShareImage.Name = "txtConnectShareImage";
+            this.txtConnectShareImage.Size = new System.Drawing.Size(97, 20);
+            this.txtConnectShareImage.TabIndex = 15;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(13, 88);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(88, 13);
+            this.label10.TabIndex = 16;
+            this.label10.Text = "path share image";
+            // 
+            // txtConnectShareData
+            // 
+            this.txtConnectShareData.Location = new System.Drawing.Point(120, 63);
+            this.txtConnectShareData.Margin = new System.Windows.Forms.Padding(2);
+            this.txtConnectShareData.Name = "txtConnectShareData";
+            this.txtConnectShareData.Size = new System.Drawing.Size(97, 20);
+            this.txtConnectShareData.TabIndex = 13;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(14, 65);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(81, 13);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "path share data";
+            // 
             // chkConnectServer
             // 
             this.chkConnectServer.AutoSize = true;
-            this.chkConnectServer.Location = new System.Drawing.Point(18, 21);
+            this.chkConnectServer.Location = new System.Drawing.Point(14, 17);
+            this.chkConnectServer.Margin = new System.Windows.Forms.Padding(2);
             this.chkConnectServer.Name = "chkConnectServer";
-            this.chkConnectServer.Size = new System.Drawing.Size(168, 21);
+            this.chkConnectServer.Size = new System.Drawing.Size(147, 17);
             this.chkConnectServer.TabIndex = 2;
             this.chkConnectServer.Text = "ต้องการใช้งานหลายเครื่อง";
             this.chkConnectServer.UseVisualStyleBackColor = true;
@@ -134,90 +179,101 @@
             // 
             // txtHost
             // 
-            this.txtHost.Location = new System.Drawing.Point(160, 51);
+            this.txtHost.Location = new System.Drawing.Point(120, 41);
+            this.txtHost.Margin = new System.Windows.Forms.Padding(2);
             this.txtHost.Name = "txtHost";
-            this.txtHost.Size = new System.Drawing.Size(128, 22);
+            this.txtHost.Size = new System.Drawing.Size(97, 20);
             this.txtHost.TabIndex = 3;
             // 
             // txtUser
             // 
-            this.txtUser.Location = new System.Drawing.Point(105, 161);
+            this.txtUser.Location = new System.Drawing.Point(79, 131);
+            this.txtUser.Margin = new System.Windows.Forms.Padding(2);
             this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(128, 22);
+            this.txtUser.Size = new System.Drawing.Size(97, 20);
             this.txtUser.TabIndex = 4;
             // 
             // txtPwd
             // 
-            this.txtPwd.Location = new System.Drawing.Point(105, 189);
+            this.txtPwd.Location = new System.Drawing.Point(79, 154);
+            this.txtPwd.Margin = new System.Windows.Forms.Padding(2);
             this.txtPwd.Name = "txtPwd";
-            this.txtPwd.Size = new System.Drawing.Size(128, 22);
+            this.txtPwd.Size = new System.Drawing.Size(97, 20);
             this.txtPwd.TabIndex = 5;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 136);
+            this.label4.Location = new System.Drawing.Point(14, 110);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 17);
+            this.label4.Size = new System.Drawing.Size(51, 13);
             this.label4.TabIndex = 12;
             this.label4.Text = "database";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 51);
+            this.label1.Location = new System.Drawing.Point(14, 41);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 17);
+            this.label1.Size = new System.Drawing.Size(52, 13);
             this.label1.TabIndex = 6;
             this.label1.Text = "server(IP)";
             // 
             // txtDatabase
             // 
-            this.txtDatabase.Location = new System.Drawing.Point(105, 133);
+            this.txtDatabase.Location = new System.Drawing.Point(79, 108);
+            this.txtDatabase.Margin = new System.Windows.Forms.Padding(2);
             this.txtDatabase.Name = "txtDatabase";
-            this.txtDatabase.Size = new System.Drawing.Size(128, 22);
+            this.txtDatabase.Size = new System.Drawing.Size(97, 20);
             this.txtDatabase.TabIndex = 11;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 164);
+            this.label2.Location = new System.Drawing.Point(14, 133);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(36, 17);
+            this.label2.Size = new System.Drawing.Size(27, 13);
             this.label2.TabIndex = 7;
             this.label2.Text = "user";
             // 
             // lV1
             // 
-            this.lV1.Location = new System.Drawing.Point(383, 120);
+            this.lV1.Location = new System.Drawing.Point(287, 98);
+            this.lV1.Margin = new System.Windows.Forms.Padding(2);
             this.lV1.Name = "lV1";
-            this.lV1.Size = new System.Drawing.Size(162, 97);
+            this.lV1.Size = new System.Drawing.Size(122, 80);
             this.lV1.TabIndex = 10;
             this.lV1.UseCompatibleStateImageBehavior = false;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 192);
+            this.label3.Location = new System.Drawing.Point(14, 156);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 17);
+            this.label3.Size = new System.Drawing.Size(60, 13);
             this.label3.TabIndex = 8;
             this.label3.Text = "passwword";
             // 
             // btnTest
             // 
-            this.btnTest.Location = new System.Drawing.Point(383, 86);
+            this.btnTest.Location = new System.Drawing.Point(287, 70);
+            this.btnTest.Margin = new System.Windows.Forms.Padding(2);
             this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(75, 32);
+            this.btnTest.Size = new System.Drawing.Size(56, 26);
             this.btnTest.TabIndex = 9;
             this.btnTest.Text = "ทดสอบ";
             this.btnTest.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(779, 424);
+            this.btnSave.Location = new System.Drawing.Point(658, 344);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(109, 50);
+            this.btnSave.Size = new System.Drawing.Size(82, 41);
             this.btnSave.TabIndex = 3;
             this.btnSave.Text = "บันทึก";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -239,45 +295,51 @@
             this.gBServer.Controls.Add(this.txtPathImage);
             this.gBServer.Controls.Add(this.btnIP);
             this.gBServer.Controls.Add(this.txtIP);
-            this.gBServer.Location = new System.Drawing.Point(160, 21);
+            this.gBServer.Location = new System.Drawing.Point(169, 17);
+            this.gBServer.Margin = new System.Windows.Forms.Padding(2);
             this.gBServer.Name = "gBServer";
-            this.gBServer.Size = new System.Drawing.Size(728, 224);
+            this.gBServer.Padding = new System.Windows.Forms.Padding(2);
+            this.gBServer.Size = new System.Drawing.Size(660, 182);
             this.gBServer.TabIndex = 28;
             this.gBServer.TabStop = false;
             this.gBServer.Text = "Server";
             // 
             // txtPathShareData
             // 
-            this.txtPathShareData.Location = new System.Drawing.Point(160, 155);
+            this.txtPathShareData.Location = new System.Drawing.Point(163, 126);
+            this.txtPathShareData.Margin = new System.Windows.Forms.Padding(2);
             this.txtPathShareData.Name = "txtPathShareData";
-            this.txtPathShareData.Size = new System.Drawing.Size(225, 22);
+            this.txtPathShareData.Size = new System.Drawing.Size(170, 20);
             this.txtPathShareData.TabIndex = 29;
             this.txtPathShareData.Text = "lottory_data";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(7, 158);
+            this.label9.Location = new System.Drawing.Point(5, 128);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(116, 17);
+            this.label9.Size = new System.Drawing.Size(87, 13);
             this.label9.TabIndex = 30;
             this.label9.Text = "path share data :";
             // 
             // chkDelImage
             // 
             this.chkDelImage.AutoSize = true;
-            this.chkDelImage.Location = new System.Drawing.Point(453, 194);
+            this.chkDelImage.Location = new System.Drawing.Point(383, 158);
+            this.chkDelImage.Margin = new System.Windows.Forms.Padding(2);
             this.chkDelImage.Name = "chkDelImage";
-            this.chkDelImage.Size = new System.Drawing.Size(175, 21);
+            this.chkDelImage.Size = new System.Drawing.Size(153, 17);
             this.chkDelImage.TabIndex = 16;
             this.chkDelImage.Text = "เมื่อนำรูปเข้าระบบ ให้ลบรูป";
             this.chkDelImage.UseVisualStyleBackColor = true;
             // 
             // btnPath1
             // 
-            this.btnPath1.Location = new System.Drawing.Point(532, 28);
+            this.btnPath1.Location = new System.Drawing.Point(442, 23);
+            this.btnPath1.Margin = new System.Windows.Forms.Padding(2);
             this.btnPath1.Name = "btnPath1";
-            this.btnPath1.Size = new System.Drawing.Size(29, 32);
+            this.btnPath1.Size = new System.Drawing.Size(22, 26);
             this.btnPath1.TabIndex = 19;
             this.btnPath1.Text = "...";
             this.btnPath1.UseVisualStyleBackColor = true;
@@ -286,32 +348,36 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 33);
+            this.label6.Location = new System.Drawing.Point(4, 27);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(146, 17);
+            this.label6.Size = new System.Drawing.Size(125, 13);
             this.label6.TabIndex = 18;
             this.label6.Text = "path เก็บรูปก่อนเข้าระบบ";
             // 
             // txtPathBefore
             // 
-            this.txtPathBefore.Location = new System.Drawing.Point(159, 33);
+            this.txtPathBefore.Location = new System.Drawing.Point(162, 27);
+            this.txtPathBefore.Margin = new System.Windows.Forms.Padding(2);
             this.txtPathBefore.Name = "txtPathBefore";
-            this.txtPathBefore.Size = new System.Drawing.Size(366, 22);
+            this.txtPathBefore.Size = new System.Drawing.Size(276, 20);
             this.txtPathBefore.TabIndex = 17;
             // 
             // txtPathShareImage
             // 
-            this.txtPathShareImage.Location = new System.Drawing.Point(160, 99);
+            this.txtPathShareImage.Location = new System.Drawing.Point(163, 80);
+            this.txtPathShareImage.Margin = new System.Windows.Forms.Padding(2);
             this.txtPathShareImage.Name = "txtPathShareImage";
-            this.txtPathShareImage.Size = new System.Drawing.Size(225, 22);
+            this.txtPathShareImage.Size = new System.Drawing.Size(170, 20);
             this.txtPathShareImage.TabIndex = 21;
             this.txtPathShareImage.Text = "lottory_image";
             // 
             // btnPath
             // 
-            this.btnPath.Location = new System.Drawing.Point(532, 61);
+            this.btnPath.Location = new System.Drawing.Point(442, 50);
+            this.btnPath.Margin = new System.Windows.Forms.Padding(2);
             this.btnPath.Name = "btnPath";
-            this.btnPath.Size = new System.Drawing.Size(29, 32);
+            this.btnPath.Size = new System.Drawing.Size(22, 26);
             this.btnPath.TabIndex = 15;
             this.btnPath.Text = "...";
             this.btnPath.UseVisualStyleBackColor = true;
@@ -319,9 +385,10 @@
             // 
             // btnShare
             // 
-            this.btnShare.Location = new System.Drawing.Point(567, 99);
+            this.btnShare.Location = new System.Drawing.Point(468, 80);
+            this.btnShare.Margin = new System.Windows.Forms.Padding(2);
             this.btnShare.Name = "btnShare";
-            this.btnShare.Size = new System.Drawing.Size(109, 50);
+            this.btnShare.Size = new System.Drawing.Size(82, 41);
             this.btnShare.TabIndex = 20;
             this.btnShare.Text = "Share Folder";
             this.btnShare.UseVisualStyleBackColor = true;
@@ -330,33 +397,37 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 69);
+            this.label5.Location = new System.Drawing.Point(5, 56);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(83, 17);
+            this.label5.Size = new System.Drawing.Size(69, 13);
             this.label5.TabIndex = 14;
             this.label5.Text = "path เก็บรูป :";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 102);
+            this.label7.Location = new System.Drawing.Point(5, 83);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(106, 17);
+            this.label7.Size = new System.Drawing.Size(80, 13);
             this.label7.TabIndex = 22;
             this.label7.Text = "path share pic :";
             // 
             // txtPathImage
             // 
-            this.txtPathImage.Location = new System.Drawing.Point(160, 66);
+            this.txtPathImage.Location = new System.Drawing.Point(163, 54);
+            this.txtPathImage.Margin = new System.Windows.Forms.Padding(2);
             this.txtPathImage.Name = "txtPathImage";
-            this.txtPathImage.Size = new System.Drawing.Size(366, 22);
+            this.txtPathImage.Size = new System.Drawing.Size(276, 20);
             this.txtPathImage.TabIndex = 13;
             // 
             // btnIP
             // 
-            this.btnIP.Location = new System.Drawing.Point(10, 194);
+            this.btnIP.Location = new System.Drawing.Point(8, 158);
+            this.btnIP.Margin = new System.Windows.Forms.Padding(2);
             this.btnIP.Name = "btnIP";
-            this.btnIP.Size = new System.Drawing.Size(109, 27);
+            this.btnIP.Size = new System.Drawing.Size(82, 22);
             this.btnIP.TabIndex = 25;
             this.btnIP.Text = "get IP";
             this.btnIP.UseVisualStyleBackColor = true;
@@ -364,17 +435,19 @@
             // 
             // txtIP
             // 
-            this.txtIP.Location = new System.Drawing.Point(160, 196);
+            this.txtIP.Location = new System.Drawing.Point(163, 159);
+            this.txtIP.Margin = new System.Windows.Forms.Padding(2);
             this.txtIP.Name = "txtIP";
-            this.txtIP.Size = new System.Drawing.Size(225, 22);
+            this.txtIP.Size = new System.Drawing.Size(170, 20);
             this.txtIP.TabIndex = 23;
             // 
             // ChkClient
             // 
             this.ChkClient.AutoSize = true;
-            this.ChkClient.Location = new System.Drawing.Point(32, 251);
+            this.ChkClient.Location = new System.Drawing.Point(24, 204);
+            this.ChkClient.Margin = new System.Windows.Forms.Padding(2);
             this.ChkClient.Name = "ChkClient";
-            this.ChkClient.Size = new System.Drawing.Size(100, 21);
+            this.ChkClient.Size = new System.Drawing.Size(83, 17);
             this.ChkClient.TabIndex = 27;
             this.ChkClient.TabStop = true;
             this.ChkClient.Text = "เครื่อง Client";
@@ -384,9 +457,10 @@
             // ChkServer
             // 
             this.ChkServer.AutoSize = true;
-            this.ChkServer.Location = new System.Drawing.Point(32, 35);
+            this.ChkServer.Location = new System.Drawing.Point(24, 28);
+            this.ChkServer.Margin = new System.Windows.Forms.Padding(2);
             this.ChkServer.Name = "ChkServer";
-            this.ChkServer.Size = new System.Drawing.Size(107, 21);
+            this.ChkServer.Size = new System.Drawing.Size(88, 17);
             this.ChkServer.TabIndex = 26;
             this.ChkServer.TabStop = true;
             this.ChkServer.Text = "เครื่อง Server";
@@ -396,9 +470,11 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.chkClearInput);
-            this.groupBox2.Location = new System.Drawing.Point(6, 10);
+            this.groupBox2.Location = new System.Drawing.Point(4, 8);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(894, 108);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Size = new System.Drawing.Size(670, 88);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "หน้าจอป้อนข้อมูล";
@@ -406,51 +482,32 @@
             // chkClearInput
             // 
             this.chkClearInput.AutoSize = true;
-            this.chkClearInput.Location = new System.Drawing.Point(6, 21);
+            this.chkClearInput.Location = new System.Drawing.Point(4, 17);
+            this.chkClearInput.Margin = new System.Windows.Forms.Padding(2);
             this.chkClearInput.Name = "chkClearInput";
-            this.chkClearInput.Size = new System.Drawing.Size(149, 21);
+            this.chkClearInput.Size = new System.Drawing.Size(127, 17);
             this.chkClearInput.TabIndex = 0;
             this.chkClearInput.Text = "ให้ล้างข้อมูลหลังบันทึก";
             this.chkClearInput.UseVisualStyleBackColor = true;
             // 
-            // txtConnectShareData
+            // button1
             // 
-            this.txtConnectShareData.Location = new System.Drawing.Point(160, 77);
-            this.txtConnectShareData.Name = "txtConnectShareData";
-            this.txtConnectShareData.Size = new System.Drawing.Size(128, 22);
-            this.txtConnectShareData.TabIndex = 13;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(18, 80);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(108, 17);
-            this.label8.TabIndex = 14;
-            this.label8.Text = "path share data";
-            // 
-            // txtConnectShareImage
-            // 
-            this.txtConnectShareImage.Location = new System.Drawing.Point(160, 103);
-            this.txtConnectShareImage.Name = "txtConnectShareImage";
-            this.txtConnectShareImage.Size = new System.Drawing.Size(128, 22);
-            this.txtConnectShareImage.TabIndex = 15;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(17, 108);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(118, 17);
-            this.label10.TabIndex = 16;
-            this.label10.Text = "path share image";
+            this.button1.Location = new System.Drawing.Point(684, 215);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(56, 26);
+            this.button1.TabIndex = 30;
+            this.button1.Text = "convert";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // FrmInitConfig
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(930, 634);
+            this.ClientSize = new System.Drawing.Size(915, 574);
             this.Controls.Add(this.groupBox1);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmInitConfig";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmInitConfig";
@@ -508,5 +565,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtConnectShareImage;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button button1;
     }
 }

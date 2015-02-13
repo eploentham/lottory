@@ -68,8 +68,15 @@ namespace lottory.objdb
         {
             String sql = "";
             DataTable dt2 = new DataTable();
-            sql = "Select * From " + sr.table + " Where " + sr.Active + "='1'";
-            dt2 = conn.selectData(sql);
+            try
+            {
+                sql = "Select * From " + sr.table + " Where " + sr.Active + "='1'";
+                dt2 = conn.selectData(sql);
+            }
+            catch (Exception ex)
+            {
+
+            }
 
             return dt2;
         }
@@ -186,10 +193,10 @@ namespace lottory.objdb
                 p.rec = "1";
             }
             sql = "Update " + sr.table + " Set " + sr.Description + "='" + p.Description + "', " +
-                sr.rec + "=" + p.rec + ", " +
-                sr.pay + "=" + p.pay + ", " +
-                sr.limit1 + "=" + p.limit1 + ", " +
-                sr.discount + "=" + p.discount + ", " +
+                sr.rec + "=" + p.rec.Replace(",", "") + ", " +
+                sr.pay + "=" + p.pay.Replace(",","") + ", " +
+                sr.limit1 + "=" + p.limit1.Replace(",", "") + ", " +
+                sr.discount + "=" + p.discount.Replace(",", "") + ", " +
                 sr.thooId + "='" + p.thooId + "', " +
                 sr.RateId + "='" + p.RateId + "', " +
                 sr.SaleId + "='" + p.SaleId + "' " +

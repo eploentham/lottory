@@ -85,6 +85,26 @@ namespace lottory.objdb
             }
             return item;
         }
+        public DataTable selectBySaleId(String yearId, String monthId, String periodId, String saleId)
+        {
+            String sql = "";
+            DataTable dt = new DataTable();
+            sql = "Select * From " + img.table + " Where " + img.Active + "='1' and " + img.yearId + "='" + yearId + "' and " +
+                img.monthId + "='" + monthId + "' and " + img.periodId + "='" + periodId + "' and "+img.saleId+"='"+saleId+"'" ;
+            dt = conn.selectData(sql);
+
+            return dt;
+        }
+        public DataTable selectByPeriod(String yearId, String monthId, String periodId, String saleId)
+        {
+            String sql = "";
+            DataTable dt = new DataTable();
+            sql = "Select * From " + img.table + " Where " + img.Active + "='1' and " + img.yearId + "='" + yearId + "' and " +
+                img.monthId + "='" + monthId + "' and " + img.periodId + "='" + periodId + "' ";
+            dt = conn.selectData(sql);
+
+            return dt;
+        }
         private String insert(Image1 p)
         {
             String sql = "", chk = "";
@@ -157,7 +177,9 @@ namespace lottory.objdb
                 String max = "";
                 max = selectMaxRowNumberByPeriod(p.yearId, p.monthId, p.periodId);
                 p.rowNumber = max;
+                //p.Id = p.rowNumber;
                 chk = insert(p);
+                chk = max;      //ให้ใช้ค่า max จะได้เรียงได้อย่างสวยงาม
             }
             else
             {
@@ -222,22 +244,21 @@ namespace lottory.objdb
                 {
                     if (dt.Rows[0][img.rowNumber].ToString().Equals(""))
                     {
-                        cnt = 1000;
+                        cnt = 10000;
                     }
                     else
                     {
                         cnt = int.Parse(dt.Rows[0][img.rowNumber].ToString())+1;
                     }
-
                 }
                 else
                 {
-                    cnt = 1000;
+                    cnt = 10000;
                 }
             }
             else
             {
-                cnt = 1000;
+                cnt = 10000;
             }
             return cnt.ToString();
         }

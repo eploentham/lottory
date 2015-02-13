@@ -71,12 +71,20 @@ namespace lottory.objdb
             Rate item = new Rate();
             String sql = "";
             DataTable dt = new DataTable();
-            sql = "Select * From " + rate.table + " Where " + rate.pkField + "='" + saleId + "'";
-            dt = conn.selectData(sql);
-            if (dt.Rows.Count > 0)
+            try
             {
-                item = setData(item, dt);
+                sql = "Select * From " + rate.table + " Where " + rate.pkField + "='" + saleId + "'";
+                dt = conn.selectData(sql);
+                if (dt.Rows.Count > 0)
+                {
+                    item = setData(item, dt);
+                }
             }
+            catch (Exception ex)
+            {
+
+            }
+            
             return item;
         }
         private String insert(Rate p)

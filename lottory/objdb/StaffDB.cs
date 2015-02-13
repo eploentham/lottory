@@ -46,8 +46,16 @@ namespace lottory.objdb
         {
             String sql = "";
             DataTable dt = new DataTable();
-            sql = "Select * From " + sf.table + " Where " + sf.Active + "='1'";
-            dt = conn.selectData(sql);
+            try
+            {
+                sql = "Select * From " + sf.table + " Where " + sf.Active + "='1'";
+                dt = conn.selectData(sql);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            
 
             return dt;
         }
@@ -73,6 +81,7 @@ namespace lottory.objdb
             {
                 item.Code = "pop";
                 item.Name = "Administrator";
+                item.Password = "pop";
                 item.Priority = "3";
                 return item;
             }
