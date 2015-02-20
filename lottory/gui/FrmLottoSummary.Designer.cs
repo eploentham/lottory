@@ -79,9 +79,9 @@
             this.groupBox1.Controls.Add(this.cboMonth);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Location = new System.Drawing.Point(9, 10);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(900, 102);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
@@ -89,7 +89,7 @@
             // btnVoid
             // 
             this.btnVoid.Location = new System.Drawing.Point(819, 46);
-            this.btnVoid.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnVoid.Margin = new System.Windows.Forms.Padding(2);
             this.btnVoid.Name = "btnVoid";
             this.btnVoid.Size = new System.Drawing.Size(76, 33);
             this.btnVoid.TabIndex = 69;
@@ -99,7 +99,7 @@
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(715, 46);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(76, 33);
             this.btnSave.TabIndex = 68;
@@ -109,7 +109,7 @@
             // btnProcess
             // 
             this.btnProcess.Location = new System.Drawing.Point(819, 12);
-            this.btnProcess.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnProcess.Margin = new System.Windows.Forms.Padding(2);
             this.btnProcess.Name = "btnProcess";
             this.btnProcess.Size = new System.Drawing.Size(76, 31);
             this.btnProcess.TabIndex = 67;
@@ -120,7 +120,7 @@
             // pB1
             // 
             this.pB1.Location = new System.Drawing.Point(568, 79);
-            this.pB1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pB1.Margin = new System.Windows.Forms.Padding(2);
             this.pB1.Name = "pB1";
             this.pB1.Size = new System.Drawing.Size(328, 19);
             this.pB1.TabIndex = 66;
@@ -129,7 +129,7 @@
             // 
             this.txtRDown34.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.txtRDown34.Location = new System.Drawing.Point(501, 51);
-            this.txtRDown34.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtRDown34.Margin = new System.Windows.Forms.Padding(2);
             this.txtRDown34.Name = "txtRDown34";
             this.txtRDown34.Size = new System.Drawing.Size(62, 32);
             this.txtRDown34.TabIndex = 65;
@@ -138,7 +138,7 @@
             // 
             this.txtRDown33.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.txtRDown33.Location = new System.Drawing.Point(435, 51);
-            this.txtRDown33.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtRDown33.Margin = new System.Windows.Forms.Padding(2);
             this.txtRDown33.Name = "txtRDown33";
             this.txtRDown33.Size = new System.Drawing.Size(62, 32);
             this.txtRDown33.TabIndex = 64;
@@ -147,7 +147,7 @@
             // 
             this.txtRDown32.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.txtRDown32.Location = new System.Drawing.Point(369, 51);
-            this.txtRDown32.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtRDown32.Margin = new System.Windows.Forms.Padding(2);
             this.txtRDown32.Name = "txtRDown32";
             this.txtRDown32.Size = new System.Drawing.Size(62, 32);
             this.txtRDown32.TabIndex = 63;
@@ -155,7 +155,7 @@
             // txtRewardId
             // 
             this.txtRewardId.Location = new System.Drawing.Point(633, 61);
-            this.txtRewardId.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtRewardId.Margin = new System.Windows.Forms.Padding(2);
             this.txtRewardId.Name = "txtRewardId";
             this.txtRewardId.Size = new System.Drawing.Size(76, 20);
             this.txtRewardId.TabIndex = 59;
@@ -165,7 +165,7 @@
             // 
             this.txtRewardDown2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.txtRewardDown2.Location = new System.Drawing.Point(633, 15);
-            this.txtRewardDown2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtRewardDown2.Margin = new System.Windows.Forms.Padding(2);
             this.txtRewardDown2.Name = "txtRewardDown2";
             this.txtRewardDown2.Size = new System.Drawing.Size(78, 32);
             this.txtRewardDown2.TabIndex = 58;
@@ -185,7 +185,7 @@
             // 
             this.txtRDown31.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.txtRDown31.Location = new System.Drawing.Point(302, 51);
-            this.txtRDown31.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtRDown31.Margin = new System.Windows.Forms.Padding(2);
             this.txtRDown31.Name = "txtRDown31";
             this.txtRDown31.Size = new System.Drawing.Size(62, 32);
             this.txtRDown31.TabIndex = 58;
@@ -205,7 +205,7 @@
             // 
             this.txtReward1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.txtReward1.Location = new System.Drawing.Point(302, 15);
-            this.txtReward1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtReward1.Margin = new System.Windows.Forms.Padding(2);
             this.txtReward1.Name = "txtReward1";
             this.txtReward1.Size = new System.Drawing.Size(218, 32);
             this.txtReward1.TabIndex = 56;
@@ -225,7 +225,7 @@
             // 
             this.cboYear.FormattingEnabled = true;
             this.cboYear.Location = new System.Drawing.Point(94, 75);
-            this.cboYear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboYear.Margin = new System.Windows.Forms.Padding(2);
             this.cboYear.Name = "cboYear";
             this.cboYear.Size = new System.Drawing.Size(75, 21);
             this.cboYear.TabIndex = 53;
@@ -236,7 +236,7 @@
             this.cboPeriod.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.cboPeriod.FormattingEnabled = true;
             this.cboPeriod.Location = new System.Drawing.Point(94, 47);
-            this.cboPeriod.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboPeriod.Margin = new System.Windows.Forms.Padding(2);
             this.cboPeriod.Name = "cboPeriod";
             this.cboPeriod.Size = new System.Drawing.Size(108, 25);
             this.cboPeriod.TabIndex = 52;
@@ -247,7 +247,7 @@
             this.cboMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.cboMonth.FormattingEnabled = true;
             this.cboMonth.Location = new System.Drawing.Point(94, 20);
-            this.cboMonth.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboMonth.Margin = new System.Windows.Forms.Padding(2);
             this.cboMonth.Name = "cboMonth";
             this.cboMonth.Size = new System.Drawing.Size(108, 25);
             this.cboMonth.TabIndex = 51;
@@ -269,10 +269,10 @@
             this.dgvRate.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvRate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRate.Location = new System.Drawing.Point(9, 117);
-            this.dgvRate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvRate.Margin = new System.Windows.Forms.Padding(2);
             this.dgvRate.Name = "dgvRate";
             this.dgvRate.RowTemplate.Height = 24;
-            this.dgvRate.Size = new System.Drawing.Size(931, 240);
+            this.dgvRate.Size = new System.Drawing.Size(931, 277);
             this.dgvRate.TabIndex = 2;
             this.dgvRate.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRate_CellDoubleClick);
             // 
@@ -280,8 +280,8 @@
             // 
             this.dgvSale.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvSale.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSale.Location = new System.Drawing.Point(9, 362);
-            this.dgvSale.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvSale.Location = new System.Drawing.Point(9, 398);
+            this.dgvSale.Margin = new System.Windows.Forms.Padding(2);
             this.dgvSale.Name = "dgvSale";
             this.dgvSale.RowTemplate.Height = 24;
             this.dgvSale.Size = new System.Drawing.Size(931, 598);
@@ -293,10 +293,10 @@
             this.dgvThooTranfer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvThooTranfer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvThooTranfer.Location = new System.Drawing.Point(944, 10);
-            this.dgvThooTranfer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvThooTranfer.Margin = new System.Windows.Forms.Padding(2);
             this.dgvThooTranfer.Name = "dgvThooTranfer";
             this.dgvThooTranfer.RowTemplate.Height = 24;
-            this.dgvThooTranfer.Size = new System.Drawing.Size(959, 347);
+            this.dgvThooTranfer.Size = new System.Drawing.Size(959, 383);
             this.dgvThooTranfer.TabIndex = 4;
             this.dgvThooTranfer.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvThooTranfer_CellDoubleClick);
             // 
@@ -304,7 +304,7 @@
             // 
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(944, 361);
+            this.dataGridView1.Location = new System.Drawing.Point(944, 397);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
@@ -315,13 +315,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1914, 971);
+            this.ClientSize = new System.Drawing.Size(1914, 1007);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.dgvThooTranfer);
             this.Controls.Add(this.dgvSale);
             this.Controls.Add(this.dgvRate);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmLottoSummary";
             this.Text = "หน้าจอสรุปรางวัล";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

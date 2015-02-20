@@ -59,7 +59,7 @@ namespace lottory.objdb
             lot.r2UpRate = "reward_2up_rate";
             lot.r2Down = "reward_2down";
             lot.r2DownRate = "reward_2down_rate";
-            lot.r2Up = "reward_2tod";
+            //lot.r2Up = "reward_2tod";
             lot.r2UpRate = "reward_2tod_rate";
             lot.r2Tod = "reward_2tod";
             lot.r2TodRate = "reward_2tod_rate";
@@ -78,6 +78,9 @@ namespace lottory.objdb
             lot.StatusVoid = "status_void";
             lot.statusInputApprove = "status_input_approve";
             lot.number2 = "number2";
+            lot.saleOldId = "sale_old_id";
+            lot.SfMoveId = "staff_move_id";
+            lot.dateMove = "date_move";
 
             lot.table = "t_lottory";
             lot.pkField = "row_id";
@@ -117,6 +120,10 @@ namespace lottory.objdb
             item.StatusVoid = dt.Rows[0][lot.StatusVoid].ToString();
             item.statusInputApprove = dt.Rows[0][lot.statusInputApprove].ToString();
             item.number2 = dt.Rows[0][lot.number2].ToString();
+
+            item.saleOldId = dt.Rows[0][lot.saleOldId].ToString();
+            item.SfMoveId = dt.Rows[0][lot.SfMoveId].ToString();
+            item.dateMove = dt.Rows[0][lot.dateMove].ToString();
             
             return item;
         }
@@ -270,6 +277,22 @@ namespace lottory.objdb
 
             return dt;            
         }
+        public DataTable selectByPeriodSale(String yearId, String monthId, String periodId, String saleId)
+        {
+            String sql = "";
+            DataTable dt = new DataTable();
+            sql = "Select lot.*, sa.sale_name " +
+                "From " + lot.table + " as lot " +
+                "Inner Join b_sale sa on sa.sale_id = lot.sale_id " +
+                "Where  lot." +
+                lot.Active + "='1' and lot." + lot.yearId + "='" + yearId + "' and lot." +
+                lot.monthId + "='" + monthId + "' and lot." + lot.periodId + "='" + periodId + "' and lot." + lot.saleId + "='" + saleId + "' " +
+                "Order By lot." + lot.CDbl + ",lot." + lot.rowNumber;
+
+            dt = conn.selectData(sql);
+
+            return dt;
+        }
         public DataTable selectByPeriod2(String yearId, String monthId, String periodId)
         {
             String sql = "";
@@ -310,6 +333,22 @@ namespace lottory.objdb
                 "Where  lot." +
                 lot.Active + "='1' and lot." + lot.yearId + "='" + yearId + "' and lot." +
                 lot.monthId + "='" + monthId + "' and lot." + lot.periodId + "='" + periodId + "' and "+lot.number+"='"+number+"' " +
+                "Order By lot." + lot.CDbl + ",lot." + lot.rowNumber;
+
+            dt = conn.selectData(sql);
+
+            return dt;
+        }
+        public DataTable selectByPeriodSale(String yearId, String monthId, String periodId, String number, String saleId)
+        {
+            String sql = "";
+            DataTable dt = new DataTable();
+            sql = "Select lot.*, sa.sale_name " +
+                "From " + lot.table + " as lot " +
+                "Inner Join b_sale sa on sa.sale_id = lot.sale_id " +
+                "Where  lot." +
+                lot.Active + "='1' and lot." + lot.yearId + "='" + yearId + "' and lot." +
+                lot.monthId + "='" + monthId + "' and lot." + lot.periodId + "='" + periodId + "' and " + lot.number + "='" + number + "' and lot."+lot.saleId+"='"+saleId+"' " +
                 "Order By lot." + lot.CDbl + ",lot." + lot.rowNumber;
 
             dt = conn.selectData(sql);
@@ -509,6 +548,21 @@ namespace lottory.objdb
                 " Where " + lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
                 lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' " +
                 "Group By " + lot.saleId ;
+            dt = conn.selectData(sql);
+
+            return dt;
+        }
+        public DataTable selectSumBySale(String yearId, String monthId, String periodId, String saleId)
+        {
+            //Lotto item = new Lotto();
+            String sql = "";
+            DataTable dt = new DataTable();
+            sql = "Select sum(" + lot.r3Up + ") as " + lot.r3Up + ", sum(" + lot.r3Tod + ") as " + lot.r3Tod + ", sum(" + lot.r3Down + ") as " + lot.r3Down +
+                ", sum(" + lot.r2Up + ") as " + lot.r2Up + ", sum(" + lot.r2Tod + ") as " + lot.r2Tod + ", sum(" + lot.r2Down + ") as " + lot.r2Down + ", " + lot.saleId + 
+                " From " + lot.table +
+                " Where " + lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
+                lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' and "+lot.saleId+" ='"+saleId+"' " +
+                "Group By " + lot.saleId;
             dt = conn.selectData(sql);
 
             return dt;
@@ -900,6 +954,30 @@ namespace lottory.objdb
                 lot.StatusVoid + "='1', " +
                 lot.staffCancel + "=" + sfId + " " +
                 "Where " + lot.pkField + "='" + rowId + "'";
+            chk = conn.ExecuteNonQuery(sql);
+            return chk;
+        }
+        public String VoidImage(String imgId, String sfId)
+        {
+            String sql = "", chk = "";
+
+            sql = "Update " + lot.table + " Set " + lot.Active + "='3', " +
+                lot.dateCancel + "=" + lot.dateGenDB + ", " +
+                lot.StatusVoid + "='2', " +
+                lot.staffCancel + "=" + sfId + " " +
+                "Where " + lot.imgId + "='" + imgId + "'";
+            chk = conn.ExecuteNonQuery(sql);
+            return chk;
+        }
+        public String UpdateSaleFromImage(String imgId, String saleNewId, String sfId)
+        {
+            String sql = "", chk = "";
+
+            sql = "Update " + lot.table + " Set " +
+                lot.saleId + "='" + saleNewId + "', " +
+                lot.saleOldId + "=" + lot.saleId + ", " +
+                lot.SfMoveId + "='" + sfId + "' " +
+                "Where " + lot.imgId + "='" + imgId + "'";
             chk = conn.ExecuteNonQuery(sql);
             return chk;
         }

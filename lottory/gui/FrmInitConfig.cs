@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -23,8 +24,15 @@ namespace lottory.gui
         }
         private void initConfig(String sfCode, LottoryControl l)
         {
+            String monthId = "", periodId = "";
             lc = l;
             sf = lc.sfdb.selectByCode(sfCode);
+            monthId = System.DateTime.Now.Month.ToString("00");
+            cboMonth = lc.cf.setCboMonth(cboMonth);
+            cboPeriod = lc.cf.setCboPeriod(cboPeriod);
+            cboMonth.SelectedValue = monthId;
+            cboYear = lc.cf.setCboYear(cboYear);
+            cboPeriod = lc.setCboPeriodDefault(cboPeriod);
             if (lc.initC.clearInput.Equals("yes"))
             {
                 chkClearInput.Checked = true;
@@ -211,6 +219,60 @@ namespace lottory.gui
                         lc.conn.ExecuteNonQuery(sql);
                     }
                     
+                }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            String sql = "", imgId = "";
+            sql = "Select img_id From t_image Where sale_id = ''";
+            DataTable dt = lc.conn.selectData(sql);
+            if (dt.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    imgId = dt.Rows[i]["img_id"].ToString();
+                    sql = "Select thoo_id From t_lottory Where year_id = '2558' and month_id = '02' and period1 = '01' and img_id = '" + imgId + "'";
+                    DataTable dt1 = lc.conn.selectData(sql);
+                    if (dt1.Rows.Count > 0)
+                    {
+                        sql = "Update t_image Set thoo_id = '" + dt1.Rows[0]["thoo_id"].ToString() + "' Where  img_id = '" + imgId + "'";
+                        lc.conn.ExecuteNonQuery(sql);
+                    }
+
+                }
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            String pahtFile = lc.initC.pathImage + "\\" + cboYear.Text + "\\" + cboMonth.SelectedValue.ToString() + "\\" + cboPeriod.SelectedValue.ToString();
+            DirectoryInfo dir = new DirectoryInfo(pahtFile);
+            foreach (FileInfo file in dir.GetFiles())
+            {
+                lc.renameFileImage1(file.FullName);
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            String sql = "", imgId = "";
+            sql = "Select distinct img_id From t_lottory Where year_id = '2558' and month_id = '02' and period1 = '02' ";
+            DataTable dt = lc.conn.selectData(sql);
+            if (dt.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    imgId = dt.Rows[i]["img_id"].ToString();
+                    sql = "Select img_id From t_image Where year_id = '2558' and month_id = '02' and period1 = '02' and "+lc.imgdb.img.rowNumber+" = '" + imgId + "'";
+                    DataTable dt1 = lc.conn.selectData(sql);
+                    if (dt1.Rows.Count > 0)
+                    {
+                        sql = "Update t_lottory Set "+lc.imgdb.img.Id+" = '" + dt1.Rows[0]["img_id"].ToString() + "' Where year_id = '2558' and month_id = '02' and period1 = '02' and "+lc.imgdb.img.Id+"='"+imgId+"' ";
+                        lc.conn.ExecuteNonQuery(sql);
+                    }
+
                 }
             }
         }

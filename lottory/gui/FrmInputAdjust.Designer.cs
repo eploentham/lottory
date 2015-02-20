@@ -1,6 +1,6 @@
 ﻿namespace lottory.gui
 {
-    partial class FrmInputImage
+    partial class FrmInputAdjust
     {
         /// <summary>
         /// Required designer variable.
@@ -57,14 +57,6 @@
             this.cboSale = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.txtTod = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtDown = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtUp = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtInput = new System.Windows.Forms.TextBox();
             this.lV1 = new System.Windows.Forms.ListView();
             this.picZoomM = new System.Windows.Forms.PictureBox();
             this.picZoomP = new System.Windows.Forms.PictureBox();
@@ -72,6 +64,12 @@
             this.pic1 = new System.Windows.Forms.PictureBox();
             this.picHand = new System.Windows.Forms.PictureBox();
             this.dgv1 = new System.Windows.Forms.DataGridView();
+            this.cboSaleNew = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.chkMoveAll = new System.Windows.Forms.RadioButton();
+            this.chkMoveImage = new System.Windows.Forms.RadioButton();
+            this.chkVoidImage = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picZoomM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picZoomP)).BeginInit();
@@ -98,7 +96,6 @@
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.pB1);
             this.groupBox1.Controls.Add(this.btnSearch);
-            this.groupBox1.Controls.Add(this.btnSave);
             this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.label17);
             this.groupBox1.Controls.Add(this.cboYear);
@@ -108,8 +105,6 @@
             this.groupBox1.Controls.Add(this.cboPeriod);
             this.groupBox1.Controls.Add(this.cboMonth);
             this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.cboSale);
-            this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Location = new System.Drawing.Point(9, 842);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
@@ -274,7 +269,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(50, 74);
+            this.btnSave.Location = new System.Drawing.Point(1355, 978);
             this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(55, 32);
@@ -377,10 +372,10 @@
             // cboSale
             // 
             this.cboSale.FormattingEnabled = true;
-            this.cboSale.Location = new System.Drawing.Point(50, 42);
+            this.cboSale.Location = new System.Drawing.Point(662, 978);
             this.cboSale.Margin = new System.Windows.Forms.Padding(2);
             this.cboSale.Name = "cboSale";
-            this.cboSale.Size = new System.Drawing.Size(108, 21);
+            this.cboSale.Size = new System.Drawing.Size(137, 21);
             this.cboSale.TabIndex = 49;
             this.cboSale.SelectedIndexChanged += new System.EventHandler(this.cboSale_SelectedIndexChanged);
             this.cboSale.Click += new System.EventHandler(this.cboSale_Click);
@@ -388,7 +383,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(3, 46);
+            this.label13.Location = new System.Drawing.Point(615, 982);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(34, 13);
@@ -404,102 +399,6 @@
             this.label12.Size = new System.Drawing.Size(41, 13);
             this.label12.TabIndex = 47;
             this.label12.Text = "ผู้ป้อน :";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label15.Location = new System.Drawing.Point(875, 977);
-            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(30, 17);
-            this.label15.TabIndex = 46;
-            this.label15.Text = "โต๊ด";
-            // 
-            // txtTod
-            // 
-            this.txtTod.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.txtTod.Location = new System.Drawing.Point(908, 973);
-            this.txtTod.Margin = new System.Windows.Forms.Padding(2);
-            this.txtTod.Name = "txtTod";
-            this.txtTod.Size = new System.Drawing.Size(76, 35);
-            this.txtTod.TabIndex = 45;
-            this.txtTod.Enter += new System.EventHandler(this.txtTod_Enter);
-            this.txtTod.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTod_KeyPress);
-            this.txtTod.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtTod_KeyUp);
-            this.txtTod.Leave += new System.EventHandler(this.txtTod_Leave);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label3.Location = new System.Drawing.Point(997, 977);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(31, 17);
-            this.label3.TabIndex = 44;
-            this.label3.Text = "ล่าง ";
-            // 
-            // txtDown
-            // 
-            this.txtDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.txtDown.Location = new System.Drawing.Point(1030, 973);
-            this.txtDown.Margin = new System.Windows.Forms.Padding(2);
-            this.txtDown.Name = "txtDown";
-            this.txtDown.Size = new System.Drawing.Size(76, 35);
-            this.txtDown.TabIndex = 43;
-            this.txtDown.Enter += new System.EventHandler(this.txtDown_Enter);
-            this.txtDown.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDown_KeyPress);
-            this.txtDown.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDown_KeyUp);
-            this.txtDown.Leave += new System.EventHandler(this.txtDown_Leave);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label2.Location = new System.Drawing.Point(748, 977);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(25, 17);
-            this.label2.TabIndex = 42;
-            this.label2.Text = "บน";
-            // 
-            // txtUp
-            // 
-            this.txtUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.txtUp.Location = new System.Drawing.Point(778, 973);
-            this.txtUp.Margin = new System.Windows.Forms.Padding(2);
-            this.txtUp.Name = "txtUp";
-            this.txtUp.Size = new System.Drawing.Size(76, 35);
-            this.txtUp.TabIndex = 41;
-            this.txtUp.Enter += new System.EventHandler(this.txtUp_Enter);
-            this.txtUp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUp_KeyPress);
-            this.txtUp.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtUp_KeyUp);
-            this.txtUp.Leave += new System.EventHandler(this.txtUp_Leave);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label1.Location = new System.Drawing.Point(618, 977);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 17);
-            this.label1.TabIndex = 40;
-            this.label1.Text = "ตัวเลข :";
-            // 
-            // txtInput
-            // 
-            this.txtInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.txtInput.Location = new System.Drawing.Point(668, 973);
-            this.txtInput.Margin = new System.Windows.Forms.Padding(2);
-            this.txtInput.Name = "txtInput";
-            this.txtInput.Size = new System.Drawing.Size(76, 35);
-            this.txtInput.TabIndex = 39;
-            this.txtInput.Enter += new System.EventHandler(this.txtInput_Enter);
-            this.txtInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtInput_KeyPress);
-            this.txtInput.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtInput_KeyUp);
-            this.txtInput.Leave += new System.EventHandler(this.txtInput_Leave);
             // 
             // lV1
             // 
@@ -580,11 +479,79 @@
             this.dgv1.TabIndex = 40;
             this.dgv1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv1_CellEndEdit);
             // 
-            // FrmInputImage
+            // cboSaleNew
+            // 
+            this.cboSaleNew.FormattingEnabled = true;
+            this.cboSaleNew.Location = new System.Drawing.Point(941, 978);
+            this.cboSaleNew.Margin = new System.Windows.Forms.Padding(2);
+            this.cboSaleNew.Name = "cboSaleNew";
+            this.cboSaleNew.Size = new System.Drawing.Size(137, 21);
+            this.cboSaleNew.TabIndex = 51;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(878, 982);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(54, 13);
+            this.label1.TabIndex = 50;
+            this.label1.Text = "Saleใหม่ :";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(814, 982);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(39, 13);
+            this.label2.TabIndex = 52;
+            this.label2.Text = "ย้ายไป";
+            // 
+            // chkMoveAll
+            // 
+            this.chkMoveAll.AutoSize = true;
+            this.chkMoveAll.Location = new System.Drawing.Point(1129, 962);
+            this.chkMoveAll.Name = "chkMoveAll";
+            this.chkMoveAll.Size = new System.Drawing.Size(102, 17);
+            this.chkMoveAll.TabIndex = 53;
+            this.chkMoveAll.TabStop = true;
+            this.chkMoveAll.Text = "ไปทั้งรูปและยอด";
+            this.chkMoveAll.UseVisualStyleBackColor = true;
+            // 
+            // chkMoveImage
+            // 
+            this.chkMoveImage.AutoSize = true;
+            this.chkMoveImage.Location = new System.Drawing.Point(1129, 986);
+            this.chkMoveImage.Name = "chkMoveImage";
+            this.chkMoveImage.Size = new System.Drawing.Size(221, 17);
+            this.chkMoveImage.TabIndex = 54;
+            this.chkMoveImage.TabStop = true;
+            this.chkMoveImage.Text = "ไปทั้งรูป และยอดป้อนใหม่+ยกเลิกยอดเก่า";
+            this.chkMoveImage.UseVisualStyleBackColor = true;
+            // 
+            // chkVoidImage
+            // 
+            this.chkVoidImage.AutoSize = true;
+            this.chkVoidImage.Location = new System.Drawing.Point(1129, 1009);
+            this.chkVoidImage.Name = "chkVoidImage";
+            this.chkVoidImage.Size = new System.Drawing.Size(78, 17);
+            this.chkVoidImage.TabIndex = 60;
+            this.chkVoidImage.TabStop = true;
+            this.chkVoidImage.Text = "ยกเลิกรูปนี้";
+            this.chkVoidImage.UseVisualStyleBackColor = true;
+            // 
+            // FrmInputAdjust
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1908, 1036);
+            this.Controls.Add(this.chkVoidImage);
+            this.Controls.Add(this.chkMoveImage);
+            this.Controls.Add(this.chkMoveAll);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.cboSaleNew);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dgv1);
             this.Controls.Add(this.picHand);
             this.Controls.Add(this.picZoomM);
@@ -593,20 +560,15 @@
             this.Controls.Add(this.pic1);
             this.Controls.Add(this.lV1);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.txtDown);
-            this.Controls.Add(this.txtInput);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtUp);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtTod);
-            this.Controls.Add(this.label15);
+            this.Controls.Add(this.cboSale);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.btnSave);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "FrmInputImage";
-            this.Text = "FrmInputImage";
+            this.Name = "FrmInputAdjust";
+            this.Text = "FrmInputAdjust";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.FrmInputImage_Load);
-            this.Resize += new System.EventHandler(this.FrmInputImage_Resize);
+            this.Load += new System.EventHandler(this.FrmInputAdjust_Load);
+            this.Resize += new System.EventHandler(this.FrmInputAdjust_Resize);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picZoomM)).EndInit();
@@ -625,14 +587,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox pic1;
         private System.Windows.Forms.ListView lV1;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox txtTod;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtDown;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtUp;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtInput;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.ComboBox cboYear;
@@ -666,5 +620,11 @@
         private System.Windows.Forms.Label lbDown;
         private System.Windows.Forms.Label lbTod;
         private System.Windows.Forms.Label lbNum;
+        private System.Windows.Forms.ComboBox cboSaleNew;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RadioButton chkMoveAll;
+        private System.Windows.Forms.RadioButton chkMoveImage;
+        private System.Windows.Forms.RadioButton chkVoidImage;
     }
 }

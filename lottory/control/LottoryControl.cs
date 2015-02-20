@@ -544,7 +544,7 @@ namespace lottory.control
         {
             if (System.DateTime.Now.Day >= 2)
             {
-                if (System.DateTime.Now.Day <= 17)
+                if (System.DateTime.Now.Day < 16)
                 {
                     c.SelectedValue = "01";
                 }
@@ -792,7 +792,22 @@ namespace lottory.control
         public void renameFileImage(String fileName)
         {
             String file1 = fileName.Replace("_0", "_1");
-            System.IO.File.Move(fileName, file1);
+            if(System.IO.File.Exists(fileName))
+            {
+                System.IO.File.Move(fileName, file1);
+            }
+            
+            //FStreamLock fl = new FStreamLock(fileName);
+        }
+        public void renameFileImage1(String fileName)
+        {
+            String file1 = fileName.Replace("_1", "_0");
+            if (System.IO.File.Exists(fileName))
+            {
+                System.IO.File.Move(fileName, file1);
+            }
+
+            //FStreamLock fl = new FStreamLock(fileName);
         }
         public void DeleteFileImage(String fileName)
         {

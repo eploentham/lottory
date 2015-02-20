@@ -51,6 +51,7 @@ namespace lottory.gui
             cboYear = lc.cf.setCboYear(cboYear);
             cboPeriod = lc.setCboPeriodDefault(cboPeriod);
             cboSale = lc.saledb.getCboSale(cboSale);
+            cboThoo = lc.thodb.getCboThoo(cboThoo);
             getImage();
             //pageLoad = false;
         }
@@ -253,6 +254,7 @@ namespace lottory.gui
                     img.statusInput = "0";
                     img.FLock = "0";
                     img.saleId = lc.cf.getValueCboItem(cboSale);
+                    img.thooId = lc.cf.getValueCboItem(cboThoo);
                     String id = lc.imgdb.insertImage(img);
 
                     Image image = Image.FromFile(file.FullName);

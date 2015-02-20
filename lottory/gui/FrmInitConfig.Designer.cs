@@ -30,6 +30,9 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.gBClient = new System.Windows.Forms.GroupBox();
             this.txtConnectShareImage = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -65,8 +68,11 @@
             this.ChkClient = new System.Windows.Forms.RadioButton();
             this.ChkServer = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cboYear = new System.Windows.Forms.ComboBox();
+            this.cboPeriod = new System.Windows.Forms.ComboBox();
+            this.cboMonth = new System.Windows.Forms.ComboBox();
             this.chkClearInput = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.gBClient.SuspendLayout();
@@ -88,6 +94,9 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button4);
+            this.groupBox3.Controls.Add(this.button3);
+            this.groupBox3.Controls.Add(this.button2);
             this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.gBClient);
             this.groupBox3.Controls.Add(this.btnSave);
@@ -102,6 +111,38 @@
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "ใช้งานหลายเครื่อง";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(684, 277);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 32;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(684, 245);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(56, 26);
+            this.button2.TabIndex = 31;
+            this.button2.Text = "convert";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(684, 215);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(56, 26);
+            this.button1.TabIndex = 30;
+            this.button1.Text = "convert";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // gBClient
             // 
@@ -469,6 +510,9 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cboYear);
+            this.groupBox2.Controls.Add(this.cboPeriod);
+            this.groupBox2.Controls.Add(this.cboMonth);
             this.groupBox2.Controls.Add(this.chkClearInput);
             this.groupBox2.Location = new System.Drawing.Point(4, 8);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
@@ -478,6 +522,36 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "หน้าจอป้อนข้อมูล";
+            // 
+            // cboYear
+            // 
+            this.cboYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.cboYear.FormattingEnabled = true;
+            this.cboYear.Location = new System.Drawing.Point(409, 32);
+            this.cboYear.Margin = new System.Windows.Forms.Padding(2);
+            this.cboYear.Name = "cboYear";
+            this.cboYear.Size = new System.Drawing.Size(75, 25);
+            this.cboYear.TabIndex = 59;
+            // 
+            // cboPeriod
+            // 
+            this.cboPeriod.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.cboPeriod.FormattingEnabled = true;
+            this.cboPeriod.Location = new System.Drawing.Point(298, 32);
+            this.cboPeriod.Margin = new System.Windows.Forms.Padding(2);
+            this.cboPeriod.Name = "cboPeriod";
+            this.cboPeriod.Size = new System.Drawing.Size(108, 25);
+            this.cboPeriod.TabIndex = 58;
+            // 
+            // cboMonth
+            // 
+            this.cboMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.cboMonth.FormattingEnabled = true;
+            this.cboMonth.Location = new System.Drawing.Point(187, 32);
+            this.cboMonth.Margin = new System.Windows.Forms.Padding(2);
+            this.cboMonth.Name = "cboMonth";
+            this.cboMonth.Size = new System.Drawing.Size(108, 25);
+            this.cboMonth.TabIndex = 57;
             // 
             // chkClearInput
             // 
@@ -490,16 +564,15 @@
             this.chkClearInput.Text = "ให้ล้างข้อมูลหลังบันทึก";
             this.chkClearInput.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // button4
             // 
-            this.button1.Location = new System.Drawing.Point(684, 215);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(56, 26);
-            this.button1.TabIndex = 30;
-            this.button1.Text = "convert";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button4.Location = new System.Drawing.Point(684, 304);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 33;
+            this.button4.Text = "button4";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // FrmInitConfig
             // 
@@ -566,5 +639,11 @@
         private System.Windows.Forms.TextBox txtConnectShareImage;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ComboBox cboYear;
+        private System.Windows.Forms.ComboBox cboPeriod;
+        private System.Windows.Forms.ComboBox cboMonth;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
     }
 }

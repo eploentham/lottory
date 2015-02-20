@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace lottory.gui
 {
-    public partial class FrmInputImage : Form
+    public partial class FrmInputAdjust : Form
     {
         int row = 0, rowImage=0;
         int colNumber = 0, colUp = 1, colTod = 2, colDown = 3, colRemark = 4, colRowId = 6, colLottoId1 = 5, colEdit=6;
@@ -31,7 +31,7 @@ namespace lottory.gui
         Double amt = 0, up = 0, tod = 0, down = 0;
         Boolean filter = false;
         Image1 img;
-        public FrmInputImage(String sfCode, LottoryControl l)
+        public FrmInputAdjust(String sfCode, LottoryControl l)
         {
             pageLoad = true;
             InitializeComponent();
@@ -51,6 +51,7 @@ namespace lottory.gui
             cboPeriod = lc.cf.setCboPeriod(cboPeriod);
             cboStaff = lc.sfdb.getCboStaff(cboStaff);
             cboSale = lc.saledb.getCboSale(cboSale);
+            cboSaleNew = lc.saledb.getCboSale(cboSaleNew);
             cboSale1 = cboSale;
             cboThoo = lc.thodb.getCboThoo(cboThoo);
             cboMonth.SelectedValue = monthId;
@@ -126,7 +127,7 @@ namespace lottory.gui
             }
         }
 
-        private void FrmInputImage_Load(object sender, EventArgs e)
+        private void FrmInputAdjust_Load(object sender, EventArgs e)
         {
             
         }
@@ -359,33 +360,33 @@ namespace lottory.gui
             lotId1 = "";
             btnEdit.Enabled = false;
         }
-        private void txtInputFocus()
-        {
-            txtInput.SelectAll();
-            txtInput.Focus();
-        }
-        private void txtDownFocus()
-        {
-            txtDown.SelectAll();
-            txtDown.Focus();
-        }
-        private void txtUpFocus()
-        {
-            txtUp.SelectAll();
-            txtUp.Focus();
-        }
-        private void txtTodFocus()
-        {
-            txtTod.SelectAll();
-            txtTod.Focus();
-        }
-        private void clearInput()
-        {
-            txtInput.Text = "";
-            txtUp.Text = "";
-            txtTod.Text = "";
-            txtDown.Text = "";
-        }
+        //private void txtInputFocus()
+        //{
+        //    txtInput.SelectAll();
+        //    txtInput.Focus();
+        //}
+        //private void txtDownFocus()
+        //{
+        //    txtDown.SelectAll();
+        //    txtDown.Focus();
+        //}
+        //private void txtUpFocus()
+        //{
+        //    txtUp.SelectAll();
+        //    txtUp.Focus();
+        //}
+        //private void txtTodFocus()
+        //{
+        //    txtTod.SelectAll();
+        //    txtTod.Focus();
+        //}
+        //private void clearInput()
+        //{
+        //    txtInput.Text = "";
+        //    txtUp.Text = "";
+        //    txtTod.Text = "";
+        //    txtDown.Text = "";
+        //}
         private Lotto setLotto(int row)
         {
             Lotto lot = new Lotto();
@@ -445,63 +446,47 @@ namespace lottory.gui
             pB1.Visible = true;
             pB1.Minimum = 0;
             pB1.Maximum = dgv1.Rows.Count;
-            for (int i = 0; i < dgv1.RowCount; i++)
+
+            if (!chkMoveAll.Checked && !chkMoveImage.Checked && !chkVoidImage.Checked)
             {
-                if (dgv1[colNumber, i].Value == null)
+                MessageBox.Show("กรุณาเลือกรายการ ย้าย", "");
+                return;
+            }
+            if (chkVoidImage.Checked)
+            {
+                if (MessageBox.Show("ต้องการยกเลิก", "", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {
-                    continue;
-                }
-                if (!dgv1[colEdit, i].Value.ToString().Equals("1"))
-                {
-                    continue;
-                }
-                lot = setLotto(i);
-                if (lot.lottoId.Equals(""))
-                {
-                    if (lotNew)
+                    if (lc.imgdb.VoidImage(img.Id, sf.Id).Equals("1"))
                     {
-                        lot.lottoId = lotId;
-                        lot.CDbl = Cbdl;
-                    }
-                    else
-                    {
-                        lot.lottoId = lotId1;
+                        lc.lotdb.VoidImage(img.Id, sf.Id);
+                        MessageBox.Show("ยกเลิก เรียบร้อย", "");
                     }
                 }
-                lc.saveLotto(lot);
-                dgv1.Rows[i].DefaultCellStyle.BackColor = Color.DarkKhaki;
-                pB1.Value = i;
-                //lV1.Items[txtIndex.Text].Checked = true;               
             }
-            if (pic1.Image != null)
+            else if (chkMoveAll.Checked)
             {
-                pic1.CancelAsync();
-                pic1.Image.Dispose();
-                //lc.renameFileImage(lc.initC.pathImage + "\\" + cboYear.Text + "\\" + cboMonth.SelectedValue.ToString() + "\\" + cboPeriod.SelectedValue.ToString() + "\\" + txtImgId.Text);           //580216
-                //lc.renameFileImage(lc.initC.pathImage + "\\" + cboYear.Text + "\\" + cboMonth.SelectedValue.ToString() + "\\" + cboPeriod.SelectedValue.ToString() + "\\" + txtImgId.Text.Replace(".lotto", ".thumb"));       //580216
-                //ListViewItem i = lV1.SelectedItems[0];
-                //txtImgId.Text = name[i.ImageIndex];
-                
-                //if (txtImgId.Text.IndexOf("_0") > 0)
-                //{
-                    lc.imgdb.UpdateStatusInput(img.Id, sf.Id, sf.Name,lc.cf.getValueCboItem(cboThoo));
-                //}
-                //else
-                //{
-                //    lc.imgdb.UpdateStatusInput(img.Id, sf.Id, sf.Name,lc.cf.getValueCboItem(cboThoo));
-                //}
-                //name[rowImage] = name[rowImage].Replace("_0", "_1");          //580216
-            }
-            
-            lc.imgdb.UpdateUnLock(img.Id);
-            //if (txtIndex.Text.Equals("."))
-            //{
-                if (lV1.Items.Count > int.Parse(txtIndex.Text))
+                if (MessageBox.Show("ต้องการย้ายรูป และข้อมูล", "", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {
-                    //txtIndex.Text = String.Concat(int.Parse(txtIndex.Text) + 1);
-                    lV1.Items[int.Parse(txtIndex.Text)].Checked = true;
+                    if (lc.imgdb.UpdateSale(img.Id, lc.cf.getValueCboItem(cboSaleNew)).Equals("1"))
+                    {
+                        lc.lotdb.UpdateSaleFromImage(img.Id, lc.cf.getValueCboItem(cboSaleNew), sf.Id);
+                        MessageBox.Show("ย้ายรูป และข้อมูล เรียบร้อย", "");
+                    }
+
                 }
-            //}
+            }
+            else if (chkMoveImage.Checked)
+            {
+                if (MessageBox.Show("ต้องการย้ายแต่รูป และยกเลิกข้อมูล", "", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    if (lc.imgdb.UpdateSale(img.Id, lc.cf.getValueCboItem(cboSaleNew)).Equals("1"))
+                    {
+                        lc.lotdb.VoidImage(img.Id, sf.Id);
+                        MessageBox.Show("ยกเลิก เรียบร้อย", "");
+                    }
+                }
+            }
+
             pB1.Visible = false;
             refresh();
         }
@@ -642,173 +627,173 @@ namespace lottory.gui
             clearGrd1 = false;
         }
 
-        private void txtInput_Enter(object sender, EventArgs e)
-        {
-            txtInput.BackColor = Color.LightYellow;
-        }
+        //private void txtInput_Enter(object sender, EventArgs e)
+        //{
+        //    txtInput.BackColor = Color.LightYellow;
+        //}
 
-        private void txtInput_Leave(object sender, EventArgs e)
-        {
-            txtInput.BackColor = Color.White;
-        }
+        //private void txtInput_Leave(object sender, EventArgs e)
+        //{
+        //    txtInput.BackColor = Color.White;
+        //}
 
-        private void txtInput_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-        }
+        //private void txtInput_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        //}
 
-        private void txtInput_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (cboSale.Text.Equals(""))
-                {
-                    MessageBox.Show("ไม่ได้เลือก Sale", "ไม่ได้เลือก Sale");
-                    return;
-                }
-                if (txtInput.Text.Length>3)
-                {
-                    return;
-                }
-                label4.Text = "";
-                if (lc.chkNumberLimit(txtInput.Text))
-                {
-                    label4.Text = "เลขอั้น";
-                    //label14.Font
-                    return;
-                }
-                else
-                {
-                    if (txtInput.Text.Equals(""))
-                    {
-                        return;
-                    }
-                    label4.Text = "OK";
-                    txtUpFocus();
-                }
-            }
-        }
+        //private void txtInput_KeyUp(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter)
+        //    {
+        //        if (cboSale.Text.Equals(""))
+        //        {
+        //            MessageBox.Show("ไม่ได้เลือก Sale", "ไม่ได้เลือก Sale");
+        //            return;
+        //        }
+        //        if (txtInput.Text.Length>3)
+        //        {
+        //            return;
+        //        }
+        //        label4.Text = "";
+        //        if (lc.chkNumberLimit(txtInput.Text))
+        //        {
+        //            label4.Text = "เลขอั้น";
+        //            //label14.Font
+        //            return;
+        //        }
+        //        else
+        //        {
+        //            if (txtInput.Text.Equals(""))
+        //            {
+        //                return;
+        //            }
+        //            label4.Text = "OK";
+        //            txtUpFocus();
+        //        }
+        //    }
+        //}
 
-        private void txtUp_Enter(object sender, EventArgs e)
-        {
-            txtUp.BackColor = Color.LightYellow;
-        }
+        //private void txtUp_Enter(object sender, EventArgs e)
+        //{
+        //    txtUp.BackColor = Color.LightYellow;
+        //}
 
-        private void txtUp_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-        }
+        //private void txtUp_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        //}
 
-        private void txtUp_Leave(object sender, EventArgs e)
-        {
-            txtUp.BackColor = Color.White;
-        }
+        //private void txtUp_Leave(object sender, EventArgs e)
+        //{
+        //    txtUp.BackColor = Color.White;
+        //}
 
-        private void txtUp_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                txtTodBackFirst = true;
-                txtTodFocus();
-            }
-        }
-        private void txtTod_Enter(object sender, EventArgs e)
-        {
-            txtTod.BackColor = Color.LightYellow;
-        }
+        //private void txtUp_KeyUp(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter)
+        //    {
+        //        txtTodBackFirst = true;
+        //        txtTodFocus();
+        //    }
+        //}
+        //private void txtTod_Enter(object sender, EventArgs e)
+        //{
+        //    txtTod.BackColor = Color.LightYellow;
+        //}
 
-        private void txtTod_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-        }
-        private void txtTod_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                txtDownBackFirst = true;
-                txtDownFocus();
-            }
-            else if ((e.KeyCode == Keys.Back) && (txtTod.Text.Equals("")))
-            {
-                if (!txtTodBackFirst)
-                {
-                    txtTodFocus();
-                }
-                txtTodBackFirst = false;
-            }
-        }
+        //private void txtTod_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        //}
+        //private void txtTod_KeyUp(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter)
+        //    {
+        //        txtDownBackFirst = true;
+        //        txtDownFocus();
+        //    }
+        //    else if ((e.KeyCode == Keys.Back) && (txtTod.Text.Equals("")))
+        //    {
+        //        if (!txtTodBackFirst)
+        //        {
+        //            txtTodFocus();
+        //        }
+        //        txtTodBackFirst = false;
+        //    }
+        //}
 
-        private void txtTod_Leave(object sender, EventArgs e)
-        {
-            txtTod.BackColor = Color.White;
-        }
+        //private void txtTod_Leave(object sender, EventArgs e)
+        //{
+        //    txtTod.BackColor = Color.White;
+        //}
 
-        private void txtDown_Enter(object sender, EventArgs e)
-        {
-            txtDown.BackColor = Color.LightYellow;
-        }
+        //private void txtDown_Enter(object sender, EventArgs e)
+        //{
+        //    txtDown.BackColor = Color.LightYellow;
+        //}
 
-        private void txtDown_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-        }
+        //private void txtDown_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        //}
 
-        private void txtDown_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (clearGrd1)
-                {
-                    setGrid1();
-                    clearGrd1 = false;
-                }
-                //if (txtInput.Text.Length == 1)
-                //{
-                    //setDgv1Down();
-                if (lc.chkNumberLimit(txtInput.Text))
-                {
-                    label18.Text = "เลขอั้น";
-                    return;
-                }
-                else
-                {
-                    label18.Text = "OK";
-                }
-                if (txtInput.Text.Length <= 0)
-                {
-                    return;
-                }
-                else if (txtInput.Text.Length == 1)
-                {
-                    setDataGrid1(txtInput.Text, txtUp.Text, "0", txtDown.Text, "", "");
-                }
-                else if (txtInput.Text.Length == 2)
-                {
-                    setDataGrid1(txtInput.Text, txtUp.Text, "0", txtDown.Text, "", "");
-                }
-                else 
-                {
-                    setDataGrid1(txtInput.Text, txtUp.Text, txtTod.Text, txtDown.Text, "", "");
-                }
-                //setDataGrid1(txtInput.Text, txtUp.Text, txtTod.Text, txtDown.Text,"","");
-                setGrdColor();
-                txtInputFocus();
-                clearInput();
-            }
-            else if ((e.KeyCode == Keys.Back) && (txtDown.Text.Equals("")) )
-            {
-                if (!txtDownBackFirst)
-                {
-                    txtTodFocus();
-                }
-                txtDownBackFirst = false;
-            }
-        }
+        //private void txtDown_KeyUp(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter)
+        //    {
+        //        if (clearGrd1)
+        //        {
+        //            setGrid1();
+        //            clearGrd1 = false;
+        //        }
+        //        //if (txtInput.Text.Length == 1)
+        //        //{
+        //            //setDgv1Down();
+        //        if (lc.chkNumberLimit(txtInput.Text))
+        //        {
+        //            label18.Text = "เลขอั้น";
+        //            return;
+        //        }
+        //        else
+        //        {
+        //            label18.Text = "OK";
+        //        }
+        //        if (txtInput.Text.Length <= 0)
+        //        {
+        //            return;
+        //        }
+        //        else if (txtInput.Text.Length == 1)
+        //        {
+        //            setDataGrid1(txtInput.Text, txtUp.Text, "0", txtDown.Text, "", "");
+        //        }
+        //        else if (txtInput.Text.Length == 2)
+        //        {
+        //            setDataGrid1(txtInput.Text, txtUp.Text, "0", txtDown.Text, "", "");
+        //        }
+        //        else 
+        //        {
+        //            setDataGrid1(txtInput.Text, txtUp.Text, txtTod.Text, txtDown.Text, "", "");
+        //        }
+        //        //setDataGrid1(txtInput.Text, txtUp.Text, txtTod.Text, txtDown.Text,"","");
+        //        setGrdColor();
+        //        txtInputFocus();
+        //        clearInput();
+        //    }
+        //    else if ((e.KeyCode == Keys.Back) && (txtDown.Text.Equals("")) )
+        //    {
+        //        if (!txtDownBackFirst)
+        //        {
+        //            txtTodFocus();
+        //        }
+        //        txtDownBackFirst = false;
+        //    }
+        //}
 
-        private void txtDown_Leave(object sender, EventArgs e)
-        {
-            txtDown.BackColor = Color.White;
-        }
+        //private void txtDown_Leave(object sender, EventArgs e)
+        //{
+        //    txtDown.BackColor = Color.White;
+        //}
 
         private void btnInit_Click(object sender, EventArgs e)
         {
@@ -841,7 +826,7 @@ namespace lottory.gui
                         setGrid1(img.Id);
                         setGrdColor();
                     }
-                    txtInputFocus();
+                    //txtInputFocus();
                 }
                 catch (Exception ex)
                 {
@@ -867,7 +852,7 @@ namespace lottory.gui
                     Cursor.Current = cursor;
                     return true; // signal that we've processed this key
                 case Keys.Insert:
-                    txtInputFocus();
+                    //txtInputFocus();
                     return true;
             }
             // run base implementation
@@ -898,7 +883,7 @@ namespace lottory.gui
             }
         }
 
-        private void FrmInputImage_Resize(object sender, EventArgs e)
+        private void FrmInputAdjust_Resize(object sender, EventArgs e)
         {
             setResize();
         }

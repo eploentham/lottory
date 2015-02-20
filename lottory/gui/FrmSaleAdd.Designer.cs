@@ -73,18 +73,19 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txtSaleCode);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(9, 10);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(394, 433);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(296, 352);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
             // btnUnActive
             // 
-            this.btnUnActive.Location = new System.Drawing.Point(262, 246);
-            this.btnUnActive.Margin = new System.Windows.Forms.Padding(4);
+            this.btnUnActive.Location = new System.Drawing.Point(196, 200);
             this.btnUnActive.Name = "btnUnActive";
-            this.btnUnActive.Size = new System.Drawing.Size(114, 28);
+            this.btnUnActive.Size = new System.Drawing.Size(86, 23);
             this.btnUnActive.TabIndex = 36;
             this.btnUnActive.Text = "ยกเลิกการใช้งาน";
             this.btnUnActive.UseVisualStyleBackColor = true;
@@ -94,9 +95,10 @@
             // 
             this.chkLimit.AutoSize = true;
             this.chkLimit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.chkLimit.Location = new System.Drawing.Point(24, 173);
+            this.chkLimit.Location = new System.Drawing.Point(18, 141);
+            this.chkLimit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkLimit.Name = "chkLimit";
-            this.chkLimit.Size = new System.Drawing.Size(50, 24);
+            this.chkLimit.Size = new System.Drawing.Size(43, 21);
             this.chkLimit.TabIndex = 18;
             this.chkLimit.Text = "อั้น";
             this.chkLimit.UseVisualStyleBackColor = true;
@@ -105,9 +107,10 @@
             // txtLimit
             // 
             this.txtLimit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.txtLimit.Location = new System.Drawing.Point(126, 173);
+            this.txtLimit.Location = new System.Drawing.Point(94, 141);
+            this.txtLimit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtLimit.Name = "txtLimit";
-            this.txtLimit.Size = new System.Drawing.Size(100, 27);
+            this.txtLimit.Size = new System.Drawing.Size(76, 23);
             this.txtLimit.TabIndex = 17;
             this.txtLimit.Visible = false;
             this.txtLimit.Enter += new System.EventHandler(this.txtLimit_Enter);
@@ -118,27 +121,30 @@
             // txtSaleId
             // 
             this.txtSaleId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.txtSaleId.Location = new System.Drawing.Point(246, 29);
+            this.txtSaleId.Location = new System.Drawing.Point(184, 24);
+            this.txtSaleId.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtSaleId.Name = "txtSaleId";
-            this.txtSaleId.Size = new System.Drawing.Size(100, 27);
+            this.txtSaleId.Size = new System.Drawing.Size(76, 23);
             this.txtSaleId.TabIndex = 14;
             this.txtSaleId.Visible = false;
             // 
             // txtSaleRemark
             // 
             this.txtSaleRemark.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.txtSaleRemark.Location = new System.Drawing.Point(126, 126);
+            this.txtSaleRemark.Location = new System.Drawing.Point(94, 102);
+            this.txtSaleRemark.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtSaleRemark.Name = "txtSaleRemark";
-            this.txtSaleRemark.Size = new System.Drawing.Size(230, 27);
+            this.txtSaleRemark.Size = new System.Drawing.Size(174, 23);
             this.txtSaleRemark.TabIndex = 13;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label3.Location = new System.Drawing.Point(20, 126);
+            this.label3.Location = new System.Drawing.Point(15, 102);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 20);
+            this.label3.Size = new System.Drawing.Size(59, 17);
             this.label3.TabIndex = 12;
             this.label3.Text = "หมายเหตุ";
             // 
@@ -146,9 +152,10 @@
             // 
             this.ChkUnActive.AutoSize = true;
             this.ChkUnActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.ChkUnActive.Location = new System.Drawing.Point(172, 246);
+            this.ChkUnActive.Location = new System.Drawing.Point(129, 200);
+            this.ChkUnActive.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ChkUnActive.Name = "ChkUnActive";
-            this.ChkUnActive.Size = new System.Drawing.Size(74, 24);
+            this.ChkUnActive.Size = new System.Drawing.Size(60, 21);
             this.ChkUnActive.TabIndex = 11;
             this.ChkUnActive.TabStop = true;
             this.ChkUnActive.Text = "ยกเลิก";
@@ -159,9 +166,10 @@
             // 
             this.chkActive.AutoSize = true;
             this.chkActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.chkActive.Location = new System.Drawing.Point(19, 246);
+            this.chkActive.Location = new System.Drawing.Point(14, 200);
+            this.chkActive.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkActive.Name = "chkActive";
-            this.chkActive.Size = new System.Drawing.Size(74, 24);
+            this.chkActive.Size = new System.Drawing.Size(61, 21);
             this.chkActive.TabIndex = 10;
             this.chkActive.TabStop = true;
             this.chkActive.Text = "ใช้งาน";
@@ -171,9 +179,10 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.btnCancel.Location = new System.Drawing.Point(193, 311);
+            this.btnCancel.Location = new System.Drawing.Point(145, 253);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 30);
+            this.btnCancel.Size = new System.Drawing.Size(56, 24);
             this.btnCancel.TabIndex = 9;
             this.btnCancel.Text = "ยกเลิก";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -182,9 +191,10 @@
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.btnSave.Location = new System.Drawing.Point(25, 311);
+            this.btnSave.Location = new System.Drawing.Point(19, 253);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 30);
+            this.btnSave.Size = new System.Drawing.Size(56, 24);
             this.btnSave.TabIndex = 8;
             this.btnSave.Text = "บันทึก";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -193,9 +203,10 @@
             // txtSaleName
             // 
             this.txtSaleName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.txtSaleName.Location = new System.Drawing.Point(126, 75);
+            this.txtSaleName.Location = new System.Drawing.Point(94, 61);
+            this.txtSaleName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtSaleName.Name = "txtSaleName";
-            this.txtSaleName.Size = new System.Drawing.Size(100, 27);
+            this.txtSaleName.Size = new System.Drawing.Size(174, 23);
             this.txtSaleName.TabIndex = 3;
             this.txtSaleName.Enter += new System.EventHandler(this.txtSaleName_Enter);
             this.txtSaleName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtSaleName_KeyUp);
@@ -205,18 +216,20 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label2.Location = new System.Drawing.Point(20, 75);
+            this.label2.Location = new System.Drawing.Point(15, 61);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(28, 20);
+            this.label2.Size = new System.Drawing.Size(23, 17);
             this.label2.TabIndex = 2;
             this.label2.Text = "ชื่อ";
             // 
             // txtSaleCode
             // 
             this.txtSaleCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.txtSaleCode.Location = new System.Drawing.Point(126, 29);
+            this.txtSaleCode.Location = new System.Drawing.Point(94, 24);
+            this.txtSaleCode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtSaleCode.Name = "txtSaleCode";
-            this.txtSaleCode.Size = new System.Drawing.Size(100, 27);
+            this.txtSaleCode.Size = new System.Drawing.Size(76, 23);
             this.txtSaleCode.TabIndex = 1;
             this.txtSaleCode.Enter += new System.EventHandler(this.txtSaleCode_Enter);
             this.txtSaleCode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtSaleCode_KeyUp);
@@ -226,9 +239,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label1.Location = new System.Drawing.Point(20, 29);
+            this.label1.Location = new System.Drawing.Point(15, 24);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 20);
+            this.label1.Size = new System.Drawing.Size(31, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "รหัส";
             // 
@@ -236,20 +250,22 @@
             // 
             this.tab1.Controls.Add(this.tabPage1);
             this.tab1.Controls.Add(this.tabPage2);
-            this.tab1.Location = new System.Drawing.Point(412, 12);
+            this.tab1.Location = new System.Drawing.Point(309, 10);
+            this.tab1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tab1.Name = "tab1";
             this.tab1.SelectedIndex = 0;
-            this.tab1.Size = new System.Drawing.Size(771, 433);
+            this.tab1.Size = new System.Drawing.Size(578, 352);
             this.tab1.TabIndex = 20;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.chkDiscount);
             this.tabPage1.Controls.Add(this.dgvRate);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(763, 404);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Size = new System.Drawing.Size(570, 326);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -258,9 +274,10 @@
             // 
             this.chkDiscount.AutoSize = true;
             this.chkDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.chkDiscount.Location = new System.Drawing.Point(6, 6);
+            this.chkDiscount.Location = new System.Drawing.Point(4, 5);
+            this.chkDiscount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkDiscount.Name = "chkDiscount";
-            this.chkDiscount.Size = new System.Drawing.Size(148, 24);
+            this.chkDiscount.Size = new System.Drawing.Size(122, 21);
             this.chkDiscount.TabIndex = 21;
             this.chkDiscount.Text = "กำหนดส่วนลดเอง";
             this.chkDiscount.UseVisualStyleBackColor = true;
@@ -271,19 +288,21 @@
             // 
             this.dgvRate.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvRate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRate.Location = new System.Drawing.Point(6, 36);
+            this.dgvRate.Location = new System.Drawing.Point(4, 29);
+            this.dgvRate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvRate.Name = "dgvRate";
             this.dgvRate.RowTemplate.Height = 24;
-            this.dgvRate.Size = new System.Drawing.Size(750, 362);
+            this.dgvRate.Size = new System.Drawing.Size(562, 294);
             this.dgvRate.TabIndex = 20;
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.dataGridView1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(763, 404);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Size = new System.Drawing.Size(570, 326);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -292,19 +311,21 @@
             // 
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 4);
+            this.dataGridView1.Location = new System.Drawing.Point(4, 3);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(750, 394);
+            this.dataGridView1.Size = new System.Drawing.Size(562, 320);
             this.dataGridView1.TabIndex = 21;
             // 
             // FrmSaleAdd
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1194, 457);
+            this.ClientSize = new System.Drawing.Size(896, 371);
             this.Controls.Add(this.tab1);
             this.Controls.Add(this.groupBox1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FrmSaleAdd";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmSaleAdd";

@@ -36,6 +36,13 @@ namespace lottory.objdb
             img.staffInputId = "staff_input_id";
             img.staffInputName = "staff_input_name";
             img.rowNumber = "row_number";
+            img.thooId = "thoo_id";
+            img.saleId = "sale_id";
+
+            img.saleOldId = "sale_old_id";
+            img.SfMoveId = "staff_move_id";
+            img.dateMove = "date_move";
+            img.sfVoidId = "staff_void_id";
 
             img.pkField = "img_id";
             img.table = "t_image";
@@ -60,6 +67,12 @@ namespace lottory.objdb
             item.staffInputId = dt.Rows[0][img.staffInputId].ToString();
             item.staffInputName = dt.Rows[0][img.staffInputName].ToString();
             item.rowNumber = dt.Rows[0][img.rowNumber].ToString();
+            item.thooId = dt.Rows[0][img.thooId].ToString();
+
+            item.saleOldId = dt.Rows[0][img.saleOldId].ToString();
+            item.SfMoveId = dt.Rows[0][img.SfMoveId].ToString();
+            item.dateMove = dt.Rows[0][img.dateMove].ToString();
+            item.sfVoidId = dt.Rows[0][img.sfVoidId].ToString();
 
             return item;
         }
@@ -72,12 +85,26 @@ namespace lottory.objdb
 
             return dt;
         }
-        public Image1 selectByPk(String saleId)
+        public Image1 selectByPk(String id)
         {
             Image1 item = new Image1();
             String sql = "";
             DataTable dt = new DataTable();
-            sql = "Select * From " + img.table + " Where " + img.pkField + "='" + saleId + "'";
+            sql = "Select * From " + img.table + " Where " + img.pkField + "='" + id + "'";
+            dt = conn.selectData(sql);
+            if (dt.Rows.Count > 0)
+            {
+                item = setData(item, dt);
+            }
+            return item;
+        }
+        public Image1 selectByRowNumber(String yearId, String monthId, String periodId, String id)
+        {
+            Image1 item = new Image1();
+            String sql = "";
+            DataTable dt = new DataTable();
+            sql = "Select * From " + img.table + " Where " + img.yearId + "='" + yearId + "' and " +
+                img.monthId + "='" + monthId + "' and " + img.periodId + "='" + periodId +"' and "+ img.rowNumber + "='" + id + "'";
             dt = conn.selectData(sql);
             if (dt.Rows.Count > 0)
             {
@@ -119,12 +146,14 @@ namespace lottory.objdb
                 img.saleId + "," + img.staffId + "," + img.Active + ","+
                 img.yearId + "," + img.monthId + "," + img.periodId + "," +
                 img.statusInput + "," + img.FLock + "," + img.dateCreate + "," +
-                img.dateInput + "," + img.staffInputId + "," + img.staffInputName + "," + img.rowNumber + ") " +
+                img.dateInput + "," + img.staffInputId + "," + img.staffInputName + "," +
+                img.rowNumber + "," + img.thooId + ") " +
                 "Values('" + p.Id + "','" + p.custId + "','" + p.pathFilename + "','" +
                 p.saleId + "','" + p.staffId + "','" + p.Active + "','" +
                 p.yearId + "','" + p.monthId + "','" + p.periodId + "','" +
                 "0','0'," + p.dateCreate+","+
-                "'','','','"+ p.rowNumber+"')";
+                "'','','','"+
+                p.rowNumber + "','" + p.thooId + "')";
             try
             {
                 chk = conn.ExecuteNonQuery(sql);
@@ -152,7 +181,8 @@ namespace lottory.objdb
                 img.staffId + "='" + p.staffId + "', " +
                 img.yearId + "='" + p.yearId + "', " +
                 img.monthId + "='" + p.monthId + "', " +
-                img.periodId + "='" + p.periodId + "' " +
+                img.periodId + "='" + p.periodId + "', " +
+                img.thooId + "='" + p.thooId + "' " +
                 "Where " + img.pkField + "='" + p.Id + "'";
             try
             {
@@ -194,13 +224,14 @@ namespace lottory.objdb
             chk = conn.ExecuteNonQuery(sql);
             return chk;
         }
-        public String UpdateStatusInput(String imgId, String sfId, String sfName)
+        public String UpdateStatusInput(String imgId, String sfId, String sfName, String thoId)
         {
             String sql = "", chk = "";
             sql = "Update " + img.table+" Set "+img.statusInput+"='1', "+
                 img.dateInput + "=" + img.dateGenDB + "," +
                 img.staffInputId+"='"+sfId+"',"+
-                img.staffInputName+"='"+sfName+"' "+
+                img.staffInputName+"='"+sfName+"', "+
+                img.thooId + "='" + thoId + "' " +
                 "Where "+img.pkField+"='"+imgId+"'" ;
             chk = conn.ExecuteNonQuery(sql);
             return chk;
@@ -223,8 +254,18 @@ namespace lottory.objdb
         {
             String sql = "", chk = "";
 
-            sql = "Update " + img.table + " Set " + img.Active + "='3' " +
+            sql = "Update " + img.table + " Set " + img.Active + "='3', " +
+                img.sfVoidId+"='"+sfId+"' "+
                 
+                "Where " + img.Id + "='" + imgId + "'";
+            chk = conn.ExecuteNonQuery(sql);
+            return chk;
+        }
+        public String UpdateSale(String imgId, String saleId)
+        {
+            String sql = "", chk = "";
+
+            sql = "Update " + img.table + " Set " + img.saleId + "='"+saleId+"', "+img.dateMove+"="+img.dateGenDB+","+img.saleOldId+"="+img.saleId+" " +
                 "Where " + img.Id + "='" + imgId + "'";
             chk = conn.ExecuteNonQuery(sql);
             return chk;

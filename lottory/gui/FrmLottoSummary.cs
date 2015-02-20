@@ -20,7 +20,7 @@ namespace lottory.gui
         
         //int colTRow = 0, colTName = 1, colTLimit = 2, colTAmt = 3, colTId = 4;
         int colRRow = 0, colRDescription = 1,colRAmt=2, colRAmtReward = 3, colRNetTotal=4, colRReward = 5, colRRec = 6, colRpayRate =7, colRLimit = 8, colRDiscount = 9, colRId = 10;
-        int colSName = 0, colSAmt=1, colSPay=2, colSId=3, colSStatusDiscount=4, colSPerDiscount=5, colSCnt=6;
+        int colSName = 0, colSAmt=1, colSPay=2, colSId=3, colSStatusDiscount=4, colSPerDiscount=5, colSCnt=15, colS3Up=7, colS3Tod=8, colS3Down=9, colS2Up=10, colS2Tod=11, colS2Down=12, colSUp=13, colSDown=14;
         int colTName = 0, colTAmt = 1, colTPay = 2, colTId = 3, colTCnt=4;
         //int colTName = 0, colSaleAmt = 1, colSalePay = 2, colSaleId = 3, colSaleCnt = 4;
         //int col1Cnt = 14;
@@ -87,7 +87,7 @@ namespace lottory.gui
             String rateId = "";
             DataTable dt = new DataTable();
             Double[] reward = new Double[2] { 0, 0 };
-            double amt = 0;
+            double amt = 0, amt1=0;
             dt = lc.selectRateAll();
             dgvRate.Rows.Clear();
             Font font = new Font("Microsoft Sans Serif", 12);
@@ -95,7 +95,7 @@ namespace lottory.gui
             dgvRate.SelectionMode = DataGridViewSelectionMode.CellSelect;
             if (dt.Rows.Count > 0)
             {
-                dgvRate.RowCount = dt.Rows.Count;
+                dgvRate.RowCount = dt.Rows.Count+1;     // +1 เพราะ row สุดท้ายไว้ summary
             }
             else
             {
@@ -157,6 +157,7 @@ namespace lottory.gui
                     dgvRate[colRAmtReward, i].Value = String.Format("{0:#,###,###.00}", reward[0]);
                     dgvRate[colRReward, i].Value = String.Format("{0:#,###,###.00}", reward[1]);
                     dgvRate[colRAmt, i].Value = String.Format("{0:#,###,###.00}", amt);
+                    amt1 += amt;
                     if (Double.Parse(lc.cf.NumberNull(dgvRate[colRReward, i].Value.ToString())) > 0)
                     {
                         dgvRate[colRReward, i].Style.Font = font1;
@@ -202,6 +203,7 @@ namespace lottory.gui
                     //}
                 }
             }
+            dgvRate[colRAmt, dgvRate.RowCount-1].Value = String.Format("{0:#,###,###.00}", amt1);
             dgvRate.RowHeadersVisible = false;
             dgvRate.Columns[colRId].Visible = false;
             dgvRate.Columns[colRRow].Visible = false;
@@ -215,6 +217,8 @@ namespace lottory.gui
         private void setGrdSale()
         {
             DataTable dt = new DataTable();
+            DataTable dt1 = new DataTable();
+            double amt = 0, amt1 = 0;
             dt = lc.lotdb.selectSumBySale(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString());
             dgvSale.Rows.Clear();
             Font font = new Font("Microsoft Sans Serif", 12);
@@ -222,7 +226,7 @@ namespace lottory.gui
             dgvSale.SelectionMode = DataGridViewSelectionMode.CellSelect;
             if (dt.Rows.Count > 0)
             {
-                dgvSale.RowCount = dt.Rows.Count;
+                dgvSale.RowCount = dt.Rows.Count + 1;     //// +1 เพราะ row สุดท้ายไว้ summary
             }
             else
             {
@@ -238,6 +242,16 @@ namespace lottory.gui
             dgvSale.Columns[colSName].HeaderText = "sale";
             dgvSale.Columns[colSAmt].HeaderText = "ยอด";
             dgvSale.Columns[colSPay].HeaderText = "%ยอด";
+
+            dgvSale.Columns[colS3Up].HeaderText = "3บน";
+            dgvSale.Columns[colS3Tod].HeaderText = "3โต๊ด";
+            dgvSale.Columns[colS3Down].HeaderText = "3ล่าง";
+            dgvSale.Columns[colS2Up].HeaderText = "2บน";
+            dgvSale.Columns[colS2Tod].HeaderText = "2โต๊ด";
+            dgvSale.Columns[colS2Down].HeaderText = "2ล่าง";
+            dgvSale.Columns[colSUp].HeaderText = "วิ่งบน";
+            dgvSale.Columns[colSDown].HeaderText = "วิ่งล่าง";
+
             dgvSale.Columns[colSId].HeaderText = " ";
             dgvSale.Columns[colSAmt].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
             dgvSale.Columns[colSPay].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
@@ -245,15 +259,19 @@ namespace lottory.gui
 
             if (dt.Rows.Count > 0)
             {
-                dgvSale.RowCount = dt.Rows.Count;
+                //dgvSale.RowCount = dt.Rows.Count;
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
+                    dt1 = new DataTable();
                     //dgvRate[colRRow, i].Value = (i + 1);
                     cItem = lc.getCboItem(cboSale, dt.Rows[i][lc.saledb.sale.Id].ToString());
                     dgvSale[colSName, i].Value = cItem.Text;
                     dgvSale[colSAmt, i].Value = String.Format("{0:#,###,###.00}",dt.Rows[i]["amt"]);
                     dgvSale[colSPay, i].Value = lc.getSalePercent(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dt.Rows[i][lc.saledb.sale.Id].ToString());
+                    dt1 = lc.lotdb.selectSumBySale(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dt.Rows[i][lc.saledb.sale.Id].ToString());
+                    dgvSale[colS3Up, i].Value = dt1.Rows[0][lc.lotdb.lot.r3Up].ToString();
                     dgvSale[colSId, i].Value = dt.Rows[i][lc.saledb.sale.Id].ToString();
+                    amt += Double.Parse(dt.Rows[i]["amt"].ToString());
                     //dgvRate[colRDiscount, i].Value = dt.Rows[i][lc.ratedb.rate.discount].ToString();
                     //dgvRate[colRId, i].Value = dt.Rows[i][lc.ratedb.rate.Id].ToString();
 
@@ -266,7 +284,7 @@ namespace lottory.gui
             dgvSale.RowHeadersVisible = false;
             dgvSale.Columns[colSId].Visible = false;
             //dgvSale.Columns[colRRow].Visible = false;
-
+            dgvSale[colSAmt, dgvSale.RowCount - 1].Value = String.Format("{0:#,###,###.00}", amt);
             dgvSale.Font = font;
             dgvSale.ReadOnly = true;
             //setDataGrdThoo();

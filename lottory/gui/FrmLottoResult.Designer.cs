@@ -71,6 +71,8 @@
             this.dgv2 = new System.Windows.Forms.DataGridView();
             this.Chk2 = new System.Windows.Forms.RadioButton();
             this.Chk3 = new System.Windows.Forms.RadioButton();
+            this.cboSale = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv3)).BeginInit();
@@ -80,6 +82,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cboSale);
+            this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.btnS);
@@ -166,6 +170,7 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(70, 32);
             this.txtSearch.TabIndex = 60;
+            this.txtSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyUp);
             // 
             // pB1
             // 
@@ -261,17 +266,17 @@
             // txtRewardDown2
             // 
             this.txtRewardDown2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.txtRewardDown2.Location = new System.Drawing.Point(633, 15);
+            this.txtRewardDown2.Location = new System.Drawing.Point(533, 15);
             this.txtRewardDown2.Margin = new System.Windows.Forms.Padding(2);
             this.txtRewardDown2.Name = "txtRewardDown2";
-            this.txtRewardDown2.Size = new System.Drawing.Size(218, 32);
+            this.txtRewardDown2.Size = new System.Drawing.Size(56, 32);
             this.txtRewardDown2.TabIndex = 58;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label2.Location = new System.Drawing.Point(537, 23);
+            this.label2.Location = new System.Drawing.Point(437, 23);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(90, 20);
@@ -304,7 +309,7 @@
             this.txtReward1.Location = new System.Drawing.Point(302, 15);
             this.txtReward1.Margin = new System.Windows.Forms.Padding(2);
             this.txtReward1.Name = "txtReward1";
-            this.txtReward1.Size = new System.Drawing.Size(218, 32);
+            this.txtReward1.Size = new System.Drawing.Size(129, 32);
             this.txtReward1.TabIndex = 56;
             // 
             // label1
@@ -575,6 +580,25 @@
             this.Chk3.UseVisualStyleBackColor = true;
             this.Chk3.Click += new System.EventHandler(this.Chk3_Click);
             // 
+            // cboSale
+            // 
+            this.cboSale.FormattingEnabled = true;
+            this.cboSale.Location = new System.Drawing.Point(680, 18);
+            this.cboSale.Margin = new System.Windows.Forms.Padding(2);
+            this.cboSale.Name = "cboSale";
+            this.cboSale.Size = new System.Drawing.Size(158, 21);
+            this.cboSale.TabIndex = 72;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(633, 22);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(34, 13);
+            this.label13.TabIndex = 71;
+            this.label13.Text = "Sale :";
+            // 
             // FrmLottoResult
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -647,5 +671,7 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton Chk2;
         private System.Windows.Forms.RadioButton Chk3;
+        private System.Windows.Forms.ComboBox cboSale;
+        private System.Windows.Forms.Label label13;
     }
 }

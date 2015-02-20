@@ -91,6 +91,12 @@
     <Compile Include="gui\FrmInitConfig.Designer.cs">
       <DependentUpon>FrmInitConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="gui\FrmInputAdjust.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\FrmInputAdjust.Designer.cs">
+      <DependentUpon>FrmInputAdjust.cs</DependentUpon>
+    </Compile>
     <Compile Include="gui\FrmInputImage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -292,6 +298,7 @@
     <Compile Include="object1\Customer.cs" />
     <Compile Include="object1\FLock.cs" />
     <Compile Include="object1\Font1.cs" />
+    <Compile Include="object1\FStreamLock.cs" />
     <Compile Include="object1\Image1.cs" />
     <Compile Include="object1\IniFile.cs" />
     <Compile Include="control\LottoryControl.cs" />
@@ -317,6 +324,9 @@
     <EmbeddedResource Include="gui\FrmInitConfig.resx">
       <DependentUpon>FrmInitConfig.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\FrmInputAdjust.resx">
+      <DependentUpon>FrmInputAdjust.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="gui\FrmInputImage.resx">
       <DependentUpon>FrmInputImage.cs</DependentUpon>
