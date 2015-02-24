@@ -44,6 +44,14 @@ namespace lottory.objdb
             img.dateMove = "date_move";
             img.sfVoidId = "staff_void_id";
 
+            img.SfCheck1Id = "staff_check1_id";
+            img.SfCheck2Id = "staff_check2_id";
+            img.Amt = "amount";
+            img.AmtCheck1 = "amount_check1";
+            img.AmtCheck2 = "amount_check2";
+            img.StatusCheck1 = "status_check1";
+            img.StatusCheck2 = "status_check2";
+
             img.pkField = "img_id";
             img.table = "t_image";
         }
@@ -73,6 +81,14 @@ namespace lottory.objdb
             item.SfMoveId = dt.Rows[0][img.SfMoveId].ToString();
             item.dateMove = dt.Rows[0][img.dateMove].ToString();
             item.sfVoidId = dt.Rows[0][img.sfVoidId].ToString();
+
+            item.SfCheck1Id = dt.Rows[0][img.SfCheck1Id].ToString();
+            item.SfCheck2Id = dt.Rows[0][img.SfCheck2Id].ToString();
+            item.Amt = dt.Rows[0][img.Amt].ToString();
+            item.AmtCheck1 = dt.Rows[0][img.AmtCheck1].ToString();
+            item.AmtCheck2 = dt.Rows[0][img.AmtCheck2].ToString();
+            item.StatusCheck1 = dt.Rows[0][img.StatusCheck1].ToString();
+            item.StatusCheck2 = dt.Rows[0][img.StatusCheck2].ToString();
 
             return item;
         }
@@ -224,14 +240,15 @@ namespace lottory.objdb
             chk = conn.ExecuteNonQuery(sql);
             return chk;
         }
-        public String UpdateStatusInput(String imgId, String sfId, String sfName, String thoId)
+        public String UpdateStatusInput(String imgId, String sfId, String sfName, String thoId, Double amt)
         {
             String sql = "", chk = "";
             sql = "Update " + img.table+" Set "+img.statusInput+"='1', "+
                 img.dateInput + "=" + img.dateGenDB + "," +
                 img.staffInputId+"='"+sfId+"',"+
                 img.staffInputName+"='"+sfName+"', "+
-                img.thooId + "='" + thoId + "' " +
+                img.thooId + "='" + thoId + "', " +
+                img.Amt + "=" + amt + " " +
                 "Where "+img.pkField+"='"+imgId+"'" ;
             chk = conn.ExecuteNonQuery(sql);
             return chk;

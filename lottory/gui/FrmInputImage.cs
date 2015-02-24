@@ -16,7 +16,7 @@ namespace lottory.gui
     public partial class FrmInputImage : Form
     {
         int row = 0, rowImage=0;
-        int colNumber = 0, colUp = 1, colTod = 2, colDown = 3, colRemark = 4, colRowId = 6, colLottoId1 = 5, colEdit=6;
+        int colNumber = 0, colUp = 1, colTod = 2, colDown = 3, colRemark = 4, colRowId = 6, colLottoId1 = 5, colEdit=7;
         int col1Cnt = 8;
         Staff sf;
         Thoo tho;
@@ -437,6 +437,7 @@ namespace lottory.gui
         {
             Lotto lot = new Lotto();
             String lotId = "", Cbdl = "";
+            Double amt = 0;
             //if (lotNew)
             //{
             lotId = lot.getGenID();
@@ -456,6 +457,8 @@ namespace lottory.gui
                     continue;
                 }
                 lot = setLotto(i);
+                amt += Double.Parse(lc.cf.NumberNull1(lot.up)) + Double.Parse(lc.cf.NumberNull1(lot.tod))+Double.Parse(lc.cf.NumberNull1(lot.down));
+
                 if (lot.lottoId.Equals(""))
                 {
                     if (lotNew)
@@ -484,7 +487,7 @@ namespace lottory.gui
                 
                 //if (txtImgId.Text.IndexOf("_0") > 0)
                 //{
-                    lc.imgdb.UpdateStatusInput(img.Id, sf.Id, sf.Name,lc.cf.getValueCboItem(cboThoo));
+                    lc.imgdb.UpdateStatusInput(img.Id, sf.Id, sf.Name,lc.cf.getValueCboItem(cboThoo), amt);
                 //}
                 //else
                 //{
@@ -824,6 +827,10 @@ namespace lottory.gui
                 pageLoad = true;
                 try
                 {
+                    if(lV1.SelectedItems[0].Text ==null)
+                    {
+                        return;
+                    }
                     ListViewItem i = lV1.SelectedItems[0];
                     rowImage = i.ImageIndex;//ใช้ตอนsave เพื่อให้แก้ไข name[]ได้ถูกต้อง
                     txtRowNumber.Text = name[rowImage];
@@ -845,7 +852,7 @@ namespace lottory.gui
                 }
                 catch (Exception ex)
                 {
-
+                    //MessageBox.Show("Error "+ex.Message, "Error");
                 }
                 pageLoad = false;
                 Cursor.Current = cursor;
