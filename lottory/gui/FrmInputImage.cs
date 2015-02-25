@@ -151,6 +151,7 @@ namespace lottory.gui
             lV1.Clear();
             DirectoryInfo dir = new DirectoryInfo(pahtFile);
             DataTable dt = new DataTable();
+            Double total = 0;
             if (cboSale.SelectedItem != null )
             {
                 //ComboBoxItem aa = new ComboBoxItem();
@@ -196,6 +197,7 @@ namespace lottory.gui
                                 {
                                     iL.Images.Add(Image.FromFile(file.FullName));
                                     name.Add(file.Name.Replace(file.Extension, "") + ".lotto");
+                                    total += Double.Parse(lc.cf.NumberNull1(dt.Rows[i][lc.imgdb.img.Amt].ToString()));
                                 }
                             }
                         }
@@ -248,6 +250,7 @@ namespace lottory.gui
                     }
                 }
             }
+            lbTotal.Text = total.ToString("#,###.00");
             pB1.Visible = false;
             pageLoad = false;
             Cursor.Current = cursor;
@@ -437,7 +440,7 @@ namespace lottory.gui
         {
             Lotto lot = new Lotto();
             String lotId = "", Cbdl = "";
-            Double amt = 0;
+            //Double amt = 0;
             //if (lotNew)
             //{
             lotId = lot.getGenID();
@@ -457,7 +460,7 @@ namespace lottory.gui
                     continue;
                 }
                 lot = setLotto(i);
-                amt += Double.Parse(lc.cf.NumberNull1(lot.up)) + Double.Parse(lc.cf.NumberNull1(lot.tod))+Double.Parse(lc.cf.NumberNull1(lot.down));
+                //amt += Double.Parse(lc.cf.NumberNull1(lot.up)) + Double.Parse(lc.cf.NumberNull1(lot.tod))+Double.Parse(lc.cf.NumberNull1(lot.down));
 
                 if (lot.lottoId.Equals(""))
                 {
@@ -487,7 +490,7 @@ namespace lottory.gui
                 
                 //if (txtImgId.Text.IndexOf("_0") > 0)
                 //{
-                    lc.imgdb.UpdateStatusInput(img.Id, sf.Id, sf.Name,lc.cf.getValueCboItem(cboThoo), amt);
+                    lc.imgdb.UpdateStatusInput(img.Id, sf.Id, sf.Name,lc.cf.getValueCboItem(cboThoo), lbAmt.Text.Replace(",","").Replace("รวม","").Replace(":","").Trim());
                 //}
                 //else
                 //{

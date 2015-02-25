@@ -240,7 +240,7 @@ namespace lottory.objdb
             chk = conn.ExecuteNonQuery(sql);
             return chk;
         }
-        public String UpdateStatusInput(String imgId, String sfId, String sfName, String thoId, Double amt)
+        public String UpdateStatusInput(String imgId, String sfId, String sfName, String thoId, String amt)
         {
             String sql = "", chk = "";
             sql = "Update " + img.table+" Set "+img.statusInput+"='1', "+
