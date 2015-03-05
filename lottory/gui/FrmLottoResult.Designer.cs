@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cboSale = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.btnS = new System.Windows.Forms.Button();
@@ -71,8 +73,6 @@
             this.dgv2 = new System.Windows.Forms.DataGridView();
             this.Chk2 = new System.Windows.Forms.RadioButton();
             this.Chk3 = new System.Windows.Forms.RadioButton();
-            this.cboSale = new System.Windows.Forms.ComboBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv3)).BeginInit();
@@ -116,6 +116,25 @@
             this.groupBox1.Size = new System.Drawing.Size(1250, 102);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // cboSale
+            // 
+            this.cboSale.FormattingEnabled = true;
+            this.cboSale.Location = new System.Drawing.Point(680, 18);
+            this.cboSale.Margin = new System.Windows.Forms.Padding(2);
+            this.cboSale.Name = "cboSale";
+            this.cboSale.Size = new System.Drawing.Size(158, 21);
+            this.cboSale.TabIndex = 72;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(633, 22);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(34, 13);
+            this.label13.TabIndex = 71;
+            this.label13.Text = "Sale :";
             // 
             // checkBox1
             // 
@@ -553,6 +572,7 @@
             this.dgv2.RowTemplate.Height = 24;
             this.dgv2.Size = new System.Drawing.Size(623, 970);
             this.dgv2.TabIndex = 1;
+            this.dgv2.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dgv2_SortCompare);
             // 
             // Chk2
             // 
@@ -579,25 +599,6 @@
             this.Chk3.Text = "แสดง3ตัว";
             this.Chk3.UseVisualStyleBackColor = true;
             this.Chk3.Click += new System.EventHandler(this.Chk3_Click);
-            // 
-            // cboSale
-            // 
-            this.cboSale.FormattingEnabled = true;
-            this.cboSale.Location = new System.Drawing.Point(680, 18);
-            this.cboSale.Margin = new System.Windows.Forms.Padding(2);
-            this.cboSale.Name = "cboSale";
-            this.cboSale.Size = new System.Drawing.Size(158, 21);
-            this.cboSale.TabIndex = 72;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(633, 22);
-            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(34, 13);
-            this.label13.TabIndex = 71;
-            this.label13.Text = "Sale :";
             // 
             // FrmLottoResult
             // 

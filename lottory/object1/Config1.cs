@@ -189,6 +189,17 @@ namespace lottory.object1
                 return txt.ToString();
             }
         }
+        public String stringNull2(Object txt)
+        {
+            if (txt == null)
+            {
+                return "0";
+            }
+            else
+            {
+                return txt.ToString();
+            }
+        }
         public String dateTimetoDB()
         {
             return datetoDB(System.DateTime.Now) + " "+System.DateTime.Now.ToShortTimeString();

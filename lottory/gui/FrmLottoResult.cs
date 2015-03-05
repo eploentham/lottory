@@ -148,6 +148,7 @@ namespace lottory.gui
             dgv2.Rows.Clear();
             Font font = new Font("Microsoft Sans Serif", 12);
             Font fontb = new Font("Microsoft Sans Serif", 12,  FontStyle.Bold);
+            //Datagridv
             //dgv21.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv2.SelectionMode = DataGridViewSelectionMode.CellSelect;
 
@@ -264,7 +265,7 @@ namespace lottory.gui
                         tmp = "";
                     }
                     dgv2[col3Remark, int.Parse(dt.Rows[i][lc.lotdb.lot.number].ToString())].Value = dt.Rows[i][lc.lotdb.lot.number].ToString();
-                    dgv2[col3RewordUp, int.Parse(dt.Rows[i][lc.lotdb.lot.number].ToString())].Value = dt.Rows[i]["up"].ToString();
+                    dgv2[col3RewordUp, int.Parse(dt.Rows[i][lc.lotdb.lot.number].ToString())].Value = lc.cf.stringNull2(dt.Rows[i]["up"].ToString());
                     dgv2[col3RewardTod, int.Parse(dt.Rows[i][lc.lotdb.lot.number].ToString())].Value = dt.Rows[i]["tod"].ToString();
                     dgv2[col3RewardDown, int.Parse(dt.Rows[i][lc.lotdb.lot.number].ToString())].Value = dt.Rows[i]["down"].ToString();
                     if (rw.up3.Equals(dt.Rows[i][lc.lotdb.lot.number].ToString()))//ตรง
@@ -807,6 +808,26 @@ namespace lottory.gui
             if (e.KeyCode == Keys.Enter)
             {
                 btnS_Click(null,null);
+            }
+        }
+
+        private void dgv2_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
+        {
+            if ((e.Column.Index == col2RewordUp) || (e.Column.Index == col2RewardDown) || (e.Column.Index == col3RewardDown))
+            {
+                if (double.Parse(e.CellValue1.ToString()) > double.Parse(e.CellValue2.ToString()))
+                {
+                    e.SortResult = 1;
+                }
+                else if (double.Parse(e.CellValue1.ToString()) < double.Parse(e.CellValue2.ToString()))
+                {
+                    e.SortResult = -1;
+                }
+                else
+                {
+                    e.SortResult = 0;
+                }
+                e.Handled = true;
             }
         }
     }
