@@ -55,6 +55,7 @@ namespace lottory.gui
                 tv1.Nodes.Add("nLottoResult", "ตรวจรางวัลประจำงวด");
                 tv1.Nodes.Add("nLottoSummary", "สรุปข้อมูลประจำงวด");
                 tv1.Nodes.Add("nInputAdjust", "ยกเลิก ย้ายข้อมูลจากรูป");
+                tv1.Nodes.Add("nInputImageCheck", "ตรวจสอบ ป้อนข้อมูลจากรูป");
             }
             if (sf.Priority.Equals("3"))
             {
@@ -162,6 +163,11 @@ namespace lottory.gui
             else if (e.Node.Name.ToString() == "nInputAdjust")
             {
                 FrmInputAdjust frm = new FrmInputAdjust(sf.Code, lc);
+                showFrame(frm);
+            }
+            else if (e.Node.Name.ToString() == "nInputImageCheck")
+            {
+                FrmInputImage frm = new FrmInputImage(sf.Code, lc);
                 showFrame(frm);
             }
         }

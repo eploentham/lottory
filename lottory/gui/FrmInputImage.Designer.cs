@@ -123,7 +123,7 @@
             // lbNum
             // 
             this.lbNum.AutoSize = true;
-            this.lbNum.Location = new System.Drawing.Point(291, 92);
+            this.lbNum.Location = new System.Drawing.Point(273, 92);
             this.lbNum.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbNum.Name = "lbNum";
             this.lbNum.Size = new System.Drawing.Size(35, 13);

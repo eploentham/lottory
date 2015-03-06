@@ -82,6 +82,15 @@ namespace lottory.objdb
             lot.SfMoveId = "staff_move_id";
             lot.dateMove = "date_move";
 
+            lot.SfCheck1Id = "staff_check1_id";
+            lot.SfCheck2Id = "staff_check2_id";
+            lot.StatusCheck1 = "status_check1";
+            lot.StatusCheck2 = "status_check2";
+            lot.todOld = "tod_old";
+            lot.upOld = "up1_old";
+            lot.downOld = "down1_old";
+            lot.numberOld = "number1_old";
+
             lot.table = "t_lottory";
             lot.pkField = "row_id";
         }
@@ -124,6 +133,15 @@ namespace lottory.objdb
             item.saleOldId = dt.Rows[0][lot.saleOldId].ToString();
             item.SfMoveId = dt.Rows[0][lot.SfMoveId].ToString();
             item.dateMove = dt.Rows[0][lot.dateMove].ToString();
+
+            item.SfCheck1Id = dt.Rows[0][lot.SfCheck1Id].ToString();
+            item.SfCheck2Id = dt.Rows[0][lot.SfCheck2Id].ToString();
+            item.StatusCheck1 = dt.Rows[0][lot.StatusCheck1].ToString();
+            item.StatusCheck2 = dt.Rows[0][lot.StatusCheck2].ToString();
+            item.todOld = dt.Rows[0][lot.todOld].ToString();
+            item.upOld = dt.Rows[0][lot.upOld].ToString();
+            item.downOld = dt.Rows[0][lot.downOld].ToString();
+            item.numberOld = dt.Rows[0][lot.numberOld].ToString();
             
             return item;
         }

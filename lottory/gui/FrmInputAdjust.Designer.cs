@@ -44,7 +44,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.pB1 = new System.Windows.Forms.ProgressBar();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
             this.cboYear = new System.Windows.Forms.ComboBox();
@@ -54,9 +53,10 @@
             this.cboPeriod = new System.Windows.Forms.ComboBox();
             this.cboMonth = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.btnSave = new System.Windows.Forms.Button();
             this.cboSale = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.lV1 = new System.Windows.Forms.ListView();
             this.picZoomM = new System.Windows.Forms.PictureBox();
             this.picZoomP = new System.Windows.Forms.PictureBox();
@@ -117,7 +117,7 @@
             // lbNum
             // 
             this.lbNum.AutoSize = true;
-            this.lbNum.Location = new System.Drawing.Point(291, 92);
+            this.lbNum.Location = new System.Drawing.Point(277, 92);
             this.lbNum.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbNum.Name = "lbNum";
             this.lbNum.Size = new System.Drawing.Size(35, 13);
@@ -267,17 +267,6 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(1355, 978);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(55, 32);
-            this.btnSave.TabIndex = 59;
-            this.btnSave.Text = "บันทึก";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
@@ -369,6 +358,27 @@
             this.label14.TabIndex = 50;
             this.label14.Text = "ประจำเดือน :";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(3, 17);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(41, 13);
+            this.label12.TabIndex = 47;
+            this.label12.Text = "ผู้ป้อน :";
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(1355, 978);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(55, 32);
+            this.btnSave.TabIndex = 59;
+            this.btnSave.Text = "บันทึก";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // cboSale
             // 
             this.cboSale.FormattingEnabled = true;
@@ -389,16 +399,6 @@
             this.label13.Size = new System.Drawing.Size(34, 13);
             this.label13.TabIndex = 48;
             this.label13.Text = "Sale :";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(3, 17);
-            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(41, 13);
-            this.label12.TabIndex = 47;
-            this.label12.Text = "ผู้ป้อน :";
             // 
             // lV1
             // 
@@ -522,7 +522,7 @@
             // chkMoveImage
             // 
             this.chkMoveImage.AutoSize = true;
-            this.chkMoveImage.Location = new System.Drawing.Point(1129, 986);
+            this.chkMoveImage.Location = new System.Drawing.Point(1129, 982);
             this.chkMoveImage.Name = "chkMoveImage";
             this.chkMoveImage.Size = new System.Drawing.Size(221, 17);
             this.chkMoveImage.TabIndex = 54;
@@ -533,7 +533,7 @@
             // chkVoidImage
             // 
             this.chkVoidImage.AutoSize = true;
-            this.chkVoidImage.Location = new System.Drawing.Point(1129, 1009);
+            this.chkVoidImage.Location = new System.Drawing.Point(1129, 1003);
             this.chkVoidImage.Name = "chkVoidImage";
             this.chkVoidImage.Size = new System.Drawing.Size(78, 17);
             this.chkVoidImage.TabIndex = 60;

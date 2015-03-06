@@ -320,5 +320,18 @@ namespace lottory.objdb
             }
             return cnt.ToString();
         }
+        public String UpdateStatusCheck1(String imgId, String sfId, String sfName, String thoId, String amt)
+        {
+            String sql = "", chk = "";
+            sql = "Update " + img.table + " Set " + img.statusInput + "='1', " +
+                img.dateInput + "=" + img.dateGenDB + "," +
+                img.staffInputId + "='" + sfId + "'," +
+                img.staffInputName + "='" + sfName + "', " +
+                img.thooId + "='" + thoId + "', " +
+                img.Amt + "=" + amt + " " +
+                "Where " + img.pkField + "='" + imgId + "'";
+            chk = conn.ExecuteNonQuery(sql);
+            return chk;
+        }
     }
 }
