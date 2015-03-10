@@ -23,7 +23,9 @@ namespace lottory.gui
         }
         private void initConfig()
         {
+            //MessageBox.Show("aaa", "FrmLogin");
             lc = new LottoryControl();
+            //MessageBox.Show("bbb", "FrmLogin");
         }
         private void getLogin()
         {

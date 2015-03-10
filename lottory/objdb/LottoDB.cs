@@ -211,7 +211,7 @@ namespace lottory.objdb
             Lotto item = new Lotto();
             String sql = "";
             DataTable dt = new DataTable();
-            sql = "Select * From " + lot.table + " Where " + lot.imgId + "='" + imgId + "' and " + lot.Active + "='1' ";
+            sql = "Select * From " + lot.table + " Where " + lot.imgId + "='" + imgId + "' and " + lot.Active + "='1' Order By "+lot.rowNumber;
             dt = conn.selectData(sql);
             //if (dt.Rows.Count > 0)
             //{
@@ -824,6 +824,41 @@ namespace lottory.objdb
                 lot.staffModi + "='" + p.staffModi + "', " +
                 lot.dateModi + "=" + p.dateModi + ", " +
                 lot.Remark + "='" + p.Remark + "' " +
+                "Where " + lot.pkField + "='" + p.rowId + "'";
+            try
+            {
+                chk = conn.ExecuteNonQuery(sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error " + ex.ToString(), "update Sale");
+            }
+            finally
+            {
+            }
+            return chk;
+        }
+        public String updateCheck(Lotto p)
+        {
+            String sql = "", chk = "";
+
+            p.Remark = p.Remark.Replace("''", "'");
+            //p.dateModi = System.DateTime.Now.ToString();
+            p.dateModi = p.dateGenDB;
+            p.staffModi = p.staffId;
+            sql = "Update " + lot.table + " Set " + lot.number + "='" + p.number + "', " +
+                lot.up + "=" + p.up + ", " +
+                lot.tod + "=" + p.tod + ", " +
+                lot.down + "=" + p.down + ", " +
+                lot.upOld + "=" + lot.up + ", " +
+                lot.todOld + "=" + lot.tod + ", " +
+                lot.downOld + "=" + lot.down + ", " +
+                lot.numberOld + "=" + lot.number + ", " +
+                //lot.thooId + "='" + p.thooId + "', " +
+                lot.SfCheck1Id + "='" + p.SfCheck1Id + "' " +
+                //lot.staffModi + "='" + p.staffModi + "', " +
+                //lot.dateModi + "=" + p.dateModi + ", " +
+                //lot.Remark + "='" + p.Remark + "' " +
                 "Where " + lot.pkField + "='" + p.rowId + "'";
             try
             {

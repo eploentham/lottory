@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using lottory.object1;
 using MySql.Data.MySqlClient;
+using System.Windows.Forms;
 
 namespace lottory.objdb
 {
@@ -44,8 +45,9 @@ namespace lottory.objdb
         //OleDbCommand cmdToExecute = new OleDbCommand();
         public ConnectDB(InitConfig  i)
         {
+            //MessageBox.Show("ccc ", "ConnectDB ");
             initc = i;
-
+            //MessageBox.Show("aaa ", "ConnectDB ");
             if (initc.StatusServer.ToLower().Equals("yes"))
             {
                 if (initc.connectDatabaseServer.ToLower().Equals("yes"))
@@ -80,6 +82,7 @@ namespace lottory.objdb
                     //_mainConnection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=D:\\source\\lottory\\lottory\\DataBase\\lottory.mdb;Persist Security Info=False";
                     //_mainConnection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" + Environment.CurrentDirectory + "\\Database\\lottory.mdb;Persist Security Info=False";
                     _mainConnection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" + "\\" + initc.pathShareData + "\\Database\\lottory.mdb;Persist Security Info=False";
+                    MessageBox.Show("bbb " , "LottoryControl StatusServer" );
                 }
             }
             //_mainConnection = new OleDbConnection();

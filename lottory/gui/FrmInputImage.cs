@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
@@ -29,18 +30,19 @@ namespace lottory.gui
         String lotId1 = "";
         Color btnEditColor;
         Double amt = 0, up = 0, tod = 0, down = 0;
-        Boolean filter = false;
+        Boolean filter = false, StatusCheck=false;
         Image1 img;
-        public FrmInputImage(String sfCode, LottoryControl l)
+        public FrmInputImage(String sfCode, LottoryControl l, Boolean StatusCheck)
         {
             pageLoad = true;
             InitializeComponent();
-            initConfig(sfCode, l);
+            initConfig(sfCode, l, StatusCheck);
             pageLoad = false;
         }
-        private void initConfig(String sfCode, LottoryControl l)
+        private void initConfig(String sfCode, LottoryControl l, Boolean statuscheck)
         {
             pB1.Visible = false;
+            StatusCheck = statuscheck;      // เอาไว้ check ว่ามาจากหน้าจอ Input หรือ หน้าจอ Check
             img = new Image1();
             String monthId = "", periodId = "";
             lc = l;
@@ -455,7 +457,7 @@ namespace lottory.gui
                 {
                     continue;
                 }
-                if (!dgv1[colEdit, i].Value.ToString().Equals("1"))
+                if (!dgv1[colEdit, i].Value.ToString().Equals("1"))//Check ว่ามีการแก้ไข หรือเป็นข้อมูลใหม่
                 {
                     continue;
                 }
@@ -474,7 +476,17 @@ namespace lottory.gui
                         lot.lottoId = lotId1;
                     }
                 }
-                lc.saveLotto(lot);
+                if (!StatusCheck)// มาจากหน้าจอ inputImage
+                {
+                    lc.saveLotto(lot);
+                }
+                else// มาจากหน้าจอ inputImageCheck
+                {
+                    //lot.numberOld = lot.numberOld;
+                    lot.SfCheck1Id = lot.staffId;
+                    lc.lotdb.updateCheck(lot);
+                }
+                
                 dgv1.Rows[i].DefaultCellStyle.BackColor = Color.DarkKhaki;
                 pB1.Value = i;
                 //lV1.Items[txtIndex.Text].Checked = true;               
@@ -490,7 +502,15 @@ namespace lottory.gui
                 
                 //if (txtImgId.Text.IndexOf("_0") > 0)
                 //{
-                    lc.imgdb.UpdateStatusInput(img.Id, sf.Id, sf.Name,lc.cf.getValueCboItem(cboThoo), lbAmt.Text.Replace(",","").Replace("รวม","").Replace(":","").Trim());
+                if (!StatusCheck)// มาจากหน้าจอ inputImage
+                {
+                    lc.imgdb.UpdateStatusInput(img.Id, sf.Id, sf.Name, lc.cf.getValueCboItem(cboThoo), lbAmt.Text.Replace(",", "").Replace("รวม", "").Replace(":", "").Trim());
+                }
+                else// มาจากหน้าจอ inputImageCheck
+                {
+                    lc.imgdb.UpdateStatusCheck(img.Id, sf.Id, lc.cf.getValueCboItem(cboThoo), lbAmt.Text.Replace(",", "").Replace("รวม", "").Replace(":", "").Trim());
+                }
+                    
                 //}
                 //else
                 //{
@@ -944,6 +964,15 @@ namespace lottory.gui
         {
             dgv1[colEdit, e.RowIndex].Value = "1";
             dgv1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.DarkKhaki;
+        }
+
+        private void pic1_DoubleClick(object sender, EventArgs e)
+        {
+            String pahtFile = lc.initC.pathImage + "\\" + cboYear.Text + "\\" + cboMonth.SelectedValue.ToString() + "\\" + cboPeriod.SelectedValue.ToString()+"\\" + name[int.Parse(txtIndex.Text)];
+            Process photoViewer = new Process();
+            photoViewer.StartInfo.FileName = pahtFile;
+            photoViewer.StartInfo.Arguments = pahtFile;
+            photoViewer.Start();
         }
     }
 }

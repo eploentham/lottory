@@ -147,7 +147,7 @@ namespace lottory.gui
             }
             else if (e.Node.Name.ToString() == "nInputImage")
             {
-                FrmInputImage frm = new FrmInputImage(sf.Code, lc);
+                FrmInputImage frm = new FrmInputImage(sf.Code, lc, false);
                 showFrame(frm);
             }
             else if (e.Node.Name.ToString() == "nLottoImage")
@@ -167,7 +167,7 @@ namespace lottory.gui
             }
             else if (e.Node.Name.ToString() == "nInputImageCheck")
             {
-                FrmInputImage frm = new FrmInputImage(sf.Code, lc);
+                FrmInputImage frm = new FrmInputImage(sf.Code, lc, true);
                 showFrame(frm);
             }
         }

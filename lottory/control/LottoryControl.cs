@@ -73,8 +73,11 @@ namespace lottory.control
             iniFile = new IniFile(Environment.CurrentDirectory + "\\" + Application.ProductName + ".ini");
             initC = new InitConfig();
             //regE = new RegEdit();
+            //MessageBox.Show("aaa " + Environment.CurrentDirectory + "\\" + Application.ProductName + ".ini", "LottoryControl StatusServer" + initC.StatusServer.ToLower());
             GetConfig();
+            //MessageBox.Show("bbb", "LottoryControl");
             cf = new Config1();
+            //MessageBox.Show("ccc", "LottoryControl");
             conn = new ConnectDB(initC);
             ratedb = new RateDB(conn);
             saledb = new SaleDB(conn);
@@ -87,7 +90,7 @@ namespace lottory.control
             cudb = new CustomerDB(conn);
             imgdb = new ImageDB(conn);
             nldb = new NumberLimitDB(conn);
-
+            //MessageBox.Show("ddd", "LottoryControl");
             rate = new Rate();
             sale = new Sale();
             staff = new Staff();
@@ -108,7 +111,7 @@ namespace lottory.control
             r3Down = new Rate();
             rUp = new Rate();
             rDown = new Rate();
-
+            //MessageBox.Show("bbb", "LottoryControl");
             rUp = ratedb.selectByPk("up");
             rDown = ratedb.selectByPk("down");
             r3Up = ratedb.selectByPk("3up");

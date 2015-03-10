@@ -454,6 +454,7 @@ namespace lottory.gui
             
             if (dt.Rows.Count > 0)
             {
+                dgv1.Rows.Clear();
                 dgv1.RowCount = dt.Rows.Count+1;
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {

@@ -34,19 +34,19 @@
             // tv1
             // 
             this.tv1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.tv1.Location = new System.Drawing.Point(13, 13);
-            this.tv1.Margin = new System.Windows.Forms.Padding(4);
+            this.tv1.Location = new System.Drawing.Point(10, 11);
             this.tv1.Name = "tv1";
-            this.tv1.Size = new System.Drawing.Size(800, 640);
+            this.tv1.Size = new System.Drawing.Size(601, 595);
             this.tv1.TabIndex = 1;
             this.tv1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tv1_NodeMouseDoubleClick);
             // 
             // FrmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(834, 674);
+            this.ClientSize = new System.Drawing.Size(626, 618);
             this.Controls.Add(this.tv1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmMain";

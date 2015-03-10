@@ -72,12 +72,12 @@ namespace lottory.objdb
             }
             return item;
         }
-        public Staff selectByCode(String sfId)
+        public Staff selectByCode(String sfCode)
         {            
             Staff item = new Staff();
             String sql = "";
             //DataTable dt = new DataTable();
-            if (sfId.Equals("pop"))
+            if (sfCode.Equals("pop"))
             {
                 item.Code = "pop";
                 item.Name = "Administrator";
@@ -85,7 +85,7 @@ namespace lottory.objdb
                 item.Priority = "3";
                 return item;
             }
-            sql = "Select * From " + sf.table + " Where " + sf.Code + "='" + sfId + "' and "+sf.Active+"='1' ";
+            sql = "Select * From " + sf.table + " Where " + sf.Code + "='" + sfCode + "' and "+sf.Active+"='1' ";
             //dt = conn.selectData(sql);
             conn.selectDataN(sql);
             if (conn.dt.Rows.Count > 0)
