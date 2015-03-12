@@ -859,7 +859,7 @@ namespace lottory.objdb
                 //lot.staffModi + "='" + p.staffModi + "', " +
                 //lot.dateModi + "=" + p.dateModi + ", " +
                 //lot.Remark + "='" + p.Remark + "' " +
-                "Where " + lot.pkField + "='" + p.rowId + "'";
+                "Where " + lot.pkField + "='" + p.lottoId + "'";
             try
             {
                 chk = conn.ExecuteNonQuery(sql);

@@ -43,6 +43,14 @@ namespace lottory.gui
         {
             pB1.Visible = false;
             StatusCheck = statuscheck;      // เอาไว้ check ว่ามาจากหน้าจอ Input หรือ หน้าจอ Check
+            if (StatusCheck)
+            {
+                this.Text = "ตรวจสอบ ป้อนข้อมูลจากรูป";
+            }
+            else
+            {
+                this.Text = "ป้อนข้อมูลจากรูป";
+            }
             img = new Image1();
             String monthId = "", periodId = "";
             lc = l;
@@ -244,10 +252,21 @@ namespace lottory.gui
                         name1 = name1.Substring(0, name1.IndexOf("_"));
                         if (name1.Equals(dt.Rows[j][lc.imgdb.img.rowNumber].ToString()))
                         {
-                            if (dt.Rows[j][lc.imgdb.img.statusInput].ToString().Equals("1"))
+                            if (StatusCheck)
                             {
-                                lV1.Items[j].Checked = true;
+                                if (dt.Rows[j][lc.imgdb.img.StatusCheck1].ToString().Equals("1"))
+                                {
+                                    lV1.Items[j].Checked = true;
+                                }
                             }
+                            else
+                            {
+                                if (dt.Rows[j][lc.imgdb.img.statusInput].ToString().Equals("1"))
+                                {
+                                    lV1.Items[j].Checked = true;
+                                }
+                            }
+                            
                         }
                     }
                 }
@@ -476,13 +495,10 @@ namespace lottory.gui
                         lot.lottoId = lotId1;
                     }
                 }
-                if (!StatusCheck)// มาจากหน้าจอ inputImage
+                lot.lottoId = lc.saveLotto(lot);
+                if (StatusCheck)// มาจากหน้าจอ inputImage   
                 {
-                    lc.saveLotto(lot);
-                }
-                else// มาจากหน้าจอ inputImageCheck
-                {
-                    //lot.numberOld = lot.numberOld;
+                    //lot.numberOld = lot.numberOld;                    
                     lot.SfCheck1Id = lot.staffId;
                     lc.lotdb.updateCheck(lot);
                 }
