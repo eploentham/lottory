@@ -20,7 +20,7 @@ namespace lottory.gui
         
         //int colTRow = 0, colTName = 1, colTLimit = 2, colTAmt = 3, colTId = 4;
         int colRRow = 0, colRDescription = 1,colRAmt=2, colRAmtReward = 3, colRNetTotal=4, colRReward = 5, colRRec = 6, colRpayRate =7, colRLimit = 8, colRDiscount = 9, colRId = 10;
-        int colSName = 0, colSAmt=1, colSPay=2, colSId=3, colSStatusDiscount=4, colSPerDiscount=5, colSCnt=15, colS3Up=7, colS3Tod=8, colS3Down=9, colS2Up=10, colS2Tod=11, colS2Down=12, colSUp=13, colSDown=14;
+        int colSName = 0, colSAmt=1, colSPay=2, colSId=3, colSStatusDiscount=4, colSPerDiscount=5, colSCnt=14, colS3Up=6, colS3Tod=7, colS3Down=8, colS2Up=9, colS2Tod=10, colS2Down=11, colSUp=12, colSDown=13;
         int colTName = 0, colTAmt = 1, colTPay = 2, colTId = 3, colTCnt=4;
         //int colTName = 0, colSaleAmt = 1, colSalePay = 2, colSaleId = 3, colSaleCnt = 4;
         //int col1Cnt = 14;
@@ -218,7 +218,7 @@ namespace lottory.gui
         {
             DataTable dt = new DataTable();
             DataTable dt1 = new DataTable();
-            double amt = 0, amt1 = 0;
+            double amt = 0, amt1 = 0, amt2 = 0;
             dt = lc.lotdb.selectSumBySale(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString());
             dgvSale.Rows.Clear();
             Font font = new Font("Microsoft Sans Serif", 12);
@@ -251,6 +251,8 @@ namespace lottory.gui
             dgvSale.Columns[colS2Down].HeaderText = "2ล่าง";
             dgvSale.Columns[colSUp].HeaderText = "วิ่งบน";
             dgvSale.Columns[colSDown].HeaderText = "วิ่งล่าง";
+            dgvSale.Columns[colSStatusDiscount].HeaderText = "แทงถูก";
+            dgvSale.Columns[colSPerDiscount].HeaderText = "คงเหลือ";
 
             dgvSale.Columns[colSId].HeaderText = " ";
             dgvSale.Columns[colSAmt].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
@@ -262,6 +264,7 @@ namespace lottory.gui
                 //dgvSale.RowCount = dt.Rows.Count;
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
+                    Double reward=0, nettotal=0;
                     dt1 = new DataTable();
                     //dgvRate[colRRow, i].Value = (i + 1);
                     cItem = lc.getCboItem(cboSale, dt.Rows[i][lc.saledb.sale.Id].ToString());
@@ -270,9 +273,21 @@ namespace lottory.gui
                     dgvSale[colSPay, i].Value = lc.getSalePercent(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dt.Rows[i][lc.saledb.sale.Id].ToString());
                     dt1 = lc.lotdb.selectSumBySale(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), dt.Rows[i][lc.saledb.sale.Id].ToString());
                     dgvSale[colS3Up, i].Value = dt1.Rows[0][lc.lotdb.lot.r3Up].ToString();
+                    dgvSale[colS3Tod, i].Value = dt1.Rows[0][lc.lotdb.lot.r3Tod].ToString();
+                    dgvSale[colS3Down, i].Value = dt1.Rows[0][lc.lotdb.lot.r3Down].ToString();
+                    dgvSale[colS2Up, i].Value = dt1.Rows[0][lc.lotdb.lot.r2Up].ToString();
+                    dgvSale[colS2Down, i].Value = dt1.Rows[0][lc.lotdb.lot.r2Down].ToString();
+                    //dgvSale[colSUp, i].Value = dt1.Rows[0][lc.lotdb.lot.rUp].ToString();
+                    //dgvSale[colSDown, i].Value = dt1.Rows[0][lc.lotdb.lot.rDown].ToString();
                     dgvSale[colSId, i].Value = dt.Rows[i][lc.saledb.sale.Id].ToString();
                     amt += Double.Parse(dt.Rows[i]["amt"].ToString());
-                    //dgvRate[colRDiscount, i].Value = dt.Rows[i][lc.ratedb.rate.discount].ToString();
+                    reward = Double.Parse(dt1.Rows[0][lc.lotdb.lot.r3Up].ToString()) + Double.Parse(dt1.Rows[0][lc.lotdb.lot.r3Tod].ToString()) + Double.Parse(dt1.Rows[0][lc.lotdb.lot.r3Down].ToString())+
+                        Double.Parse(dt1.Rows[0][lc.lotdb.lot.r2Up].ToString()) + Double.Parse(dt1.Rows[0][lc.lotdb.lot.r2Down].ToString());
+                    nettotal = Double.Parse(dgvSale[colSAmt, i].Value.ToString()) - Double.Parse(dgvSale[colSPay, i].Value.ToString()) - reward;
+                    amt1 += nettotal;
+                    amt2 += reward;
+                    dgvSale[colSStatusDiscount, i].Value = String.Format("{0:#,###,###.00}", reward);
+                    dgvSale[colSPerDiscount, i].Value = String.Format("{0:#,###,###.00}", nettotal);
                     //dgvRate[colRId, i].Value = dt.Rows[i][lc.ratedb.rate.Id].ToString();
 
                     if ((i % 2) != 0)
@@ -283,8 +298,12 @@ namespace lottory.gui
             }
             dgvSale.RowHeadersVisible = false;
             dgvSale.Columns[colSId].Visible = false;
+            //dgvSale.Columns[colSStatusDiscount].Visible = false;
+            //dgvSale.Columns[colSPerDiscount].Visible = false;
             //dgvSale.Columns[colRRow].Visible = false;
             dgvSale[colSAmt, dgvSale.RowCount - 1].Value = String.Format("{0:#,###,###.00}", amt);
+            dgvSale[colSPerDiscount, dgvSale.RowCount - 1].Value = String.Format("{0:#,###,###.00}", amt1);
+            dgvSale[colSStatusDiscount, dgvSale.RowCount - 1].Value = String.Format("{0:#,###,###.00}", amt2);
             dgvSale.Font = font;
             dgvSale.ReadOnly = true;
             //setDataGrdThoo();

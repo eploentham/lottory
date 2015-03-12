@@ -341,7 +341,7 @@ namespace lottory.gui
             }
             dgv2.Font = font;
         }
-        private void setDataGrid1(DataGridView dgv, int row, Int32 number, Double numUp, Double numTod, Double numDown, String rowId, String lottoId, String sale)
+        private void setDataGrid1(int row, Int32 number, Double numUp, Double numTod, Double numDown, String rowId, String lottoId, String sale)
         {
             //if (dgv.Enabled == false)
             //{
@@ -354,20 +354,20 @@ namespace lottory.gui
             //dgv.Rows.Insert(dgv1.RowCount - 1, 1);
             //int r = 0;
             //r = row;
-            dgv[colNumber, row].Value = number;
-            dgv[colUp, row].Value = String.Format("{0:#,###,###.00}",numUp);
-            dgv[colTod, row].Value = String.Format("{0:#,###,###.00}",numTod);
-            dgv[colDown, row].Value = String.Format("{0:#,###,###.00}",numDown);
-            dgv[colRowId, row].Value = rowId;
-            dgv[colLottoId1, row].Value = lottoId;
-            dgv[colRUp, row].Value = "0";
-            dgv[colRDown, row].Value = "0";
-            dgv[colR2Up, row].Value = "0";
-            dgv[colR2Down, row].Value = "0";
-            dgv[colR3Up, row].Value = "0";
-            dgv[colR3Down, row].Value = "0";
-            dgv[colR3Tod, row].Value = "0";
-            dgv[colSale, row].Value = sale;
+            dgv1[colNumber, row].Value = number;
+            dgv1[colUp, row].Value = String.Format("{0:#,###,###.00}",numUp);
+            dgv1[colTod, row].Value = String.Format("{0:#,###,###.00}",numTod);
+            dgv1[colDown, row].Value = String.Format("{0:#,###,###.00}",numDown);
+            dgv1[colRowId, row].Value = rowId;
+            dgv1[colLottoId1, row].Value = lottoId;
+            dgv1[colRUp, row].Value = "0";
+            dgv1[colRDown, row].Value = "0";
+            dgv1[colR2Up, row].Value = "0";
+            dgv1[colR2Down, row].Value = "0";
+            dgv1[colR3Up, row].Value = "0";
+            dgv1[colR3Down, row].Value = "0";
+            dgv1[colR3Tod, row].Value = "0";
+            dgv1[colSale, row].Value = sale;
             //row++;
 
         }
@@ -458,7 +458,7 @@ namespace lottory.gui
                 dgv1.RowCount = dt.Rows.Count+1;
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    setDataGrid1(dgv1, i, int.Parse(dt.Rows[i][lc.lotdb.lot.number].ToString()), Double.Parse(dt.Rows[i][lc.lotdb.lot.up].ToString()),
+                    setDataGrid1(i, int.Parse(dt.Rows[i][lc.lotdb.lot.number].ToString()), Double.Parse(dt.Rows[i][lc.lotdb.lot.up].ToString()),
                         Double.Parse(dt.Rows[i][lc.lotdb.lot.tod].ToString()), Double.Parse(dt.Rows[i][lc.lotdb.lot.down].ToString()),
                         dt.Rows[i][lc.lotdb.lot.rowId].ToString(), dt.Rows[i][lc.lotdb.lot.lottoId].ToString(), dt.Rows[i]["sale_name"].ToString());
                     
@@ -742,10 +742,19 @@ namespace lottory.gui
 
         private void btnApprove_Click(object sender, EventArgs e)
         {
-            
-            
-            
-            
+            Cursor cursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
+            pB1.Minimum = 0;
+            pB1.Maximum = dgv1.Rows.Count;
+            pB1.Visible = true;
+
+            for (int i = 0; i < dgv1.Rows.Count; i++)
+            {
+
+            }
+
+            pB1.Visible = false;
+            Cursor.Current = cursor;
         }
 
         private void cboMonth_SelectedIndexChanged(object sender, EventArgs e)
