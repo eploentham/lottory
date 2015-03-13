@@ -696,7 +696,7 @@ namespace lottory.gui
 
         private void txtInput_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar.Equals("+");
         }
 
         private void txtInput_KeyUp(object sender, KeyEventArgs e)
@@ -708,26 +708,78 @@ namespace lottory.gui
                     MessageBox.Show("ไม่ได้เลือก Sale", "ไม่ได้เลือก Sale");
                     return;
                 }
-                if (txtInput.Text.Length>3)
+                if (txtInput.Text.IndexOf("+") > 0)
                 {
-                    return;
+                    String[] aa = txtInput.Text.Split('+');
+                    String num = aa[0];
+                    if (num.Length == 2)// 2ตัว
+                    {
+                        /**
+                         *12+50  = 12 บน 50 Enter
+                         *12+50+ = 12 บน 50 Enter 21 บน 50 Enter
+                         *12-50  = 12 ล่าง 50 Enter
+                         *12-50- = 12 ล่าง 50 Enter 21 ล่าง 50 Enter
+                         *12+50+-= 12 บน 50 ล่าง 50 Enter 21 บน 50 ล่าง 50 Enter
+                         *
+                        **/
+                        if (aa.Length == 2)//12+50  = 12 บน 50 Enter
+                        {
+                            String up = "";
+                            up = aa[1];
+
+                        }
+                        else if (aa.Length == 3)//12+50+ = 12 บน 50 Enter 21 บน 50 Enter
+                        {
+
+                        }
+                    }
+                    
                 }
-                label4.Text = "";
-                if (lc.chkNumberLimit(txtInput.Text))
+                else if (txtInput.Text.IndexOf("-") > 0)
                 {
-                    label4.Text = "เลขอั้น";
-                    //label14.Font
-                    return;
+                    String[] aa = txtInput.Text.Split('+');
+                    String num = aa[0];
+                    /**
+                         *12+50  = 12 บน 50 Enter
+                         *12+50+ = 12 บน 50 Enter 21 บน 50 Enter
+                         *12-50  = 12 ล่าง 50 Enter
+                         *12-50- = 12 ล่าง 50 Enter 21 ล่าง 50 Enter
+                         *12+50+-= 12 บน 50 ล่าง 50 Enter 21 บน 50 ล่าง 50 Enter
+                         *
+                        **/
+                    if (aa.Length == 2)//12+50  = 12 บน 50 Enter
+                    {
+
+                    }
+                    else if (aa.Length == 3)//12+50+ = 12 บน 50 Enter 21 บน 50 Enter
+                    {
+
+                    }
                 }
                 else
                 {
-                    if (txtInput.Text.Equals(""))
+                    if (txtInput.Text.Length > 3)
                     {
                         return;
                     }
-                    label4.Text = "OK";
-                    txtUpFocus();
+                    label4.Text = "";
+                    if (lc.chkNumberLimit(txtInput.Text))
+                    {
+                        label4.Text = "เลขอั้น";
+                        //label14.Font
+                        return;
+                    }
+                    else
+                    {
+                        if (txtInput.Text.Equals(""))
+                        {
+                            return;
+                        }
+                        label4.Text = "OK";
+                        txtUpFocus();
+                    }
                 }
+                
             }
         }
 
@@ -793,6 +845,7 @@ namespace lottory.gui
         private void txtDown_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+            //e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar.Equals("+");
         }
 
         private void txtDown_KeyUp(object sender, KeyEventArgs e)
