@@ -80,6 +80,8 @@ namespace lottory.gui
 
             setGrid1();
             viewImage();
+
+            setResize();
             btnEdit.Enabled = false;
         }
         private void setGrid1()
@@ -999,10 +1001,37 @@ namespace lottory.gui
 
         private void FrmInputImage_Resize(object sender, EventArgs e)
         {
-            setResize();
+            //setResize();
         }
         private void setResize()
         {
+            //MessageBox.Show("Widht "+Screen.PrimaryScreen.Bounds.Width.ToString(), "");
+            //MessageBox.Show("Height " + Screen.PrimaryScreen.Bounds.Height.ToString(), "");
+            //this.Text = this.Text +" "+ Screen.PrimaryScreen.Bounds.Width.ToString() + " " + Screen.PrimaryScreen.Bounds.Height.ToString();
+            if (Screen.PrimaryScreen.Bounds.Height == 900)
+            {
+
+                lV1.Height = lV1.Height - 150;
+                lV1.Width = lV1.Width - 50;
+                dgv1.Height = dgv1.Height - 150;
+                
+                pic1.Left = lV1.Width + 20;                
+                groupBox1.Top = lV1.Height + 10;
+                pic1.Width = lV1.Width + 70;
+                pic1.Height = lV1.Height;
+
+                dgv1.Left = lV1.Width + 20 + pic1.Width + 20;
+
+                label1.Top = pic1.Height + 30;
+                label2.Top = pic1.Height + 30;
+                label3.Top = pic1.Height + 30;
+                label15.Top = pic1.Height + 30;
+                lbTotal.Top = pic1.Height + 30;
+                txtInput.Top = pic1.Height + 30;
+                txtUp.Top = pic1.Height + 30;
+                txtTod.Top = pic1.Height + 30;
+                txtDown.Top = pic1.Height + 30;
+            }
             //dgvAdd.Width = this.Width - 80;
             ////groupBox3.Left = dgvAdd.Width - groupBox3.Width - 50;
             //btnSave.Left = dgvAdd.Width - 80;

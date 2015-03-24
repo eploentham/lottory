@@ -341,7 +341,7 @@ namespace lottory.gui
             }
             dgv2.Font = font;
         }
-        private void setDataGrid1(int row, Int32 number, Double numUp, Double numTod, Double numDown, String rowId, String lottoId, String sale)
+        private void setDataGrid1(int row, String number, Double numUp, Double numTod, Double numDown, String rowId, String lottoId, String sale)
         {
             //if (dgv.Enabled == false)
             //{
@@ -458,7 +458,7 @@ namespace lottory.gui
                 dgv1.RowCount = dt.Rows.Count+1;
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    setDataGrid1(i, int.Parse(dt.Rows[i][lc.lotdb.lot.number].ToString()), Double.Parse(dt.Rows[i][lc.lotdb.lot.up].ToString()),
+                    setDataGrid1(i, dt.Rows[i][lc.lotdb.lot.number].ToString(), Double.Parse(dt.Rows[i][lc.lotdb.lot.up].ToString()),
                         Double.Parse(dt.Rows[i][lc.lotdb.lot.tod].ToString()), Double.Parse(dt.Rows[i][lc.lotdb.lot.down].ToString()),
                         dt.Rows[i][lc.lotdb.lot.rowId].ToString(), dt.Rows[i][lc.lotdb.lot.lottoId].ToString(), dt.Rows[i]["sale_name"].ToString());
                     
