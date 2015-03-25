@@ -753,25 +753,80 @@ namespace lottory.gui
                                 txtTod.Text = "";
                                 setgdv();
                             }
-                            else if (cross.Equals("-"))
+                            else if (cross.Equals("-"))//*12+50+-= 12 บน 50 ล่าง 50 Enter 21 บน 50 ล่าง 50 Enter
                             {
+                                txtUp.Text = up;
+                                txtInput.Text = num;
+                                txtDown.Text = up;
+                                txtTod.Text = "";
+                                setgdv();
 
+                                num = num.Substring(up.Length - 1) + num.Substring(0, 1);
+                                txtUp.Text = up;
+                                txtInput.Text = num;
+                                txtDown.Text = up;
+                                txtTod.Text = "";
+                                setgdv();
                             }
-                            
                         }
                     }
-                    
+                    else if (num.Length == 3)// 3ตัว
+                    {
+                        /**
+                         * 3หาง     112+50*
+                         *          112+50+-     112 บน50 โต๊ด50 ล่าง50
+                         *          112+50+      112 บน50 โต๊ด50
+                         **/
+                        if (aa.Length == 2)     //3หาง     112+50*
+                        {
+                            String up = "", cross = "";
+                            up = aa[1];
+                            //cross = aa[2];
+                            if (up.Substring(up.Length-1).Equals("*"))//* 3หาง     112+50*
+                            {
+                                char[] thechars = num.ToCharArray();
+                                txtUp.Text = up.Replace("*","");
+                                txtInput.Text = thechars[0].ToString() + thechars[1].ToString() + thechars[2].ToString();//* 3หาง     112+50*
+                                txtDown.Text = "";
+                                txtTod.Text = "";
+                                setgdv();
+
+                                txtUp.Text = up.Replace("*", "");
+                                txtInput.Text = thechars[0].ToString() + thechars[2].ToString() + thechars[1].ToString();//* 3หาง     121+50*
+                                txtDown.Text = "";
+                                txtTod.Text = "";
+                                setgdv();
+
+                                txtUp.Text = up.Replace("*", "");
+                                txtInput.Text = thechars[2].ToString() + thechars[1].ToString() + thechars[0].ToString();//* 3หาง     211+50*
+                                txtDown.Text = "";
+                                txtTod.Text = "";
+                                setgdv();
+                            }
+                        }
+                        else if (aa.Length == 3)//*          112+50+-     112 บน50 โต๊ด50 ล่าง50
+                        {
+                            String up = "", cross = "";
+                            up = aa[1];
+                            cross = aa[2];
+                            if (cross.Equals("-"))
+                            {
+                                txtUp.Text = up;
+                                txtInput.Text = num;//*          112+50+-     112 บน50 โต๊ด50 ล่าง50
+                                txtDown.Text = up;
+                                txtTod.Text = up;
+                                setgdv();
+                            }
+                        }
+                    }
                 }
                 else if (txtInput.Text.IndexOf("-") > 0)
                 {
                     String[] aa = txtInput.Text.Split('-');
                     String num = aa[0];
                     /**
-                         *12+50  = 12 บน 50 Enter
-                         *12+50+ = 12 บน 50 Enter 21 บน 50 Enter
                          *12-50  = 12 ล่าง 50 Enter
-                         *12-50- = 12 ล่าง 50 Enter 21 ล่าง 50 Enter
-                         *12+50+-= 12 บน 50 ล่าง 50 Enter 21 บน 50 ล่าง 50 Enter
+                         *12-50- = 12 ล่าง 50 Enter 21 ล่าง 50 Enter                         
                          *
                         **/
                     if (aa.Length == 2)//12-50  = 12 ล่าง 50 Enter
@@ -802,10 +857,6 @@ namespace lottory.gui
                             txtUp.Text = "";
                             txtTod.Text = "";
                             setgdv();
-                        }
-                        else
-                        {
-
                         }
                     }
                 }
