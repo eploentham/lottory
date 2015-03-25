@@ -710,7 +710,7 @@ namespace lottory.gui
                     MessageBox.Show("ไม่ได้เลือก Sale", "ไม่ได้เลือก Sale");
                     return;
                 }
-                if (txtInput.Text.IndexOf("+") > 0)
+                if (txtInput.Text.IndexOf("+") > 0)//ป้อน แบบสูตร จริง
                 {
                     String[] aa = txtInput.Text.Split('+');
                     String num = aa[0];
@@ -728,18 +728,43 @@ namespace lottory.gui
                         {
                             String up = "";
                             up = aa[1];
-
+                            txtUp.Text = up;
+                            txtInput.Text = num;
+                            txtDown.Text = "";
+                            txtTod.Text = "";
+                            setgdv();
                         }
                         else if (aa.Length == 3)//12+50+ = 12 บน 50 Enter 21 บน 50 Enter
                         {
+                            String up = "", cross="";
+                            up = aa[1];
+                            cross = aa[2];
+                            if (cross.Equals(""))// 12+50+ = 12 บน 50 Enter 21 บน 50 Enter
+                            {
+                                txtUp.Text = up;
+                                txtInput.Text = num;
+                                txtDown.Text = "";
+                                txtTod.Text = "";
+                                setgdv();
+                                num = num.Substring(up.Length-1) + num.Substring(0,1);
+                                txtInput.Text = num;
+                                txtDown.Text = up;
+                                txtUp.Text = "";
+                                txtTod.Text = "";
+                                setgdv();
+                            }
+                            else if (cross.Equals("-"))
+                            {
 
+                            }
+                            
                         }
                     }
                     
                 }
                 else if (txtInput.Text.IndexOf("-") > 0)
                 {
-                    String[] aa = txtInput.Text.Split('+');
+                    String[] aa = txtInput.Text.Split('-');
                     String num = aa[0];
                     /**
                          *12+50  = 12 บน 50 Enter
@@ -749,13 +774,39 @@ namespace lottory.gui
                          *12+50+-= 12 บน 50 ล่าง 50 Enter 21 บน 50 ล่าง 50 Enter
                          *
                         **/
-                    if (aa.Length == 2)//12+50  = 12 บน 50 Enter
+                    if (aa.Length == 2)//12-50  = 12 ล่าง 50 Enter
                     {
-
+                        String down = "";
+                        down = aa[1];
+                        txtDown.Text = down;
+                        txtInput.Text = num;
+                        txtUp.Text = "";
+                        txtTod.Text = "";
+                        setgdv();
                     }
-                    else if (aa.Length == 3)//12+50+ = 12 บน 50 Enter 21 บน 50 Enter
+                    else if (aa.Length == 3)//12-50- = 12 ล่าง 50 Enter 21 ล่าง 50 Enter
                     {
+                        String down = "", cross = "";
+                        down = aa[1];
+                        cross = aa[2];
+                        if (cross.Equals(""))// 12-50- = 12 ล่าง 50 Enter 21 ล่าง 50 Enter
+                        {
+                            txtDown.Text = down;
+                            txtInput.Text = num;
+                            txtUp.Text = "";
+                            txtTod.Text = "";
+                            setgdv();
+                            num = num.Substring(down.Length - 1) + num.Substring(0, 1);
+                            txtInput.Text = num;
+                            txtDown.Text = down;
+                            txtUp.Text = "";
+                            txtTod.Text = "";
+                            setgdv();
+                        }
+                        else
+                        {
 
+                        }
                     }
                 }
                 else
@@ -1071,6 +1122,46 @@ namespace lottory.gui
             photoViewer.StartInfo.FileName = pahtFile;
             photoViewer.StartInfo.Arguments = pahtFile;
             photoViewer.Start();
+        }
+        private void setgdv()
+        {
+            if (clearGrd1)
+            {
+                setGrid1();
+                clearGrd1 = false;
+            }
+            //if (txtInput.Text.Length == 1)
+            //{
+            //setDgv1Down();
+            if (lc.chkNumberLimit(txtInput.Text))
+            {
+                label18.Text = "เลขอั้น";
+                return;
+            }
+            else
+            {
+                label18.Text = "OK";
+            }
+            if (txtInput.Text.Length <= 0)
+            {
+                return;
+            }
+            else if (txtInput.Text.Length == 1)
+            {
+                setDataGrid1(txtInput.Text, txtUp.Text, "0", txtDown.Text, "", "");
+            }
+            else if (txtInput.Text.Length == 2)
+            {
+                setDataGrid1(txtInput.Text, txtUp.Text, "0", txtDown.Text, "", "");
+            }
+            else
+            {
+                setDataGrid1(txtInput.Text, txtUp.Text, txtTod.Text, txtDown.Text, "", "");
+            }
+            //setDataGrid1(txtInput.Text, txtUp.Text, txtTod.Text, txtDown.Text,"","");
+            setGrdColor();
+            txtInputFocus();
+            clearInput();
         }
     }
 }
