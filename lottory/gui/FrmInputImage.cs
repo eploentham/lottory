@@ -1129,6 +1129,7 @@ namespace lottory.gui
                 label3.Top = pic1.Height + 30;
                 label15.Top = pic1.Height + 30;
                 lbTotal.Top = pic1.Height + 30;
+                lbTotal.Left = lbTotal.Left - 50;
                 txtInput.Top = pic1.Height + 30;
                 txtUp.Top = pic1.Height + 30;
                 txtTod.Top = pic1.Height + 30;
