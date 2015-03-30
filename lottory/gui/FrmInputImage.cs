@@ -17,8 +17,8 @@ namespace lottory.gui
     public partial class FrmInputImage : Form
     {
         int row = 0, rowImage=0;
-        int colNumber = 0, colUp = 1, colTod = 2, colDown = 3, colRemark = 4, colRowId = 6, colLottoId1 = 5, colEdit=7;
-        int col1Cnt = 8;
+        int colNumber = 0, colUp = 1, colTod = 2, colDown = 3, colRemark = 4, colRowId = 6, colLottoId1 = 5, colEdit=7, colNumberReal=8;
+        int col1Cnt = 9;
         Staff sf;
         Thoo tho;
         LottoryControl lc;
@@ -107,6 +107,7 @@ namespace lottory.gui
             dgv1.Columns[colLottoId1].Visible = false;
             dgv1.Columns[colRemark].Visible = false;
             dgv1.Columns[colEdit].Visible = false;
+            dgv1.Columns[colNumberReal].Visible = false;
 
             dgv1.Font = font;
 
@@ -448,6 +449,7 @@ namespace lottory.gui
             lot.statusInput= "2";
             lot.imgId = img.Id;
             lot.number = lot.number.Trim();
+            lot.numberReal = lc.cf.LottoNull(dgv1[colNumberReal, row].Value);
             //if (txtImgId.Text.IndexOf("_0") > 0)
             //{
             //    lot.imgId = txtImgId.Text.Replace(txtImgId.Text.Substring(txtImgId.Text.IndexOf("_0")), "");
@@ -549,7 +551,7 @@ namespace lottory.gui
             pB1.Visible = false;
             refresh();
         }
-        private void setDataGrid1(String number, String numUp, String numTod, String numDown, String rowId, String lottoId)
+        private void setDataGrid1(String number, String numUp, String numTod, String numDown, String rowId, String lottoId, String numberReal)
         {
             //dgv1.Rows.Insert(dgv1.RowCount - 1, 1);
             dgv1.Rows.Add();
@@ -583,6 +585,7 @@ namespace lottory.gui
             dgv1[colLottoId1, row].Value = lottoId;
             dgv1.FirstDisplayedScrollingRowIndex = row;
             dgv1[colEdit, row].Value = "1";
+            dgv1[colNumberReal, row].Value = numberReal;
             
             row++;
         }
@@ -956,43 +959,44 @@ namespace lottory.gui
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (clearGrd1)
-                {
-                    setGrid1();
-                    clearGrd1 = false;
-                }
-                //if (txtInput.Text.Length == 1)
+                //if (clearGrd1)
                 //{
-                    //setDgv1Down();
-                if (lc.chkNumberLimit(txtInput.Text))
-                {
-                    label18.Text = "เลขอั้น";
-                    return;
-                }
-                else
-                {
-                    label18.Text = "OK";
-                }
-                if (txtInput.Text.Length <= 0)
-                {
-                    return;
-                }
-                else if (txtInput.Text.Length == 1)
-                {
-                    setDataGrid1(txtInput.Text, txtUp.Text, "0", txtDown.Text, "", "");
-                }
-                else if (txtInput.Text.Length == 2)
-                {
-                    setDataGrid1(txtInput.Text, txtUp.Text, "0", txtDown.Text, "", "");
-                }
-                else 
-                {
-                    setDataGrid1(txtInput.Text, txtUp.Text, txtTod.Text, txtDown.Text, "", "");
-                }
-                //setDataGrid1(txtInput.Text, txtUp.Text, txtTod.Text, txtDown.Text,"","");
-                setGrdColor();
-                txtInputFocus();
-                clearInput();
+                //    setGrid1();
+                //    clearGrd1 = false;
+                //}
+                ////if (txtInput.Text.Length == 1)
+                ////{
+                //    //setDgv1Down();
+                //if (lc.chkNumberLimit(txtInput.Text))
+                //{
+                //    label18.Text = "เลขอั้น";
+                //    return;
+                //}
+                //else
+                //{
+                //    label18.Text = "OK";
+                //}
+                //if (txtInput.Text.Length <= 0)
+                //{
+                //    return;
+                //}
+                //else if (txtInput.Text.Length == 1)
+                //{
+                //    setDataGrid1(txtInput.Text, txtUp.Text, "0", txtDown.Text, "", "");
+                //}
+                //else if (txtInput.Text.Length == 2)
+                //{
+                //    setDataGrid1(txtInput.Text, txtUp.Text, "0", txtDown.Text, "", "");
+                //}
+                //else 
+                //{
+                //    setDataGrid1(txtInput.Text, txtUp.Text, txtTod.Text, txtDown.Text, "", "");
+                //}
+                ////setDataGrid1(txtInput.Text, txtUp.Text, txtTod.Text, txtDown.Text,"","");
+                //setGrdColor();
+                //txtInputFocus();
+                //clearInput();
+                setgdv();
             }
             else if ((e.KeyCode == Keys.Back) && (txtDown.Text.Equals("")) )
             {
@@ -1200,15 +1204,15 @@ namespace lottory.gui
             }
             else if (txtInput.Text.Length == 1)
             {
-                setDataGrid1(txtInput.Text, txtUp.Text, "0", txtDown.Text, "", "");
+                setDataGrid1(txtInput.Text, txtUp.Text, "0", txtDown.Text, "", "", txtInput.Text);
             }
             else if (txtInput.Text.Length == 2)
             {
-                setDataGrid1(txtInput.Text, txtUp.Text, "0", txtDown.Text, "", "");
+                setDataGrid1(txtInput.Text, txtUp.Text, "0", txtDown.Text, "", "", txtInput.Text);
             }
             else
             {
-                setDataGrid1(txtInput.Text, txtUp.Text, txtTod.Text, txtDown.Text, "", "");
+                setDataGrid1(txtInput.Text, txtUp.Text, txtTod.Text, txtDown.Text, "", "", txtInput.Text);
             }
             //setDataGrid1(txtInput.Text, txtUp.Text, txtTod.Text, txtDown.Text,"","");
             setGrdColor();

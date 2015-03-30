@@ -343,6 +343,7 @@ namespace lottory.control
         public String saveLotto(Lotto p)
         {
             String chk = "";
+            p.macName = initC.MacName;
             chk = lotdb.insertLotto(p);
             return chk;
         }
@@ -727,7 +728,7 @@ namespace lottory.control
             initC.StatusServer = iniFile.Read("statusserver");
             initC.pathShareData = iniFile.Read("pathsharedata");
             initC.pathShareImage = iniFile.Read("pathshareimage");
-            //initC.Password = regE.getPassword();
+            initC.MacName = iniFile.Read("macname");
         }
         public void SetPathImage(String path)
         {

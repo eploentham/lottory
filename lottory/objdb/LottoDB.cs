@@ -91,6 +91,9 @@ namespace lottory.objdb
             lot.downOld = "down1_old";
             lot.numberOld = "number1_old";
 
+            lot.numberReal = "number_real";
+            lot.macName = "mac_name";
+
             lot.table = "t_lottory";
             lot.pkField = "row_id";
         }
@@ -142,6 +145,9 @@ namespace lottory.objdb
             item.upOld = dt.Rows[0][lot.upOld].ToString();
             item.downOld = dt.Rows[0][lot.downOld].ToString();
             item.numberOld = dt.Rows[0][lot.numberOld].ToString();
+
+            item.numberReal = dt.Rows[0][lot.numberReal].ToString();
+            item.macName = dt.Rows[0][lot.macName].ToString();
             
             return item;
         }
@@ -751,6 +757,7 @@ namespace lottory.objdb
             p.staffCreate = p.staffId;
             p.Remark = p.Remark.Replace("''", "'");
             p.statusInputApprove = "";
+            
             //sql = "Insert Into " + lot.table + " (" + lot.pkField + "," + lot.lottoId + "," + lot.staffId + "," +
             //    lot.number + "," + lot.up + "," + lot.tod + "," + 
             //    lot.down + "," + lot.monthId + "," + lot.periodId + "," + 
@@ -778,7 +785,7 @@ namespace lottory.objdb
                 lot.staffCancel + "," + lot.yearId + "," + lot.rowNumber + "," +
                 lot.statusApprove + "," + lot.thooTranferId + "," + lot.dateApprove + "," +
                 lot.staffApproveId + "," + lot.CDbl + "," + lot.statusInput + "," +
-                lot.imgId + "," + lot.log + "," + lot.statusInputApprove + ") " +
+                lot.imgId + "," + lot.log + "," + lot.statusInputApprove + "," + lot.macName + "," + lot.numberReal + ") " +
                 "Values('" + p.rowId + "','" + p.lottoId + "','" + p.staffId + "','" +
                 p.number + "'," + p.up + "," + p.tod + "," +
                 p.down + ",'" + p.monthId + "','" + p.periodId + "','" +
@@ -787,8 +794,8 @@ namespace lottory.objdb
                  "'','" + p.staffCreate + "',''," +
                 "'','" + p.yearId + "','" + p.rowNumber + "','" +
                 p.statusApprove + "','" + p.thooTranferId + "','" + p.dateApprove + "','" +
-                p.staffApproveId + "','" + p.CDbl + "','" + p.statusInput + "','" + 
-                p.imgId + "','','" + p.statusInputApprove+"')";
+                p.staffApproveId + "','" + p.CDbl + "','" + p.statusInput + "','" +
+                p.imgId + "','','" + p.statusInputApprove + "','" + p.macName + "','" + p.numberReal + "')";
             try
             {
                 chk = conn.ExecuteNonQuery(sql);
