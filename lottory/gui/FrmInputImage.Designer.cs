@@ -73,6 +73,7 @@
             this.picHand = new System.Windows.Forms.PictureBox();
             this.dgv1 = new System.Windows.Forms.DataGridView();
             this.lbTotal = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picZoomM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picZoomP)).BeginInit();
@@ -84,6 +85,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.lbNum);
             this.groupBox1.Controls.Add(this.lbDown);
             this.groupBox1.Controls.Add(this.lbTod);
@@ -287,7 +289,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(245, 42);
+            this.comboBox1.Location = new System.Drawing.Point(276, 42);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(108, 21);
@@ -296,7 +298,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(193, 46);
+            this.label17.Location = new System.Drawing.Point(224, 46);
             this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(38, 13);
@@ -381,7 +383,7 @@
             this.cboSale.Location = new System.Drawing.Point(50, 42);
             this.cboSale.Margin = new System.Windows.Forms.Padding(2);
             this.cboSale.Name = "cboSale";
-            this.cboSale.Size = new System.Drawing.Size(139, 21);
+            this.cboSale.Size = new System.Drawing.Size(170, 21);
             this.cboSale.TabIndex = 49;
             this.cboSale.SelectedIndexChanged += new System.EventHandler(this.cboSale_SelectedIndexChanged);
             this.cboSale.Click += new System.EventHandler(this.cboSale_Click);
@@ -592,6 +594,16 @@
             this.lbTotal.TabIndex = 71;
             this.lbTotal.Text = "รวม : ";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(546, 16);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.TabIndex = 76;
+            this.label5.Text = "รวม : ";
+            // 
             // FrmInputImage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -681,5 +693,6 @@
         private System.Windows.Forms.Label lbTod;
         private System.Windows.Forms.Label lbNum;
         private System.Windows.Forms.Label lbTotal;
+        private System.Windows.Forms.Label label5;
     }
 }

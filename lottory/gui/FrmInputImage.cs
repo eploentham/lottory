@@ -165,6 +165,7 @@ namespace lottory.gui
             DirectoryInfo dir = new DirectoryInfo(pahtFile);
             DataTable dt = new DataTable();
             Double total = 0;
+            int numPic = 0;
             if (cboSale.SelectedItem != null )
             {
                 //ComboBoxItem aa = new ComboBoxItem();
@@ -211,6 +212,7 @@ namespace lottory.gui
                                     iL.Images.Add(Image.FromFile(file.FullName));
                                     name.Add(file.Name.Replace(file.Extension, "") + ".lotto");
                                     total += Double.Parse(lc.cf.NumberNull1(dt.Rows[i][lc.imgdb.img.Amt].ToString()));
+                                    numPic++;
                                 }
                             }
                         }
@@ -269,12 +271,12 @@ namespace lottory.gui
                                     lV1.Items[j].Checked = true;
                                 }
                             }
-                            
                         }
                     }
                 }
             }
             lbTotal.Text = total.ToString("#,###.00");
+            label5.Text = numPic.ToString();
             pB1.Visible = false;
             pageLoad = false;
             Cursor.Current = cursor;
