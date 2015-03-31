@@ -51,6 +51,7 @@ namespace lottory.objdb
             //MessageBox.Show("aaa ", "ConnectDB ");
             if (initc.StatusServer.ToLower().Equals("yes"))
             {
+                MessageBox.Show("initc.StatusServer.ToLower() " + initc.StatusServer.ToLower(), "initc.StatusServer.ToLower() ");
                 if (initc.connectDatabaseServer.ToLower().Equals("yes"))
                 {
                     cMysql = new MySql.Data.MySqlClient.MySqlConnection();
@@ -58,6 +59,7 @@ namespace lottory.objdb
                 }
                 else
                 {
+                    MessageBox.Show("Environment.CurrentDirectory " + Environment.CurrentDirectory + " " + Assembly.GetExecutingAssembly().GetName().Name, "ConnectDB ");
                     if (Environment.Is64BitOperatingSystem)
                     {
                         _mainConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=D:\\source\\lottory\\lottory\\DataBase\\lottory.mdb;Persist Security Info=False";
