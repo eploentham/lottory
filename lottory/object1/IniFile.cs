@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows.Forms;
 
 namespace lottory.object1
 {
@@ -27,6 +28,8 @@ namespace lottory.object1
         public string Read(string Key, string Section = null)
         {
             var RetVal = new StringBuilder(255);
+            //MessageBox.Show("ccc Path " + Path, "LottoryControl");
+            //MessageBox.Show("ccc EXE " + EXE, "LottoryControl");
             GetPrivateProfileString(Section ?? EXE, Key, "", RetVal, 255, Path);
             return RetVal.ToString();
         }

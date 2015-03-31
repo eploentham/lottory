@@ -46,12 +46,13 @@ namespace lottory.objdb
         //OleDbCommand cmdToExecute = new OleDbCommand();
         public ConnectDB(InitConfig  i)
         {
-            //MessageBox.Show("ccc ", "ConnectDB ");
+            //
             initc = i;
+            //MessageBox.Show("ccc " + initc.StatusServer, "ConnectDB ");
             //MessageBox.Show("aaa ", "ConnectDB ");
             if (initc.StatusServer.ToLower().Equals("yes"))
             {
-                MessageBox.Show("initc.StatusServer.ToLower() " + initc.StatusServer.ToLower(), "initc.StatusServer.ToLower() ");
+                //MessageBox.Show("initc.StatusServer.ToLower() " + initc.StatusServer.ToLower(), "initc.StatusServer.ToLower() ");
                 if (initc.connectDatabaseServer.ToLower().Equals("yes"))
                 {
                     cMysql = new MySql.Data.MySqlClient.MySqlConnection();
@@ -59,7 +60,7 @@ namespace lottory.objdb
                 }
                 else
                 {
-                    MessageBox.Show("Environment.CurrentDirectory " + Environment.CurrentDirectory + " " + Assembly.GetExecutingAssembly().GetName().Name, "ConnectDB ");
+                    //MessageBox.Show("Environment.CurrentDirectory " + Environment.CurrentDirectory + " " + Assembly.GetExecutingAssembly().GetName().Name, "ConnectDB ");
                     if (Environment.Is64BitOperatingSystem)
                     {
                         _mainConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=D:\\source\\lottory\\lottory\\DataBase\\lottory.mdb;Persist Security Info=False";
@@ -74,18 +75,20 @@ namespace lottory.objdb
             }
             else
             {
+                //MessageBox.Show("aaa ", "ConnectDB ");
                 if (Environment.Is64BitOperatingSystem)
                 {
-                    //_mainConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=D:\\source\\lottory\\lottory\\DataBase\\lottory.mdb;Persist Security Info=False";
+                    //MessageBox.Show("bbb " + Environment.CurrentDirectory+" " + Assembly.GetExecutingAssembly().GetName().Name, "ConnectDB ");
+                    //_mainConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=C:\\Google ไดรฟ์\\Lottory\\Program\\formula1\\Database\\formula1.mdb;Persist Security Info=False";
                     //_mainConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=" + Environment.CurrentDirectory + "\\Database\\lottory.mdb;Persist Security Info=False";
-                    _mainConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=" + "\\" + initc.pathShareData + "\\Database\\" + Assembly.GetExecutingAssembly().GetName().Name + ".mdb;Persist Security Info=False";
+                    _mainConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=" + Environment.CurrentDirectory + "\\Database\\" + Assembly.GetExecutingAssembly().GetName().Name + ".mdb;Persist Security Info=False";
                 }
                 else
                 {
                     //_mainConnection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=D:\\source\\lottory\\lottory\\DataBase\\lottory.mdb;Persist Security Info=False";
                     //_mainConnection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" + Environment.CurrentDirectory + "\\Database\\lottory.mdb;Persist Security Info=False";
-                    _mainConnection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" + "\\" + initc.pathShareData + "\\Database\\" + Assembly.GetExecutingAssembly().GetName().Name + ".mdb;Persist Security Info=False";
-                    MessageBox.Show("bbb " , "LottoryControl StatusServer" );
+                    _mainConnection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" + Environment.CurrentDirectory + "\\Database\\" + Assembly.GetExecutingAssembly().GetName().Name + ".mdb;Persist Security Info=False";
+                    //MessageBox.Show("bbb " , "LottoryControl StatusServer" );
                 }
             }
             //_mainConnection = new OleDbConnection();
