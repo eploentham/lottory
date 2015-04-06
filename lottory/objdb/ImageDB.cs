@@ -267,6 +267,19 @@ namespace lottory.objdb
             chk = conn.ExecuteNonQuery(sql);
             return chk;
         }
+        public String UpdateStatusCheck2(String imgId, String sfId, String thoId, String amt)
+        {
+            String sql = "", chk = "";
+            sql = "Update " + img.table + " Set " + img.statusInput + "='1', " +
+                img.dateInput + "=" + img.dateGenDB + "," +
+                img.SfCheck1Id + "='" + sfId + "'," +
+                //img.staffInputName + "='" + sfName + "', " +
+                img.StatusCheck2 + "='1', " +
+                img.AmtCheck1 + "=" + amt + " " +
+                "Where " + img.pkField + "='" + imgId + "'";
+            chk = conn.ExecuteNonQuery(sql);
+            return chk;
+        }
         public String UpdateLock(String imgId)
         {
             String sql = "", chk = "";

@@ -30,19 +30,20 @@ namespace lottory.gui
         String lotId1 = "";
         Color btnEditColor;
         Double amt = 0, up = 0, tod = 0, down = 0;
-        Boolean filter = false, StatusCheck=false;
+        Boolean filter = false, StatusCheck=false, StatusCheck2=false;
         Image1 img;
-        public FrmInputImage(String sfCode, LottoryControl l, Boolean StatusCheck)
+        public FrmInputImage(String sfCode, LottoryControl l, Boolean StatusCheck, Boolean StatusCheck2)
         {
             pageLoad = true;
             InitializeComponent();
-            initConfig(sfCode, l, StatusCheck);
+            initConfig(sfCode, l, StatusCheck, StatusCheck2);
             pageLoad = false;
         }
-        private void initConfig(String sfCode, LottoryControl l, Boolean statuscheck)
+        private void initConfig(String sfCode, LottoryControl l, Boolean statuscheck, Boolean statuscheck2)
         {
             pB1.Visible = false;
             StatusCheck = statuscheck;      // เอาไว้ check ว่ามาจากหน้าจอ Input หรือ หน้าจอ Check
+            StatusCheck2 = statuscheck2;      // เอาไว้ check ว่ามาจากหน้าจอ Input หรือ หน้าจอ Check
             if (StatusCheck)
             {
                 this.Text = "ตรวจสอบ ป้อนข้อมูลจากรูป";
@@ -259,9 +260,19 @@ namespace lottory.gui
                         {
                             if (StatusCheck)
                             {
-                                if (dt.Rows[j][lc.imgdb.img.StatusCheck1].ToString().Equals("1"))
+                                if (StatusCheck2)
                                 {
-                                    lV1.Items[j].Checked = true;
+                                    if (dt.Rows[j][lc.imgdb.img.StatusCheck2].ToString().Equals("1"))
+                                    {
+                                        lV1.Items[j].Checked = true;
+                                    }
+                                }
+                                else
+                                {
+                                    if (dt.Rows[j][lc.imgdb.img.StatusCheck1].ToString().Equals("1"))
+                                    {
+                                        lV1.Items[j].Checked = true;
+                                    }
                                 }
                             }
                             else
@@ -506,7 +517,15 @@ namespace lottory.gui
                 {
                     //lot.numberOld = lot.numberOld;                    
                     lot.SfCheck1Id = lot.staffId;
-                    lc.lotdb.updateCheck(lot);
+                    if (StatusCheck2)
+                    {
+                        lc.lotdb.updateCheck2(lot);
+                    }
+                    else
+                    {
+                        lc.lotdb.updateCheck(lot);
+                    }
+                    
                 }
                 
                 dgv1.Rows[i].DefaultCellStyle.BackColor = Color.DarkKhaki;
@@ -530,7 +549,15 @@ namespace lottory.gui
                 }
                 else// มาจากหน้าจอ inputImageCheck
                 {
-                    lc.imgdb.UpdateStatusCheck(img.Id, sf.Id, lc.cf.getValueCboItem(cboThoo), lbAmt.Text.Replace(",", "").Replace("รวม", "").Replace(":", "").Trim());
+                    if (StatusCheck2)
+                    {
+                        lc.imgdb.UpdateStatusCheck2(img.Id, sf.Id, lc.cf.getValueCboItem(cboThoo), lbAmt.Text.Replace(",", "").Replace("รวม", "").Replace(":", "").Trim());
+                    }
+                    else
+                    {
+                        lc.imgdb.UpdateStatusCheck(img.Id, sf.Id, lc.cf.getValueCboItem(cboThoo), lbAmt.Text.Replace(",", "").Replace("รวม", "").Replace(":", "").Trim());
+                    }
+                    
                 }
                     
                 //}

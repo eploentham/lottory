@@ -16,6 +16,7 @@ namespace lottory.gui
         //int row = 0;
         int colNumber = 0, colUp = 1, colTod = 2, colDown = 3, colRemark = 4, colRowId = 6, colLottoId1 = 5, colRUp=7, colRDown=8, colR2Up=9, colR2Down=10, colR3Up=11, colR3Down=13, colR3Tod=12, colSale=14;
         int col1Cnt = 15;
+        int col1Number = 0, col1RewordUp = 1, col1RewardDown = 2, col1Remark = 3, col1Rew = 4, col11Cnt = 5;
         int col2Number = 0, col2RewordUp = 1, col2RewardDown=2, col2Remark = 3, col2Rew=4, col2Cnt=5;
         int col3Number = 0, col3RewordUp = 1, col3RewardTod = 2, col3RewardDown = 3, col3Remark = 4, col3Rew = 5, col3Cnt = 6;
         LottoryControl lc;
@@ -141,6 +142,70 @@ namespace lottory.gui
             dgv.Columns[colRemark].Visible = false;
 
             dgv.Font = font;
+
+        }
+        private void setGrd1()
+        {
+            dgv2.Rows.Clear();
+            Font font = new Font("Microsoft Sans Serif", 12);
+            Font fontb = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
+            //Datagridv
+            //dgv21.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv2.SelectionMode = DataGridViewSelectionMode.CellSelect;
+
+            dgv2.ColumnCount = col11Cnt;
+            dgv2.RowCount = 10;
+            //row = 0;
+            dgv2.Columns[col1Number].Width = 80;
+            dgv2.Columns[col1RewordUp].Width = 120;
+            dgv2.Columns[col1Remark].Width = 60;
+            dgv2.Columns[col1Rew].Width = 120;
+
+            dgv2.Columns[col1Number].HeaderText = "ตัวเลข";
+            dgv2.Columns[col1RewordUp].HeaderText = "มูลค่าบน";
+            dgv2.Columns[col1RewardDown].HeaderText = "มูลค่าล่าง";
+            dgv2.Columns[col1Remark].HeaderText = "";
+            dgv2.Columns[col1Rew].HeaderText = "ถูกรางวัล";
+            String tmp = "";
+            for (int i = 0; i < 10; i++)
+            {
+                tmp = i.ToString();
+
+                dgv2[col1Number, i].Value = tmp;
+
+                if (!rw.reward1.Equals(""))
+                {
+                    if (rw.rewardDown2.Equals(dgv2[col1Number, i].Value.ToString()) || rw.reward1.Substring(rw.reward1.Length - 2).Equals(dgv2[col1Number, i].Value.ToString()))
+                    {
+                        dgv2[col1Number, i].Style.ForeColor = Color.Red;
+                        dgv2[col1Number, i].Style.Font = fontb;
+                        dgv2.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#789640");
+                    }
+                }
+            }
+
+            DataTable dt = new DataTable();
+            dt = lc.lotdb.selectByPeriod1(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString());
+            if (dt.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    dgv2[col1Remark, int.Parse(dt.Rows[i][lc.lotdb.lot.number].ToString())].Value = dt.Rows[i][lc.lotdb.lot.number].ToString();
+                    dgv2[col1RewordUp, int.Parse(dt.Rows[i][lc.lotdb.lot.number].ToString())].Value = Double.Parse(dt.Rows[i]["up"].ToString());
+                    dgv2[col1RewardDown, int.Parse(dt.Rows[i][lc.lotdb.lot.number].ToString())].Value = Double.Parse(dt.Rows[i]["down"].ToString());
+            //        if (rw.rewardDown2.Equals(dgv2[col2Number, i].Value.ToString()))
+            //        {
+            //            dgv2[col2RewardDown, i].Style.ForeColor = Color.Red;
+            //            dgv2[col2Rew, int.Parse(dt.Rows[i][lc.lotdb.lot.number].ToString())].Value = String.Format("{0:#,###,###.00}", Double.Parse(dt.Rows[i]["down"].ToString()) * Double.Parse(lc.r2Down.pay));
+            //        }
+            //        else if (rw.up2.Equals(dgv2[col2Number, i].Value.ToString()))
+            //        {
+            //            dgv2[col2RewordUp, i].Style.ForeColor = Color.Red;
+            //            dgv2[col2Rew, int.Parse(dt.Rows[i][lc.lotdb.lot.number].ToString())].Value = String.Format("{0:#,###,###.00}", Double.Parse(dt.Rows[i]["up"].ToString()) * Double.Parse(lc.r2Up.pay));
+            //        }
+                }
+            }
+            dgv2.Font = font;
 
         }
         private void setGrd2()
@@ -844,6 +909,14 @@ namespace lottory.gui
                     e.SortResult = 0;
                 }
                 e.Handled = true;
+            }
+        }
+
+        private void Chk1_Click(object sender, EventArgs e)
+        {
+            if (Chk1.Checked)
+            {
+                setGrd1();
             }
         }
     }

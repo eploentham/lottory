@@ -73,6 +73,7 @@
             this.dgv2 = new System.Windows.Forms.DataGridView();
             this.Chk2 = new System.Windows.Forms.RadioButton();
             this.Chk3 = new System.Windows.Forms.RadioButton();
+            this.Chk1 = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv3)).BeginInit();
@@ -600,12 +601,25 @@
             this.Chk3.UseVisualStyleBackColor = true;
             this.Chk3.Click += new System.EventHandler(this.Chk3_Click);
             // 
+            // Chk1
+            // 
+            this.Chk1.AutoSize = true;
+            this.Chk1.Location = new System.Drawing.Point(1526, 10);
+            this.Chk1.Margin = new System.Windows.Forms.Padding(2);
+            this.Chk1.Name = "Chk1";
+            this.Chk1.Size = new System.Drawing.Size(62, 17);
+            this.Chk1.TabIndex = 72;
+            this.Chk1.Text = "แสดงวิ่ง";
+            this.Chk1.UseVisualStyleBackColor = true;
+            this.Chk1.Click += new System.EventHandler(this.Chk1_Click);
+            // 
             // FrmLottoResult
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1901, 1045);
+            this.Controls.Add(this.Chk1);
             this.Controls.Add(this.Chk3);
             this.Controls.Add(this.Chk2);
             this.Controls.Add(this.groupBox2);
@@ -675,5 +689,6 @@
         private System.Windows.Forms.RadioButton Chk3;
         private System.Windows.Forms.ComboBox cboSale;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.RadioButton Chk1;
     }
 }

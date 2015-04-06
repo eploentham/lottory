@@ -317,6 +317,21 @@ namespace lottory.objdb
 
             return dt;
         }
+        public DataTable selectByPeriod1(String yearId, String monthId, String periodId)
+        {
+            String sql = "";
+            DataTable dt = new DataTable();
+            sql = "Select lot." + lot.number + ", sum(" + lot.up + ") as up, sum(" + lot.down + ") as down " +
+                "From " + lot.table + " as lot " +
+                "Where  lot." +
+                lot.Active + "='1' and lot." + lot.yearId + "='" + yearId + "' and lot." +
+                lot.monthId + "='" + monthId + "' and lot." + lot.periodId + "='" + periodId + "' and len(" + lot.number + ") =1 " +
+                "Group By lot." + lot.number + " Order By lot." + lot.number;
+
+            dt = conn.selectData(sql);
+
+            return dt;
+        }
         public DataTable selectByPeriod2(String yearId, String monthId, String periodId)
         {
             String sql = "";
@@ -863,6 +878,41 @@ namespace lottory.objdb
                 lot.numberOld + "=" + lot.number + ", " +
                 //lot.thooId + "='" + p.thooId + "', " +
                 lot.SfCheck1Id + "='" + p.SfCheck1Id + "' " +
+                //lot.staffModi + "='" + p.staffModi + "', " +
+                //lot.dateModi + "=" + p.dateModi + ", " +
+                //lot.Remark + "='" + p.Remark + "' " +
+                "Where " + lot.pkField + "='" + p.lottoId + "'";
+            try
+            {
+                chk = conn.ExecuteNonQuery(sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error " + ex.ToString(), "update Sale");
+            }
+            finally
+            {
+            }
+            return chk;
+        }
+        public String updateCheck2(Lotto p)
+        {
+            String sql = "", chk = "";
+
+            p.Remark = p.Remark.Replace("''", "'");
+            //p.dateModi = System.DateTime.Now.ToString();
+            p.dateModi = p.dateGenDB;
+            p.staffModi = p.staffId;
+            sql = "Update " + lot.table + " Set " + lot.number + "='" + p.number + "', " +
+                lot.up + "=" + p.up + ", " +
+                lot.tod + "=" + p.tod + ", " +
+                lot.down + "=" + p.down + ", " +
+                lot.upOld + "=" + lot.up + ", " +
+                lot.todOld + "=" + lot.tod + ", " +
+                lot.downOld + "=" + lot.down + ", " +
+                lot.numberOld + "=" + lot.number + ", " +
+                //lot.thooId + "='" + p.thooId + "', " +
+                lot.SfCheck2Id + "='" + p.SfCheck2Id + "' " +
                 //lot.staffModi + "='" + p.staffModi + "', " +
                 //lot.dateModi + "=" + p.dateModi + ", " +
                 //lot.Remark + "='" + p.Remark + "' " +
