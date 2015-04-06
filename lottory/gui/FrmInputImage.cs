@@ -644,12 +644,11 @@ namespace lottory.gui
                 {
                     if (dgv1[colUp, i].Value != null)
                     {
-                        amt += (Double.Parse(dgv1[colUp, i].Value.ToString()) + Double.Parse(lc.cf.NumberNull2(dgv1[colTod, i].Value.ToString())) + Double.Parse(lc.cf.NumberNull2(dgv1[colDown, i].Value.ToString())));
-                        up += (Double.Parse(dgv1[colUp, i].Value.ToString()));
+                        amt += (Double.Parse(lc.cf.NumberNull2(dgv1[colUp, i].Value.ToString())) + Double.Parse(lc.cf.NumberNull2(dgv1[colTod, i].Value.ToString())) + Double.Parse(lc.cf.NumberNull2(dgv1[colDown, i].Value.ToString())));
+                        up += (Double.Parse(lc.cf.NumberNull2(dgv1[colUp, i].Value.ToString())));
                         tod += (Double.Parse(lc.cf.NumberNull2(dgv1[colTod, i].Value.ToString())));
                         down += (Double.Parse(lc.cf.NumberNull2(dgv1[colDown, i].Value.ToString())));
                     }
-                    
                 }
                 
                 if ((i % 2) != 0)
@@ -669,9 +668,11 @@ namespace lottory.gui
             Cursor cursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
             btnSave.Enabled = false;
+            pic1.Enabled = false;
             saveLotto();
             row = 0;
             btnSave.Enabled = true;
+            pic1.Enabled = true;
             Cursor.Current = cursor;
         }
 

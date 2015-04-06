@@ -357,6 +357,10 @@ namespace lottory.object1
         }
         public String NumberNull2(String o)
         {
+            if (o == null)
+            {
+                return "0";
+            }
             if (o.Equals(""))
             {
                 return "0";
