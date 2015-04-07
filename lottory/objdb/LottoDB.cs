@@ -289,9 +289,10 @@ namespace lottory.objdb
         {
             String sql = "";
             DataTable dt = new DataTable();
-            sql = "Select lot.*, sa.sale_name "+
-                "From " + lot.table + " as lot "+
-                "Inner Join b_sale sa on sa.sale_id = lot.sale_id "+
+            sql = "Select lot.*, sa.sale_name, im.row_number as row_number1, im.path_filename " +
+                "From (" + lot.table + " as lot "+
+                "Inner Join b_sale sa on sa.sale_id = lot.sale_id) "+
+                "Inner Join t_image im on im.img_id = lot.img_id " +
                 "Where  lot." +
                 lot.Active + "='1' and lot." + lot.yearId + "='" + yearId + "' and lot." +
                 lot.monthId + "='" + monthId + "' and lot." + lot.periodId + "='" + periodId + "' " +
@@ -305,9 +306,10 @@ namespace lottory.objdb
         {
             String sql = "";
             DataTable dt = new DataTable();
-            sql = "Select lot.*, sa.sale_name " +
-                "From " + lot.table + " as lot " +
-                "Inner Join b_sale sa on sa.sale_id = lot.sale_id " +
+            sql = "Select lot.*, sa.sale_name, im.row_number as row_number1, im.path_filename " +
+                "From (" + lot.table + " as lot " +
+                "Inner Join b_sale sa on sa.sale_id = lot.sale_id) " +
+                "Inner Join t_image im on im.img_id = lot.img_id " +
                 "Where  lot." +
                 lot.Active + "='1' and lot." + lot.yearId + "='" + yearId + "' and lot." +
                 lot.monthId + "='" + monthId + "' and lot." + lot.periodId + "='" + periodId + "' and lot." + lot.saleId + "='" + saleId + "' " +
@@ -366,9 +368,10 @@ namespace lottory.objdb
         {
             String sql = "";
             DataTable dt = new DataTable();
-            sql = "Select lot.*, sa.sale_name " +
-                "From " + lot.table + " as lot " +
-                "Inner Join b_sale sa on sa.sale_id = lot.sale_id " +
+            sql = "Select lot.*, sa.sale_name, im.row_number as row_number1, im.path_filename " +
+                "From (" + lot.table + " as lot " +
+                "Inner Join b_sale sa on sa.sale_id = lot.sale_id) " +
+                "Inner Join t_image im on im.img_id = lot.img_id " +
                 "Where  lot." +
                 lot.Active + "='1' and lot." + lot.yearId + "='" + yearId + "' and lot." +
                 lot.monthId + "='" + monthId + "' and lot." + lot.periodId + "='" + periodId + "' and "+lot.number+"='"+number+"' " +
@@ -382,9 +385,10 @@ namespace lottory.objdb
         {
             String sql = "";
             DataTable dt = new DataTable();
-            sql = "Select lot.*, sa.sale_name " +
-                "From " + lot.table + " as lot " +
-                "Inner Join b_sale sa on sa.sale_id = lot.sale_id " +
+            sql = "Select lot.*, sa.sale_name, im.row_number as row_number1, im.path_filename " +
+                "From (" + lot.table + " as lot " +
+                "Inner Join b_sale sa on sa.sale_id = lot.sale_id) " +
+                "Inner Join t_image im on im.img_id = lot.img_id " +
                 "Where  lot." +
                 lot.Active + "='1' and lot." + lot.yearId + "='" + yearId + "' and lot." +
                 lot.monthId + "='" + monthId + "' and lot." + lot.periodId + "='" + periodId + "' and " + lot.number + "='" + number + "' and lot."+lot.saleId+"='"+saleId+"' " +

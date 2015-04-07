@@ -234,6 +234,7 @@
             this.chkNum.TabStop = true;
             this.chkNum.Text = "แสดงทั้งหมดเฉพาะที่แทงถูก";
             this.chkNum.UseVisualStyleBackColor = true;
+            this.chkNum.Click += new System.EventHandler(this.chkNum_Click);
             // 
             // txtRDown34
             // 

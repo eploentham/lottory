@@ -14,8 +14,8 @@ namespace lottory.gui
     public partial class FrmLottoResult : Form
     {
         //int row = 0;
-        int colNumber = 0, colUp = 1, colTod = 2, colDown = 3, colRemark = 4, colRowId = 6, colLottoId1 = 5, colRUp=7, colRDown=8, colR2Up=9, colR2Down=10, colR3Up=11, colR3Down=13, colR3Tod=12, colSale=14;
-        int col1Cnt = 15;
+        int colNumber = 0, colUp = 1, colTod = 2, colDown = 3, colRemark = 4, colRowId = 6, colLottoId1 = 5, colRUp=7, colRDown=8, colR2Up=9, colR2Down=10, colR3Up=11, colR3Down=13, colR3Tod=12, colSale=14, colImage=15, colImage1=16, cola=17;
+        int col1Cnt = 18;
         int col1Number = 0, col1RewordUp = 1, col1RewardDown = 2, col1Remark = 3, col1Rew = 4, col11Cnt = 5;
         int col2Number = 0, col2RewordUp = 1, col2RewardDown=2, col2Remark = 3, col2Rew=4, col2Cnt=5;
         int col3Number = 0, col3RewordUp = 1, col3RewardTod = 2, col3RewardDown = 3, col3Remark = 4, col3Rew = 5, col3Cnt = 6;
@@ -57,13 +57,14 @@ namespace lottory.gui
             setGrid(dgv1);
             setGrd2();
             setGrid(dgv3);
-            chkNum.Checked = true;
-            if (chkNum.Checked)
-            {
-                //dgv2.Visible = false;
-                dgv3.Visible = false;
-                //dgv1.Width = 1050;       
-            }
+            //chkNum.Checked = true;
+            //if (chkNum.Checked)
+            //{
+            //    //dgv2.Visible = false;
+            dgv3.Visible = false;
+            //    //dgv1.Width = 1050;       
+            //}
+            chkNum.Checked = false;
             setDGrd();
             pageLoad = false;
             dgv1.ReadOnly = true;
@@ -113,6 +114,7 @@ namespace lottory.gui
             dgv.Columns[colR3Tod].Width = 100;
             dgv.Columns[colRemark].Width = 60;
             dgv.Columns[colSale].Width = 150;
+            dgv.Columns[colImage1].Width = 200;
             dgv.Columns[colNumber].HeaderText = "ตัวเลข";
             dgv.Columns[colUp].HeaderText = "บน";
             dgv.Columns[colTod].HeaderText = "โต๊ด";
@@ -125,6 +127,8 @@ namespace lottory.gui
             dgv.Columns[colR3Down].HeaderText = "ถูก3ตัวล่าง";
             dgv.Columns[colR3Tod].HeaderText = "ถูกโต๊ด";
             dgv.Columns[colSale].HeaderText = "คนเก็บโพย";
+            dgv.Columns[colImage].HeaderText = "รูป";
+            dgv.Columns[colImage1].HeaderText = "รูป1";
 
             dgv.Columns[colUp].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
             dgv.Columns[colTod].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
@@ -412,7 +416,7 @@ namespace lottory.gui
             }
             dgv2.Font = font;
         }
-        private void setDataGrid1(int row, String number, Double numUp, Double numTod, Double numDown, String rowId, String lottoId, String sale)
+        private void setDataGrid1(int row, String number, Double numUp, Double numTod, Double numDown, String rowId, String lottoId, String sale, String img, String img1)
         {
             //if (dgv.Enabled == false)
             //{
@@ -439,8 +443,9 @@ namespace lottory.gui
             dgv1[colR3Down, row].Value = "0";
             dgv1[colR3Tod, row].Value = "0";
             dgv1[colSale, row].Value = sale;
+            dgv1[colImage, row].Value = img;
+            dgv1[colImage1, row].Value = img1;
             //row++;
-
         }
         private void calReward()
         {
@@ -496,7 +501,8 @@ namespace lottory.gui
         {
             DataTable dt = new DataTable();
             String num = "", chk = "";
-            
+            Double up = 0, tod = 0, down = 0, rup=0, rdown=0, r2up=0, r2down=0;
+
             Font font = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
             if (txtSearch.Text.Equals(""))
             {
@@ -529,9 +535,12 @@ namespace lottory.gui
                 dgv1.RowCount = dt.Rows.Count+1;
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
+                    up += Double.Parse(dt.Rows[i][lc.lotdb.lot.up].ToString());
+                    tod += Double.Parse(dt.Rows[i][lc.lotdb.lot.tod].ToString());
+                    down += Double.Parse(dt.Rows[i][lc.lotdb.lot.down].ToString());
                     setDataGrid1(i, dt.Rows[i][lc.lotdb.lot.number].ToString(), Double.Parse(dt.Rows[i][lc.lotdb.lot.up].ToString()),
                         Double.Parse(dt.Rows[i][lc.lotdb.lot.tod].ToString()), Double.Parse(dt.Rows[i][lc.lotdb.lot.down].ToString()),
-                        dt.Rows[i][lc.lotdb.lot.rowId].ToString(), dt.Rows[i][lc.lotdb.lot.lottoId].ToString(), dt.Rows[i]["sale_name"].ToString());
+                        dt.Rows[i][lc.lotdb.lot.rowId].ToString(), dt.Rows[i][lc.lotdb.lot.lottoId].ToString(), dt.Rows[i]["sale_name"].ToString(), dt.Rows[i]["row_number1"].ToString(), dt.Rows[i]["path_filename"].ToString());
                     
                     if ((i % 2) != 0)
                     {
@@ -549,6 +558,7 @@ namespace lottory.gui
                             dgv1[colNumber, i].Style.ForeColor = Color.Red;
                             dgv1[colUp, i].Style.Font = font;
                             dgv1[colUp, i].Style.ForeColor = Color.Red;
+                            rup += Double.Parse(dgv1[colRUp, i].Value.ToString());
                         }
                         if (Double.Parse(lc.cf.NumberNull(dgv1[colRDown, i].Value.ToString())) > 0)
                         {
@@ -559,6 +569,7 @@ namespace lottory.gui
                             dgv1[colNumber, i].Style.ForeColor = Color.Red;
                             dgv1[colDown, i].Style.Font = font;
                             dgv1[colDown, i].Style.ForeColor = Color.Red;
+                            rdown += Double.Parse(dgv1[colRDown, i].Value.ToString());
                         }
                         dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#174e75");
                     }
@@ -578,6 +589,7 @@ namespace lottory.gui
                             dgv1[colNumber, i].Style.ForeColor = Color.Red;
                             dgv1[colUp, i].Style.Font = font;
                             dgv1[colUp, i].Style.ForeColor = Color.Red;
+                            r2up += Double.Parse(dgv1[colR2Up, i].Value.ToString());
                         }
                         if (Double.Parse(lc.cf.NumberNull(dgv1[colR2Down, i].Value.ToString())) > 0)
                         {
@@ -588,6 +600,7 @@ namespace lottory.gui
                             dgv1[colNumber, i].Style.ForeColor = Color.Red;
                             dgv1[colDown, i].Style.Font = font;
                             dgv1[colDown, i].Style.ForeColor = Color.Red;
+                            r2down += Double.Parse(dgv1[colR2Down, i].Value.ToString());
                         }
                         dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#789640");
                     }
@@ -627,7 +640,11 @@ namespace lottory.gui
                     }
                 }
                 calReward();
-                
+                dgv1[colTod, dgv1.RowCount-1].Value = tod;
+                dgv1[colUp, dgv1.RowCount-1].Value = up;
+                dgv1[colDown, dgv1.RowCount-1].Value = down;
+                dgv1[colR2Up, dgv1.RowCount - 1].Value = r2up;
+                dgv1[colR2Down, dgv1.RowCount - 1].Value = r2down;
             }
         }
         private void saveLottoReward()
@@ -688,6 +705,7 @@ namespace lottory.gui
                         dgv1[colNumber, i].Style.ForeColor = Color.Red;
                         dgv1[colUp, i].Style.Font = font;
                         dgv1[colUp, i].Style.ForeColor = Color.Red;
+                        dgv1[cola, i].Value = "1";
                     }
                     if (Double.Parse(lc.cf.NumberNull(dgv1[colRDown, i].Value.ToString())) > 0)
                     {
@@ -698,6 +716,7 @@ namespace lottory.gui
                         dgv1[colNumber, i].Style.ForeColor = Color.Red;
                         dgv1[colDown, i].Style.Font = font;
                         dgv1[colDown, i].Style.ForeColor = Color.Red;
+                        dgv1[cola, i].Value = "1";
                     }
                     dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#174e75");
                 }
@@ -725,6 +744,7 @@ namespace lottory.gui
                         dgv1[colNumber, i].Style.ForeColor = Color.Red;
                         dgv1[colUp, i].Style.Font = font;
                         dgv1[colUp, i].Style.ForeColor = Color.Red;
+                        dgv1[cola, i].Value = "1";
                     }
                     if (Double.Parse(lc.cf.NumberNull(dgv1[colR2Down, i].Value.ToString())) > 0)
                     {
@@ -735,6 +755,7 @@ namespace lottory.gui
                         dgv1[colNumber, i].Style.ForeColor = Color.Red;
                         dgv1[colDown, i].Style.Font = font;
                         dgv1[colDown, i].Style.ForeColor = Color.Red;
+                        dgv1[cola, i].Value = "1";
                     }
                     dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#789640");
                 }
@@ -761,6 +782,7 @@ namespace lottory.gui
                         dgv1[colNumber, i].Style.ForeColor = Color.Red;
                         dgv1[colUp, i].Style.Font = font;
                         dgv1[colUp, i].Style.ForeColor = Color.Red;
+                        dgv1[cola, i].Value = "1";
                     }
                     if (Double.Parse(lc.cf.NumberNull(dgv1[colR3Tod, i].Value.ToString())) > 0)
                     {
@@ -771,6 +793,7 @@ namespace lottory.gui
                         dgv1[colNumber, i].Style.ForeColor = Color.Red;
                         dgv1[colTod, i].Style.Font = font;
                         dgv1[colTod, i].Style.ForeColor = Color.Red;
+                        dgv1[cola, i].Value = "1";
                     }
                     if (Double.Parse(lc.cf.NumberNull(dgv1[colR3Down, i].Value.ToString())) > 0)
                     {
@@ -781,6 +804,7 @@ namespace lottory.gui
                         dgv1[colNumber, i].Style.ForeColor = Color.Red;
                         dgv1[colDown, i].Style.Font = font;
                         dgv1[colDown, i].Style.ForeColor = Color.Red;
+                        dgv1[cola, i].Value = "1";
                     }
                     dgv1.Rows[i].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#788540");
                 }
@@ -918,6 +942,63 @@ namespace lottory.gui
             {
                 setGrd1();
             }
+        }
+
+        private void chkNum_Click(object sender, EventArgs e)
+        {
+            Double r2up = 0, r2down = 0, rup=0, rdown=0, r3up=0,r3down=0,r3tod=0;
+            for (int i = 0; i < dgv1.Rows.Count-1; i++)
+            {
+                if (dgv1[cola, i].Value == null)
+                {
+                    dgv1.Rows.RemoveAt(i);
+                    i--;
+                    continue;
+                }
+
+                //if (dgv1[cola, i].Value.ToString().Equals("1"))
+                //{
+
+                //}
+            }
+            for (int i = 0; i < dgv1.Rows.Count; i++)
+            {
+                if (dgv1[colRUp, i].Value != null)
+                {
+                    rup += Double.Parse(dgv1[colRUp, i].Value.ToString());
+                }
+                if (dgv1[colRDown, i].Value != null)
+                {
+                    rdown += Double.Parse(dgv1[colRDown, i].Value.ToString());
+                }
+                if (dgv1[colR2Up, i].Value != null)
+                {
+                    r2up += Double.Parse(dgv1[colR2Up, i].Value.ToString());
+                }
+                if (dgv1[colR2Down, i].Value != null)
+                {
+                    r2down += Double.Parse(dgv1[colR2Down, i].Value.ToString());
+                }
+                if (dgv1[colR3Down, i].Value != null)
+                {
+                    r3down += Double.Parse(dgv1[colR3Down, i].Value.ToString());
+                }
+                if (dgv1[colR3Up, i].Value != null)
+                {
+                    r3up += Double.Parse(dgv1[colR3Up, i].Value.ToString());
+                }
+                if (dgv1[colR3Tod, i].Value != null)
+                {
+                    r3tod += Double.Parse(dgv1[colR3Tod, i].Value.ToString());
+                }
+            }
+            dgv1[colR2Up, dgv1.RowCount - 1].Value = r2up;
+            dgv1[colR2Down, dgv1.RowCount - 1].Value = r2down;
+            dgv1[colRUp, dgv1.RowCount - 1].Value = rup;
+            dgv1[colRDown, dgv1.RowCount - 1].Value = rdown;
+            dgv1[colR3Down, dgv1.RowCount - 1].Value = r3down;
+            dgv1[colR3Up, dgv1.RowCount - 1].Value = r3up;
+            dgv1[colR3Tod, dgv1.RowCount - 1].Value = r3tod;
         }
     }
 }
