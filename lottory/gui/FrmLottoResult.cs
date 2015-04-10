@@ -249,10 +249,16 @@ namespace lottory.gui
                 if (tmp.Length <= 2)
                 {
                     dgv2[col2Number, i].Value = tmp;
+                    dgv2[col3RewordUp, i].Value = 0;
+                    dgv2[col3RewardTod, i].Value = 0;
+                    dgv2[col3RewardDown, i].Value = 0;
                 }
                 else
                 {
                     dgv2[col2Number, i].Value = tmp.Substring(1);
+                    dgv2[col3RewordUp, i].Value = 0;
+                    dgv2[col3RewardTod, i].Value = 0;
+                    dgv2[col3RewardDown, i].Value = 0;
                 }
                 if (!rw.reward1.Equals(""))
                 {
