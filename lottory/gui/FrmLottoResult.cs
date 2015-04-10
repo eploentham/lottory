@@ -189,7 +189,15 @@ namespace lottory.gui
             }
 
             DataTable dt = new DataTable();
-            dt = lc.lotdb.selectByPeriod1(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString());
+            if (cboSale.Text.Equals(""))
+            {
+                dt = lc.lotdb.selectByPeriod1(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString());
+            }
+            else
+            {
+                dt = lc.lotdb.selectByPeriod1Sale(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), lc.cf.getValueCboItem(cboSale));
+            }
+            
             if (dt.Rows.Count > 0)
             {
                 for (int i = 0; i < dt.Rows.Count; i++)
@@ -258,7 +266,15 @@ namespace lottory.gui
             }
 
             DataTable dt = new DataTable();
-            dt = lc.lotdb.selectByPeriod2(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString());
+            //dt = lc.lotdb.selectByPeriod2(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString());
+            if (cboSale.Text.Equals(""))
+            {
+                dt = lc.lotdb.selectByPeriod2(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString());
+            }
+            else
+            {
+                dt = lc.lotdb.selectByPeriod2Sale(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), lc.cf.getValueCboItem(cboSale));
+            }
             if (dt.Rows.Count > 0)
             {
                 for (int i = 0; i < dt.Rows.Count; i++)
@@ -329,7 +345,15 @@ namespace lottory.gui
             }
 
             DataTable dt = new DataTable();
-            dt = lc.lotdb.selectByPeriod3(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString());
+            //dt = lc.lotdb.selectByPeriod3(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString());
+            if (cboSale.Text.Equals(""))
+            {
+                dt = lc.lotdb.selectByPeriod3(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString());
+            }
+            else
+            {
+                dt = lc.lotdb.selectByPeriod3Sale(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), lc.cf.getValueCboItem(cboSale));
+            }
             if (dt.Rows.Count > 0)
             {
                 for (int i = 0; i < dt.Rows.Count; i++)
@@ -514,7 +538,6 @@ namespace lottory.gui
                 {
                     dt = lc.lotdb.selectByPeriodSale(cboYear.Text, cboMonth.SelectedValue.ToString(), cboPeriod.SelectedValue.ToString(), lc.cf.getValueCboItem(cboSale));
                 }
-                
             }
             else
             {
@@ -681,6 +704,7 @@ namespace lottory.gui
                 numTod = dgv1[colTod, i].Value.ToString();
                 numDown = dgv1[colDown, i].Value.ToString();
                 rDown += (Double.Parse(dgv1[colRDown, i].Value.ToString()));
+                rUp += (Double.Parse(dgv1[colRUp, i].Value.ToString()));
                 r2Up += (Double.Parse(dgv1[colR2Up, i].Value.ToString()));
                 r2Down += (Double.Parse(dgv1[colR2Down, i].Value.ToString()));
                 r3Up += (Double.Parse(dgv1[colR3Up, i].Value.ToString()));
@@ -858,6 +882,7 @@ namespace lottory.gui
             {
                 setControl();
                 setDGrd();
+                setGrd2();
             }            
         }
 
@@ -877,6 +902,7 @@ namespace lottory.gui
             {
                 setControl();
                 setDGrd();
+                setGrd2();
             }
         }
 

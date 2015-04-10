@@ -282,7 +282,8 @@ namespace lottory.gui
                     dgvSale[colSId, i].Value = dt.Rows[i][lc.saledb.sale.Id].ToString();
                     amt += Double.Parse(dt.Rows[i]["amt"].ToString());
                     reward = Double.Parse(dt1.Rows[0][lc.lotdb.lot.r3Up].ToString()) + Double.Parse(dt1.Rows[0][lc.lotdb.lot.r3Tod].ToString()) + Double.Parse(dt1.Rows[0][lc.lotdb.lot.r3Down].ToString())+
-                        Double.Parse(dt1.Rows[0][lc.lotdb.lot.r2Up].ToString()) + Double.Parse(dt1.Rows[0][lc.lotdb.lot.r2Down].ToString());
+                        Double.Parse(dt1.Rows[0][lc.lotdb.lot.r2Up].ToString()) + Double.Parse(dt1.Rows[0][lc.lotdb.lot.r2Down].ToString()) +
+                        Double.Parse(dt1.Rows[0][lc.lotdb.lot.rUp].ToString()) + Double.Parse(dt1.Rows[0][lc.lotdb.lot.rDown].ToString());
                     nettotal = Double.Parse(dgvSale[colSAmt, i].Value.ToString()) - Double.Parse(dgvSale[colSPay, i].Value.ToString()) - reward;
                     amt1 += nettotal;
                     amt2 += reward;

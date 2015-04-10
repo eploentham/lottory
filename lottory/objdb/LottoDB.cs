@@ -334,6 +334,21 @@ namespace lottory.objdb
 
             return dt;
         }
+        public DataTable selectByPeriod1Sale(String yearId, String monthId, String periodId, String saId)
+        {
+            String sql = "";
+            DataTable dt = new DataTable();
+            sql = "Select lot." + lot.number + ", sum(" + lot.up + ") as up, sum(" + lot.down + ") as down " +
+                "From " + lot.table + " as lot " +
+                "Where  lot." +
+                lot.Active + "='1' and lot." + lot.yearId + "='" + yearId + "' and lot." +
+                lot.monthId + "='" + monthId + "' and lot." + lot.periodId + "='" + periodId + "' and len(" + lot.number + ") =1  and lot." + lot.saleId + "='" + saId + "' " +
+                "Group By lot." + lot.number + " Order By lot." + lot.number;
+
+            dt = conn.selectData(sql);
+
+            return dt;
+        }
         public DataTable selectByPeriod2(String yearId, String monthId, String periodId)
         {
             String sql = "";
@@ -349,6 +364,21 @@ namespace lottory.objdb
 
             return dt;
         }
+        public DataTable selectByPeriod2Sale(String yearId, String monthId, String periodId, String saId)
+        {
+            String sql = "";
+            DataTable dt = new DataTable();
+            sql = "Select lot." + lot.number + ", sum(" + lot.up + ") as up, sum(" + lot.down + ") as down " +
+                "From " + lot.table + " as lot " +
+                "Where  lot." +
+                lot.Active + "='1' and lot." + lot.yearId + "='" + yearId + "' and lot." +
+                lot.monthId + "='" + monthId + "' and lot." + lot.periodId + "='" + periodId + "' and len(" + lot.number + ") =2 and lot." + lot.saleId + "='" + saId + "' " +
+                "Group By lot." + lot.number + " Order By lot." + lot.number;
+
+            dt = conn.selectData(sql);
+
+            return dt;
+        }
         public DataTable selectByPeriod3(String yearId, String monthId, String periodId)
         {
             String sql = "";
@@ -358,6 +388,21 @@ namespace lottory.objdb
                 "Where  lot." +
                 lot.Active + "='1' and lot." + lot.yearId + "='" + yearId + "' and lot." +
                 lot.monthId + "='" + monthId + "' and lot." + lot.periodId + "='" + periodId + "' and len(" + lot.number + ") =3 " +
+                "Group By lot." + lot.number + " Order By lot." + lot.number;
+
+            dt = conn.selectData(sql);
+
+            return dt;
+        }
+        public DataTable selectByPeriod3Sale(String yearId, String monthId, String periodId, String saId)
+        {
+            String sql = "";
+            DataTable dt = new DataTable();
+            sql = "Select lot." + lot.number + ", sum( lot." + lot.up + ") as up, sum( lot." + lot.down + ") as down, sum( lot." + lot.tod + ") as tod " +
+                "From " + lot.table + " as lot " +
+                "Where  lot." +
+                lot.Active + "='1' and lot." + lot.yearId + "='" + yearId + "' and lot." +
+                lot.monthId + "='" + monthId + "' and lot." + lot.periodId + "='" + periodId + "' and len(" + lot.number + ") =3 and lot." + lot.saleId + "='" + saId + "' " +
                 "Group By lot." + lot.number + " Order By lot." + lot.number;
 
             dt = conn.selectData(sql);
@@ -601,7 +646,9 @@ namespace lottory.objdb
             String sql = "";
             DataTable dt = new DataTable();
             sql = "Select sum(" + lot.r3Up + ") as " + lot.r3Up + ", sum(" + lot.r3Tod + ") as " + lot.r3Tod + ", sum(" + lot.r3Down + ") as " + lot.r3Down +
-                ", sum(" + lot.r2Up + ") as " + lot.r2Up + ", sum(" + lot.r2Tod + ") as " + lot.r2Tod + ", sum(" + lot.r2Down + ") as " + lot.r2Down + ", " + lot.saleId + 
+                ", sum(" + lot.r2Up + ") as " + lot.r2Up + ", sum(" + lot.r2Tod + ") as " + lot.r2Tod + ", sum(" + lot.r2Down + ") as " + lot.r2Down +
+                ", sum(" + lot.rUp + ") as " + lot.rUp + ", sum(" + lot.rDown + ") as " + lot.rDown + "," +
+                lot.saleId + 
                 " From " + lot.table +
                 " Where " + lot.Active + "='1' and " + lot.yearId + "='" + yearId + "' and " +
                 lot.monthId + "='" + monthId + "' and " + lot.periodId + "='" + periodId + "' and "+lot.saleId+" ='"+saleId+"' " +
